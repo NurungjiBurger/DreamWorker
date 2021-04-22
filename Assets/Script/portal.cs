@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class portal : MonoBehaviour
 {
-    public character player;
+    public P_info player;
     private void checkdelete()
     {
 
@@ -18,7 +18,7 @@ public class portal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<character>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
     }
 
     // Update is called once per frame

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class orbital_attack : MonoBehaviour
 {
-    public character character;
+    public P_info character;
     private int dir;
     Animator animator;
     int flag;
@@ -28,7 +28,7 @@ public class orbital_attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        character = GameObject.FindGameObjectWithTag("Player").GetComponent<character>();
+        character = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
         dir = character.dir;
         gameObject.transform.localScale = new Vector3(2 * dir, 2, 2);
         cnt = 0;

@@ -153,16 +153,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prf_monster:
-  - {fileID: 4679402531833990277, guid: 7beefb8390bcdfe428d733bae753114f, type: 3}
-  - {fileID: 626738366359779800, guid: 56bcd4872c45ab04f97d3688015f6a2a, type: 3}
-  - {fileID: 8089979809550748404, guid: a845c3cd809734e42af05ceb0465664f, type: 3}
-  - {fileID: 2234413034055536899, guid: f5affcb06e7d94248bba3deda0c4ff12, type: 3}
+  - {fileID: 3669066004584926201, guid: 7beefb8390bcdfe428d733bae753114f, type: 3}
+  - {fileID: 561254009004928827, guid: 56bcd4872c45ab04f97d3688015f6a2a, type: 3}
+  - {fileID: 4111291780921786306, guid: a845c3cd809734e42af05ceb0465664f, type: 3}
+  - {fileID: 1435551059982855661, guid: f5affcb06e7d94248bba3deda0c4ff12, type: 3}
   prf_boss_monster: []
   prf_character:
-  - {fileID: 2338817756393491121, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
+  - {fileID: 6485205295942090449, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
   prf_portal:
-  - {fileID: 4541314278830169119, guid: bf99970d24134db439cb952dbab788bf, type: 3}
-  - {fileID: 3287823714575628324, guid: b68bd87ee5df83a46a650f7af292c894, type: 3}
+  - {fileID: 4508550508265296456, guid: bf99970d24134db439cb952dbab788bf, type: 3}
+  - {fileID: 4163875461290686834, guid: b68bd87ee5df83a46a650f7af292c894, type: 3}
 --- !u!4 &56016493
 Transform:
   m_ObjectHideFlags: 0

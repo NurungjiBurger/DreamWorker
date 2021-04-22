@@ -3,48 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class character : MonoBehaviour
+public class P_info : MonoBehaviour
 {
 
     // 캐릭터 스탯 & 상태
-    int maxHP;  
-    int nowHP;
-    static int size = 2;
-    public int atkDmg; 
+    private int maxHP;  
+    private int nowHP;
+    private static int size = 2;   
+    private float moveSpeed;    
+    private float jumpPower;
+    private bool inputRight = false;    
+    private bool inputLeft = false;
+    private bool ground = false;
+    private bool inputJump = false; 
+    private bool inputDash = false;
+    private bool detectwall = false;
+    private float DashTime;
+    private bool useDash = false;
+    private float AttackTime;
+    private bool useAttack = false;
+    private float atkSpeed = 0.5f; // 캐릭터의 공격 속도 ( 공격 사이의 간격시간 )
+    private int cnt;
+    private int jumpcnt;
+    public int dir;
+    public bool portal = false;
+    public bool inputUp = false;
+    public int atkDmg;
     public bool attacked = false;  // 캐릭터가 공격중인가?
     public bool gonext = false;
-    public int attack_range;   
-    float moveSpeed;    
-    float jumpPower;
-    public bool inputUp = false;
-    bool inputRight = false;    
-    bool inputLeft = false;
-    public bool portal = false;
-    bool collider = false;
-    bool ground = false;
-    bool inputJump = false; 
-    bool inputDash = false; 
-    bool detectwall = false;
-    public int flag;
-    public int dir;
-    int cnt;
-    int jumpcnt;
+    public int attack_range;
 
-    float DashTime;
-    bool useDash = false;
-    float AttackTime;
-    bool useAttack = false;
-    float atkSpeed = 0.5f; // 캐릭터의 공격 속도 ( 공격 사이의 간격시간 )
-
-    public GameObject prefab;
-    public GameObject objcharacter;
-    BoxCollider2D col2D;
+    // 오브젝트
+    [SerializeField]
+    private GameObject prefab;
+    [SerializeField]
+    private GameObject objcharacter;
 
     // 캐릭터 위치 및 사출기 위치
-    Rigidbody2D rigid2D;
+    private Rigidbody2D rigid2D;
+    private BoxCollider2D col2D;
     public float plax, play, plaz;
     public float shotx, shoty, shotz;
-
    
     private void OnTriggerStay2D(Collider2D col)
     {
@@ -96,7 +95,6 @@ public class character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        flag = 0;
         dir = 1;
         cnt = 0;
         moveSpeed = 0.1f;
@@ -161,6 +159,7 @@ public class character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //nowHPbar.fillAmount = (float)nowHP / (float)maxHP;
         DashTime += Time.deltaTime;
         AttackTime += Time.deltaTime;

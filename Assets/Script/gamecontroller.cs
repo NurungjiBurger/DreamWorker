@@ -11,7 +11,7 @@ public class gamecontroller : MonoBehaviour
     public GameObject[] prf_character;
     public GameObject[] prf_portal;
     // public GameObject[] tile;
-    private character player;
+    private P_info player;
     private GameObject[] monsters;
     private GameObject[] portals;
 
@@ -38,8 +38,8 @@ public class gamecontroller : MonoBehaviour
     void makeportal()
     {
         print(counter + ", " + substagenumber);
-        if (counter != substagenumber+1) Instantiate(prf_portal[0], new Vector3(0, -3.8f, 0), Quaternion.identity);  // 기본 포탈 생성
-        else Instantiate(prf_portal[1], new Vector3(0, -3.8f, 0), Quaternion.identity); // 보스 포탈 생성
+        if (counter != substagenumber+1) Instantiate(prf_portal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
+        else Instantiate(prf_portal[1], new Vector3(0, -2.9f, 0), Quaternion.identity); // 보스 포탈 생성
         portalpresence = true;
     }
     void createmonster(float x, float y, int type)    // 몬스터 생성 함수
@@ -58,14 +58,14 @@ public class gamecontroller : MonoBehaviour
         if (substagenumber != 0) // 부스테이지 번호가 0 일 경우 몬스터가 없는 스테이지.
         {
             //population = Random.Range(8, 10);  // 현재 스테이지에 생성할 몬스터의 마릿 수.
-            population = 5;
+            population = 2;
             for (int i = 0; i < population; i++)
             {
                 int type;
                 type = Random.Range((stagenumber - 1) * 3, stagenumber * 3);
                 mx = Random.Range(-5, 5);
                 my = Random.Range(-4, maxgy);
-                createmonster((float)mx, (float)my, type);    // 랜덤 좌표에 몬스터 생성
+                createmonster((float)mx, (float)my, 1);    // 랜덤 좌표에 몬스터 생성
             }
         }
     }
@@ -84,7 +84,7 @@ public class gamecontroller : MonoBehaviour
         print("보스전");
         createmaptile();
         createmonster(0, 0, stagenumber);
-        Instantiate(prf_portal[0], new Vector3(0, -4.0f, 0), Quaternion.identity);  // 기본 포탈 생성
+        Instantiate(prf_portal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
         countportal();
     }
     void Start()
@@ -100,7 +100,7 @@ public class gamecontroller : MonoBehaviour
 
         // 플레이어 캐릭터 생성
         Instantiate(prf_character[0], new Vector3(1.5f, 0, 0), Quaternion.identity);
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<character>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
     }
 
     void Update()
