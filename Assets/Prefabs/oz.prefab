@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3436436398185508405}
   - component: {fileID: 3294821540588540543}
   - component: {fileID: 3452637295615809757}
-  - component: {fileID: 3438343885556885794}
-  - component: {fileID: 3839224261617117046}
+  - component: {fileID: 9212142361299134469}
+  - component: {fileID: -5956867864961039818}
   m_Layer: 0
   m_Name: oz
   m_TagString: Player
@@ -108,8 +108,9 @@ MonoBehaviour:
   attacked: 0
   gonext: 0
   attack_range: 0
-  prefab: {fileID: 0}
-  objcharacter: {fileID: 0}
+  objcharacter: {fileID: 6485205295942090449}
+  animator: {fileID: 0}
+  obj: {fileID: 0}
   plax: 0
   play: 0
   plaz: 0
@@ -182,7 +183,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &3438343885556885794
+--- !u!114 &9212142361299134469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2a075cefe005741852d828a3d32d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3839224261617117046
+  portal: 0
+  inputUp: 0
+  gonext: 0
+--- !u!114 &-5956867864961039818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,3 +210,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40da29a92ba95940bafc2ec3b217515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
