@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9080921341708518496}
   - component: {fileID: 3425145612327966303}
-  - component: {fileID: 6291990988712674617}
   - component: {fileID: 3436436398185508405}
   - component: {fileID: 3294821540588540543}
   - component: {fileID: 3452637295615809757}
+  - component: {fileID: 6291990988712674617}
   - component: {fileID: 9212142361299134469}
   - component: {fileID: -5956867864961039818}
   m_Layer: 0
@@ -89,34 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6291990988712674617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6485205295942090449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0445856446d544d43b572d3ddbd376c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dir: 0
-  portal: 0
-  inputUp: 0
-  atkDmg: 0
-  attacked: 0
-  gonext: 0
-  attack_range: 0
-  objcharacter: {fileID: 6485205295942090449}
-  animator: {fileID: 0}
-  obj: {fileID: 0}
-  plax: 0
-  play: 0
-  plaz: 0
-  shotx: 0
-  shoty: 0
-  shotz: 0
 --- !u!95 &3436436398185508405
 Animator:
   serializedVersion: 3
@@ -183,6 +155,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &6291990988712674617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485205295942090449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0445856446d544d43b572d3ddbd376c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objcharacter: {fileID: 6485205295942090449}
+  animator: {fileID: 0}
+  plax: 0
+  play: 0
+  plaz: 0
+  shotx: 0
+  shoty: 0
+  shotz: 0
 --- !u!114 &9212142361299134469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,9 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2a075cefe005741852d828a3d32d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portal: 0
-  inputUp: 0
-  gonext: 0
 --- !u!114 &-5956867864961039818
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5786757119477042015}
   - component: {fileID: 7674054108959290764}
   - component: {fileID: 4200134110261200157}
+  - component: {fileID: -7158993521284657744}
+  - component: {fileID: 2933794711152355535}
   m_Layer: 0
   m_Name: pig
   m_TagString: Monster
@@ -144,12 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa75d6f0100aba43aab5270a49a4623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacked: 0
-  height: 1.7
   prfHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
   objmonster: {fileID: 4111291780921786306}
-  player: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &4200134110261200157
 Rigidbody2D:
   serializedVersion: 4
@@ -171,3 +171,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-7158993521284657744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111291780921786306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b889be04212a800438e14c24c860740f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2933794711152355535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111291780921786306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7004ee89d705fc4d9b74d52230264f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

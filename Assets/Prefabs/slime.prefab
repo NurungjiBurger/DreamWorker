@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2251310567082611252}
   - component: {fileID: 8161695580824134025}
   - component: {fileID: 1058003956766417005}
+  - component: {fileID: -6615422524911211642}
+  - component: {fileID: -7510353347137672441}
   m_Layer: 0
   m_Name: slime
   m_TagString: Monster
@@ -165,9 +167,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa75d6f0100aba43aab5270a49a4623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacked: 0
-  height: 1.7
   prfHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
   objmonster: {fileID: 1435551059982855661}
-  player: {fileID: 0}
+  animator: {fileID: 0}
+--- !u!114 &-6615422524911211642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435551059982855661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b889be04212a800438e14c24c860740f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7510353347137672441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435551059982855661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7004ee89d705fc4d9b74d52230264f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

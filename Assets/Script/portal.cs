@@ -8,9 +8,9 @@ public class portal : MonoBehaviour
     private void checkdelete()
     {
 
-        if(player.portal && player.inputUp)
+        if(player.Getportal() && player.Getinputup())
         {
-            player.gonext = true;
+            player.Setgonext(true);
             Destroy(gameObject);
         }
 
