@@ -271,6 +271,40 @@ public class P_info : MonoBehaviour
         attacked = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        print("아파!");
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.CompareTag("Portal")) // 포탈과 충돌하면
+        {
+            Setportal(true);
+        }
+        if (col.CompareTag("Ground")) // 땅과 닿아있다면
+        {
+            Setiswall(false);
+            Setisground(true);
+            col2D.isTrigger = false;
+        }
+        if (col.CompareTag("Wall")) // 벽과 충돌하면
+        {
+            Setiswall(true);
+            col2D.isTrigger = false;
+        }
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Monster"))
+        {
+            col.GetComponent<BoxCollider2D>().isTrigger = false;
+            col.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -317,8 +351,6 @@ public class P_info : MonoBehaviour
         plax = this.transform.position.x;
         play = this.transform.position.y;
         plaz = this.transform.position.z;
-
-
 
         dashtime += Time.deltaTime;
         atktime += Time.deltaTime;

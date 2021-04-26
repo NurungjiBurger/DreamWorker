@@ -38,7 +38,7 @@ public class M_attack : MonoBehaviour
                 }
             }
         }
-        else if (info.Getatktype() == 1)
+        else if (info.Getatktype() == 1) // 돌진공격
         {
             if (info.Getdir() < 0)
             {

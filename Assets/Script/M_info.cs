@@ -186,6 +186,15 @@ public class M_info : MonoBehaviour
         else if (attacktype == 1) dashPower = _jump_dashPower;
     }   // 일반 몬스터 스탯 설정
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        GameObject obj = col.gameObject;
+        if (obj.CompareTag("Player"))
+        {
+            col2D.isTrigger = true;
+            rigid2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Attack_Judgment"))
@@ -203,7 +212,13 @@ public class M_info : MonoBehaviour
                 }
             }
         }     
+
+        if (col.CompareTag("Ground"))
+        {
+
+        }
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -234,7 +249,7 @@ public class M_info : MonoBehaviour
         // 보스 몬스터
         if (name.Equals("balrog(Clone)"))
         {
-            SetEnemyStatus("발록", 5000, 0, 10, 6, 0, 4);
+            SetEnemyStatus("발록", 5000, 0, 5, 6, 0, 4);
             isboss = true;
         }
         nowHPbar = hpBar.transform.GetChild(0).GetComponent<Image>();
@@ -269,9 +284,5 @@ public class M_info : MonoBehaviour
 
         atktime += Time.deltaTime;
         mvtime += Time.deltaTime;
-
-        if (isboss) animator.SetTrigger("attack0");
-
-
     }
 }

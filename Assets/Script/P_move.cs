@@ -9,23 +9,7 @@ public class P_move : MonoBehaviour
     private Transform obj;
 
     private P_info info;
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.CompareTag("Portal")) // 포탈과 충돌하면
-        {
-            info.Setportal(true);
-        }
-        if (col.CompareTag("Ground")) // 땅과 닿아있다면
-        {
-            info.Setiswall(false);
-            info.Setisground(true);
-        }
-        if (col.CompareTag("Wall")) // 벽과 충돌하면
-        {
-            info.Setiswall(true);
-            col2D.isTrigger = false;
-        }
-    }
+    
     // Start is called before the first frame update
     void Start()
     {

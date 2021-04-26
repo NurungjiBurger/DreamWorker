@@ -50,7 +50,6 @@ public class B_balrog : MonoBehaviour
     {
         if (info.Getattacked())
         {
-            //info.animator.SetTrigger("attack");
             attackmotion();
         }
         else
@@ -60,16 +59,15 @@ public class B_balrog : MonoBehaviour
                 // 공격사거리 내에 있는 경우 이므로 공격 실행
                 if (!info.Getattacked() && rigid2D.velocity.y == 0) // 공격은 바닥에 붙어있을때만 가능
                 {
-                    /*
+                    info.animator.SetBool("move", false);
                     info.Setatkdone(false);
-                    rigid2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                     info.Setrandom("atkrandom", 0, 2);
-                    print("공격!" + info.Getrandom("atkrandom"));
-                    //info.animator.SetTrigger("attack" + info.Getrandom("atkrandom").ToString());
+                    if (info.Getrandom("atkrandom") == 1) info.animator.SetTrigger("attack1");
+                    else info.animator.SetTrigger("attack");
                     info.Setattacked(true);
                     info.Settime("atktime", 0);
                     info.Setisground(true);
-                    */
+                    
                 }
             }
             else if (Vector3.Distance(player.transform.position, this.transform.position) <= (float)info.Getrecogrange()) // 플레이어와의 거리가 공격 사거리보다 길고 인식 사거리보다 짧은 경우
@@ -93,7 +91,7 @@ public class B_balrog : MonoBehaviour
             {
                 // 완벽한 사거리 밖이므로 몬스터는 랜덤으로 행동
                 // 사거리 밖에 플레이어가 있을 경우 몬스터가 할 수 있는 행동 3가지로 분류
-                print(info.Getrandom("mvrandom"));
+
                 if (info.Gettime("mvtime") >= info.GetatkSpd())
                 {
                     info.Settime("mvtime", 0);
