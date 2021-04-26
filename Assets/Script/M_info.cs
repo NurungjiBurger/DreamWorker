@@ -13,17 +13,20 @@ public class M_info : MonoBehaviour
     private int nowHP;
     private int atkDmg; 
     private int atkSpeed; 
-    private int recognition_range; 
+    private int recognition_range;
+    private int attack_range;
     private float jumpPower; 
     private float dashPower; 
     private bool attacked = false; 
     private float dir; 
     private int attacktype; 
     private bool atkdone = false; 
-    private bool isground = false; 
+    private bool isground = false;
+    private bool isboss = false;
 
     private float height = 0.7f;
 
+    private int atkrandom;
     private int mvrandom;  
 
     private float atktime; 
@@ -64,12 +67,14 @@ public class M_info : MonoBehaviour
 
     public int Getrandom(string name)
     {
-        return mvrandom;
+        if (name == "mvrandom") return mvrandom;
+        else return atkrandom;
     }
 
     public void Setrandom(string name, int s, int e)
     {
         if (name == "mvrandom") mvrandom = Random.Range(s, e);
+        else if (name == "atkrandom") atkrandom = Random.Range(s, e);
     }
 
     public bool Getisground()
@@ -128,6 +133,12 @@ public class M_info : MonoBehaviour
     {
         return recognition_range;
     }
+
+    public int Getattackrange()
+    {
+        return attack_range;
+    }
+
     public int GetatkDmg()
     {
         return atkDmg;
@@ -147,9 +158,9 @@ public class M_info : MonoBehaviour
     {
         if (name == "atktime") atktime = time;
         else mvtime = time;
-    }    
+    }
 
-    private void SetEnemyStatus(string _enemyName, int _maxHP, int _atkDmg, int _atkSpd, int _recognition_range, int _attacktype, float _jump_dashPower)
+    private void SetEnemyStatus(string _enemyName, int _maxHP, int _atkDmg, int _atkSpd, int _recognition_range, int _attacktype, int _attack_range)
     {
         enemyName = _enemyName;
         maxHP = _maxHP;
@@ -158,9 +169,22 @@ public class M_info : MonoBehaviour
         atkSpeed = _atkSpd;
         recognition_range = _recognition_range;
         attacktype = _attacktype;
+        attack_range = _attack_range;
+    }   // 보스 몬스터 스탯 설정
+
+    private void SetEnemyStatus(string _enemyName, int _maxHP, int _atkDmg, int _atkSpd, int _recognition_range, int _attacktype, int _attack_range, float _jump_dashPower)
+    {
+        enemyName = _enemyName;
+        maxHP = _maxHP;
+        nowHP = _maxHP;
+        atkDmg = _atkDmg;
+        atkSpeed = _atkSpd;
+        recognition_range = _recognition_range;
+        attacktype = _attacktype;
+        attack_range = _attack_range;
         if (attacktype == 0) jumpPower = _jump_dashPower;
         else if (attacktype == 1) dashPower = _jump_dashPower;
-    }
+    }   // 일반 몬스터 스탯 설정
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -168,7 +192,7 @@ public class M_info : MonoBehaviour
         {
             if (player.Getattacked())
             {
-                animator.SetTrigger("hit");
+                if (!isboss) animator.SetTrigger("hit");
                 nowHP -= player.Getatkdmg();
                 player.Setattacked(false);
                 if (nowHP <= 0)
@@ -178,17 +202,7 @@ public class M_info : MonoBehaviour
                     Destroy(hpBar.gameObject);
                 }
             }
-        }
-        
-        /*
-        if (col.CompareTag("Player"))
-        {
-            print("캐릭터다");
-            col2D.isTrigger = true;
-        }
-        */
-
-        
+        }     
     }
 
     // Start is called before the first frame update
@@ -199,21 +213,29 @@ public class M_info : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
         animator = GetComponent<Animator>();
 
+        // 일반 몬스터
         if (name.Equals("mushroom(Clone)"))
         {
-            SetEnemyStatus("주황버섯", 100, 10, 3, 3, 0, 0.035f);
+            SetEnemyStatus("주황버섯", 100, 10, 3, 4, 0, 2, 0.035f);
         }
         else if (name.Equals("blue_snail(Clone)"))
         {
-            SetEnemyStatus("파란달팽이", 50, 5, 5, 2, 1, 0.015f);
+            SetEnemyStatus("파란달팽이", 50, 5, 5, 3, 1, 2, 0.015f);
         }
         else if (name.Equals("pig(Clone)"))
         {
-            SetEnemyStatus("돼지", 100, 15, 5, 4, 1, 0.015f);
+            SetEnemyStatus("돼지", 100, 15, 5, 4, 1, 2, 0.015f);
         }
         else if (name.Equals("slime(Clone)"))
         {
-            SetEnemyStatus("슬라임", 100, 10, 3, 3, 0, 0.015f);
+            SetEnemyStatus("슬라임", 100, 10, 3, 3, 0, 2, 0.015f);
+        }
+
+        // 보스 몬스터
+        if (name.Equals("balrog(Clone)"))
+        {
+            SetEnemyStatus("발록", 5000, 0, 10, 6, 0, 4);
+            isboss = true;
         }
         nowHPbar = hpBar.transform.GetChild(0).GetComponent<Image>();
         rigid2D = GetComponent<Rigidbody2D>();
@@ -221,6 +243,13 @@ public class M_info : MonoBehaviour
 
         mvtime = 0;
         atktime = 0;
+
+        if (isboss)
+        {
+            Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(0, 4.3f, 0));
+            hpBar.transform.localScale = new Vector3(11, 5, 1);
+            hpBar.transform.position = _hpBarPos;
+        }
     }
     void FixedUpdate()
     {       
@@ -230,12 +259,18 @@ public class M_info : MonoBehaviour
     void Update()
     {
 
-        Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
-        hpBar.transform.position = _hpBarPos;
+        if (!isboss)
+        {
+            Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
+            hpBar.transform.position = _hpBarPos;
+        }
+
         nowHPbar.fillAmount = (float)nowHP / (float)maxHP;
 
         atktime += Time.deltaTime;
         mvtime += Time.deltaTime;
+
+        if (isboss) animator.SetTrigger("attack0");
 
 
     }

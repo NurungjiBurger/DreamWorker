@@ -44,13 +44,13 @@ public class gamecontroller : MonoBehaviour
     void makeportal()
     {
         print(counter + ", " + substagenumber);
-        if (counter != substagenumber+1) Instantiate(prf_portal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
+        if (counter != substagenumber + 1) Instantiate(prf_portal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
         else Instantiate(prf_portal[1], new Vector3(0, -2.9f, 0), Quaternion.identity); // 보스 포탈 생성
         portalpresence = true;
     }
-    void createmonster(float x, float y, int type)    // 몬스터 생성 함수
+    void createmonster(GameObject prf, float x, float y)    // 몬스터 생성 함수
     {
-        Instantiate(prf_monster[type], new Vector3(x, y, 0), Quaternion.identity);
+        Instantiate(prf, new Vector3(0, 0, 0), Quaternion.identity);
     }
     void createmaptile() // 맵 생성 함수
     {
@@ -71,7 +71,7 @@ public class gamecontroller : MonoBehaviour
                 type = Random.Range((stagenumber - 1) * 3, stagenumber * 3);
                 mx = Random.Range(-5, 5);
                 my = Random.Range(-4, maxgy);
-                createmonster((float)mx, (float)my, 1);    // 랜덤 좌표에 몬스터 생성
+                createmonster(prf_monster[type], (float)mx, (float)my);    // 랜덤 좌표에 몬스터 생성
             }
         }
     }
@@ -89,7 +89,7 @@ public class gamecontroller : MonoBehaviour
     {
         print("보스전");
         createmaptile();
-        createmonster(0, 0, stagenumber);
+        createmonster(prf_boss_monster[0], 0, 0);
         Instantiate(prf_portal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
         countportal();
     }
@@ -115,7 +115,8 @@ public class gamecontroller : MonoBehaviour
 
         txhp = nowHPbar.transform.GetChild(0).GetComponent<Text>();
 
-         Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(0, 3, 0));
+
+         Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));
          hpBar.transform.position = _hpBarPos;
     }
 
@@ -124,47 +125,49 @@ public class gamecontroller : MonoBehaviour
         txhp.text = player.Getnowhp().ToString() + "    /    " + player.Getmaxhp().ToString();
         nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
 
-        if (!stageentrance) // 처음 스테이지에 입장
+        if (stagenumber < 2)
         {
-            stageentrance = true; // 스테이지에 입장 완료.
-            counter = Random.Range(8, 10);  // 부스테이지 갯수 설정
-            counter = 2;
-        }
-        else
-        {
-            if (!substageentrance) // 처음 부스테이지에 입장
+            if (!stageentrance) // 처음 스테이지에 입장
             {
-                substagenumber++;
-                if (counter == substagenumber) // 보스 포탈을 타고 넘어왔음.
-                {
-                    makebossstage();
-                }
-                else makestage();   // 스테이지 생성
-                substageentrance = true; // 부스테이지에 입장 완료.
+                stageentrance = true; // 스테이지에 입장 완료.
+                counter = Random.Range(8, 10);  // 부스테이지 갯수 설정
+                counter = 2;
             }
-            else    // 게임 진행중
+            else
             {
-                countmonster();
-                if (monsters.Length == 0) // 몬스터가 모두 죽었다면
+                if (!substageentrance) // 처음 부스테이지에 입장
                 {
-                    if(!portalpresence) makeportal();
-
-                    countportal();
-
-                    if (portals.Length == 0) // 포탈이 사라졌다면
+                    substagenumber++;
+                    if (counter == substagenumber) // 보스 포탈을 타고 넘어왔음.
                     {
-                        if(counter == substagenumber)
+                        makebossstage();
+                    }
+                    else makestage();   // 스테이지 생성
+                    substageentrance = true; // 부스테이지에 입장 완료.
+                }
+                else    // 게임 진행중
+                {
+                    countmonster();
+                    if (monsters.Length == 0) // 몬스터가 모두 죽었다면
+                    {
+                        if (!portalpresence) makeportal();
+
+                        countportal();
+
+                        if (portals.Length == 0) // 포탈이 사라졌다면
                         {
-                            print("넘어가자");
-                            gonextstage();
+                            if (counter == substagenumber)
+                            {
+                                print("넘어가자");
+                                gonextstage();
+                            }
+                            else substageentrance = false;
+                            portalpresence = false;
                         }
-                        else substageentrance = false;
-                        portalpresence = false;
                     }
                 }
             }
         }
-
      
 
         

@@ -122,7 +122,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -136,7 +136,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: balrog_attack0
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 0.1
   m_Transitions:
   - {fileID: 4924694353622267873}
   - {fileID: -6244850147960977510}
@@ -151,7 +151,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 0abdd448fcde32044b081e32947f1a1a, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: spd
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -164,7 +164,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: balrog_attack1
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 0.1
   m_Transitions:
   - {fileID: -473577959053151443}
   - {fileID: -7186437266495042927}
@@ -242,30 +242,30 @@ AnimatorController:
   m_Name: balrog
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: move
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: attack0
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: attack1
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: die
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: move
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -296,10 +296,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -418,13 +418,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 4588082731265541628}
-    m_Position: {x: 240, y: 210, z: 0}
+    m_Position: {x: 230, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7193248034643794924}
     m_Position: {x: 530, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2365260141669379534}
-    m_Position: {x: 700, y: 60, z: 0}
+    m_Position: {x: 840, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2854476692456518767}
     m_Position: {x: 230, y: -60, z: 0}
