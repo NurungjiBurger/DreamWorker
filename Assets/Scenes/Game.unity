@@ -157,12 +157,15 @@ MonoBehaviour:
   - {fileID: 561254009004928827, guid: 56bcd4872c45ab04f97d3688015f6a2a, type: 3}
   - {fileID: 4111291780921786306, guid: a845c3cd809734e42af05ceb0465664f, type: 3}
   - {fileID: 1435551059982855661, guid: f5affcb06e7d94248bba3deda0c4ff12, type: 3}
-  prf_boss_monster: []
+  prf_boss_monster:
+  - {fileID: 7842352421957864564, guid: 9f2091fbf65126249a85b0ae9814484a, type: 3}
   prf_character:
   - {fileID: 6485205295942090449, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
   prf_portal:
   - {fileID: 4508550508265296456, guid: bf99970d24134db439cb952dbab788bf, type: 3}
   - {fileID: 4163875461290686834, guid: b68bd87ee5df83a46a650f7af292c894, type: 3}
+  prfHpBar: {fileID: 2976229603464939949, guid: 9304a1b6e6a69e94080cedbde3f78721, type: 3}
+  canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
 --- !u!4 &56016493
 Transform:
   m_ObjectHideFlags: 0

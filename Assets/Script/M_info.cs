@@ -6,38 +6,37 @@ using UnityEngine.UI;
 public class M_info : MonoBehaviour
 {
     // 몬스터의 스탯 & 상태
-    private static int size = 2; // g
+    private static int size = 2; 
 
     private string enemyName;
     private int maxHP;
     private int nowHP;
-    private int atkDmg; // g
-    private int atkSpeed; // g
-    private int recognition_range; // g
-    private float jumpPower; // g
-    private float dashPower; // g
-    private bool attacked = false; // g, r
-    private float dir; // g, r
-    private int attacktype; // g
-    private bool atkdone = false; // g, r
-    private bool isground = false; // g, r
+    private int atkDmg; 
+    private int atkSpeed; 
+    private int recognition_range; 
+    private float jumpPower; 
+    private float dashPower; 
+    private bool attacked = false; 
+    private float dir; 
+    private int attacktype; 
+    private bool atkdone = false; 
+    private bool isground = false; 
 
     private float height = 0.7f;
 
-    private int mvrandom;  // g
+    private int mvrandom;  
 
-    private float atktime; // g, s
-    private float mvtime; // g, s
+    private float atktime; 
+    private float mvtime; 
 
-    private float atkx, atky, atkz; // g
+    private float atkx, atky, atkz; 
 
     // 오브젝트
     [SerializeField]
     private GameObject prfHpBar;
     [SerializeField]
     private GameObject canvas;
-    [SerializeField]
-    private GameObject objmonster;
+
     public Animator animator;
     private RectTransform hpBar;
     private P_info player;
@@ -222,7 +221,6 @@ public class M_info : MonoBehaviour
 
         mvtime = 0;
         atktime = 0;
-        attacked = false;
     }
     void FixedUpdate()
     {       

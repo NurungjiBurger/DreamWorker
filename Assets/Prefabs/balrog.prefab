@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7842352421957864560}
   - component: {fileID: 7842352421957864567}
   - component: {fileID: 7842352421957864566}
-  - component: {fileID: 7842352421957864565}
   m_Layer: 0
   m_Name: balrog
   m_TagString: Untagged
@@ -153,21 +152,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7842352421957864565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7842352421957864564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34a656f175a356f459372d693273686f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attacked: 0
-  height: 0.7
-  prfHpBar: {fileID: 0}
-  canvas: {fileID: 0}
-  objmonster: {fileID: 0}
-  player: {fileID: 0}

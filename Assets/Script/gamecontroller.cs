@@ -15,6 +15,12 @@ public class gamecontroller : MonoBehaviour
     private GameObject[] monsters;
     private GameObject[] portals;
 
+    RectTransform hpBar;
+    public GameObject prfHpBar;
+    public GameObject canvas;
+    Image nowHPbar;
+    Text txhp;
+
     //
     int population;
     int counter;
@@ -101,10 +107,23 @@ public class gamecontroller : MonoBehaviour
         // 플레이어 캐릭터 생성
         Instantiate(prf_character[0], new Vector3(1.5f, 0, 0), Quaternion.identity);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
+
+        canvas = Instantiate(canvas);
+        hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
+        nowHPbar = hpBar.transform.GetChild(0).GetComponent<Image>();
+
+
+        txhp = nowHPbar.transform.GetChild(0).GetComponent<Text>();
+
+         Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(0, 3, 0));
+         hpBar.transform.position = _hpBarPos;
     }
 
     void Update()
     {
+        txhp.text = player.Getnowhp().ToString() + "    /    " + player.Getmaxhp().ToString();
+        nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
+
         if (!stageentrance) // 처음 스테이지에 입장
         {
             stageentrance = true; // 스테이지에 입장 완료.
