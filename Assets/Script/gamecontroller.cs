@@ -116,8 +116,8 @@ public class gamecontroller : MonoBehaviour
         txhp = nowHPbar.transform.GetChild(0).GetComponent<Text>();
 
 
-         Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));
-         hpBar.transform.position = _hpBarPos;
+        // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));
+         //hpBar.transform.position = _hpBarPos;
     }
 
     void Update()

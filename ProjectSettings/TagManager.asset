@@ -10,6 +10,7 @@ TagManager:
   - Portal
   - Player_attack_judgement
   - Monster_attack_judgement
+  - Monster_attack_effect
   layers:
   - Default
   - TransparentFX

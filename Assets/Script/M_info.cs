@@ -17,22 +17,22 @@ public class M_info : MonoBehaviour
     private int recognition_range;
     private int attack_range;
     private float jumpPower; 
-    private float dashPower; 
-    private bool attacked = false; 
+    private float dashPower;
+    private int attacktype;
+    private bool isboss = false;
+
+    private bool attacked = false;
     private float dir; 
-    private int attacktype; 
     private bool atkdone = false; 
     private bool isground = false;
-    private bool isboss = false;
 
     private bool effecton = false;
     private bool judgementon = false;
 
     private float height = 0.7f;
 
-
     private int atkrandom;
-    private int mvrandom;  
+    private int mvrandom;
 
     private float atktime; 
     private float mvtime; 
@@ -52,6 +52,7 @@ public class M_info : MonoBehaviour
 
     private BoxCollider2D col2D;
     private Rigidbody2D rigid2D;
+
 
     public bool Geteffect()
     {
@@ -184,14 +185,16 @@ public class M_info : MonoBehaviour
         return atkSpeed;
     }
 
-    public float Gettime(string time)
+    public float Gettime(string name)
     {
-        if (time == "atktime") return atktime;
+        if (name == "atktime") return atktime;
+       // else if (name == "intervaltime") return intervaltime;
         else return mvtime;
     }
     public void Settime(string name, float time)
     {
         if (name == "atktime") atktime = time;
+       // else if (name == "intervaltime") intervaltime = time;
         else mvtime = time;
     }
 
@@ -294,9 +297,10 @@ public class M_info : MonoBehaviour
         // 보스 몬스터
         if (name.Equals("balrog(Clone)"))
         {
-            SetEnemyStatus("발록", 5000, 10, 5, 6, 0, 4);
+            SetEnemyStatus("발록", 5000, 10, 3, 6, 0, 4);
             isboss = true;
         }
+
         nowHPbar = hpBar.transform.GetChild(0).GetComponent<Image>();
         rigid2D = GetComponent<Rigidbody2D>();
         col2D = GetComponent<BoxCollider2D>();
@@ -307,7 +311,7 @@ public class M_info : MonoBehaviour
         if (isboss)
         {
             Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(0, 4.3f, 0));
-            hpBar.transform.localScale = new Vector3(11, 5, 1);
+            hpBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             hpBar.transform.position = _hpBarPos;
         }
     }

@@ -295,7 +295,6 @@ public class P_info : MonoBehaviour
         {
             if (!Gethit()) // 피격이 가능한 상태라면
             {
-                print("아파!");
                 // 데미지 들어옴
                 Settime("hittime", 0);
                 Sethit(true);
@@ -339,7 +338,6 @@ public class P_info : MonoBehaviour
         {
             if (!Gethit())
             {
-                print("아파ㅠ");
                 Settime("hittime", 0);
                 Sethit(true);
             }
@@ -348,12 +346,11 @@ public class P_info : MonoBehaviour
         {
             if (!Gethit()) // 피격이 가능한 상태라면
             {
-                print("아파!!!!!");
                 // 데미지 들어옴
                 Settime("hittime", 0);
                 Sethit(true);
                 // 피격 후 무적을 위한 타임 체크 ( 피격 후 곧바로 피격되지는 않는다. )
-                print(col.GetComponent<M_info>().GetatkDmg());
+                print(col.GetComponent<Ef_balrog>().GetDmg());
             }
         }
 
@@ -377,7 +374,7 @@ public class P_info : MonoBehaviour
 
         jumpcnt = 1; // 기본적으로 대부분의 캐릭터의 경우 이단점프 불가. 아이템이나 캐릭터 추가시 변경될 부분.
 
-        hitdelay = 5.0f; // 플레이어가 피격당한 후 일정시간 동안에는 피격불가 상태가 됨.
+        hitdelay = 2.0f; // 플레이어가 피격당한 후 일정시간 동안에는 피격불가 상태가 됨.
 
         atktime = 0;
         dashtime = 0;

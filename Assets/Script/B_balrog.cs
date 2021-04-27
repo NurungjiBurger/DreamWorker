@@ -25,14 +25,17 @@ public class B_balrog : MonoBehaviour
             // x dir 만큼 1 변경하고 dir 만큼 0~1
             // y 0.029 더하고 0~1
             // 메테오
-            //Instantiate(prf_attack_judgement[0], new Vector3(-(mx + (-2 * -info.Getdir()) + (-Random.Range(1.0f, 2.0f) * -info.Getdir())), my + 0.03f + Random.Range(0.0f, 1.0f), mz), Quaternion.identity);
+            Instantiate(prf_attack_judgement[0], new Vector3(mx - (1.5f * info.Getdir()), my + 0.7f, mz), Quaternion.identity);
+            Instantiate(prf_attack_judgement[0], new Vector3(mx - (1.9f * info.Getdir()), my + 1.5f, mz), Quaternion.identity);
+            Instantiate(prf_attack_judgement[0], new Vector3(mx - (3.1f * info.Getdir()), my + 1.0f, mz), Quaternion.identity);
         }
         else
         {
             // 할퀴기
             // 왼쪽이면 -1 , -0.4
             // 오른쪽이면 1 , -0.4
-            Instantiate(prf_attack_judgement[1], new Vector3(mx - ( 1.5f * info.Getdir() ) , my - 0.8f, mz), Quaternion.identity);
+            Instantiate(prf_attack_judgement[1], new Vector3(mx - ( 1.0f * info.Getdir() ) , my - 0.8f, mz), Quaternion.identity);
+            Instantiate(prf_attack_judgement[1], new Vector3(mx - ( 1.5f * info.Getdir()), my, mz), Quaternion.identity);
         }
 
         info.Setjudgement(true);
@@ -47,7 +50,7 @@ public class B_balrog : MonoBehaviour
             if (info.Getrandom("atkrandom") == 0)
             {
                 info.animator.SetTrigger("attack");
-                //Instantiate(prf_attack_effect[0], new Vector3(-(mx + (-2 * -info.Getdir())), my - 0.25f, mz), Quaternion.identity);
+                Instantiate(prf_attack_effect[0], new Vector3(mx - (1.5f * info.Getdir()), my - 0.4f, mz), Quaternion.identity);
             }
             else
             {
@@ -69,8 +72,6 @@ public class B_balrog : MonoBehaviour
     {
         // 공격 모션이 시작되면서 공격 이펙트 생성
         if (!info.Geteffect()) attack_effect();
-
-        if (info.Gettime("atktime") >= info.GetatkSpd()) info.Setattacked(false);
     }
 
     // Start is called before the first frame update
@@ -85,17 +86,29 @@ public class B_balrog : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (info.Getattacked())
         {
             attackmotion();
+
+            if (GameObject.FindGameObjectsWithTag("Monster_attack_effect").Length == 0) info.Seteffect(false);
+            if (GameObject.FindGameObjectsWithTag("Monster_attack_judgement").Length == 0) info.Setjudgement(false);
+            if (!info.Geteffect() && !info.Getjudgement()) info.Setattacked(false);
+            else
+            {
+                if (info.Gettime("atktime") >= info.GetatkSpd())
+                {
+                    info.Seteffect(false);
+                    info.Setjudgement(false);
+                    info.Setattacked(false);
+                }
+            }
         }
         else
         {
-            if (Vector3.Distance(player.transform.position, this.transform.position) <= (float)info.Getattackrange()) // 플레이어와의 거리가 공격 사거리보다 짧은 경우
+            if (Vector3.Distance(player.transform.position, this.transform.position) <= (float)info.Getattackrange() && info.Gettime("atktime") >= info.GetatkSpd()) // 플레이어와의 거리가 공격 사거리보다 짧은 경우
             {
                 // 공격사거리 내에 있는 경우 이므로 공격 실행
-                if (!info.Getattacked() && rigid2D.velocity.y == 0) // 공격은 바닥에 붙어있을때만 가능
+                if (rigid2D.velocity.y == 0) // 공격은 바닥에 붙어있을때만 가능
                 {
                     if (player.transform.position.x > mx)
                     {
@@ -110,13 +123,10 @@ public class B_balrog : MonoBehaviour
 
                     info.animator.SetBool("move", false);
                     info.Setatkdone(false);
-                    info.Setrandom("atkrandom", 1, 2);
+                    info.Setrandom("atkrandom", 0, 2);
                     info.Setattacked(true);
                     info.Settime("atktime", 0);
-                    info.Setisground(true);
-
-                    
-                    
+                    info.Setisground(true);                   
                 }
             }
             else if (Vector3.Distance(player.transform.position, this.transform.position) <= (float)info.Getrecogrange()) // 플레이어와의 거리가 공격 사거리보다 길고 인식 사거리보다 짧은 경우
@@ -142,7 +152,6 @@ public class B_balrog : MonoBehaviour
             {
                 // 완벽한 사거리 밖이므로 몬스터는 랜덤으로 행동
                 // 사거리 밖에 플레이어가 있을 경우 몬스터가 할 수 있는 행동 3가지로 분류
-
                 if (info.Gettime("mvtime") >= info.GetatkSpd())
                 {
                     info.Settime("mvtime", 0);

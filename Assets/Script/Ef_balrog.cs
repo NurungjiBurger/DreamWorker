@@ -31,14 +31,12 @@ public class Ef_balrog : MonoBehaviour
         if (type == 0)
         {
             Destroy(gameObject);
-            info.Seteffect(false);
         }
         else
         {
             if (disappear)
             {
                 Destroy(gameObject);
-                info.Setjudgement(false);
             }
         }
     }    
@@ -50,7 +48,15 @@ public class Ef_balrog : MonoBehaviour
             if (col.CompareTag("Ground") || col.CompareTag("Wall"))
             {
                 disappear = true;
-                animator.SetBool("isground", true);
+                animator.SetBool("disappear", true);
+            }
+            else if (col.CompareTag("Player"))
+            {
+                if(!col.GetComponent<P_info>().Gethit())
+                {
+                    disappear = true;
+                    animator.SetBool("disappear", true);
+                }
             }
         }
         else if (type != 0)
@@ -71,6 +77,8 @@ public class Ef_balrog : MonoBehaviour
         dir = info.Getdir();
         if (dir == 1) this.transform.localScale = new Vector3(size, size, size);
         else this.transform.localScale = new Vector3(-size, size, size);
+
+        if (type != 1) disappear = true;
     }
 
     private void FixedUpdate()

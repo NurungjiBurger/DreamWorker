@@ -81,7 +81,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isground
+    m_ConditionEvent: disappear
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6782985923058537001}
@@ -131,7 +131,7 @@ AnimatorController:
   m_Name: balrog_attack_summon_0
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: isground
+  - m_Name: disappear
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

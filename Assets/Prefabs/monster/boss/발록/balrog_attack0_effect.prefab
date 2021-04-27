@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8980405740472362444}
   m_Layer: 0
   m_Name: balrog_attack0_effect
-  m_TagString: Untagged
+  m_TagString: Monster_attack_effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,4 +118,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dmg: 0
   type: 0
-  size: 1
+  size: 2
