@@ -15,8 +15,13 @@ public class P_info : MonoBehaviour
     private bool inputdash = false; 
     private float movespeed; 
     private float jumppower; 
+
     private float dashtime; 
-    private bool usedash = false; 
+    private bool usedash = false;
+
+    private float hittime;
+    private float hitdelay;
+    private bool hit = false;
 
     private bool portal = false; 
     private bool inputup = false;
@@ -154,6 +159,16 @@ public class P_info : MonoBehaviour
         useattack = value;
     }
 
+    public bool Gethit()
+    {
+        return hit;
+    }
+
+    public void Sethit(bool value)
+    {
+        hit = value;
+    }
+
     public bool Getusedash()
     {
         return usedash;
@@ -237,12 +252,14 @@ public class P_info : MonoBehaviour
     public float Gettime(string name)
     {
         if (name == "atktime") return atktime;
+        else if (name == "hittime") return hittime;
         else return dashtime;
     }
 
     public void Settime(string name, float time)
     {
         if (name == "atktime") atktime = time;
+        else if (name == "hittime") hittime = time;
         else dashtime = time;
 
     }
@@ -262,6 +279,7 @@ public class P_info : MonoBehaviour
         return true;
     }
 
+
     void AttackTrue()
     {
         attacked = true;
@@ -273,7 +291,31 @@ public class P_info : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        print("아파!");
+        if (col.CompareTag("Monster"))
+        {
+            if (!Gethit()) // 피격이 가능한 상태라면
+            {
+                print("아파!");
+                // 데미지 들어옴
+                Settime("hittime", 0);
+                Sethit(true);
+                // 피격 후 무적을 위한 타임 체크 ( 피격 후 곧바로 피격되지는 않는다. )
+                print(col.GetComponent<M_info>().GetbodyDmg());
+            }
+        }
+
+        if (col.CompareTag("Monster_attack_judgement"))
+        {
+            if (!Gethit()) // 피격이 가능한 상태라면
+            {
+                // 데미지 들어옴
+                Settime("hittime", 0);
+                Sethit(true);
+                // 피격 후 무적을 위한 타임 체크 ( 피격 후 곧바로 피격되지는 않는다. )
+                //print(col.GetComponent<Ef_balrog>().GetDmg());
+            }
+        }
+
     }
 
     private void OnTriggerStay2D(Collider2D col)
@@ -293,7 +335,28 @@ public class P_info : MonoBehaviour
             Setiswall(true);
             col2D.isTrigger = false;
         }
-        
+        if (col.CompareTag("Monster"))
+        {
+            if (!Gethit())
+            {
+                print("아파ㅠ");
+                Settime("hittime", 0);
+                Sethit(true);
+            }
+        }
+        if (col.CompareTag("Monster_attack_judgement"))
+        {
+            if (!Gethit()) // 피격이 가능한 상태라면
+            {
+                print("아파!!!!!");
+                // 데미지 들어옴
+                Settime("hittime", 0);
+                Sethit(true);
+                // 피격 후 무적을 위한 타임 체크 ( 피격 후 곧바로 피격되지는 않는다. )
+                print(col.GetComponent<M_info>().GetatkDmg());
+            }
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -313,6 +376,8 @@ public class P_info : MonoBehaviour
         cnt = 0;
 
         jumpcnt = 1; // 기본적으로 대부분의 캐릭터의 경우 이단점프 불가. 아이템이나 캐릭터 추가시 변경될 부분.
+
+        hitdelay = 5.0f; // 플레이어가 피격당한 후 일정시간 동안에는 피격불가 상태가 됨.
 
         atktime = 0;
         dashtime = 0;
@@ -354,6 +419,9 @@ public class P_info : MonoBehaviour
 
         dashtime += Time.deltaTime;
         atktime += Time.deltaTime;
+        hittime += Time.deltaTime;
+
+        if (Gethit()) hit = CalCoolDown(hittime, hitdelay);
 
     }
 }

@@ -11,6 +11,7 @@ public class M_info : MonoBehaviour
     private string enemyName;
     private int maxHP;
     private int nowHP;
+    private int bodyDmg;
     private int atkDmg; 
     private int atkSpeed; 
     private int recognition_range;
@@ -24,7 +25,11 @@ public class M_info : MonoBehaviour
     private bool isground = false;
     private bool isboss = false;
 
+    private bool effecton = false;
+    private bool judgementon = false;
+
     private float height = 0.7f;
+
 
     private int atkrandom;
     private int mvrandom;  
@@ -47,6 +52,26 @@ public class M_info : MonoBehaviour
 
     private BoxCollider2D col2D;
     private Rigidbody2D rigid2D;
+
+    public bool Geteffect()
+    {
+        return effecton;
+    }
+
+    public void Seteffect(bool value)
+    {
+        effecton = value;
+    }
+
+    public bool Getjudgement()
+    {
+        return judgementon;
+    }
+
+    public void Setjudgement(bool value)
+    {
+        judgementon = value;
+    }
 
     public int Getsize()
     {
@@ -139,9 +164,19 @@ public class M_info : MonoBehaviour
         return attack_range;
     }
 
+    public int GetbodyDmg()
+    {
+        return bodyDmg;
+    }
+
     public int GetatkDmg()
     {
         return atkDmg;
+    }
+
+    public void SetatkDmg(int dmg)
+    {
+        atkDmg = dmg;
     }
 
     public int GetatkSpd()
@@ -166,6 +201,7 @@ public class M_info : MonoBehaviour
         maxHP = _maxHP;
         nowHP = _maxHP;
         atkDmg = _atkDmg;
+        bodyDmg = _atkDmg;
         atkSpeed = _atkSpd;
         recognition_range = _recognition_range;
         attacktype = _attacktype;
@@ -178,6 +214,7 @@ public class M_info : MonoBehaviour
         maxHP = _maxHP;
         nowHP = _maxHP;
         atkDmg = _atkDmg;
+        bodyDmg = _atkDmg;
         atkSpeed = _atkSpd;
         recognition_range = _recognition_range;
         attacktype = _attacktype;
@@ -197,7 +234,7 @@ public class M_info : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Attack_Judgment"))
+        if (col.CompareTag("Player_attack_judgement"))
         {
             if (player.Getattacked())
             {
@@ -212,6 +249,12 @@ public class M_info : MonoBehaviour
                 }
             }
         }     
+
+        if (col.CompareTag("Player"))
+        {
+            col2D.isTrigger = true;
+            rigid2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        }
 
         if (col.CompareTag("Ground"))
         {
@@ -228,6 +271,8 @@ public class M_info : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
         animator = GetComponent<Animator>();
 
+        dir = 1;
+
         // 일반 몬스터
         if (name.Equals("mushroom(Clone)"))
         {
@@ -235,7 +280,7 @@ public class M_info : MonoBehaviour
         }
         else if (name.Equals("blue_snail(Clone)"))
         {
-            SetEnemyStatus("파란달팽이", 50, 5, 5, 3, 1, 2, 0.015f);
+            SetEnemyStatus("파란달팽이", 50, 5, 5, 3, 1, 2,  0.015f);
         }
         else if (name.Equals("pig(Clone)"))
         {
@@ -249,7 +294,7 @@ public class M_info : MonoBehaviour
         // 보스 몬스터
         if (name.Equals("balrog(Clone)"))
         {
-            SetEnemyStatus("발록", 5000, 0, 5, 6, 0, 4);
+            SetEnemyStatus("발록", 5000, 10, 5, 6, 0, 4);
             isboss = true;
         }
         nowHPbar = hpBar.transform.GetChild(0).GetComponent<Image>();

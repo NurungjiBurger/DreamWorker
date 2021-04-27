@@ -20,20 +20,57 @@ public class B_balrog : MonoBehaviour
     void attack_judgement_summon()
     {
         // 실제 공격판정이 들어가는 이펙트 애니메이션 재생
+        if (info.Getrandom("atkrandom") == 0)
+        {
+            // x dir 만큼 1 변경하고 dir 만큼 0~1
+            // y 0.029 더하고 0~1
+            // 메테오
+            //Instantiate(prf_attack_judgement[0], new Vector3(-(mx + (-2 * -info.Getdir()) + (-Random.Range(1.0f, 2.0f) * -info.Getdir())), my + 0.03f + Random.Range(0.0f, 1.0f), mz), Quaternion.identity);
+        }
+        else
+        {
+            // 할퀴기
+            // 왼쪽이면 -1 , -0.4
+            // 오른쪽이면 1 , -0.4
+            Instantiate(prf_attack_judgement[1], new Vector3(mx - ( 1.5f * info.Getdir() ) , my - 0.8f, mz), Quaternion.identity);
+        }
+
+        info.Setjudgement(true);
     }
 
     void attack_effect()
     {
+        // print("now" + mx + " , " + my + " , " + mz);
         // 공격 이펙트가 진행되면서 공격 판정 소환물 생성
-        attack_judgement_summon();
+        if (!info.Getjudgement())
+        {
+            if (info.Getrandom("atkrandom") == 0)
+            {
+                info.animator.SetTrigger("attack");
+                //Instantiate(prf_attack_effect[0], new Vector3(-(mx + (-2 * -info.Getdir())), my - 0.25f, mz), Quaternion.identity);
+            }
+            else
+            {
+                //왼쪽 2
+                // x: -1
+                // y: -0.25
+                info.animator.SetTrigger("attack1");
+                Instantiate(prf_attack_effect[1], new Vector3(mx , my , mz), Quaternion.identity);              
+            }
+
+            info.Seteffect(true);
+
+            attack_judgement_summon();
+        }
+
     }
 
     void attackmotion()
     {
         // 공격 모션이 시작되면서 공격 이펙트 생성
-        if (info.Gettime("atktime") >= info.GetatkSpd()) info.Setattacked(false);
+        if (!info.Geteffect()) attack_effect();
 
-        attack_effect();
+        if (info.Gettime("atktime") >= info.GetatkSpd()) info.Setattacked(false);
     }
 
     // Start is called before the first frame update
@@ -48,6 +85,7 @@ public class B_balrog : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (info.Getattacked())
         {
             attackmotion();
@@ -59,14 +97,25 @@ public class B_balrog : MonoBehaviour
                 // 공격사거리 내에 있는 경우 이므로 공격 실행
                 if (!info.Getattacked() && rigid2D.velocity.y == 0) // 공격은 바닥에 붙어있을때만 가능
                 {
+                    if (player.transform.position.x > mx)
+                    {
+                        info.Setdir(-1);
+                        this.transform.localScale = new Vector3(-info.Getsize(), info.Getsize(), info.Getsize());
+                    }
+                    else
+                    {
+                        info.Setdir(1);
+                        this.transform.localScale = new Vector3(info.Getsize(), info.Getsize(), info.Getsize());
+                    }
+
                     info.animator.SetBool("move", false);
                     info.Setatkdone(false);
-                    info.Setrandom("atkrandom", 0, 2);
-                    if (info.Getrandom("atkrandom") == 1) info.animator.SetTrigger("attack1");
-                    else info.animator.SetTrigger("attack");
+                    info.Setrandom("atkrandom", 1, 2);
                     info.Setattacked(true);
                     info.Settime("atktime", 0);
                     info.Setisground(true);
+
+                    
                     
                 }
             }
@@ -78,13 +127,15 @@ public class B_balrog : MonoBehaviour
                 {
                     this.transform.localScale = new Vector3(info.Getsize(), info.Getsize(), info.Getsize());
                     info.animator.SetBool("move", true);
-                    this.transform.Translate(-0.01f, 0, 0);
+                    info.Setdir(-1);
+                    this.transform.Translate(info.Getdir() * 0.01f, 0, 0);
                 }
                 else if (player.transform.position.x + 0.5 > this.transform.position.x) // 몬스터가 플레이어보다 왼쪽
                 {
                     this.transform.localScale = new Vector3(-info.Getsize(), info.Getsize(), info.Getsize());
                     info.animator.SetBool("move", true);
-                    this.transform.Translate(0.01f, 0, 0);
+                    info.Setdir(1);
+                    this.transform.Translate(info.Getdir() * 0.01f, 0, 0);
                 }
             }
             else    // 플레이어와의 거리가 인식사거리도 벗어난 경우
@@ -101,13 +152,15 @@ public class B_balrog : MonoBehaviour
                 {
                     this.transform.localScale = new Vector3(info.Getsize(), info.Getsize(), info.Getsize());
                     info.animator.SetBool("move", true);
-                    this.transform.Translate(-0.01f, 0, 0);
+                    info.Setdir(-1);
+                    this.transform.Translate(info.Getdir() * 0.01f, 0, 0);
                 }
                 else if (info.Getrandom("mvrandom") == 1) // 좌로 이동 
                 {
                     this.transform.localScale = new Vector3(-info.Getsize(), info.Getsize(), info.Getsize());
                     info.animator.SetBool("move", true);
-                    this.transform.Translate(0.01f, 0, 0);
+                    info.Setdir(1);
+                    this.transform.Translate(info.Getdir() * 0.01f, 0, 0);
                 }
                 else info.animator.SetBool("move", false); // stand 애니메이션 재생
             }
@@ -120,16 +173,4 @@ public class B_balrog : MonoBehaviour
         my = this.transform.position.y;
         mz = this.transform.position.z;
     }
-
-    /*
-    왼쪽 2
-    x : -1
-    y : -0.25
-    
-
-
-
-    
-
-    */
 }

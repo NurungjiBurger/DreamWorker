@@ -152,7 +152,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &-2187248144116332193
 MonoBehaviour:
@@ -181,5 +181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba598b54066f63c4cbb41c84de27ffe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prf_attack_effect: []
-  prf_attack_judgement: []
+  prf_attack_effect:
+  - {fileID: 2875528627778084287, guid: 17f0608e2bb48de46be1bb0c08c6f2d4, type: 3}
+  - {fileID: 9112057345939385583, guid: b170d12314d0d734a90fc2b823285d23, type: 3}
+  prf_attack_judgement:
+  - {fileID: 2791982713275079274, guid: da6a4bd6e458a784999cafbfdd2ebe7d, type: 3}
+  - {fileID: 2045336948463158510, guid: b689289ba7e8ffc488be5755f9a26f83, type: 3}

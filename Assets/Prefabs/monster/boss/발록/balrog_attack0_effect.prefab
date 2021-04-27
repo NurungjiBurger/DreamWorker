@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2875528627778084274}
   - component: {fileID: 2875528627778084285}
   - component: {fileID: 2875528627778084284}
+  - component: {fileID: -8980405740472362444}
   m_Layer: 0
   m_Name: balrog_attack0_effect
   m_TagString: Untagged
@@ -103,3 +104,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8980405740472362444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875528627778084287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed5dfbb37b16644e807b6754c252101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dmg: 0
+  type: 0
+  size: 1

@@ -7,8 +7,9 @@ TagManager:
   - Monster
   - Ground
   - Wall
-  - Attack_Judgment
   - Portal
+  - Player_attack_judgement
+  - Monster_attack_judgement
   layers:
   - Default
   - TransparentFX
