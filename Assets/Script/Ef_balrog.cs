@@ -52,11 +52,8 @@ public class Ef_balrog : MonoBehaviour
             }
             else if (col.CompareTag("Player"))
             {
-                if(!col.GetComponent<P_info>().Gethit())
-                {
-                    disappear = true;
-                    animator.SetBool("disappear", true);
-                }
+                disappear = true;
+                animator.SetBool("disappear", true);
             }
         }
         else if (type != 0)

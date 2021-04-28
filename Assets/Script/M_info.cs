@@ -47,7 +47,7 @@ public class M_info : MonoBehaviour
 
     public Animator animator;
     private RectTransform hpBar;
-    private P_info player;
+    private GameObject player;
     private Image nowHPbar;
 
     private BoxCollider2D col2D;
@@ -239,18 +239,16 @@ public class M_info : MonoBehaviour
     {
         if (col.CompareTag("Player_attack_judgement"))
         {
-            if (player.Getattacked())
+            if (!isboss) animator.SetTrigger("hit");
+            nowHP -= col.GetComponent<orbital_attack>().GetDamage();
+            Debug.Log(nowHP);
+            if (nowHP <= 0)
             {
-                if (!isboss) animator.SetTrigger("hit");
-                nowHP -= player.Getatkdmg();
-                player.Setattacked(false);
-                if (nowHP <= 0)
-                {
-                    Destroy(canvas);
-                    Destroy(gameObject);
-                    Destroy(hpBar.gameObject);
-                }
+                Destroy(canvas);
+                Destroy(gameObject);
+                Destroy(hpBar.gameObject);
             }
+         
         }     
 
         if (col.CompareTag("Player"))
@@ -271,7 +269,7 @@ public class M_info : MonoBehaviour
     {
         canvas = Instantiate(canvas);
         hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
+        player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
 
         dir = 1;

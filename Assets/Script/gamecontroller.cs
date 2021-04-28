@@ -11,7 +11,7 @@ public class gamecontroller : MonoBehaviour
     public GameObject[] prf_character;
     public GameObject[] prf_portal;
     // public GameObject[] tile;
-    private P_info player;
+    private GameObject player;
     private GameObject[] monsters;
     private GameObject[] portals;
 
@@ -106,7 +106,7 @@ public class gamecontroller : MonoBehaviour
 
         // 플레이어 캐릭터 생성
         Instantiate(prf_character[0], new Vector3(1.5f, 0, 0), Quaternion.identity);
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
         canvas = Instantiate(canvas);
         hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
@@ -122,8 +122,8 @@ public class gamecontroller : MonoBehaviour
 
     void Update()
     {
-        txhp.text = player.Getnowhp().ToString() + "    /    " + player.Getmaxhp().ToString();
-        nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
+       // txhp.text = player.Getnowhp().ToString() + "    /    " + player.Getmaxhp().ToString();
+       // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
 
         if (stagenumber < 2)
         {

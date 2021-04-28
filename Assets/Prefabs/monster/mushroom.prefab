@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 8413788652700232729}
   - component: {fileID: 3241268766575711930}
   - component: {fileID: 5168022905801713081}
-  - component: {fileID: -8792696398860824042}
-  - component: {fileID: 6793172356807492040}
+  - component: {fileID: -7362322023510059291}
   m_Layer: 0
   m_Name: mushroom
   m_TagString: Monster
@@ -122,7 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prfHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
-  objmonster: {fileID: 561254009004928827}
   animator: {fileID: 0}
 --- !u!61 &3241268766575711930
 BoxCollider2D:
@@ -171,7 +169,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-8792696398860824042
+--- !u!114 &-7362322023510059291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,18 +178,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 561254009004928827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b889be04212a800438e14c24c860740f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6793172356807492040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561254009004928827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7004ee89d705fc4d9b74d52230264f2, type: 3}
+  m_Script: {fileID: 11500000, guid: d2fd5cd4e0babc447b035e06b1f05364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

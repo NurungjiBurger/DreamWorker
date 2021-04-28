@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class M_move : MonoBehaviour
 {
-    private M_attack atk;
-    private P_info player;
-    private BoxCollider2D col2D;
-    private Rigidbody2D rigid2D;
-    private M_info info;
+    private GameObject player;
 
     private float mx, my, mz;
     // Start is called before the first frame update
     void Start()
     {
-        info = GetComponent<M_info>();
-        atk = GetComponent<M_attack>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
+        player = GameObject.FindGameObjectWithTag("Player");
         rigid2D = GetComponent<Rigidbody2D>();
         col2D = GetComponent<BoxCollider2D>();
 

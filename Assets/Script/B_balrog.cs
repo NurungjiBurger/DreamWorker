@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class B_balrog : MonoBehaviour
 {
+    private GameObject player;
     private M_info info;
-    private P_info player;
     private BoxCollider2D col2D;
     private Rigidbody2D rigid2D;
 
@@ -78,7 +78,7 @@ public class B_balrog : MonoBehaviour
     void Start()
     {
         info = GetComponent<M_info>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<P_info>();
+        player = GameObject.FindGameObjectWithTag("Player");
         rigid2D = GetComponent<Rigidbody2D>();
         col2D = GetComponent<BoxCollider2D>();
     }

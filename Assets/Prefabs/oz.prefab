@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3436436398185508405}
   - component: {fileID: 3294821540588540543}
   - component: {fileID: 3452637295615809757}
-  - component: {fileID: 6291990988712674617}
   - component: {fileID: 9212142361299134469}
-  - component: {fileID: -5956867864961039818}
+  - component: {fileID: -4653240224018148939}
+  - component: {fileID: -1517670687863710666}
   m_Layer: 0
   m_Name: oz
   m_TagString: Player
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6485205295942090449}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -155,19 +155,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &6291990988712674617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6485205295942090449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0445856446d544d43b572d3ddbd376c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!114 &9212142361299134469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +167,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2a075cefe005741852d828a3d32d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5956867864961039818
+  jump: 100
+  moveSpeed: 0.1
+  jumpPower: 0.4
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+--- !u!114 &-4653240224018148939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485205295942090449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029e96eadec32f24b807282498a78dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+--- !u!114 &-1517670687863710666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,3 +197,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
