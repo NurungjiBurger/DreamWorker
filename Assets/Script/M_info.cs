@@ -273,7 +273,8 @@ public class M_info : MonoBehaviour
         animator = GetComponent<Animator>();
 
         dir = 1;
-
+        //string _enemyName, int _maxHP, int _atkDmg, int _atkSpd, int _recognition_range, int _attacktype, int _attack_range, float _jump_dashPower
+        // 이름, 최대피, 데미지, 공속, 인식범위, 공격타입, 사거리, 점프대쉬파워, 
         // 일반 몬스터
         if (name.Equals("mushroom(Clone)"))
         {

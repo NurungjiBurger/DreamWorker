@@ -64,7 +64,7 @@ public class gamecontroller : MonoBehaviour
         if (substagenumber != 0) // 부스테이지 번호가 0 일 경우 몬스터가 없는 스테이지.
         {
             //population = Random.Range(8, 10);  // 현재 스테이지에 생성할 몬스터의 마릿 수.
-            population = 2;
+            population = 1;
             for (int i = 0; i < population; i++)
             {
                 int type;
