@@ -135,9 +135,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow))
         {
             dir = Direction.Stop;
+            isGoNext = false;
         }
+        //
 
-        if (isGoNext) isGoNext = false;
 
         if (GetComponent<Rigidbody2D>().velocity.y > 0)
         {
@@ -147,7 +148,8 @@ public class PlayerMovement : MonoBehaviour
         if (GetComponent<Rigidbody2D>().velocity.y < 0)
         {
             GetComponent<Collider2D>().isTrigger = false;
-        }      
+        }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)

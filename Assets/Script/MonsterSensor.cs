@@ -26,7 +26,6 @@ public class MonsterSensor : MonoBehaviour
 
         if (col.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("땅이다");
             isGround = true;
             GetComponent<Collider2D>().isTrigger = false;
         }
@@ -36,7 +35,6 @@ public class MonsterSensor : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("떠난다");
             isGround = false;
         }
     }

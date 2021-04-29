@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 7842352421957864566}
   - component: {fileID: 153625911630939029}
   - component: {fileID: -6306246261198616340}
-  - component: {fileID: -1236305300175764174}
+  - component: {fileID: -1797472146437140349}
+  - component: {fileID: 8960678136742002029}
+  - component: {fileID: 1105003613153287362}
   m_Layer: 0
   m_Name: balrog
   m_TagString: Monster
@@ -170,10 +172,13 @@ MonoBehaviour:
   maxHP: 5000
   nowHP: 0
   power: 20
+  jumpPower: 6
+  moveSpeed: 2
   name: "\uBC1C\uB85D"
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
   isBoss: 1
+  bodyDmg: 10
 --- !u!114 &-6306246261198616340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,8 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e810935c8b487e478010f1e703bf3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
---- !u!114 &-1236305300175764174
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+--- !u!114 &-1797472146437140349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,7 +204,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fd5cd4e0babc447b035e06b1f05364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recognitionRange: 8
+  recognitionRange: 5
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
-  moveSpeed: 0.2
-  jumpPower: 0.6
+--- !u!114 &8960678136742002029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842352421957864564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c028441d3d4217b439fec512ba1c7276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 3
+  attackQuantity: 2
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  attackSpeed: 3
+  attackType: 0
+--- !u!114 &1105003613153287362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842352421957864564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4541026e5981ee54abaf9b8d46db60ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabEffect:
+  - {fileID: 2875528627778084287, guid: 17f0608e2bb48de46be1bb0c08c6f2d4, type: 3}
+  - {fileID: 9112057345939385583, guid: b170d12314d0d734a90fc2b823285d23, type: 3}
+  prefabJudgement:
+  - {fileID: 2791982713275079274, guid: da6a4bd6e458a784999cafbfdd2ebe7d, type: 3}
+  - {fileID: 2045336948463158510, guid: b689289ba7e8ffc488be5755f9a26f83, type: 3}

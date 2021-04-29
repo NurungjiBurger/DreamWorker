@@ -22,20 +22,11 @@ public class MonsterMovement : MonoBehaviour
     [SerializeField]
     private GameObject prefabTimer;
 
+
+
     private Timer moveTimer;
 
-  
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        animator = GetComponent<Animator>();
-
-        moveTimer = Instantiate(prefabTimer).GetComponent<Timer>();
-        moveTimer.SetCooldown(1.0f);
-    }
-    private void FixedUpdate()
+    public void Moving()
     {
         if (!GetComponent<MonsterAttack>().Attack) // 몬스터가 공격중이 아니라면 무빙 가능
         {
@@ -54,6 +45,8 @@ public class MonsterMovement : MonoBehaviour
                 case Direction.Up:
                     break;
                 case Direction.Stop:
+                    animator.SetBool("move", false);
+                    break;
                 default:
                     //GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0f);
                     break;
@@ -78,17 +71,13 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DecideMove()
     {
-       Debug.Log(isMove + "     " + transform.position.x + "    " + moveRandom + "   " +  GetComponent<MonsterAttack>().Attack);
-
         if (moveTimer.CooldownCheck()) isMove = false;
-        
+
         // 인식 범위 안
         if (Vector3.Distance(player.transform.position, transform.position) <= recognitionRange)
         {
-           // Debug.Log("무빙중");
             if (player.transform.position.x < transform.position.x) moveRandom = 1;
             else if (player.transform.position.x > transform.position.x) moveRandom = 0;
             else moveRandom = 3;
@@ -98,9 +87,8 @@ public class MonsterMovement : MonoBehaviour
         // 인식 범위 밖일때
         else
         {
-            //Debug.Log("자유시간");
             // 움직이고 있지 않으면 1초 동안 어떻게 움직일지 정해줌
-            if (!isMove)    
+            if (!isMove)
             {
                 moveRandom = Random.Range(0, 4);
                 moveTimer.TimerSetZero();
@@ -127,8 +115,27 @@ public class MonsterMovement : MonoBehaviour
             case 3:
             default:
                 dir = Direction.Stop;
-                animator.SetBool("move", false);
                 break;
         }
+    }
+
+    // Start is called before the first frame update
+    public void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        animator = GetComponent<Animator>();
+
+        moveTimer = Instantiate(prefabTimer).GetComponent<Timer>();
+        moveTimer.SetCooldown(1.0f);
+    }
+    private void FixedUpdate()
+    {
+        Moving();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        DecideMove();
     }
 }

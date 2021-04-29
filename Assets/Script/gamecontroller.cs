@@ -3,174 +3,208 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gamecontroller : MonoBehaviour
+public class GameController : MonoBehaviour
 {
     // 게임 오브젝트
-    public GameObject[] prf_monster;
-    public GameObject[] prf_boss_monster;
-    public GameObject[] prf_character;
-    public GameObject[] prf_portal;
+    [SerializeField]
+    private GameObject[] prefabMonster;
+    [SerializeField]
+    private GameObject[] prefabBossMonster;
+    [SerializeField]
+    private GameObject[] prefabCharacter;
+    [SerializeField]
+    private GameObject[] prefabPortal;
     // public GameObject[] tile;
     private GameObject player;
+
     private GameObject[] monsters;
     private GameObject[] portals;
 
     RectTransform hpBar;
-    public GameObject prfHpBar;
-    public GameObject canvas;
-    Image nowHPbar;
-    Text txhp;
+    [SerializeField]
+    private GameObject prefabHpBar;
+    [SerializeField]
+    private GameObject canvas;
+    private Image nowHPBar;
+    private Text textHp;
 
     //
-    int population;
-    int counter;
-    int gx, gy, maxgy;
-    int mx, my;
+    private int population;
+    private int counter;
+    private int gx, gy, maxgy;
+    private int mx, my;
 
     // 스테이지 번호 1-1
-    int stagenumber;
-    int substagenumber;
+    private int stageNumber;
+    private int subStageNumber;
 
     // 상태
-    bool stageentrance;
-    bool substageentrance;
-    bool monsterpresence;
-    bool portalpresence;
+    private bool isClear;
+    private bool stageEntrance;
+    private bool subStageEntrance;
+    private bool monsterPresence;
+    private bool portalPresence;
 
-    void countportal()  // 포탈 수 세기
+    void ManagePortal()  // 포탈 관리
     {
         portals = GameObject.FindGameObjectsWithTag("Portal");
+        if (portals.Length == 0) portalPresence = false;
+        else portalPresence = true;
     }
-    void makeportal()
+    void CreatePortal()
     {
-        print(counter + ", " + substagenumber);
-        if (counter != substagenumber + 1) Instantiate(prf_portal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
-        else Instantiate(prf_portal[1], new Vector3(0, -2.9f, 0), Quaternion.identity); // 보스 포탈 생성
-        portalpresence = true;
+        if (counter != subStageNumber) Instantiate(prefabPortal[0], new Vector3(0, -3.1f, 0), Quaternion.identity);  // 기본 포탈 생성
+        else Instantiate(prefabPortal[1], new Vector3(0, -3.1f, 0), Quaternion.identity); // 보스 포탈 생성
     }
-    void createmonster(GameObject prf, float x, float y)    // 몬스터 생성 함수
+    void ManageMonster() // 몬스터 관리
     {
-        Instantiate(prf, new Vector3(0, 0, 0), Quaternion.identity);
+        monsters = GameObject.FindGameObjectsWithTag("Monster");
+        if (monsters.Length == 0) monsterPresence = false;
+        else monsterPresence = true;
     }
-    void createmaptile() // 맵 생성 함수
+    void CreateMonster(GameObject prefab, float x, float y)    // 몬스터 생성 함수
+    {
+        Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+    void CreateMapTile() // 맵 생성 함수
     {
 
     }
-    void makestage()    // 스테이지 생성 함수
+    void CreateStage()    // 스테이지 생성 함수
     {
-        createmaptile();
+        CreateMapTile();
         maxgy = 0;// 최대 높이 가져오기
         
-        if (substagenumber != 0) // 부스테이지 번호가 0 일 경우 몬스터가 없는 스테이지.
+        if (subStageNumber != 0) // 부스테이지 번호가 0 일 경우 몬스터가 없는 스테이지.
         {
             //population = Random.Range(8, 10);  // 현재 스테이지에 생성할 몬스터의 마릿 수.
             population = 1;
             for (int i = 0; i < population; i++)
             {
                 int type;
-                type = Random.Range((stagenumber - 1) * 3, stagenumber * 3);
+                type = Random.Range((stageNumber - 1) * 3, stageNumber * 3);
                 mx = Random.Range(-5, 5);
                 my = Random.Range(-4, maxgy);
-                createmonster(prf_monster[type], (float)mx, (float)my);    // 랜덤 좌표에 몬스터 생성
+                CreateMonster(prefabMonster[type], (float)mx, (float)my);    // 랜덤 좌표에 몬스터 생성
             }
         }
     }
-    void gonextstage()
+    void GoNextStage()
     {
-        substageentrance = false;
-        stagenumber++;
-        substagenumber = 0;
+        stageEntrance = false;
+        subStageEntrance = false;
+        stageNumber++;
+        subStageNumber = 0;
     }
-    void countmonster() // 몬스터 수 세기
+    void CreateBossStage()    // 보스맵 생성
     {
-        monsters = GameObject.FindGameObjectsWithTag("Monster");
-    }
-    void makebossstage()    // 보스맵 생성
-    {
-        print("보스전");
-        createmaptile();
-        createmonster(prf_boss_monster[0], 0, 0);
-        Instantiate(prf_portal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
-        countportal();
+        Debug.Log("보스전");
+        CreateMapTile();
+        CreateMonster(prefabBossMonster[0], 0, 0);
+        Instantiate(prefabPortal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
+        ManagePortal();
     }
     void Start()
     {
-        // 변수 초기화
-        stagenumber = 1;
-        substagenumber = 0;
+        // 파일을 로드
 
-        stageentrance = false;  // 스테이지에 처음 들어왔는가?
-        substageentrance = false; // 부스테이지에 처음 들어왔는가?
-        monsterpresence = false;// 몬스터가 존재하는가?
-        portalpresence = false; // 포탈이 존재하는가?
+        // 로드 실패
+        // 변수 초기화
+        stageNumber = 0;
+        subStageNumber = 0;
+
+        stageEntrance = false;  // 스테이지에 처음 들어왔는가?
+        subStageEntrance = false; // 부스테이지에 처음 들어왔는가?
+        monsterPresence = false;// 몬스터가 존재하는가?
+        portalPresence = false; // 포탈이 존재하는가?
 
         // 플레이어 캐릭터 생성
-        Instantiate(prf_character[0], new Vector3(1.5f, 0, 0), Quaternion.identity);
+        Instantiate(prefabCharacter[0], new Vector3(1.5f, 0, 0), Quaternion.identity);
         player = GameObject.FindGameObjectWithTag("Player");
 
         canvas = Instantiate(canvas);
-        hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
-        nowHPbar = hpBar.transform.GetChild(0).GetComponent<Image>();
+        hpBar = Instantiate(prefabHpBar, canvas.transform).GetComponent<RectTransform>();
+        nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
 
 
-        txhp = nowHPbar.transform.GetChild(0).GetComponent<Text>();
+        textHp = nowHPBar.transform.GetChild(0).GetComponent<Text>();
+
+        isClear = false;
 
 
         // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));
-         //hpBar.transform.position = _hpBarPos;
+        // hpBar.transform.position = _hpBarPos;
     }
 
     void Update()
     {
-       // txhp.text = player.Getnowhp().ToString() + "    /    " + player.Getmaxhp().ToString();
-       // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
+        // txhp.text = player.Getnowhp().ToString() + "    /    " + player.Getmaxhp().ToString();
+        // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
 
-        if (stagenumber < 2)
+        // 1-0 2-0 같은 스테이지인가
+
+        ManageMonster();
+        ManagePortal();
+
+        Debug.Log("현재 " + stageNumber + " - " + subStageNumber + "  /  " + counter);
+
+        if (stageNumber <= 5) // // 5스테이지가 마지막
         {
-            if (!stageentrance) // 처음 스테이지에 입장
+            if (!stageEntrance) // 처음 스테이지에 입장
             {
-                stageentrance = true; // 스테이지에 입장 완료.
-                counter = Random.Range(8, 10);  // 부스테이지 갯수 설정
-                counter = 2;
+                stageEntrance = true;
+                if (stageNumber != 0)
+                {
+                    counter = Random.Range(8, 10);
+                    counter = 3;
+                }
+                else counter = 0;
             }
             else
             {
-                if (!substageentrance) // 처음 부스테이지에 입장
+                if (!subStageEntrance) // 부스테이지 최초 입장
                 {
-                    substagenumber++;
-                    if (counter == substagenumber) // 보스 포탈을 타고 넘어왔음.
+                    subStageEntrance = true;
+
+                    if (subStageNumber != 0 && counter == subStageNumber) // 보스포탈을 타고 넘어왔다면.
                     {
-                        makebossstage();
+                        CreateBossStage(); // 보스맵 생성
                     }
-                    else makestage();   // 스테이지 생성
-                    substageentrance = true; // 부스테이지에 입장 완료.
+                    else CreateStage(); // 그렇지 않으면 일반맵 생성
                 }
-                else    // 게임 진행중
+                else    // 게임 진행중 
                 {
-                    countmonster();
-                    if (monsters.Length == 0) // 몬스터가 모두 죽었다면
+                    if (!isClear)
                     {
-                        if (!portalpresence) makeportal();
-
-                        countportal();
-
-                        if (portals.Length == 0) // 포탈이 사라졌다면
+                        if (!monsterPresence) // 몬스터가 맵에 존재하지 않는다면
                         {
-                            if (counter == substagenumber)
+                            if (!portalPresence) CreatePortal(); // 몬스터가 다 죽었으니 포탈을 만들어
+                            else isClear = true;
+                        }
+                    }
+                    else
+                    {
+                        if (!portalPresence) // 포탈과 상호작용해서 없애버리면
+                        {
+                            isClear = false;
+
+                            if (counter == subStageNumber) // 보스맵이었으면 다음스테이지로 가야지
                             {
-                                print("넘어가자");
-                                gonextstage();
+                                Debug.Log("다음스테이지로!");
+                                stageEntrance = false;
+                                subStageEntrance = false;
+                                stageNumber++;
+                                subStageNumber = 0;
                             }
-                            else substageentrance = false;
-                            portalpresence = false;
+                            else
+                            {
+                                subStageNumber++;
+                                subStageEntrance = false;
+                            }
                         }
                     }
                 }
             }
         }
-     
-
-        
-        
     }
 }

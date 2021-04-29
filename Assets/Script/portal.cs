@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class portal : MonoBehaviour
+public class Portal : MonoBehaviour
 {
     private GameObject player;
+
     private void checkdelete()
     {
 
-        if(player.GetComponent<PlayerMovement>().GetGoNext())
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().GetGoNext())
         {
             Destroy(gameObject);
         }
@@ -17,7 +18,6 @@ public class portal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

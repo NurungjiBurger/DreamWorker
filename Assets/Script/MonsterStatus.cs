@@ -15,8 +15,11 @@ public class MonsterStatus : Status
 
     [SerializeField]
     private bool isBoss;
+    [SerializeField]
+    private int bodyDmg;
 
     public bool Boss { get { return isBoss; } }
+    public int Dmg { get { return bodyDmg; } }
 
     // Start is called before the first frame update
     void Start()

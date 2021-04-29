@@ -30,8 +30,81 @@ public class MonsterAttack : MonoBehaviour
 
     public float Range {  get { return attackRange; } }
 
-    // Start is called before the first frame update
-    void Start()
+    public int Quantity { get { return attackQuantity; } }
+
+    public bool CoolDownCheck { get { return attackTimer.CooldownCheck(); } }
+    public int AttackRandom { get { return attackRandom; } }
+    public int Direction { get { return dir; } }
+
+    public void VerifyAttack()
+    {
+        if (!GetComponent<AttackEffect>().Effect && !GetComponent<AttackEffect>().Judgement) isAttack = false;
+        else
+        {
+            if (attackTimer.CooldownCheck()) isAttack = false;
+
+        }
+    }
+
+    public void DecideAttack()
+    {
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
+        {
+            if (!isAttack)
+            {
+                isAttack = true;
+                attackTimer.TimerSetZero();
+                if (GetComponent<SpriteRenderer>().flipX) dir = -1;
+                else dir = 1;
+                if (attackQuantity == 1)
+                {
+                    if (attackType == 0) isUp = true;
+                }
+                else
+                {
+                    attackRandom = Random.Range(0, attackQuantity);
+                }
+            }
+        }
+    }
+
+    public void Attacking()
+    {
+        if (isAttack)
+        {
+            if (attackTimer.CooldownCheck()) isAttack = false;
+
+            if (attackQuantity == 1)
+            {
+                if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().JumpPower) isUp = false;
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                if (attackType == 0) // 점프공격 
+                {
+                    if (isUp) transform.Translate(0, 0.075f * GetComponent<MonsterStatus>().JumpPower / (float)(attackSpeed * 4), 0);
+                    else transform.Translate(-0.01f * dir * GetComponent<MonsterStatus>().MoveSpeed, -(0.075f * GetComponent<MonsterStatus>().JumpPower) / (float)attackSpeed, 0);
+
+                    if (GetComponent<MonsterSensor>().Ground) isAttack = false;
+                }
+                else if (attackType == 1) // 돌진공격
+                {
+                    transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
+                }
+            }
+            else
+            {
+                GetComponent<AttackEffect>().AttackMotion();
+
+                // 종료조건
+            }
+        }
+        else
+        {
+            GetComponent<Collider2D>().isTrigger = false;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
+    public void Setting()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
@@ -40,47 +113,20 @@ public class MonsterAttack : MonoBehaviour
         attackTimer.SetCooldown(attackSpeed);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    private void Start()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
-        {
-            if (!isAttack)
-            {
-                isAttack = true;
-                attackTimer.TimerSetZero();
-                if (attackType == 0) isUp = true;
-                if (GetComponent<SpriteRenderer>().flipX) dir = -1;
-                else dir = 1;
-            }
-        }
+        Setting();
+    }
 
+    // Update is called once per frame
+    private void Update()
+    {
+        DecideAttack();
     }
 
     private void FixedUpdate()
     {
-        if (isAttack)
-        {
-            if (attackTimer.CooldownCheck()) isAttack = false;
-
-            if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().JumpPower) isUp = false;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            if (attackType == 0) // 점프공격 
-            {
-                if (isUp) transform.Translate(0, 0.075f * GetComponent<MonsterStatus>().JumpPower / (float)(attackSpeed * 4), 0);
-                else transform.Translate(-0.01f * dir * GetComponent<MonsterStatus>().MoveSpeed, -(0.075f * GetComponent<MonsterStatus>().JumpPower) / (float)attackSpeed,  0);
-
-                if (GetComponent<MonsterSensor>().Ground) isAttack = false;
-            }
-            else if (attackType == 1) // 돌진공격
-            {
-                transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
-            }
-        }
-        else
-        {
-            GetComponent<Collider2D>().isTrigger = false;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
+        Attacking();
     }
 }
