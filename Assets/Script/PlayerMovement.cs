@@ -17,20 +17,13 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private GameObject prefabTimer;
-
     private Timer dashTimer;
-
     private Direction dir = Direction.Stop;
-
-    private bool isMonster = false;
 
     private float time;
 
     private bool dashing = false;
-
-    private bool isGround = true;
     private bool jumping = false;
-    private bool isPortal = false;
 
     private bool isGoNext = false;
 
@@ -75,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
         if (jumping)
         {
             jumping = false;
-            isGround = false;
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
         }
         if (dashing)
@@ -116,13 +108,13 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("move", true);
         }
         // 포탈상호작용?
-        if (Input.GetKey(KeyCode.UpArrow) && isPortal)
+        if (Input.GetKey(KeyCode.UpArrow) && GetComponent<PlayerSensor>().Portal)
         {
             dir = Direction.Up;
             animator.SetBool("move", true);
         }
         // 점프
-        if (Input.GetKeyDown(jump) && isGround)
+        if (Input.GetKeyDown(jump) && GetComponent<PlayerSensor>().Ground)
         {
             jumping = true;
         }
@@ -139,55 +131,6 @@ public class PlayerMovement : MonoBehaviour
         }
         //
 
-
-        if (GetComponent<Rigidbody2D>().velocity.y > 0)
-        {
-            GetComponent<Collider2D>().isTrigger = true;
-        }
-
-        if (GetComponent<Rigidbody2D>().velocity.y < 0)
-        {
-            GetComponent<Collider2D>().isTrigger = false;
-        }
-
+        //Debug.Log(GetComponent<PlayerSensor>().Ground);
     }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Portal"))
-        {
-            isPortal = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Portal"))
-        {
-            isPortal = false;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Ground"))
-        {
-            isGround = true;
-        }
-
-        if (collision.collider.CompareTag("Monster"))
-        {
-            isMonster = true;
-        }
-
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Monster"))
-        {
-           isMonster = false;
-        }
-    }
-
 }

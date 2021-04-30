@@ -8,7 +8,6 @@ public class MonsterMovement : MonoBehaviour
 
     private Direction dir = Direction.Stop;
 
-    private bool isGround = true;
     private bool jumping = false;
 
     private bool isMove = false;
@@ -33,12 +32,10 @@ public class MonsterMovement : MonoBehaviour
             switch (dir)
             {
                 case Direction.Right:
-                    GetComponent<SpriteRenderer>().flipX = true;
                     animator.SetBool("move", true);
                     transform.Translate(0.005f * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
                     break;
                 case Direction.Left:
-                    GetComponent<SpriteRenderer>().flipX = false;
                     animator.SetBool("move", true);
                     transform.Translate(-0.005f * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
                     break;
@@ -54,9 +51,10 @@ public class MonsterMovement : MonoBehaviour
 
             if (jumping)
             {
+                Debug.Log("점프중");
                 jumping = false;
-                isGround = false;
-                transform.Translate(0, 0.005f * GetComponent<MonsterStatus>().JumpPower, 0);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().JumpPower);
+                //transform.Translate(0, 0.005f * GetComponent<MonsterStatus>().JumpPower, 0);
             }
         }
 
@@ -96,6 +94,11 @@ public class MonsterMovement : MonoBehaviour
             }
         }
 
+        // 방향 바꾸기
+        if(dir == Direction.Right) GetComponent<SpriteRenderer>().flipX = true;
+        else if (dir == Direction.Left) GetComponent<SpriteRenderer>().flipX = false;
+
+        moveRandom = 2;
         // 다 정했으니 움직이자!
         switch (moveRandom)
         {
@@ -106,7 +109,7 @@ public class MonsterMovement : MonoBehaviour
                 dir = Direction.Left;
                 break;
             case 2:
-                if (isGround)
+                if (GetComponent<MonsterSensor>().Ground)
                 {
                     dir = Direction.Up;
                     jumping = true;

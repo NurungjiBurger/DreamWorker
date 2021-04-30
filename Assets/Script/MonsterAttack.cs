@@ -38,7 +38,7 @@ public class MonsterAttack : MonoBehaviour
 
     public void VerifyAttack()
     {
-        if (!GetComponent<AttackEffect>().Effect && !GetComponent<AttackEffect>().Judgement) isAttack = false;
+        if (!GetComponent<MonsterAttackEffect>().Effect && !GetComponent<MonsterAttackEffect>().Judgement) isAttack = false;
         else
         {
             if (attackTimer.CooldownCheck()) isAttack = false;
@@ -46,8 +46,11 @@ public class MonsterAttack : MonoBehaviour
         }
     }
 
+    public void AnimaotrSetFalse() { animator.SetBool("move", false); }
+
     public void DecideAttack()
     {
+        // 공격범위내에 있다면
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
         {
             if (!isAttack)
@@ -62,7 +65,7 @@ public class MonsterAttack : MonoBehaviour
                 }
                 else
                 {
-                    attackRandom = Random.Range(0, attackQuantity);
+                     attackRandom = Random.Range(0, attackQuantity);
                 }
             }
         }
@@ -74,7 +77,7 @@ public class MonsterAttack : MonoBehaviour
         {
             if (attackTimer.CooldownCheck()) isAttack = false;
 
-            if (attackQuantity == 1)
+            if (attackQuantity == 0)
             {
                 if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().JumpPower) isUp = false;
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
@@ -89,10 +92,16 @@ public class MonsterAttack : MonoBehaviour
                 {
                     transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
                 }
+                else if (attackType == 2) // 본체 공격애니메이션에 데미지
+                {
+                    animator.SetTrigger("attack");
+                    GetComponent<Collider2D>().isTrigger = true;
+                    GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
+                }
             }
             else
             {
-                GetComponent<AttackEffect>().AttackMotion();
+                GetComponent<MonsterAttackEffect>().AttackMotion();
 
                 // 종료조건
             }

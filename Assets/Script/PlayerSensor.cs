@@ -9,47 +9,88 @@ public class PlayerSensor : MonoBehaviour
 
     private Timer hitTimer;
 
+    private bool isGround = false;
+    private bool isPortal = false;
     private bool isHit = false;
+    private bool onOff = false;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public bool Ground { get { return isGround; } }
+    public bool Portal { get { return isPortal; } }
+
+    // 트리거 충돌
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Monster"))
+        if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
         {
-            if (!isHit)
+            GetComponent<Collider2D>().isTrigger = false;
+            isGround = true;
+        }
+    } 
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal")) isPortal = true;
+        if (collision.CompareTag("Monster"))
+        {
+            if (!isHit) // 피격이 가능한 상태라면
             {
-               // Debug.Log("collision 충돌");
                 isHit = true;
                 hitTimer.TimerSetZero();
+                onOff = true;
             }
+        }
+        if (collision.CompareTag("Monster_attack_judgement"))
+        {
+            if (!isHit) // 피격이 가능한 상태라면
+            {
+                isHit = true;
+                hitTimer.TimerSetZero();
+                onOff = true;
+            }
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal")) isPortal = false;
+        if (collision.CompareTag("Monster"))
+        {
+            GetComponent<Collider2D>().isTrigger = false;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    // 콜리젼 충돌
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (col.CompareTag("Monster"))
+
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ground")) isGround = true;
+
+        if (collision.collider.CompareTag("Monster"))
         {
-            if (!isHit) // 피격이 가능한 상태라면
-            {
-               // Debug.Log("trigger 충돌");
+            GetComponent<Collider2D>().isTrigger = true;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            if (!isHit)
+            {               
                 isHit = true;
                 hitTimer.TimerSetZero();
-                // 데미지 들어옴
-                // 피격 후 무적을 위한 타임 체크 ( 피격 후 곧바로 피격되지는 않는다. )
+                onOff = true; 
             }
-        }
+        }        
+    }
 
-        if (col.CompareTag("Monster_attack_judgement"))
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
         {
-            if (!isHit) // 피격이 가능한 상태라면
-            {
-                isHit = true;
-                hitTimer.TimerSetZero();
-                // 데미지 들어옴
-                // 피격 후 무적을 위한 타임 체크 ( 피격 후 곧바로 피격되지는 않는다. )
-            }
+            GetComponent<Collider2D>().isTrigger = true;
+            isGround = false;
         }
-
-
     }
 
     // Start is called before the first frame update
@@ -63,7 +104,15 @@ public class PlayerSensor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isHit) isHit = !hitTimer.CooldownCheck();
-        //Debug.Log(isHit);
+        if (onOff)
+        {
+            isHit = !hitTimer.CooldownCheck();
+            if (!isHit)
+            {
+                onOff = false;
+                GetComponent<Collider2D>().isTrigger = false;
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
+        }
     }
 }

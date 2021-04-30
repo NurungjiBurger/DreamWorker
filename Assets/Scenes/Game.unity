@@ -152,19 +152,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1616946a78bc5c649af31a60acab8426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prf_monster:
+  prefabMonster:
   - {fileID: 3669066004584926201, guid: 7beefb8390bcdfe428d733bae753114f, type: 3}
   - {fileID: 561254009004928827, guid: 56bcd4872c45ab04f97d3688015f6a2a, type: 3}
   - {fileID: 4111291780921786306, guid: a845c3cd809734e42af05ceb0465664f, type: 3}
   - {fileID: 1435551059982855661, guid: f5affcb06e7d94248bba3deda0c4ff12, type: 3}
-  prf_boss_monster:
+  - {fileID: 383148728429647738, guid: f4102c0afb7775044b41c0ded4721ea0, type: 3}
+  - {fileID: 1864798779100027704, guid: 33d0e06c9e0f45a4e93fd662a59e5619, type: 3}
+  - {fileID: 7769854020418550967, guid: a05ce65ef9e055a48ac3331975cbfb35, type: 3}
+  - {fileID: 1550942159688109516, guid: 9685ba18de9898042869cb240658db81, type: 3}
+  prefabBossMonster:
   - {fileID: 7842352421957864564, guid: 9f2091fbf65126249a85b0ae9814484a, type: 3}
-  prf_character:
+  prefabCharacter:
   - {fileID: 6485205295942090449, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
-  prf_portal:
+  prefabPortal:
   - {fileID: 4508550508265296456, guid: bf99970d24134db439cb952dbab788bf, type: 3}
   - {fileID: 4163875461290686834, guid: b68bd87ee5df83a46a650f7af292c894, type: 3}
-  prfHpBar: {fileID: 2976229603464939949, guid: 9304a1b6e6a69e94080cedbde3f78721, type: 3}
+  prefabHpBar: {fileID: 2976229603464939949, guid: 9304a1b6e6a69e94080cedbde3f78721, type: 3}
   canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
 --- !u!4 &56016493
 Transform:

@@ -21,6 +21,13 @@ public class MonsterStatus : Status
     public bool Boss { get { return isBoss; } }
     public int Dmg { get { return bodyDmg; } }
 
+    void DestroyObject()
+    {
+        Destroy(canvas);
+        Destroy(gameObject);
+        Destroy(hpBar.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,9 +58,8 @@ public class MonsterStatus : Status
 
         if (GetComponent<MonsterStatus>().NowHP <= 0)
         {
-            Destroy(canvas);
-            Destroy(gameObject);
-            Destroy(hpBar.gameObject);
+            if (GetComponent<MonsterStatus>().isBoss) GetComponent<Animator>().SetTrigger("die");
+            else DestroyObject();
         }
     }
 }

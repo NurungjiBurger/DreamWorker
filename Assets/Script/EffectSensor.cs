@@ -5,62 +5,31 @@ using UnityEngine;
 public class EffectSensor : MonoBehaviour
 {
     [SerializeField]
-    private int Dmg;
+    protected int dmg;
     [SerializeField]
-    private int type;
+    protected int type;
     [SerializeField]
-    private int size;
+    protected int size;
 
-    private float dir;
+    protected float dir;
+    protected bool disappear = false;
 
-    private bool disappear = false;
+    public int Damage { get { return dmg; } }
 
-    public int GetDmg()
-    {
-        return Dmg;
-    }
-
-    void destroy()
+    void DestroyObject()
     {
         if (disappear) Destroy(gameObject);
     }    
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (type == 1)
-        {
-            if (col.CompareTag("Ground") || col.CompareTag("Wall"))
-            {
-                disappear = true;
-                GetComponent<Animator>().SetBool("disappear", true);
-            }
-        }
-
-        if (col.CompareTag("Player"))
-        {
-            disappear = true;
-            if (type == 1) GetComponent<Animator>().SetBool("disappear", true);
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        dir = GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterAttack>().Direction;
-
-        if (dir == 1) GetComponent<SpriteRenderer>().flipX = false;
-        else GetComponent<SpriteRenderer>().flipX = true;
-
-        if (type == 1) disappear = false;
-        else disappear = true;
+       
     }
 
     private void FixedUpdate()
     { 
-        if (type == 1) // ╦чев©ю
-        {
-            transform.Translate(-0.01f * dir, -0.01f, 0);
-        }
+
     }
 
     // Update is called once per frame

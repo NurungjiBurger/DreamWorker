@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
     }
     void CreatePortal()
     {
-        if (counter != subStageNumber) Instantiate(prefabPortal[0], new Vector3(0, -3.1f, 0), Quaternion.identity);  // 기본 포탈 생성
+        if (counter != subStageNumber-1 || counter == 0) Instantiate(prefabPortal[0], new Vector3(0, -3.1f, 0), Quaternion.identity);  // 기본 포탈 생성
         else Instantiate(prefabPortal[1], new Vector3(0, -3.1f, 0), Quaternion.identity); // 보스 포탈 생성
     }
     void ManageMonster() // 몬스터 관리
@@ -145,8 +145,6 @@ public class GameController : MonoBehaviour
 
         ManageMonster();
         ManagePortal();
-
-        Debug.Log("현재 " + stageNumber + " - " + subStageNumber + "  /  " + counter);
 
         if (stageNumber <= 5) // // 5스테이지가 마지막
         {

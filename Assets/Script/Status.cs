@@ -7,13 +7,13 @@ public class Status : MonoBehaviour
     public int maxHP;
     public int nowHP;
     public int power;
-    public int jumpPower;
-    public int moveSpeed;
+    public float jumpPower;
+    public float moveSpeed;
     public string name;
 
 
-    public int JumpPower { get { return jumpPower; } }
-    public int MoveSpeed { get { return moveSpeed; } }
+    public float JumpPower { get { return jumpPower; } }
+    public float MoveSpeed { get { return moveSpeed; } }
     public int MaxHP { get { return maxHP; } }
 
     public int NowHP {  get { return nowHP; } set { nowHP = value; } }
