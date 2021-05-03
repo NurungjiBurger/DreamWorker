@@ -140,7 +140,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.07, y: -0.04}
@@ -202,7 +202,7 @@ MonoBehaviour:
   maxHP: 100
   nowHP: 0
   power: 10
-  jumpPower: 8
+  jumpPower: 0.17
   moveSpeed: 2
   name: "\uC2AC\uB77C\uC784"
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6306246261198616340}
   - component: {fileID: -1797472146437140349}
   - component: {fileID: 8960678136742002029}
-  - component: {fileID: 1105003613153287362}
+  - component: {fileID: -5352225682186780840}
   m_Layer: 0
   m_Name: Balrog
   m_TagString: Monster
@@ -172,7 +172,7 @@ MonoBehaviour:
   maxHP: 5000
   nowHP: 0
   power: 20
-  jumpPower: 6
+  jumpPower: 0.2
   moveSpeed: 2
   name: "\uBC1C\uB85D"
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
@@ -223,7 +223,7 @@ MonoBehaviour:
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
   attackSpeed: 3
   attackType: 0
---- !u!114 &1105003613153287362
+--- !u!114 &-5352225682186780840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7842352421957864564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4541026e5981ee54abaf9b8d46db60ab, type: 3}
+  m_Script: {fileID: 11500000, guid: e7ea0594acb8045418d5d169956cd4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefabEffect:

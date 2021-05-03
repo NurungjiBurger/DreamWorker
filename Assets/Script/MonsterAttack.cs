@@ -26,6 +26,7 @@ public class MonsterAttack : MonoBehaviour
 
     private Timer attackTimer;
 
+    
     public bool Attack { get { return isAttack; } }
 
     public float Range {  get { return attackRange; } }
@@ -36,20 +37,16 @@ public class MonsterAttack : MonoBehaviour
     public int AttackRandom { get { return attackRandom; } }
     public int Direction { get { return dir; } }
 
-    public void VerifyAttack()
+    
+    public void ModifyColliderSize()
     {
-        if (!GetComponent<MonsterAttackEffect>().Effect && !GetComponent<MonsterAttackEffect>().Judgement) isAttack = false;
-        else
-        {
-            if (attackTimer.CooldownCheck()) isAttack = false;
-
-        }
+        GetComponent<BoxCollider2D>().size = new Vector3(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y, GetComponent<SpriteRenderer>().bounds.size.z);
     }
 
     public void AnimaotrSetFalse() { animator.SetBool("move", false); }
 
     public void DecideAttack()
-    {
+    {       
         // 공격범위내에 있다면
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
         {
@@ -95,20 +92,19 @@ public class MonsterAttack : MonoBehaviour
                 else if (attackType == 2) // 본체 공격애니메이션에 데미지
                 {
                     animator.SetTrigger("attack");
+                    ModifyColliderSize();
                     GetComponent<Collider2D>().isTrigger = true;
                     GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
                 }
             }
             else
             {
-                GetComponent<MonsterAttackEffect>().AttackMotion();
 
                 // 종료조건
             }
         }
         else
         {
-            GetComponent<Collider2D>().isTrigger = false;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }

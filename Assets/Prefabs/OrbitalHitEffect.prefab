@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1442404132088783730}
   - component: {fileID: 1611775827021989295}
   m_Layer: 0
-  m_Name: orbitalhiteffect
+  m_Name: OrbitalHitEffect
   m_TagString: Player_attack_judgement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce734f8ff0dc77b4d9a0be3c8a5a629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 30
+  dmg: 500
   type: 0
   size: 0
 --- !u!58 &1611775827021989295

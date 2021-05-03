@@ -2,15 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbitalAttack : PlayerAttackEffect
+public class OrbitalAttack : Projectile
 {
-    // 갔다가 돌아오기 위해 필요한 것.
-    private int flag;
-    private int cnt;
-    private int dir;
-
-    [SerializeField]
-    private GameObject prefabEffect;
+    private GameObject player;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,9 +22,7 @@ public class OrbitalAttack : PlayerAttackEffect
 
         GetComponent<SpriteRenderer>().flipX = flip;
 
-        attackRange = 3.0f;
-
-        startPosition = player.transform.position;
+        startPosition = transform.position;
 
         cnt = 0;
         flag = 1;

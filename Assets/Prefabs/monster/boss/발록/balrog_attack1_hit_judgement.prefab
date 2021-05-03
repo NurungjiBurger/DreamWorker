@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2045336948463158508}
   - component: {fileID: 2045336948463158509}
   - component: {fileID: -3498860363749043238}
-  - component: {fileID: 7592819401914803434}
   - component: {fileID: 7993509531910338800}
+  - component: {fileID: -8774390237401515667}
   m_Layer: 0
   m_Name: balrog_attack1_hit_judgement
   m_TagString: Monster_attack_judgement
@@ -127,8 +127,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!60 &7592819401914803434
-PolygonCollider2D:
+--- !u!114 &7993509531910338800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045336948463158510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481de0e1c61321149b74183fc4bc1518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 50
+  type: 2
+  size: 0
+--- !u!61 &-8774390237401515667
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,31 +165,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.06, y: 0.28}
-      - {x: -0.13, y: 0.17999999}
-      - {x: -0.28, y: 0}
-      - {x: -0.35999998, y: -0.17999999}
-      - {x: -0.35999998, y: -0.22999999}
-      - {x: -0.29999998, y: -0.29999998}
-      - {x: -0.17, y: -0.29999998}
-      - {x: 0.19, y: -0.12}
-      - {x: 0.29999998, y: 0.21}
-      - {x: 0.29999998, y: 0.26999998}
-      - {x: 0.29, y: 0.28}
---- !u!114 &7993509531910338800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045336948463158510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481de0e1c61321149b74183fc4bc1518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dmg: 50
-  type: 2
-  size: 0
+  serializedVersion: 2
+  m_Size: {x: 0.78, y: 0.72}
+  m_EdgeRadius: 0

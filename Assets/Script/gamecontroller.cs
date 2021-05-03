@@ -53,8 +53,8 @@ public class GameController : MonoBehaviour
     }
     void CreatePortal()
     {
-        if (counter != subStageNumber-1 || counter == 0) Instantiate(prefabPortal[0], new Vector3(0, -3.1f, 0), Quaternion.identity);  // 기본 포탈 생성
-        else Instantiate(prefabPortal[1], new Vector3(0, -3.1f, 0), Quaternion.identity); // 보스 포탈 생성
+        if (counter - 1 == subStageNumber || counter == 0) Instantiate(prefabPortal[1], new Vector3(0, -3.1f, 0), Quaternion.identity);  // 보스 포탈 생성
+        else Instantiate(prefabPortal[0], new Vector3(0, -3.1f, 0), Quaternion.identity); // 기본 포탈 생성
     }
     void ManageMonster() // 몬스터 관리
     {
@@ -78,11 +78,11 @@ public class GameController : MonoBehaviour
         if (subStageNumber != 0) // 부스테이지 번호가 0 일 경우 몬스터가 없는 스테이지.
         {
             //population = Random.Range(8, 10);  // 현재 스테이지에 생성할 몬스터의 마릿 수.
-            population = 1;
+            population = 2;
             for (int i = 0; i < population; i++)
             {
                 int type;
-                type = Random.Range((stageNumber - 1) * 3, stageNumber * 3);
+                type = Random.Range((stageNumber - 1) * 4, (stageNumber * 4) - 1);
                 mx = Random.Range(-5, 5);
                 my = Random.Range(-4, maxgy);
                 CreateMonster(prefabMonster[type], (float)mx, (float)my);    // 랜덤 좌표에 몬스터 생성
@@ -146,6 +146,7 @@ public class GameController : MonoBehaviour
         ManageMonster();
         ManagePortal();
 
+
         if (stageNumber <= 5) // // 5스테이지가 마지막
         {
             if (!stageEntrance) // 처음 스테이지에 입장
@@ -172,6 +173,7 @@ public class GameController : MonoBehaviour
                 }
                 else    // 게임 진행중 
                 {
+                    Debug.Log(stageNumber + " - " + subStageNumber + " / " + counter);
                     if (!isClear)
                     {
                         if (!monsterPresence) // 몬스터가 맵에 존재하지 않는다면

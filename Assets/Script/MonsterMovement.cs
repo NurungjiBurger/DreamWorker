@@ -51,7 +51,6 @@ public class MonsterMovement : MonoBehaviour
 
             if (jumping)
             {
-                Debug.Log("점프중");
                 jumping = false;
                 GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().JumpPower);
                 //transform.Translate(0, 0.005f * GetComponent<MonsterStatus>().JumpPower, 0);
@@ -76,11 +75,16 @@ public class MonsterMovement : MonoBehaviour
         // 인식 범위 안
         if (Vector3.Distance(player.transform.position, transform.position) <= recognitionRange)
         {
-            if (player.transform.position.x < transform.position.x) moveRandom = 1;
-            else if (player.transform.position.x > transform.position.x) moveRandom = 0;
-            else moveRandom = 3;
-
-            //if (player.transform.position.y > transform.position.y) moveRandom = 2;
+            if (GetComponent<MonsterSensor>().LastColliderGround != player.GetComponent<PlayerSensor>().LastColliderGround && transform.position.y < player.transform.position.y)
+            {
+                moveRandom = 2;
+            }
+            else
+            {
+                if (player.transform.position.x < transform.position.x) moveRandom = 1;
+                else if (player.transform.position.x > transform.position.x) moveRandom = 0;
+                else moveRandom = 3;
+            }
         }
         // 인식 범위 밖일때
         else
@@ -98,7 +102,6 @@ public class MonsterMovement : MonoBehaviour
         if(dir == Direction.Right) GetComponent<SpriteRenderer>().flipX = true;
         else if (dir == Direction.Left) GetComponent<SpriteRenderer>().flipX = false;
 
-        moveRandom = 2;
         // 다 정했으니 움직이자!
         switch (moveRandom)
         {
