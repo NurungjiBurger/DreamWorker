@@ -15,7 +15,7 @@ public class OrbitalAttack : Projectile
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         flip = player.GetComponent<SpriteRenderer>().flipX;
@@ -37,7 +37,7 @@ public class OrbitalAttack : Projectile
         
     }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // 플레이어에게서 사출되어 멀어짐
         if (flag == 1)

@@ -16,13 +16,13 @@ public class EffectSensor : MonoBehaviour
 
     public int Damage { get { return dmg; } }
 
-    void DestroyObject()
+    public void DestroyObject()
     {
         if (disappear) Destroy(gameObject);
     }    
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
        
     }
@@ -33,7 +33,7 @@ public class EffectSensor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
     }
 }

@@ -16,7 +16,7 @@ public class PlayerAttack : MonoBehaviour
 
     private bool isAttack = false;
 
-    private float coolDown = 0.5f;
+    private float attackSpeed;
 
     private void AttackAnimatestart()
     {
@@ -28,7 +28,8 @@ public class PlayerAttack : MonoBehaviour
         animator = GetComponent<Animator>();        
         attackTimer = Instantiate(prefabTimer).GetComponent<Timer>();
 
-        attackTimer.SetCooldown(coolDown);
+        attackSpeed = GetComponent<PlayerStatus>().AttackSpeed;
+        attackTimer.SetCooldown(attackSpeed);
     }
 
     private void FixedUpdate()
@@ -46,6 +47,8 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        attackSpeed = GetComponent<PlayerStatus>().AttackSpeed;
+
         // 캐릭터 공격
         if (Input.GetKey(KeyCode.Q) && attackTimer.CooldownCheck())
         {

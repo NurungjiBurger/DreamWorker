@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2604391568266412114}
   m_Layer: 0
   m_Name: vonleon
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 8887170625428642108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -127,6 +127,8 @@ MonoBehaviour:
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
   attackSpeed: 5
   attackType: 0
+  sizeX: 3.5
+  sizeY: 5.08
 --- !u!114 &-5794471957699201959
 MonoBehaviour:
   m_ObjectHideFlags: 0

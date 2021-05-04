@@ -5,7 +5,7 @@ using UnityEngine;
 public class BalrogAttackEffect : MonsterAttackEffect
 {
 
-    public void AttackJudgementCreate()
+    private void AttackJudgementCreate()
     {
         if (!judgement)
         {
@@ -31,7 +31,7 @@ public class BalrogAttackEffect : MonsterAttackEffect
             judgement = true;
         }
     }
-    public void AttackEffectCreate()
+    private void AttackEffectCreate()
     {
         // 이펙트 생성
         if (!effect) // 공격 판정 이펙트가 없다면 진행
@@ -46,7 +46,7 @@ public class BalrogAttackEffect : MonsterAttackEffect
             AttackJudgementCreate();
         }
     }
-    public void AttackMotion()
+    private void AttackMotion()
     {
         // 애니메이션 재생
         if (!motion) // 공격 이펙트가 없다면 진행
@@ -61,13 +61,13 @@ public class BalrogAttackEffect : MonsterAttackEffect
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         VerifyQualification();
 

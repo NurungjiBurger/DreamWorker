@@ -20,7 +20,6 @@ public class PlayerSensor : MonoBehaviour
     public bool Ground { get { return isGround; } }
     public bool Portal { get { return isPortal; } }
     public Collider2D LastColliderGround { get { return lastColliderGround; } }
-    public Collision2D LastCollisionGround { get { return lastCollisionGround; } }
 
     // 트리거 충돌
     private void OnTriggerEnter2D(Collider2D collision)
@@ -88,7 +87,6 @@ public class PlayerSensor : MonoBehaviour
 
         if (collision.collider.CompareTag("Monster"))
         {
-            Debug.Log("몬스터다");
             GetComponent<Collider2D>().isTrigger = true;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
             if (!isHit)
@@ -110,7 +108,7 @@ public class PlayerSensor : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         hitTimer = Instantiate(prefabTimer).GetComponent<Timer>();
 
@@ -118,7 +116,7 @@ public class PlayerSensor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (onOff)
         {

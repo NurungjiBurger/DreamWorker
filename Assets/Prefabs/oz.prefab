@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9212142361299134469}
   - component: {fileID: -4653240224018148939}
   - component: {fileID: -1517670687863710666}
+  - component: {fileID: 4393010736296152136}
   m_Layer: 0
   m_Name: Oz
   m_TagString: Player
@@ -198,3 +199,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+--- !u!114 &4393010736296152136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485205295942090449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdba100566b87e4fbab07fb883da8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  power: 20
+  jumpPower: 0.4
+  moveSpeed: 0.1
+  name: "\uC624\uC988"
+  occupation: "\uB9C8\uBC95\uC0AC"

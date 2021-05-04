@@ -25,7 +25,7 @@ public class MonsterMovement : MonoBehaviour
 
     private Timer moveTimer;
 
-    public void Moving()
+    private void Moving()
     {
         if (!GetComponent<MonsterAttack>().Attack) // 몬스터가 공격중이 아니라면 무빙 가능
         {
@@ -68,7 +68,7 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
-    public void DecideMove()
+    private void DecideMove()
     {
         if (moveTimer.CooldownCheck()) isMove = false;
 
@@ -126,7 +126,7 @@ public class MonsterMovement : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    public void Start()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
@@ -140,7 +140,7 @@ public class MonsterMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         DecideMove();
     }

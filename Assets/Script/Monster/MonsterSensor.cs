@@ -10,16 +10,17 @@ public class MonsterSensor : MonoBehaviour
     private GameObject prefabTimer;
 
     private Collider2D lastColliderGround = null;
-    private Collision2D lastCollisionGround = null;
+
+    private bool isPlayer;
 
     private Animator animator;
     private GameObject player;
 
     private bool isGround;
 
+    public bool Player { get { return isPlayer; } }
     public bool Ground { get { return isGround; } }
     public Collider2D LastColliderGround { get { return lastColliderGround; } }
-    public Collision2D LastCollisionGround { get { return lastCollisionGround; } }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,12 +43,12 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Player")) isPlayer = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Player")) isPlayer = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -59,7 +60,6 @@ public class MonsterSensor : MonoBehaviour
     {
         if (collision.collider.CompareTag("Ground"))
         {
-            lastCollisionGround = collision;
             isGround = true;
         }
     }
@@ -74,7 +74,7 @@ public class MonsterSensor : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();

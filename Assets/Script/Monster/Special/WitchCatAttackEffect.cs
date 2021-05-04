@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackCatAttackEffect : MonsterAttackEffect
+public class WitchCatAttackEffect : MonsterAttackEffect
 {
     public void AttackJudgementCreate()
     {
         if (!judgement)
         {
-            // 공격판정 생성
-            Instantiate(prefabJudgement[0], new Vector3(transform.position.x - (0.5f * GetComponent<MonsterAttack>().Direction), transform.position.y - 0.01f, transform.position.z), Quaternion.identity);
 
-            judgement = true;
         }
     }
     public void AttackEffectCreate()
@@ -19,6 +16,9 @@ public class BlackCatAttackEffect : MonsterAttackEffect
         // 이펙트 생성
         if (!effect) // 공격 판정 이펙트가 없다면 진행
         {
+            Instantiate(prefabEffect[0], new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+
+            effect = true;
             AttackJudgementCreate();
         }
     }
@@ -37,13 +37,13 @@ public class BlackCatAttackEffect : MonsterAttackEffect
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         VerifyQualification();
 

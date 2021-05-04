@@ -9,19 +9,23 @@ public class MonsterStatus : Status
     private GameObject prefabHpBar;
     [SerializeField]
     private GameObject canvas;
-
-    private Image nowHpBar;
-    private RectTransform hpBar;
-
     [SerializeField]
     private bool isBoss;
     [SerializeField]
     private int bodyDmg;
 
+    [SerializeField]
+    private GameObject[] dropItemList;
+
+    private Image nowHpBar;
+    private RectTransform hpBar;
+
+    
+
     public bool Boss { get { return isBoss; } }
     public int Dmg { get { return bodyDmg; } }
 
-    void DestroyObject()
+    public void DestroyObject()
     {
         Destroy(canvas);
         Destroy(gameObject);
@@ -29,7 +33,7 @@ public class MonsterStatus : Status
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         nowHP = maxHP;
 
@@ -46,7 +50,7 @@ public class MonsterStatus : Status
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!GetComponent<MonsterStatus>().Boss)
         {

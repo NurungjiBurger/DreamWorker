@@ -23,7 +23,7 @@ public class MonsterEffectSensor : EffectSensor
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         dir = GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterAttack>().Direction;
 
@@ -43,7 +43,7 @@ public class MonsterEffectSensor : EffectSensor
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }

@@ -12,6 +12,7 @@ TagManager:
   - Monster_attack_judgement
   - Monster_attack_effect
   - Player_attack_effect
+  - Item
   layers:
   - Default
   - TransparentFX

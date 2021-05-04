@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OneWayThrow : Projectile
 {
-    public void OnGoingOneWay()
+    protected void OnGoingOneWay()
     {
         GetComponent<SpriteRenderer>().flipX = flip;
 
@@ -22,20 +22,20 @@ public class OneWayThrow : Projectile
         else Destroy(gameObject);
     }
 
-    public void SetPosition()
+    protected void SetPosition()
     {
         startPosition = transform.position;
         cnt = 0;
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
     
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
      
     }

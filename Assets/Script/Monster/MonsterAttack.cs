@@ -14,6 +14,10 @@ public class MonsterAttack : MonoBehaviour
     private float attackSpeed;
     [SerializeField]
     private int attackType;
+    [SerializeField]
+    protected float sizeX;
+    [SerializeField]
+    protected float sizeY;
 
     private bool isAttack = false;
     private int attackRandom;
@@ -28,24 +32,21 @@ public class MonsterAttack : MonoBehaviour
 
     
     public bool Attack { get { return isAttack; } }
-
     public float Range {  get { return attackRange; } }
-
     public int Quantity { get { return attackQuantity; } }
-
     public bool CoolDownCheck { get { return attackTimer.CooldownCheck(); } }
     public int AttackRandom { get { return attackRandom; } }
     public int Direction { get { return dir; } }
-
-    
+    public void RestoreCollidersize()
+    {
+        GetComponent<BoxCollider2D>().size = new Vector3(sizeX, sizeY, 0);
+    }
     public void ModifyColliderSize()
     {
         GetComponent<BoxCollider2D>().size = new Vector3(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y, GetComponent<SpriteRenderer>().bounds.size.z);
     }
-
     public void AnimaotrSetFalse() { animator.SetBool("move", false); }
-
-    public void DecideAttack()
+    protected void DecideAttack()
     {       
         // 공격범위내에 있다면
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
@@ -67,8 +68,7 @@ public class MonsterAttack : MonoBehaviour
             }
         }
     }
-
-    public void Attacking()
+    protected void Attacking()
     {
         if (isAttack)
         {
@@ -92,7 +92,6 @@ public class MonsterAttack : MonoBehaviour
                 else if (attackType == 2) // 본체 공격애니메이션에 데미지
                 {
                     animator.SetTrigger("attack");
-                    ModifyColliderSize();
                     GetComponent<Collider2D>().isTrigger = true;
                     GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
                 }
@@ -109,7 +108,7 @@ public class MonsterAttack : MonoBehaviour
         }
     }
 
-    public void Setting()
+    protected void Setting()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();

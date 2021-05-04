@@ -147,11 +147,14 @@ public class GameController : MonoBehaviour
         ManagePortal();
 
 
+
         if (stageNumber <= 5) // // 5스테이지가 마지막
         {
             if (!stageEntrance) // 처음 스테이지에 입장
             {
+
                 stageEntrance = true;
+                CreateMonster(prefabBossMonster[1], 0, 0);
                 if (stageNumber != 0)
                 {
                     counter = Random.Range(8, 10);
@@ -173,7 +176,7 @@ public class GameController : MonoBehaviour
                 }
                 else    // 게임 진행중 
                 {
-                    Debug.Log(stageNumber + " - " + subStageNumber + " / " + counter);
+                    //Debug.Log(stageNumber + " - " + subStageNumber + " / " + counter);
                     if (!isClear)
                     {
                         if (!monsterPresence) // 몬스터가 맵에 존재하지 않는다면

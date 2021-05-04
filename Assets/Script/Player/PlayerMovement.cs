@@ -9,11 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private KeyCode jump = KeyCode.D;
 
-    [SerializeField]
-    private float moveSpeed = 0.1f;
-
-    [SerializeField]
-    private float jumpPower = 0.4f;
+    private float moveSpeed;
+    private float jumpPower;
 
     [SerializeField]
     private GameObject prefabTimer;
@@ -36,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
 
@@ -90,8 +87,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        jumpPower = GetComponent<PlayerStatus>().JumpPower;
+        moveSpeed = GetComponent<PlayerStatus>().MoveSpeed;
+
         animator.SetBool("move", false);
         // 오른쪽이동
         if (Input.GetKey(KeyCode.RightArrow))
