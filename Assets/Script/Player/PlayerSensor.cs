@@ -35,6 +35,17 @@ public class PlayerSensor : MonoBehaviour
         {
             GetComponent<Collider2D>().isTrigger = false;
         }
+
+        if (collision.CompareTag("Item"))
+        {
+            if(GetComponent<PlayerStatus>().Acquirable)
+            {
+                Debug.Log(collision.gameObject);
+                // 소지품리스트에 물품을 추가한다.
+                GetComponent<PlayerStatus>().AcquireItem(collision.gameObject);
+            }
+        }
+
     } 
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -74,7 +85,14 @@ public class PlayerSensor : MonoBehaviour
     // 콜리젼 충돌
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (collision.collider.CompareTag("Item"))
+        {
+            if (GetComponent<PlayerStatus>().Acquirable)
+            {
+                // 소지품리스트에 물품을 추가한다.
+                GetComponent<PlayerStatus>().AcquireItem(collision.gameObject);
+            }
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

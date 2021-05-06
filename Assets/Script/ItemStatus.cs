@@ -17,9 +17,10 @@ public class ItemStatus : Status
     public float CurseRate { get { return cursedRate; } set { cursedRate = value; } }
     public string Occupation { get { return dedicatedOccupation; } }
 
+
     private int OccupationCheck()
     {
-        // 무기마다 정해진 전용 직업군이 무기를 장착했을 경우 특별한 효과가 생기도록함.
+        // 무기마다 정해진 전용 직업군이 무기를 장착했을 경우 특별한 효과가 생기도록하기위한 체크
         if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) return 1;
         else return 0;
     }
@@ -38,6 +39,6 @@ public class ItemStatus : Status
     // Update is called once per frame
     private void Update()
     {
-        
+        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
     }
 }

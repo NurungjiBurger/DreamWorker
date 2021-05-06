@@ -21,9 +21,12 @@ public class MonsterMovement : MonoBehaviour
     [SerializeField]
     private GameObject prefabTimer;
 
-
-
     private Timer moveTimer;
+
+    public void DestroyAll()
+    {
+        moveTimer.DestroyAll();
+    }
 
     private void Moving()
     {

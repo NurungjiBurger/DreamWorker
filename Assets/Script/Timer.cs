@@ -8,6 +8,11 @@ public class Timer : MonoBehaviour
     private float time;
     private float cooldown;
 
+    public void DestroyAll()
+    {
+        Destroy(gameObject);
+    }
+
     public void SetCooldown(float cool)
     {
         cooldown = cool;

@@ -48,9 +48,11 @@ public class PlayerMovement : MonoBehaviour
         switch (dir)
         {
             case Direction.Right:
+                GetComponent<SpriteRenderer>().flipX = true;
                 GetComponent<Rigidbody2D>().AddForce(Vector2.right * moveSpeed);
                 break;
             case Direction.Left:
+                GetComponent<SpriteRenderer>().flipX = false;
                 GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
                 break;
             case Direction.Up:
@@ -97,14 +99,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             dir = Direction.Right;
-            GetComponent<SpriteRenderer>().flipX = true;
             animator.SetBool("move", true);
         }
         // 왼쪽이동
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             dir = Direction.Left;
-            GetComponent<SpriteRenderer>().flipX = false;
             animator.SetBool("move", true);
         }
         // 포탈상호작용?

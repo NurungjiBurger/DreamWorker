@@ -37,6 +37,7 @@ public class MonsterAttack : MonoBehaviour
     public bool CoolDownCheck { get { return attackTimer.CooldownCheck(); } }
     public int AttackRandom { get { return attackRandom; } }
     public int Direction { get { return dir; } }
+    public void DestroyAll() { attackTimer.DestroyAll(); }
     public void RestoreCollidersize()
     {
         GetComponent<BoxCollider2D>().size = new Vector3(sizeX, sizeY, 0);

@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class MonsterSensor : MonoBehaviour
 {
-
-    [SerializeField]
-    private GameObject prefabTimer;
-
     private Collider2D lastColliderGround = null;
 
     private bool isPlayer;

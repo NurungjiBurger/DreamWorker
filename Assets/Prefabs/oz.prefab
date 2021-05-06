@@ -169,8 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 100
-  moveSpeed: 0.1
-  jumpPower: 0.4
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
 --- !u!114 &-4653240224018148939
 MonoBehaviour:
@@ -215,5 +213,9 @@ MonoBehaviour:
   power: 20
   jumpPower: 0.4
   moveSpeed: 0.1
+  attackSpeed: 0.5
   name: "\uC624\uC988"
+  defenseCapability: 0
   occupation: "\uB9C8\uBC95\uC0AC"
+  possessItemList: []
+  equipItemList: []

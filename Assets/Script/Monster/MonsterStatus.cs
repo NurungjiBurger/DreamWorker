@@ -27,6 +27,11 @@ public class MonsterStatus : Status
 
     public void DestroyObject()
     {
+        Instantiate(dropItemList[Random.Range(0, dropItemList.Length)], transform.position, Quaternion.identity);
+        // 아이템 떨구기
+
+        GetComponent<MonsterAttack>().DestroyAll();
+        GetComponent<MonsterMovement>().DestroyAll();
         Destroy(canvas);
         Destroy(gameObject);
         Destroy(hpBar.gameObject);

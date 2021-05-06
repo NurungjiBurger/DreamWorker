@@ -39,11 +39,16 @@ public class GameController : MonoBehaviour
     private int subStageNumber;
 
     // 상태
+    private bool isPause;
+    private bool goNext;
     private bool isClear;
     private bool stageEntrance;
     private bool subStageEntrance;
     private bool monsterPresence;
     private bool portalPresence;
+
+    public bool IsPause { get { return isPause; } }
+    public bool GoNext { get { return goNext; } }
 
     void ManagePortal()  // 포탈 관리
     {
@@ -85,6 +90,7 @@ public class GameController : MonoBehaviour
                 type = Random.Range((stageNumber - 1) * 4, (stageNumber * 4) - 1);
                 mx = Random.Range(-5, 5);
                 my = Random.Range(-4, maxgy);
+                type = 0;
                 CreateMonster(prefabMonster[type], (float)mx, (float)my);    // 랜덤 좌표에 몬스터 생성
             }
         }
@@ -113,6 +119,7 @@ public class GameController : MonoBehaviour
         stageNumber = 0;
         subStageNumber = 0;
 
+        goNext = false;
         stageEntrance = false;  // 스테이지에 처음 들어왔는가?
         subStageEntrance = false; // 부스테이지에 처음 들어왔는가?
         monsterPresence = false;// 몬스터가 존재하는가?
@@ -130,7 +137,7 @@ public class GameController : MonoBehaviour
         textHp = nowHPBar.transform.GetChild(0).GetComponent<Text>();
 
         isClear = false;
-
+        
 
         // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));
         // hpBar.transform.position = _hpBarPos;
@@ -146,15 +153,21 @@ public class GameController : MonoBehaviour
         ManageMonster();
         ManagePortal();
 
+        /*
+        if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
+        else isPause = true;
 
+        if (isPause) Time.timeScale = 0;
+        else Time.timeScale = 1;
+        */
 
         if (stageNumber <= 5) // // 5스테이지가 마지막
         {
+            goNext = false;
             if (!stageEntrance) // 처음 스테이지에 입장
             {
-
                 stageEntrance = true;
-                CreateMonster(prefabBossMonster[1], 0, 0);
+               // CreateMonster(prefabBossMonster[1], 0, 0);
                 if (stageNumber != 0)
                 {
                     counter = Random.Range(8, 10);
@@ -190,6 +203,7 @@ public class GameController : MonoBehaviour
                         if (!portalPresence) // 포탈과 상호작용해서 없애버리면
                         {
                             isClear = false;
+                            goNext = true;
 
                             if (counter == subStageNumber) // 보스맵이었으면 다음스테이지로 가야지
                             {

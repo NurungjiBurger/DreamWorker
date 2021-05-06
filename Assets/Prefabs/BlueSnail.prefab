@@ -187,6 +187,8 @@ MonoBehaviour:
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
   attackSpeed: 3
   attackType: 1
+  sizeX: 0
+  sizeY: 0
 --- !u!114 &8580075090159654400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,15 +202,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 50
-  nowHP: 0
   power: 5
   jumpPower: 0.07
   moveSpeed: 2
+  attackSpeed: 0
   name: "\uD30C\uB780\uB2EC\uD33D\uC774"
+  defenseCapability: 0
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
   isBoss: 0
   bodyDmg: 0
+  dropItemList:
+  - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
 --- !u!114 &9169423813200269170
 MonoBehaviour:
   m_ObjectHideFlags: 0
