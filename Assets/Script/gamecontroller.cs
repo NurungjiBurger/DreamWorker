@@ -58,8 +58,8 @@ public class GameController : MonoBehaviour
     }
     void CreatePortal()
     {
-        if (counter - 1 == subStageNumber || counter == 0) Instantiate(prefabPortal[1], new Vector3(0, -3.1f, 0), Quaternion.identity);  // 보스 포탈 생성
-        else Instantiate(prefabPortal[0], new Vector3(0, -3.1f, 0), Quaternion.identity); // 기본 포탈 생성
+        if (counter - 1 == subStageNumber || counter == 0) Instantiate(prefabPortal[1], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 보스 포탈 생성
+        else Instantiate(prefabPortal[0], new Vector3(0, -2.9f, 0), Quaternion.identity); // 기본 포탈 생성
     }
     void ManageMonster() // 몬스터 관리
     {

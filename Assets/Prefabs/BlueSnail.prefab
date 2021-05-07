@@ -214,6 +214,10 @@ MonoBehaviour:
   bodyDmg: 0
   dropItemList:
   - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
+  - {fileID: 2714758718541124912, guid: a99b15a9ec2eda6439edb6a6acf2b221, type: 3}
+  - {fileID: 6968412572008391060, guid: 1a65fa89ae7152643bd0d29141f808cd, type: 3}
+  - {fileID: 4432175680456323203, guid: eedcdf2ba92557843bcd0f3bdbb0db24, type: 3}
+  - {fileID: 6724252274442110958, guid: 59126ff7bf59f2d448f3dd4cd7165a70, type: 3}
 --- !u!114 &9169423813200269170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,4 +230,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e810935c8b487e478010f1e703bf3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabTimer: {fileID: 0}

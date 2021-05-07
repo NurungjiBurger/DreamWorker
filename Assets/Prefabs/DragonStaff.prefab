@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4154780654488785393}
   - component: {fileID: 1554819403923729823}
   - component: {fileID: 3406007476486537590}
-  - component: {fileID: 2199448394864867830}
   - component: {fileID: 2585070544025469761}
+  - component: {fileID: 6108375413819436806}
   m_Layer: 0
   m_Name: DragonStaff
   m_TagString: Item
@@ -108,6 +108,7 @@ MonoBehaviour:
   defenseCapability: 0
   prefabAttack:
   - {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
+  - {fileID: 3691583726259073126, guid: 6a36db1972bb49c46a5d1c0d6b268516, type: 3}
   dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
   mountingPart: weapon
 --- !u!50 &3406007476486537590
@@ -131,7 +132,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2199448394864867830
+--- !u!114 &2585070544025469761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102262969444909037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0a163b697b6d54584d7331585e66b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &6108375413819436806
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,15 +170,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.39, y: 0.38}
   m_EdgeRadius: 0
---- !u!114 &2585070544025469761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8102262969444909037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e0a163b697b6d54584d7331585e66b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
