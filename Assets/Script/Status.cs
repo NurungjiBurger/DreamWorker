@@ -21,6 +21,10 @@ public class Status : MonoBehaviour
 
     protected int nowHP;
 
+    // 현상유지 할거면 1을 넣어주고
+    // 너프 할거면 1보다 작게
+    // 버프 할거면 1보다 크게
+
     public float Defense { get { return defenseCapability; } set { defenseCapability = value; } }
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
     public float JumpPower { get { return jumpPower; } set { jumpPower = value; } }

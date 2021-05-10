@@ -6,9 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonUI : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    [SerializeField]
     private GameObject Inventory;
-    [SerializeField]
     private GameObject Inspector;
 
     private int number;
@@ -18,73 +16,38 @@ public class ButtonUI : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, ID
 
     private bool onOff;
 
-    public void InsertImage(GameObject item)
+    public void InputNumber(int index)
     {
-        itemImage = item.GetComponent<SpriteRenderer>().sprite;
-        GetComponent<Image>().sprite = itemImage;
+        number = index;
     }
 
-    /*
-    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
+    public void SelectCommand()
     {
-        Debug.Log("실행합니다");
-    }
-
-    void IDragHandler.OnDrag(PointerEventData eventData)
-    {
-        Debug.Log("실행중");
-        transform.position = Input.mousePosition;
-    }
-
-    void IEndDragHandler.OnEndDrag(PointerEventData eventData)
-    {
-        Debug.Log("끝났습니다");
-    }
-    */
-    public void Test()
-    {
-        Debug.Log("실행");
+        GameObject.Find("Canvas").transform.Find("Inventory(Clone)").transform.Find("InventoryBackground").transform.GetChild(number).GetComponent<Slot>().ConductCommand(transform.Find("Text").GetComponent<Text>().text);
+        Destroy(transform.parent.gameObject);
     }
 
     public void InventoryActive()
     {
         onOff = !onOff;
-        Inventory.SetActive(onOff);
-        Inspector.SetActive(onOff);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // GetComponent<Button>().interactable = true;
-        onOff = false;
-        if (name.Equals("Item"))
-        {
-            Debug.Log("슬롯입니다");
-            GetComponent<Button>().onClick.AddListener(Test);
-            Debug.Log("아이템입니다");
-        }
-        
+        onOff = false;       
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (name.Equals("InventoryButton(Clone)"))
+        {
+            if (!Inspector) Inspector = GameObject.Find("Canvas").transform.Find("Inspector(Clone)").gameObject;
+            if (!Inventory) Inventory = GameObject.Find("Canvas").transform.Find("Inventory(Clone)").gameObject;
 
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
+            Inventory.SetActive(onOff);
+            Inspector.SetActive(onOff);
+        }
     }
 }

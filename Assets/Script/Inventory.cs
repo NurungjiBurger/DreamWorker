@@ -10,11 +10,6 @@ public class Inventory : MonoBehaviour
 
     private List<GameObject> possessItemList = new List<GameObject>();
     private GameObject player;
-    
-    public void SEND()
-    {
-        Debug.Log("°í");
-    }
 
     public void AddToInventory()
     {

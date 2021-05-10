@@ -8,11 +8,11 @@ public class MonsterStatus : Status
     [SerializeField]
     private GameObject prefabHpBar;
     [SerializeField]
-    private GameObject canvas;
-    [SerializeField]
     private bool isBoss;
     [SerializeField]
     private int bodyDmg;
+
+    private GameObject canvas;
 
     [SerializeField]
     private GameObject[] dropItemList;
@@ -40,6 +40,8 @@ public class MonsterStatus : Status
     // Start is called before the first frame update
     private void Start()
     {
+        canvas = GameObject.Find("Canvas");
+
         nowHP = maxHP;
 
         canvas = Instantiate(canvas);

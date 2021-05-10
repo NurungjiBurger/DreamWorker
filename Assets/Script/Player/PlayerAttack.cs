@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
 
     private Animator animator;
 
-    private List<GameObject> equipList = new List<GameObject>();
+    private GameObject weapon;
 
     private Timer attackTimer;
     private bool isAttack = false;
@@ -27,15 +27,10 @@ public class PlayerAttack : MonoBehaviour
     private void AttackAnimatestart()
     {
 
-        equipList = GetComponent<PlayerStatus>().EquipItemList;
+        weapon = GetComponent<PlayerStatus>().EquipItemList[4];
 
-        for (int i = equipList.Count - 1; i >= 0; i--)
-        {
-            if (equipList[i].GetComponent<ItemStatus>().MountingPart == "weapon")
-            {
-                Instantiate(equipList[i].GetComponent<ItemStatus>().AttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-            }
-        }
+
+        Instantiate(weapon.GetComponent<ItemStatus>().AttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
     // Start is called before the first frame update
     private void Start()

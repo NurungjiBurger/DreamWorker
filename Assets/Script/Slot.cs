@@ -6,12 +6,18 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour , IPointerClickHandler//, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    [SerializeField]
+    private GameObject prefabUI;
+
+    private GameObject UI;
 
     private Sprite itemImage;
 
-    public void SEND()
+    private GameObject player;
+
+    public void DestroyObject()
     {
-        Debug.Log("왜ㅐㅐㅐ");
+        Destroy(gameObject);
     }
 
     public void InsertImage(GameObject item)
@@ -20,49 +26,43 @@ public class Slot : MonoBehaviour , IPointerClickHandler//, IBeginDragHandler, I
         transform.Find("Item").GetComponent<Image>().sprite = itemImage;
     }
 
+    public void ConductCommand(string command)
+    {
+        // 장착
+        if (command == "Equip")
+        {
+            Debug.Log("equip");
+            player.GetComponent<PlayerStatus>().EquipItem(transform.GetSiblingIndex());
+        }
+        // 버리기
+        else if (command == "Discard")
+        {
+            Debug.Log("discard");
+            player.GetComponent<PlayerStatus>().DiscardItem(transform.GetSiblingIndex());
+            DestroyObject();
+        }
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("실행");
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("Mouse Click Button : Left");
-        }
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            
-            /*
-            if (item != null)
-            {
-                if (item.itemType == Item.ItemType.Equipment)
-                {
-                    // 장착
-                    StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
-                }
-                else
-                {
-                    // 소비
-                    Debug.Log(item.itemName + " 을 사용했습니다.");
-                    SetSlotCount(-1);
-                }
-            }
-            */
+            // UI 띄우기
+           // Debug.Log(transform.GetSiblingIndex());
+            UI = Instantiate(prefabUI, GameObject.Find("Canvas").transform);
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (name.Equals("Slot(Clone)"))
-        {
-            Debug.Log("슬롯입니다");
-        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
     }
 
 }

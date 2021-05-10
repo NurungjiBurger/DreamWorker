@@ -22,6 +22,7 @@ public class ItemStatus : Status
     private bool isMount = false;
     private bool isAttack = false;
 
+    public bool IsMount { get { return isMount; } }
     public string MountingPart { get { return mountingPart; } }
     public int Number { get { return number; } }
     public bool IsAttack { get { return isAttack; } }

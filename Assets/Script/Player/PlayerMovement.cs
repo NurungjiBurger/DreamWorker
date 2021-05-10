@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameObject prefabTimer;
     private Timer dashTimer;
+
     private Direction dir = Direction.Stop;
 
     private float time;
