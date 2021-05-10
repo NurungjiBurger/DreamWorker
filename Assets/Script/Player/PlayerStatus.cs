@@ -50,7 +50,7 @@ public class PlayerStatus : Status
         // 아이템을 먹으면 소유물품리스트에 추가.
         possessItemList.Add(item);
         GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("InventoryBackground").gameObject.GetComponent<Inventory>().AddToInventory();
-        GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("InventoryBackground").transform.GetChild(possessItemList.Count-1).transform.Find("Item").gameObject.GetComponent<Button>().InsertImage(item);
+        GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("InventoryBackground").transform.GetChild(possessItemList.Count-1).gameObject.GetComponent<Slot>().InsertImage(item);
         if (possessItemList.Count == 1 ) EquipItem(item);
     }
 

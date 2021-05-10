@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Button : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class ButtonUI : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField]
     private GameObject Inventory;
@@ -41,6 +41,10 @@ public class Button : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, IDra
         Debug.Log("끝났습니다");
     }
     */
+    public void Test()
+    {
+        Debug.Log("실행");
+    }
 
     public void InventoryActive()
     {
@@ -54,6 +58,13 @@ public class Button : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, IDra
     {
         // GetComponent<Button>().interactable = true;
         onOff = false;
+        if (name.Equals("Item"))
+        {
+            Debug.Log("슬롯입니다");
+            GetComponent<Button>().onClick.AddListener(Test);
+            Debug.Log("아이템입니다");
+        }
+        
     }
 
     // Update is called once per frame
