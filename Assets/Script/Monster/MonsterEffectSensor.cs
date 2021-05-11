@@ -36,9 +36,12 @@ public class MonsterEffectSensor : EffectSensor
 
     private void FixedUpdate()
     {
-        if (type == 1) // 메테오
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            transform.Translate(-0.01f * dir, -0.01f, 0);
+            if (type == 1) // 메테오
+            {
+                transform.Translate(-0.01f * dir, -0.01f, 0);
+            }
         }
     }
 

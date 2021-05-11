@@ -127,11 +127,11 @@ public class MonsterAttack : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        DecideAttack();
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) DecideAttack();
     }
 
     private void FixedUpdate()
     {
-        Attacking();
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) Attacking();
     }
 }

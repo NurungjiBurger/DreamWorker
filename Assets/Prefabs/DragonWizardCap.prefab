@@ -108,7 +108,7 @@ MonoBehaviour:
   defenseCapability: 10
   prefabAttack: []
   dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
-  mountingPart: head
+  mountingPart: Head
 --- !u!50 &-6257986780715437751
 Rigidbody2D:
   serializedVersion: 4

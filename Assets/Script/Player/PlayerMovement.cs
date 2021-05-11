@@ -44,53 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-        switch (dir)
-        {
-            case Direction.Right:
-                GetComponent<SpriteRenderer>().flipX = true;
-                GetComponent<Rigidbody2D>().AddForce(Vector2.right * moveSpeed);
-                break;
-            case Direction.Left:
-                GetComponent<SpriteRenderer>().flipX = false;
-                GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
-                break;
-            case Direction.Up:
-                isGoNext = true;
-                break;
-            case Direction.Stop:
-            default:
-                //GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0f);
-                break;
-        }
-
-        if (jumping)
-        {
-            jumping = false;
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
-        }
-        if (dashing)
-        {
-            dashTimer.TimerSetZero();
-            dashing = false;
-            if (GetComponent<SpriteRenderer>().flipX) GetComponent<Transform>().Translate(1.5f,0,0);
-            else GetComponent<Transform>().Translate(-1.5f, 0, 0);
-        }
-
-        // 加档 力茄
-        if (GetComponent<Rigidbody2D>().velocity.x >= 2.5f)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(2.5f, GetComponent<Rigidbody2D>().velocity.y);
-        }
-        else if (GetComponent<Rigidbody2D>().velocity.x <= -2.5f)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-2.5f, GetComponent<Rigidbody2D>().velocity.y);
-        }
-    }
-
-    // Update is called once per frame
-    private void Update()
+    private void KeyInput()
     {
         jumpPower = GetComponent<PlayerStatus>().JumpPower;
         moveSpeed = GetComponent<PlayerStatus>().MoveSpeed;
@@ -130,8 +84,70 @@ public class PlayerMovement : MonoBehaviour
             dir = Direction.Stop;
             isGoNext = false;
         }
-        //
+    }
 
-        //Debug.Log(GetComponent<PlayerSensor>().Ground);
+    private void Moving()
+    {
+        switch (dir)
+        {
+            case Direction.Right:
+                GetComponent<SpriteRenderer>().flipX = true;
+                GetComponent<Rigidbody2D>().AddForce(Vector2.right * moveSpeed);
+                break;
+            case Direction.Left:
+                GetComponent<SpriteRenderer>().flipX = false;
+                GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
+                break;
+            case Direction.Up:
+                isGoNext = true;
+                break;
+            case Direction.Stop:
+            default:
+                //GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0f);
+                break;
+        }
+
+        if (jumping)
+        {
+            jumping = false;
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
+        }
+        if (dashing)
+        {
+            dashTimer.TimerSetZero();
+            dashing = false;
+            if (GetComponent<SpriteRenderer>().flipX) GetComponent<Transform>().Translate(1.5f, 0, 0);
+            else GetComponent<Transform>().Translate(-1.5f, 0, 0);
+        }
+
+        // 加档 力茄
+        if (GetComponent<Rigidbody2D>().velocity.x >= 2.5f)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(2.5f, GetComponent<Rigidbody2D>().velocity.y);
+        }
+        else if (GetComponent<Rigidbody2D>().velocity.x <= -2.5f)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-2.5f, GetComponent<Rigidbody2D>().velocity.y);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        {
+            GetComponent<Rigidbody2D>().isKinematic = false;
+            Moving();
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            GetComponent<Rigidbody2D>().isKinematic = true;
+        }
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) KeyInput();
     }
 }

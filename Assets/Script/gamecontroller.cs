@@ -158,13 +158,10 @@ public class GameController : MonoBehaviour
         ManageMonster();
         ManagePortal();
 
-        /*
+
         if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
         else isPause = true;
 
-        if (isPause) Time.timeScale = 0;
-        else Time.timeScale = 1;
-        */
 
         if (stageNumber <= 5) // // 5스테이지가 마지막
         {

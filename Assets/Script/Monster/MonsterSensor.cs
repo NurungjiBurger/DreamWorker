@@ -20,31 +20,40 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player_attack_judgement"))
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            if (!GetComponent<MonsterStatus>().Boss) animator.SetTrigger("hit");
-            GetComponent<MonsterStatus>().NowHP = GetComponent<MonsterStatus>().NowHP - collision.GetComponent<PlayerEffectSensor>().Damage;
-        }
-        if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
-        {
-            lastColliderGround = collision;
-            GetComponent<Collider2D>().isTrigger = false;
-            isGround = true;
-        }
-        if (collision.CompareTag("Wall"))
-        {
-            GetComponent<Collider2D>().isTrigger = false;
+            if (collision.CompareTag("Player_attack_judgement"))
+            {
+                if (!GetComponent<MonsterStatus>().Boss) animator.SetTrigger("hit");
+                GetComponent<MonsterStatus>().NowHP = GetComponent<MonsterStatus>().NowHP - collision.GetComponent<PlayerEffectSensor>().Damage;
+            }
+            if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                lastColliderGround = collision;
+                GetComponent<Collider2D>().isTrigger = false;
+                isGround = true;
+            }
+            if (collision.CompareTag("Wall"))
+            {
+                GetComponent<Collider2D>().isTrigger = false;
+            }
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) isPlayer = true;
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        {
+            if (collision.CompareTag("Player")) isPlayer = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) isPlayer = false;
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        {
+            if (collision.CompareTag("Player")) isPlayer = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,18 +63,24 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            isGround = true;
+            if (collision.collider.CompareTag("Ground"))
+            {
+                isGround = true;
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            GetComponent<Collider2D>().isTrigger = true;
-            isGround = false;
+            if (collision.collider.CompareTag("Ground"))
+            {
+                GetComponent<Collider2D>().isTrigger = true;
+                isGround = false;
+            }
         }
     }
 

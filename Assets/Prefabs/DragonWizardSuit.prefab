@@ -99,16 +99,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8930f6a86c226743bc4a89b38f7bc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 0
-  power: 0
+  maxHP: 20
+  power: 10
   jumpPower: 0
-  moveSpeed: 0
+  moveSpeed: 0.1
   attackSpeed: 0
-  name: 
-  defenseCapability: 0
+  name: "\uC6A9\uC758\uB85C\uBE0C"
+  defenseCapability: 10
   prefabAttack: []
-  dedicatedOccupation: 
-  mountingPart: 
+  dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
+  mountingPart: Suit
 --- !u!50 &2387820097837346795
 Rigidbody2D:
   serializedVersion: 4

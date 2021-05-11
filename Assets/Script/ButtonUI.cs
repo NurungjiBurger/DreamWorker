@@ -21,11 +21,6 @@ public class ButtonUI : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, ID
         number = index;
     }
 
-    public void SelectCommand()
-    {
-        GameObject.Find("Canvas").transform.Find("Inventory(Clone)").transform.Find("InventoryBackground").transform.GetChild(number).GetComponent<Slot>().ConductCommand(transform.Find("Text").GetComponent<Text>().text);
-        Destroy(transform.parent.gameObject);
-    }
 
     public void InventoryActive()
     {

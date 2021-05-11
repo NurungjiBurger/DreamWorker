@@ -139,12 +139,21 @@ public class MonsterMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Moving();
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        {
+            GetComponent<Rigidbody2D>().isKinematic = false;
+            Moving();
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            GetComponent<Rigidbody2D>().isKinematic = true;
+        }
     }
 
     // Update is called once per frame
     private void Update()
     {
-        DecideMove();
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)  DecideMove();
     }
 }

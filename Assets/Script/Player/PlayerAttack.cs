@@ -6,7 +6,8 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField]
     private GameObject prefabTimer;
-
+    [SerializeField]
+    private GameObject prefab;
     private Animator animator;
 
     private GameObject weapon;
@@ -27,10 +28,10 @@ public class PlayerAttack : MonoBehaviour
     private void AttackAnimatestart()
     {
 
-        weapon = GetComponent<PlayerStatus>().EquipItemList[4];
+        //weapon = GetComponent<PlayerStatus>().EquipItemList[4];
 
-
-        Instantiate(weapon.GetComponent<ItemStatus>().AttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        //Instantiate(weapon.GetComponent<ItemStatus>().AttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
     // Start is called before the first frame update
     private void Start()
@@ -42,19 +43,7 @@ public class PlayerAttack : MonoBehaviour
         attackTimer.SetCooldown(attackSpeed);
     }
 
-    private void FixedUpdate()
-    {
-        if (isAttack)
-        {
-            isAttack = false;
-            animator.SetTrigger("attack");
-            attackTimer.TimerSetZero();
-            AttackAnimatestart();
-        }
-    }
-
-    // Update is called once per frame
-    private void Update()
+    private void KeyInput()
     {
         attackSpeed = GetComponent<PlayerStatus>().AttackSpeed;
 
@@ -66,6 +55,28 @@ public class PlayerAttack : MonoBehaviour
                 isAttack = true;
             }
         }
+    }
+
+    private void Attacking()
+    {
+        if (isAttack)
+        {
+            isAttack = false;
+            animator.SetTrigger("attack");
+            attackTimer.TimerSetZero();
+            AttackAnimatestart();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) Attacking();
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) KeyInput();
     }
     
 }

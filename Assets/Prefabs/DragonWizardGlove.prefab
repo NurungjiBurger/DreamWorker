@@ -108,7 +108,7 @@ MonoBehaviour:
   defenseCapability: 10
   prefabAttack: []
   dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
-  mountingPart: hand
+  mountingPart: Glove
 --- !u!50 &-5524223327970384938
 Rigidbody2D:
   serializedVersion: 4

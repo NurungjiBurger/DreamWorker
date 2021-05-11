@@ -59,18 +59,21 @@ public class MonsterStatus : Status
     // Update is called once per frame
     private void Update()
     {
-        if (!GetComponent<MonsterStatus>().Boss)
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + 0.7f, 0));
-            hpBar.transform.position = _hpBarPos;
-        }
+            if (!GetComponent<MonsterStatus>().Boss)
+            {
+                Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + 0.7f, 0));
+                hpBar.transform.position = _hpBarPos;
+            }
 
-        nowHpBar.fillAmount = (float)GetComponent<MonsterStatus>().NowHP / (float)GetComponent<MonsterStatus>().MaxHP;
+            nowHpBar.fillAmount = (float)GetComponent<MonsterStatus>().NowHP / (float)GetComponent<MonsterStatus>().MaxHP;
 
-        if (GetComponent<MonsterStatus>().NowHP <= 0)
-        {
-            if (GetComponent<MonsterStatus>().isBoss) GetComponent<Animator>().SetTrigger("die");
-            else DestroyObject();
+            if (GetComponent<MonsterStatus>().NowHP <= 0)
+            {
+                if (GetComponent<MonsterStatus>().isBoss) GetComponent<Animator>().SetTrigger("die");
+                else DestroyObject();
+            }
         }
     }
 }
