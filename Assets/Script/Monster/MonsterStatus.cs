@@ -8,6 +8,8 @@ public class MonsterStatus : Status
     [SerializeField]
     private GameObject prefabHpBar;
     [SerializeField]
+    private Sprite miniIcon;
+    [SerializeField]
     private bool isBoss;
     [SerializeField]
     private int bodyDmg;
@@ -32,7 +34,6 @@ public class MonsterStatus : Status
 
         GetComponent<MonsterAttack>().DestroyAll();
         GetComponent<MonsterMovement>().DestroyAll();
-        Destroy(canvas);
         Destroy(gameObject);
         Destroy(hpBar.gameObject);
     }
@@ -44,15 +45,15 @@ public class MonsterStatus : Status
 
         nowHP = maxHP;
 
-        canvas = Instantiate(canvas);
         hpBar = Instantiate(prefabHpBar, canvas.transform).GetComponent<RectTransform>();
         nowHpBar = hpBar.transform.GetChild(0).GetComponent<Image>();
 
         if (GetComponent<MonsterStatus>().Boss)
         {
-            Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(0, 4.3f, 0));
+            // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(0, 4.3f, 0));
+            hpBar.transform.position = new Vector3(transform.position.x + 175.5f, transform.position.y + 177, transform.position.z);
             hpBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            hpBar.transform.position = _hpBarPos;
+           // hpBar.transform.position = _hpBarPos;
         }
     }
 
