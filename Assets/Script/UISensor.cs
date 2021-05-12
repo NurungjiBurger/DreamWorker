@@ -31,24 +31,24 @@ public class UISensor : MonoBehaviour
                 mountAble = true;
                 toInventory = false;
             }
-            if (collision.collider.name.Equals("Slot(Clone)"))
+            else if (collision.collider.name.Equals("Slot(Clone)"))
             {
                 discardAble = false;
-                if (collision.collider.transform.parent == inspector) mountAble = false;
-                else mountAble = true;
+                if (collision.collider.transform.parent == inspector) mountAble = true;
+                else mountAble = false;
                 if (collision.collider.transform.parent == inventory) toInventory = true;
                 else toInventory = false;
             }
-            if (collision.collider.name.Equals("Inventory(Clone)"))
+            else if (collision.collider.name.Equals("Inventory(Clone)"))
             {
                 discardAble = false;
                 mountAble = false;
                 toInventory = true;
             }
-            if (collision.collider.name.Equals("Inspector(Clone)"))
+            else if (collision.collider.name.Equals("Inspector(Clone)"))
             {
                 discardAble = false;
-                mountAble = false;
+                mountAble = true;
                 toInventory = false;
             }
         }
@@ -64,7 +64,7 @@ public class UISensor : MonoBehaviour
                 mountAble = false;
                 toInventory = false;
             }
-            if (collision.collider.name.Equals("Inspector(Clone)"))
+            else if (collision.collider.name.Equals("Inspector(Clone)"))
             {
                 discardAble = true;
                 mountAble = false;

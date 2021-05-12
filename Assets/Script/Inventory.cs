@@ -21,15 +21,22 @@ public class Inventory : MonoBehaviour
 
     public void MoveItem(GameObject item)
     {
-        possessItemList.Add(item);
-        RerangeInventory();
+        if (possessItemList.Count < 9)
+        {
+            possessItemList.Add(item);
+            RerangeInventory();
+        }
     }
 
     public void DiscardItem(int index)
     {
         // 아이템을 소유물품리스트에서 삭제.
-        possessItemList.Remove(possessItemList[index]);
-        RerangeInventory();
+        if (possessItemList.Count != 0)
+        {
+           // Debug.Log("index " + index);
+            possessItemList.Remove(possessItemList[index]);
+            RerangeInventory();
+        }
     }
 
     public void AcquireItem(GameObject item)

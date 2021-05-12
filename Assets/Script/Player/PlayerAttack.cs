@@ -28,10 +28,10 @@ public class PlayerAttack : MonoBehaviour
     private void AttackAnimatestart()
     {
 
-        //weapon = GetComponent<PlayerStatus>().EquipItemList[4];
+        weapon = GameObject.Find("Canvas").transform.Find("Inspector(Clone)").transform.Find("Background").transform.Find("Weapon").GetChild(0).GetComponent<Slot>().SlotItem;
 
-        Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        //Instantiate(weapon.GetComponent<ItemStatus>().AttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        // Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        Instantiate(weapon.GetComponent<ItemStatus>().AttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
     // Start is called before the first frame update
     private void Start()

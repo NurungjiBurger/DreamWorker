@@ -101,14 +101,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 20
   power: 10
-  jumpPower: 0
-  moveSpeed: 1
+  jumpPower: 1.1
+  moveSpeed: 1.2
   attackSpeed: 0
   name: "\uC6A9\uC758\uC2E0\uBC1C"
   defenseCapability: 10
   prefabAttack: []
   dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
   mountingPart: Shoe
+  grade: 3
 --- !u!50 &-7638676068501605642
 Rigidbody2D:
   serializedVersion: 4

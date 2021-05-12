@@ -7,25 +7,41 @@ using UnityEngine.EventSystems;
 public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector3 startPosition;
+    private Vector3 diff;
+
+    private bool isDrag = false;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startPosition = transform.position;
+        isDrag = true;
+        startPosition = transform.position; 
+        diff = new Vector3(Input.mousePosition.x - transform.position.x, Input.mousePosition.y - transform.position.y, Input.mousePosition.z - transform.position.z);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+        isDrag = true;
+        transform.position = new Vector3(Input.mousePosition.x - diff.x, Input.mousePosition.y - diff.y, Input.mousePosition.z - diff.z);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!GetComponent<UISensor>().DiscardAble)
+        isDrag = false;
+        if (name.Equals("Slot(Clone)"))
         {
-            if (GetComponent<UISensor>().MountAble) GetComponent<Slot>().Mounting();
+            if (!GetComponent<UISensor>().DiscardAble)
+            {
+                if (GetComponent<UISensor>().MountAble) GetComponent<Slot>().Mounting();
+                else
+                {
+                    if (GetComponent<UISensor>().ToInventory) GetComponent<Slot>().DisMounting();
+                    else transform.position = startPosition;
+                }
+            }
             else
             {
-                if (GetComponent<UISensor>().ToInventory) GetComponent<Slot>().DisMounting();
+                Debug.Log("¿ÜºÎ");
+                transform.position = startPosition;
             }
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
     [SerializeField]
     protected GameObject prefabEffect;
     [SerializeField]

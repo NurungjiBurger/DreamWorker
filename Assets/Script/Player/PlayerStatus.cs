@@ -11,17 +11,31 @@ public class PlayerStatus : Status
     [SerializeField]
     private GameObject basicItem;
 
+    [SerializeField]
+    private int damage;
+
     private GameObject inventory;
     private int inventoryItemNumber;
     public string Occupation { get { return occupation; } }
     public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
     public GameObject Inventory { get { return inventory; } }
+    public int Damage { get { return damage; } }
+
+    private void CalDamage()
+    {
+        damage = (int)(power * 1.5);
+    }
 
     public void CalCulateStat(GameObject item, int how)
     {
+        int coefficient;
+
+        if (item.GetComponent<ItemStatus>().Occupation == occupation) coefficient = 2;
+        else coefficient = 1;
+
         defenseCapability += item.GetComponent<ItemStatus>().Defense * how;
         MaxHP += item.GetComponent<ItemStatus>().MaxHP * how;
-        Power += item.GetComponent<ItemStatus>().Power * how;
+        Power += item.GetComponent<ItemStatus>().Power * how * coefficient;
         if (how == 1)
         {
             if(item.GetComponent<ItemStatus>().AttackSpeed != 0 ) AttackSpeed *= item.GetComponent<ItemStatus>().AttackSpeed;
@@ -34,7 +48,7 @@ public class PlayerStatus : Status
             if (item.GetComponent<ItemStatus>().JumpPower != 0) jumpPower /= item.GetComponent<ItemStatus>().JumpPower;
             if (item.GetComponent<ItemStatus>().MoveSpeed != 0) moveSpeed /= item.GetComponent<ItemStatus>().MoveSpeed;
         }
-
+        CalDamage();
     }
 
     // Start is called before the first frame update
@@ -48,6 +62,5 @@ public class PlayerStatus : Status
     void Update()
     {
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory(Clone)").transform.Find("InventoryBackground").gameObject;
-        
     }
 }

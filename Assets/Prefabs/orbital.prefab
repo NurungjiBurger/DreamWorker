@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1390081591845034964}
   - component: {fileID: 6173109365360759420}
   m_Layer: 0
-  m_Name: orbital
-  m_TagString: Player_attack_effect
+  m_Name: Orbital
+  m_TagString: Player_attack_judgement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,5 +133,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0e3579d6e19f1429f729c6efe20b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 3
   prefabEffect: {fileID: 5029871703977606209, guid: 4d64989b9d641cb4ca0f600d1448c1e6, type: 3}
+  attackRange: 3

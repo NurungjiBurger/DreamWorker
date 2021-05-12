@@ -102,13 +102,14 @@ MonoBehaviour:
   maxHP: 20
   power: 10
   jumpPower: 0
-  moveSpeed: 0.1
+  moveSpeed: 0.9
   attackSpeed: 0
   name: "\uC6A9\uC758\uB85C\uBE0C"
   defenseCapability: 10
   prefabAttack: []
   dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
   mountingPart: Suit
+  grade: 4
 --- !u!50 &2387820097837346795
 Rigidbody2D:
   serializedVersion: 4

@@ -162,6 +162,7 @@ public class GameController : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
         else isPause = true;
 
+        GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y, -10), Quaternion.identity);
 
         if (stageNumber <= 5) // // 5스테이지가 마지막
         {

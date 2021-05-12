@@ -10,23 +10,26 @@ public class ItemStatus : Status
     private string dedicatedOccupation;
     [SerializeField]
     private string mountingPart;
+    [SerializeField]
+    private int grade;
+    [SerializeField]
+    private int cursedRate;
 
     private List<GameObject> equipList = new List<GameObject>();
 
-
     private int number;
 
-    private float cursedRate;
     private GameObject player;
 
     private bool isMount = false;
     private bool isAttack = false;
 
+    public int Grade { get { return grade; } }
     public bool IsMount { get { return isMount; } }
     public string MountingPart { get { return mountingPart; } }
     public int Number { get { return number; } }
     public bool IsAttack { get { return isAttack; } }
-    public float CurseRate { get { return cursedRate; } set { cursedRate = value; } }
+    public int CurseRate { get { return cursedRate; } set { cursedRate = value; } }
     public string Occupation { get { return dedicatedOccupation; } }
 
     public void EquipCheck(List<GameObject> list)

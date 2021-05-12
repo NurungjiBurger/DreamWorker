@@ -25,7 +25,7 @@ public class MonsterSensor : MonoBehaviour
             if (collision.CompareTag("Player_attack_judgement"))
             {
                 if (!GetComponent<MonsterStatus>().Boss) animator.SetTrigger("hit");
-                GetComponent<MonsterStatus>().NowHP = GetComponent<MonsterStatus>().NowHP - collision.GetComponent<PlayerEffectSensor>().Damage;
+                GetComponent<MonsterStatus>().NowHP = GetComponent<MonsterStatus>().NowHP - player.GetComponent<PlayerStatus>().Damage;
             }
             if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
             {

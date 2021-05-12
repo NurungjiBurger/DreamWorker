@@ -9,6 +9,7 @@ public class Slot : MonoBehaviour
     [SerializeField]
     private GameObject prefabUI;
 
+    private GameObject ui;
     private GameObject slotItem;
 
     private Sprite itemImage;
@@ -24,34 +25,62 @@ public class Slot : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void CompareMountItem()
+    {
+        if (transform.parent.gameObject == inventory)
+        {
+            if (inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).childCount == 1)
+            {
+                if (inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).transform.Find("Slot(Clone)").GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Grade > slotItem.GetComponent<ItemStatus>().Grade)
+                {
+                    if (!ui) ui = Instantiate(prefabUI, transform);
+                }
+                else
+                {
+                    if (ui) Destroy(ui.gameObject);
+                }
+            }
+        }
+        else
+        {
+            if (ui) Destroy(ui.gameObject);
+        }
+    }
+
     public void Discard()
     {
         Debug.Log("버린다");
     }
-
-    public void Mounting() // toinspector가 트루
+     
+    public void Mounting()
     {
-        //Debug.Log("mount");
+        Debug.Log("mount");
+        inventory.GetComponent<Inventory>().DiscardItem(transform.GetSiblingIndex());
         transform.SetParent(inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).transform);
         transform.position = transform.parent.position;
+        GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+        transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
         player.GetComponent<PlayerStatus>().CalCulateStat(slotItem, 1);
-        inventory.GetComponent<Inventory>().DiscardItem(transform.GetSiblingIndex());
 
         if (inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).childCount == 2)
         {
-            //Debug.Log("교환");
+            Debug.Log("교환");
             GameObject tmp;
-            tmp = inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).GetChild(0).gameObject;
+            tmp = inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).GetChild(1).gameObject;
             tmp.transform.SetParent(inventory.transform);
+            tmp.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+            transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             player.GetComponent<PlayerStatus>().CalCulateStat(tmp.GetComponent<Slot>().SlotItem, -1);
             inventory.GetComponent<Inventory>().MoveItem(tmp.GetComponent<Slot>().SlotItem);
         }
     }
 
-    public void DisMounting() // toinventory가 트루
+    public void DisMounting()
     {
         Debug.Log("dismount");
         transform.SetParent(inventory.transform);
+        GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+        transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
         player.GetComponent<PlayerStatus>().CalCulateStat(slotItem, -1);
         inventory.GetComponent<Inventory>().MoveItem(slotItem);
     }
@@ -60,7 +89,30 @@ public class Slot : MonoBehaviour
     public void InsertImage(GameObject item)
     {
         slotItem = item;
-        transform.Find("Item").GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+        switch(slotItem.GetComponent<ItemStatus>().Grade)
+        {
+            case 0:
+                // 노멀 하양
+                transform.Find("Background").GetComponent<Image>().color = new Color(255/255f, 255/255f, 255/255f, 0.5f);
+                break;
+            case 1:
+                // 레어 하늘
+                transform.Find("Background").GetComponent<Image>().color = new Color(23 / 255f, 224 / 255f, 224 / 255f, 0.5f);
+                break;
+            case 2:
+                // 에픽 보라
+                transform.Find("Background").GetComponent<Image>().color = new Color(159 / 255f, 14 / 255f, 224 / 255f, 0.5f);
+                break;
+            case 3:
+                // 유니크 노랑
+                transform.Find("Background").GetComponent<Image>().color = new Color(233 / 255f, 241 / 255f, 35 / 255f, 0.5f);
+                break;
+            case 4:
+                // 레전더리 초록
+                transform.Find("Background").GetComponent<Image>().color = new Color(96 / 255f, 236 / 255f, 39 / 255f, 0.5f);
+                break;
+        }
+        transform.Find("Background").transform.Find("Item").GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
     }
 
     // Start is called before the first frame update
@@ -75,21 +127,6 @@ public class Slot : MonoBehaviour
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory(Clone)").transform.Find("InventoryBackground").gameObject;
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector(Clone)").transform.Find("Background").gameObject;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            // 마우스 왼쪽 버튼을 눌렀을 때의 처리
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            // 마우스 왼쪽 버튼을 누르고 있는 도중의 처리
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-           // Debug.Log(GetObject());
-            // 마우스 왼쪽 버튼을 뗄 때의 처리
-        }
+        CompareMountItem();
     }
 }
