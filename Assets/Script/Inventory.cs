@@ -19,6 +19,11 @@ public class Inventory : MonoBehaviour
     public bool Acquirable { get { return acquirable; } }
     public int ItemCount { get { return possessItemList.Count; } }
 
+    public void GoldText()
+    {
+        transform.parent.GetChild(1).transform.Find("Handmoney").GetComponent<Text>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
+    }
+
     public void MoveItem(GameObject item)
     {
         if (possessItemList.Count < 9)
@@ -88,5 +93,7 @@ public class Inventory : MonoBehaviour
     {
         if (possessItemList.Count == possessItemNumber) acquirable = false;
         else acquirable = true;
+
+        GoldText();
     }
 }

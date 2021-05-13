@@ -25,18 +25,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4380738148394357223}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4380738148523259158}
   m_Father: {fileID: 4380738148901501494}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.7285}
+  m_SizeDelta: {x: 0, y: -1.457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4380738148394357218
 CanvasRenderer:
@@ -101,17 +101,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4380738148523259157}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4380738148394357216}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4.5657}
-  m_SizeDelta: {x: 30, y: 27.1313}
+  m_AnchoredPosition: {x: -0.1, y: -1.7534}
+  m_SizeDelta: {x: 30, y: 33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4380738148523259152
 CanvasRenderer:
@@ -274,8 +274,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4380738148901501495}
-        m_TargetAssemblyTypeName: PlyaerUtility, Assembly-CSharp
-        m_MethodName: InventoryActive
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: UIActive
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -297,5 +297,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3945593910f2b4d439842114172eeaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory: {fileID: 6539910253303087671, guid: 8396341c21bc1a04fb4d7c1b24e3bea6, type: 3}
-  Inspector: {fileID: 5300580614127877610, guid: 2730427394f197547b6fc6e1245cee1b, type: 3}

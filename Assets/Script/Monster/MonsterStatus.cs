@@ -13,11 +13,17 @@ public class MonsterStatus : Status
     private bool isBoss;
     [SerializeField]
     private int bodyDmg;
-
-    private GameObject canvas;
-
+    [SerializeField]
+    private int dropRate;
     [SerializeField]
     private GameObject[] dropItemList;
+    [SerializeField]
+    private GameObject[] dropCoin;
+    [SerializeField]
+    private int experience;
+
+    private int coinNumber;
+    private GameObject canvas;
 
     private Image nowHpBar;
     private RectTransform hpBar;
@@ -29,8 +35,18 @@ public class MonsterStatus : Status
 
     public void DestroyObject()
     {
-        Instantiate(dropItemList[Random.Range(0, dropItemList.Length)], transform.position, Quaternion.identity);
+        if (Random.Range(0, 101) <= dropRate) Instantiate(dropItemList[Random.Range(0, dropItemList.Length)], transform.position, Quaternion.identity);
         // 아이템 떨구기
+        for(int i=0;i<coinNumber;i++)
+        {
+            Instantiate(dropCoin[0], transform.position, Quaternion.identity);
+            // 돈 떨구기
+        }
+        if (isBoss) Instantiate(dropCoin[1], transform.position, Quaternion.identity);
+        // 마일리지 떨구기
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().CalCulateExperience(experience);
+        // 경험치 주기
 
         GetComponent<MonsterAttack>().DestroyAll();
         GetComponent<MonsterMovement>().DestroyAll();
@@ -47,6 +63,9 @@ public class MonsterStatus : Status
 
         hpBar = Instantiate(prefabHpBar, canvas.transform).GetComponent<RectTransform>();
         nowHpBar = hpBar.transform.GetChild(0).GetComponent<Image>();
+
+        if (!isBoss) coinNumber = Random.Range(1, 5);
+        else coinNumber = 15;
 
         if (GetComponent<MonsterStatus>().Boss)
         {

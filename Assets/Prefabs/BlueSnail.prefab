@@ -209,15 +209,19 @@ MonoBehaviour:
   name: "\uD30C\uB780\uB2EC\uD33D\uC774"
   defenseCapability: 0
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
-  canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
+  miniIcon: {fileID: 0}
   isBoss: 0
   bodyDmg: 0
+  dropRate: 60
   dropItemList:
   - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
   - {fileID: 2714758718541124912, guid: a99b15a9ec2eda6439edb6a6acf2b221, type: 3}
   - {fileID: 6968412572008391060, guid: 1a65fa89ae7152643bd0d29141f808cd, type: 3}
   - {fileID: 4432175680456323203, guid: eedcdf2ba92557843bcd0f3bdbb0db24, type: 3}
   - {fileID: 6724252274442110958, guid: 59126ff7bf59f2d448f3dd4cd7165a70, type: 3}
+  dropCoin:
+  - {fileID: 684209268223019105, guid: ffc876534464390479fb614286335c96, type: 3}
+  experience: 50
 --- !u!114 &9169423813200269170
 MonoBehaviour:
   m_ObjectHideFlags: 0

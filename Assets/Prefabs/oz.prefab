@@ -195,8 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40da29a92ba95940bafc2ec3b217515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  prefab: {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
 --- !u!114 &4393010736296152136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +216,10 @@ MonoBehaviour:
   attackSpeed: 0.5
   name: "\uC624\uC988"
   defenseCapability: 0
-  occupation: "\uB9C8\uBC95\uC0AC"
+  occupation: Wizard
   basicItem: {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
-  possessItemList: []
-  equipItemList: []
+  handMoney: 0
+  experience: 0
+  needExperience: 0
+  level: 0
+  damage: 0

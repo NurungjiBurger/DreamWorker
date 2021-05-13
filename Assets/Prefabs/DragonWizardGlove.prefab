@@ -109,7 +109,8 @@ MonoBehaviour:
   prefabAttack: []
   dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
   mountingPart: Glove
-  grade: 2
+  grade: 0
+  cursedRate: 0
 --- !u!50 &-5524223327970384938
 Rigidbody2D:
   serializedVersion: 4

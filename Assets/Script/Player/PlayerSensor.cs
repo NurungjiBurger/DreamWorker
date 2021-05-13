@@ -42,11 +42,22 @@ public class PlayerSensor : MonoBehaviour
             {
                 if (GetComponent<PlayerStatus>().Acquirable)
                 {
-                    Debug.Log(collision.gameObject);
                     // 소지품리스트에 물품을 추가한다.
                     GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AcquireItem(collision.gameObject);
                 }
             }
+
+            if (collision.CompareTag("Wealth"))
+            {
+                if (collision.GetComponent<Parabola>().Arrived)
+                {
+                    if (collision.name.Equals("Gold(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                    if (collision.name.Equals("Golds(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
+                    //if (collision.collider.name.Equals("Mileage(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                    Destroy(collision.gameObject);
+                }
+            }
+
         }
 
     } 
@@ -106,6 +117,15 @@ public class PlayerSensor : MonoBehaviour
                     GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AcquireItem(collision.gameObject);
                 }
             }
+
+            if (collision.collider.CompareTag("Wealth"))
+            {
+                if (collision.collider.name.Equals("Gold(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                if (collision.collider.name.Equals("Golds(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
+                //if (collision.collider.name.Equals("Mileage(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                Destroy(collision.collider.gameObject);
+            }
+
         }
     }
 

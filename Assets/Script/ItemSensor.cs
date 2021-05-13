@@ -15,11 +15,11 @@ public class ItemSensor : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // 플레이어가 아이템을 획득할 수 있는 상태라면
-            if (collision.GetComponent<PlayerStatus>().Acquirable)
-            {
-                // 아이템은 사라진다.
-                gameObject.SetActive(false);
-            }
+                if (collision.GetComponent<PlayerStatus>().Acquirable)
+                {
+                    // 아이템은 사라진다.
+                    gameObject.SetActive(false);
+                }
         }
     }
 
@@ -39,11 +39,12 @@ public class ItemSensor : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             // 플레이어가 아이템을 획득할 수 있는 상태라면
-            if (collision.collider.GetComponent<PlayerStatus>().Acquirable)
-            {
-                // 아이템은 사라진다.
-                gameObject.SetActive(false);
-            }
+                if (collision.collider.GetComponent<PlayerStatus>().Acquirable)
+                {
+                    // 아이템은 사라진다.
+                    gameObject.SetActive(false);
+                    //Destroy(gameObject);
+                }
         }
     }
 

@@ -25,4 +25,12 @@ public class Portal : MonoBehaviour
     {
         checkdelete();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
 }

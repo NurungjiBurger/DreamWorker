@@ -139,9 +139,10 @@ public class GameController : MonoBehaviour
 
         isClear = false;
 
-        Instantiate(prefabUtility[0], canvas.transform).GetComponent<RectTransform>();
-        Instantiate(prefabUtility[1], canvas.transform).GetComponent<RectTransform>();
-        Instantiate(prefabUtility[2], canvas.transform).GetComponent<RectTransform>();
+        for(int i=0;i<prefabUtility.Length;i++)
+        {
+            Instantiate(prefabUtility[i], canvas.transform).GetComponent<RectTransform>();
+        }
 
 
         // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));

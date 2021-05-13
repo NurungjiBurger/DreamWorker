@@ -10,16 +10,41 @@ public class PlayerStatus : Status
     private string occupation;
     [SerializeField]
     private GameObject basicItem;
+    [SerializeField]
+    private int handMoney;
+
+    [SerializeField]
+    private int experience;
+    [SerializeField]
+    private int needExperience;
+    [SerializeField]
+    private int level;
 
     [SerializeField]
     private int damage;
 
     private GameObject inventory;
     private int inventoryItemNumber;
+
+    public int Level { get { return level; } }
+    public int HandMoney { get { return handMoney; } }
     public string Occupation { get { return occupation; } }
     public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
     public GameObject Inventory { get { return inventory; } }
     public int Damage { get { return damage; } }
+
+    public void CalCulateExperience(int exp)
+    {
+        experience += exp;
+        needExperience = level * 100;
+
+        if (experience >= needExperience) level++;
+    }
+
+    public void AddHandMoney(int money)
+    {
+        handMoney += money;
+    }
 
     private void CalDamage()
     {
@@ -54,6 +79,7 @@ public class PlayerStatus : Status
     // Start is called before the first frame update
     void Start()
     {
+        level = 1;
         GameObject obj;
         obj = Instantiate(basicItem, new Vector3(-1,-1,0), Quaternion.identity);
     }
@@ -62,5 +88,7 @@ public class PlayerStatus : Status
     void Update()
     {
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory(Clone)").transform.Find("InventoryBackground").gameObject;
+
+        CalCulateExperience(0);
     }
 }
