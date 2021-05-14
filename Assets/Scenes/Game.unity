@@ -171,8 +171,9 @@ MonoBehaviour:
   - {fileID: 4163875461290686834, guid: b68bd87ee5df83a46a650f7af292c894, type: 3}
   prefabUtility:
   - {fileID: 4380738148901501493, guid: 7223f56c9d5ef4f4f8e62e5e19916600, type: 3}
-  - {fileID: 5300580614127877610, guid: 2730427394f197547b6fc6e1245cee1b, type: 3}
   - {fileID: 6539910253303087671, guid: 8396341c21bc1a04fb4d7c1b24e3bea6, type: 3}
+  - {fileID: 5079644627993286474, guid: fd48e540ab06d6c40b03d0533eb3a927, type: 3}
+  - {fileID: 5300580614127877610, guid: 2730427394f197547b6fc6e1245cee1b, type: 3}
   - {fileID: 9153257626757338776, guid: 27a8910909542c140b9fc6f60a751ad3, type: 3}
   - {fileID: 8578633034812998945, guid: e46800506fc61264fbce2719faab8f17, type: 3}
   prefabHpBar: {fileID: 2976229603464939949, guid: 9304a1b6e6a69e94080cedbde3f78721, type: 3}
@@ -717,7 +718,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

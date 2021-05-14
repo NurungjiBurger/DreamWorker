@@ -11,11 +11,12 @@ public class UISensor : MonoBehaviour
     private bool discardAble = false;
     private bool mountAble = false;
     private bool toInventory = false;
+    private bool changeAble = false;
 
     private GameObject inspector;
     private GameObject inventory;
 
-
+    public bool ChangeAble { get { return changeAble; } }
     public bool DiscardAble { get { return discardAble; } }
     public bool MountAble { get { return mountAble ; } }
     public bool ToInventory { get { return toInventory; } }
@@ -27,50 +28,63 @@ public class UISensor : MonoBehaviour
         {
             if (collision.collider.name.Equals("Head") || collision.collider.name.Equals("Glove") || collision.collider.name.Equals("Suit") || collision.collider.name.Equals("Shoe") || collision.collider.name.Equals("Weapon"))
             {
+               // Debug.Log("장비");
                 discardAble = false;
                 mountAble = true;
                 toInventory = false;
+                changeAble = false;
             }
             else if (collision.collider.name.Equals("Slot(Clone)"))
             {
+               // Debug.Log("슬롯");
                 discardAble = false;
                 if (collision.collider.transform.parent == inspector) mountAble = true;
                 else mountAble = false;
                 if (collision.collider.transform.parent == inventory) toInventory = true;
                 else toInventory = false;
+                changeAble = false;
             }
             else if (collision.collider.name.Equals("Inventory(Clone)"))
             {
+               // Debug.Log("인벤");
                 discardAble = false;
                 mountAble = false;
                 toInventory = true;
+                changeAble = false;
             }
             else if (collision.collider.name.Equals("Inspector(Clone)"))
             {
+               // Debug.Log("스펙터");
                 discardAble = false;
                 mountAble = true;
                 toInventory = false;
+                changeAble = false;
+            }
+            else if (collision.collider.name.Equals("Exchanger(Clone)"))
+            {
+               // Debug.Log("체인저");
+                discardAble = false;
+                mountAble = false;
+                toInventory = false;
+                changeAble = true;
             }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        /*
         if (name.Equals("Slot(Clone)"))
         {
-            if (collision.collider.name.Equals("Inventory(Clone)"))
+            if (collision.collider.name.Equals("Inventory(Clone)") || collision.collider.name.Equals("Inspector(Clone)") || collision.collider.name.Equals("Exchanger(Clone)"))
             {
                 discardAble = true;
                 mountAble = false;
                 toInventory = false;
-            }
-            else if (collision.collider.name.Equals("Inspector(Clone)"))
-            {
-                discardAble = true;
-                mountAble = false;
-                toInventory = false;
+                changeAble = false;
             }
         }
+        */
     }
     // Start is called before the first frame update
     void Start()

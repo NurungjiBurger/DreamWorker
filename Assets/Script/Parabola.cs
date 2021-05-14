@@ -24,6 +24,8 @@ public class Parabola : MonoBehaviour
 
     void Update()
     {
+        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
+
         if (!isArrived)
         {
             float x0 = m_StartPosition.x;

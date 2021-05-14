@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject canvas;
     private Image nowHPBar;
-    private Text textHp;
+    private TextMeshProUGUI textHp;
 
     //
     private int population;
@@ -135,7 +136,7 @@ public class GameController : MonoBehaviour
         nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
 
 
-        textHp = nowHPBar.transform.GetChild(0).GetComponent<Text>();
+        textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         isClear = false;
 
@@ -151,7 +152,8 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        // txhp.text = player.Getnowhp().ToString() + "    /    " + player.Getmaxhp().ToString();
+        
+        textHp.text = player.GetComponent<PlayerStatus>().NowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().MaxHP.ToString();
         // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
 
         // 1-0 2-0 같은 스테이지인가

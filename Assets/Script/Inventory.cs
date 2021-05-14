@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class Inventory : MonoBehaviour
 
     public void GoldText()
     {
-        transform.parent.GetChild(1).transform.Find("Handmoney").GetComponent<Text>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
+        transform.parent.transform.Find("HandMoneyBackground").transform.Find("HandMoney").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
     }
 
     public void MoveItem(GameObject item)

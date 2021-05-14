@@ -10,9 +10,22 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector3 diff;
 
     private bool isDrag = false;
+    private GameObject tmp;
+    private int index;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (name.Equals("Slot(Clone)"))
+        {
+            tmp = transform.parent.gameObject;
+            index = transform.GetSiblingIndex();
+            transform.SetParent(GameObject.Find("Canvas").transform);
+        }
+        else
+        {
+            index = transform.GetSiblingIndex();
+            transform.SetSiblingIndex(transform.parent.childCount);
+        }
         isDrag = true;
         startPosition = transform.position; 
         diff = new Vector3(Input.mousePosition.x - transform.position.x, Input.mousePosition.y - transform.position.y, Input.mousePosition.z - transform.position.z);
@@ -29,20 +42,25 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         isDrag = false;
         if (name.Equals("Slot(Clone)"))
         {
-            if (!GetComponent<UISensor>().DiscardAble)
+            transform.SetParent(tmp.transform);
+            transform.SetSiblingIndex(index);
+
+            if (GetComponent<UISensor>().MountAble)
             {
-                if (GetComponent<UISensor>().MountAble) GetComponent<Slot>().Mounting();
-                else
-                {
-                    if (GetComponent<UISensor>().ToInventory) GetComponent<Slot>().DisMounting();
-                    else transform.position = startPosition;
-                }
+                if (transform.parent == GameObject.Find("Canvas").transform.Find("Exchanger(Clone)").transform.Find("Background").transform) GetComponent<Slot>().LetDownExchanger();
+                GetComponent<Slot>().Mounting();
             }
-            else
+            else if (GetComponent<UISensor>().ToInventory)
             {
-                Debug.Log("¿ÜºÎ");
-                transform.position = startPosition;
+                if (transform.parent == GameObject.Find("Canvas").transform.Find("Exchanger(Clone)").transform.Find("Background").transform) GetComponent<Slot>().LetDownExchanger();
+                GetComponent<Slot>().DisMounting();
             }
+            else if(GetComponent<UISensor>().ChangeAble) GetComponent<Slot>().RaiseOnExchanger();
+            else transform.position = startPosition;                        
+        }        
+        else
+        {
+            transform.SetSiblingIndex(index);
         }
     }
 
