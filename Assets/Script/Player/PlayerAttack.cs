@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
     private void AttackAnimatestart()
     {
 
-        weapon = GameObject.Find("Canvas").transform.Find("Inspector(Clone)").transform.Find("Background").transform.Find("Weapon").GetChild(0).GetComponent<Slot>().SlotItem;
+        weapon = GameObject.Find("Canvas").transform.Find("Inspector").transform.Find("Background").transform.Find("Weapon").GetChild(0).GetComponent<Slot>().SlotItem;
 
         // Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);

@@ -45,17 +45,8 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             transform.SetParent(tmp.transform);
             transform.SetSiblingIndex(index);
 
-            if (GetComponent<UISensor>().MountAble)
-            {
-                if (transform.parent == GameObject.Find("Canvas").transform.Find("Exchanger(Clone)").transform.Find("Background").transform) GetComponent<Slot>().LetDownExchanger();
-                GetComponent<Slot>().Mounting();
-            }
-            else if (GetComponent<UISensor>().ToInventory)
-            {
-                if (transform.parent == GameObject.Find("Canvas").transform.Find("Exchanger(Clone)").transform.Find("Background").transform) GetComponent<Slot>().LetDownExchanger();
-                GetComponent<Slot>().DisMounting();
-            }
-            else if(GetComponent<UISensor>().ChangeAble) GetComponent<Slot>().RaiseOnExchanger();
+            if (GetComponent<UISensor>().MountAble) GetComponent<Slot>().Mounting();
+            else if (GetComponent<UISensor>().ToInventory) GetComponent<Slot>().DisMounting();
             else transform.position = startPosition;                        
         }        
         else

@@ -12,6 +12,8 @@ public class PlayerStatus : Status
     private GameObject basicItem;
     [SerializeField]
     private int handMoney;
+    [SerializeField]
+    private GameObject prefabSlot;
 
     [SerializeField]
     private int experience;
@@ -32,6 +34,16 @@ public class PlayerStatus : Status
     public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
     public GameObject Inventory { get { return inventory; } }
     public int Damage { get { return damage; } }
+
+    public Slot CreateItemSlot(GameObject item)
+    {
+        GameObject tmp;
+        tmp = Instantiate(prefabSlot, inventory.transform);
+
+        tmp.GetComponent<Slot>().InsertImage(item);
+  
+        return tmp.GetComponent<Slot>();
+    }
 
     public void CalCulateExperience(int exp)
     {
@@ -87,7 +99,7 @@ public class PlayerStatus : Status
     // Update is called once per frame
     void Update()
     {
-        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory(Clone)").transform.Find("InventoryBackground").gameObject;
+        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("Background").gameObject;
 
         CalCulateExperience(0);
     }

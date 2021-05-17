@@ -219,6 +219,7 @@ MonoBehaviour:
   occupation: Wizard
   basicItem: {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
   handMoney: 0
+  prefabSlot: {fileID: 6407902520024726435, guid: 6a92acf727ceb2d4e9d82297cab7a676, type: 3}
   experience: 0
   needExperience: 0
   level: 0

@@ -43,7 +43,7 @@ public class PlayerSensor : MonoBehaviour
                 if (GetComponent<PlayerStatus>().Acquirable)
                 {
                     // 소지품리스트에 물품을 추가한다.
-                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AcquireItem(collision.gameObject);
+                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GetComponent<PlayerStatus>().CreateItemSlot(collision.gameObject));
                 }
             }
 
@@ -114,7 +114,7 @@ public class PlayerSensor : MonoBehaviour
                 if (GetComponent<PlayerStatus>().Acquirable)
                 {
                     // 소지품리스트에 물품을 추가한다.
-                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AcquireItem(collision.gameObject);
+                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GetComponent<PlayerStatus>().CreateItemSlot(collision.gameObject));
                 }
             }
 

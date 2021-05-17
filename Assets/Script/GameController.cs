@@ -15,8 +15,6 @@ public class GameController : MonoBehaviour
     private GameObject[] prefabCharacter;
     [SerializeField]
     private GameObject[] prefabPortal;
-    [SerializeField]
-    private GameObject[] prefabUtility;
     // public GameObject[] tile;
     private GameObject player;
 
@@ -24,10 +22,6 @@ public class GameController : MonoBehaviour
     private GameObject[] portals;
 
     RectTransform hpBar;
-    [SerializeField]
-    private GameObject prefabHpBar;
-    [SerializeField]
-    private GameObject canvas;
     private Image nowHPBar;
     private TextMeshProUGUI textHp;
 
@@ -132,19 +126,13 @@ public class GameController : MonoBehaviour
         Instantiate(prefabCharacter[0], new Vector3(1.5f, 0, 0), Quaternion.identity);
         player = GameObject.FindGameObjectWithTag("Player");
 
-        hpBar = Instantiate(prefabHpBar, canvas.transform).GetComponent<RectTransform>();
+        hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
         nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
 
 
         textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         isClear = false;
-
-        for(int i=0;i<prefabUtility.Length;i++)
-        {
-            Instantiate(prefabUtility[i], canvas.transform).GetComponent<RectTransform>();
-        }
-
 
         // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));
         // hpBar.transform.position = _hpBarPos;

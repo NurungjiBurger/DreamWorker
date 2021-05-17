@@ -6,8 +6,39 @@ using TMPro;
 
 public class Inspector : MonoBehaviour
 {
-
+    private List<Slot> equipItemList = new List<Slot>();
     private GameObject player;
+
+    public void DiscardToInspector(string part)
+    {
+        for(int i=0;i<equipItemList.Count;i++)
+        {
+            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == part)
+            {
+                equipItemList.Remove(equipItemList[i]);
+                player.GetComponent<PlayerStatus>().CalCulateStat(equipItemList[i].SlotItem, -1);
+                break;
+            }
+        }
+    }
+
+    public void AddToInspector(Slot slot)
+    {
+        if (equipItemList.Count < 5)
+        {
+            Debug.Log("오");
+            if (transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).childCount == 1) DiscardToInspector(slot.SlotItem.GetComponent<ItemStatus>().MountingPart);
+            Debug.Log("여");
+            equipItemList.Add(slot);
+
+            slot.transform.SetParent(transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).transform);
+            slot.transform.position = slot.transform.parent.position;
+            slot.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+            slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+            player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, 1);
+        }
+        else Debug.Log("장착할수없습니다");
+    }
 
     public void StatusText()
     {

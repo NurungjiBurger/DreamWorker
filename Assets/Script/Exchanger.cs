@@ -79,16 +79,28 @@ public class Exchanger : MonoBehaviour
         }
 
     }
-
-    public void DiscardItem(int index)
+    
+    public void DiscardToExchanger(int index)
     {
-        if (ExchangeItemList.Count != 0) ExchangeItemList.Remove(ExchangeItemList[index]);
+        if (ExchangeItemList.Count != 0)
+        {
+            ExchangeItemList.Remove(ExchangeItemList[index]);
+
+        }
     }
 
-    public void AddItem(Slot slot)
+    public void AddToExchanger(Slot slot)
     {
-        if (ExchangeItemList.Count < 4 ) ExchangeItemList.Add(slot);
+        if (ExchangeItemList.Count < 4)
+        {
+            ExchangeItemList.Add(slot);
+
+            slot.transform.SetParent(this.transform);
+            slot.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
+            slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        }
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +111,11 @@ public class Exchanger : MonoBehaviour
     void Update()
     {
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
+
+        if (gameObject.activeInHierarchy == false)
+        {
+            for (int i = 0; i < ExchangeItemList.Count; i++) ExchangeItemList.Remove(ExchangeItemList[0]);
+        }
 
         if (ExchangeItemList.Count == 0) transform.parent.transform.Find("ButtonBackground").gameObject.SetActive(false);
         else transform.parent.transform.Find("ButtonBackground").gameObject.SetActive(true);

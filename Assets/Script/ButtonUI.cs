@@ -4,11 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ButtonUI : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class ButtonUI : MonoBehaviour
 {
     private GameObject ui;
 
     private bool onOff = false;
+
+    public void SelectItem()
+    {
+
+    }
+
+    public void CloseButton()
+    {
+        if (transform.parent.name.Equals("Exchanger")) GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
+        else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
+    }
 
     public void UIActive()
     {
@@ -24,9 +35,23 @@ public class ButtonUI : MonoBehaviour //, IBeginDragHandler, IEndDragHandler, ID
     // Update is called once per frame
     void Update()
     {
-        if (name.Equals("InventoryButton(Clone)")) { if (!ui) ui = GameObject.Find("Canvas").transform.Find("Inventory(Clone)").gameObject; }
-        if (name.Equals("InspectorButton(Clone)")) { if (!ui) ui = GameObject.Find("Canvas").transform.Find("Inspector(Clone)").gameObject; }
-        if (name.Equals("ExchangerButton(Clone)")) { if (!ui) ui = GameObject.Find("Canvas").transform.Find("Exchanger(Clone)").gameObject; }
-        ui.SetActive(onOff);
+        if (!ui)
+        {
+            switch(transform.name)
+            {
+                case "InventoryButton":
+                    ui = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+                    break;
+                case "InspectorButton":
+                    ui = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+                    break;
+                case "ExchangerButton":
+                    ui = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else ui.SetActive(onOff);
     }
 }
