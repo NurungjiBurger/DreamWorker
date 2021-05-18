@@ -6,38 +6,48 @@ using TMPro;
 
 public class Inspector : MonoBehaviour
 {
-    private List<Slot> equipItemList = new List<Slot>();
     private GameObject player;
 
-    public void DiscardToInspector(string part)
+    private List<Slot> equipItemList = new List<Slot>();
+
+    public int ItemCount { get { return equipItemList.Count; } }
+    public List<Slot> EquipItemList { get { return equipItemList; } }
+
+    public bool DiscardToInspector(Slot slot)
     {
-        for(int i=0;i<equipItemList.Count;i++)
+        // 버렸다면 true
+        if (transform.Find("Background").transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart))
         {
-            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == part)
+            player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, -1);
+            int size = equipItemList.Count;
+            for(int i=0;i<size;i++)
             {
-                equipItemList.Remove(equipItemList[i]);
-                player.GetComponent<PlayerStatus>().CalCulateStat(equipItemList[i].SlotItem, -1);
-                break;
+                if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
+                {
+                    equipItemList.Remove(equipItemList[i]);
+                    break;
+                }
             }
+            return true;
         }
+        // 안버렸다면 false
+        else return false;
     }
 
     public void AddToInspector(Slot slot)
     {
         if (equipItemList.Count < 5)
         {
-            Debug.Log("오");
-            if (transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).childCount == 1) DiscardToInspector(slot.SlotItem.GetComponent<ItemStatus>().MountingPart);
-            Debug.Log("여");
+            DiscardToInspector(slot);
+
             equipItemList.Add(slot);
 
-            slot.transform.SetParent(transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).transform);
+            slot.transform.SetParent(transform.Find("Background").transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).transform);
             slot.transform.position = slot.transform.parent.position;
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
             slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
             player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, 1);
         }
-        else Debug.Log("장착할수없습니다");
     }
 
     public void StatusText()

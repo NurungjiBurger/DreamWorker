@@ -19,15 +19,23 @@ public class Inventory : MonoBehaviour
 
     public bool Acquirable { get { return acquirable; } }
     public int ItemCount { get { return possessItemList.Count; } }
+    public List<Slot> PossessItemList { get { return possessItemList; } }
 
     public void GoldText()
     {
-          transform.parent.transform.Find("HandMoneyBackground").transform.Find("HandMoney").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
+          transform.Find("HandMoneyBackground").transform.Find("HandMoney").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
     }
 
-    public void DiscardToInventory(int index)
+    public Slot DiscardToInventory(int index)
     {
-        if (possessItemList.Count != 0) possessItemList.Remove(possessItemList[index]);
+        if (possessItemList.Count != 0)
+        {
+            Slot tmp;
+            tmp = possessItemList[index];
+            possessItemList.Remove(possessItemList[index]);
+            return tmp;
+        }
+        else return null;
     }
 
     public void AddToInventory(Slot slot)
@@ -36,7 +44,7 @@ public class Inventory : MonoBehaviour
         {
             possessItemList.Add(slot);
 
-            slot.transform.SetParent(transform);
+            slot.transform.SetParent(transform.Find("Background").transform);
             slot.transform.position = slot.transform.parent.position;
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
             slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);

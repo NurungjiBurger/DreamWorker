@@ -5,14 +5,12 @@ using UnityEngine;
 public class Exchanger : MonoBehaviour
 {
     [SerializeField]
-    private GameObject prefabSlot;
-
-    [SerializeField]
     private GameObject[] prefabItem;
 
-    private List<Slot> ExchangeItemList = new List<Slot>();
+    private List<Slot> exchangeItemList = new List<Slot>();
     private GameObject player;
 
+    public int ItemCount { get { return exchangeItemList.Count; } }
 
     public void Exchange()
     {
@@ -22,7 +20,7 @@ public class Exchanger : MonoBehaviour
         // 4개 60퍼
         int success;
 
-        switch (ExchangeItemList.Count)
+        switch (exchangeItemList.Count)
         {
             case 1:
                 success = 1;
@@ -45,20 +43,20 @@ public class Exchanger : MonoBehaviour
         int averageGrade = 0;
         int averageCursedRate = 0;
 
-        for (int i = 0; i < ExchangeItemList.Count; i++) { averageGrade += ExchangeItemList[i].SlotItem.GetComponent<ItemStatus>().ItemGrade; averageCursedRate += ExchangeItemList[i].SlotItem.GetComponent<ItemStatus>().CursedRate; }
+        for (int i = 0; i < exchangeItemList.Count; i++) { averageGrade += exchangeItemList[i].SlotItem.GetComponent<ItemStatus>().ItemGrade; averageCursedRate += exchangeItemList[i].SlotItem.GetComponent<ItemStatus>().CursedRate; }
 
-        averageGrade /= ExchangeItemList.Count;
-        averageCursedRate /= ExchangeItemList.Count;
+        averageGrade /= exchangeItemList.Count;
+        averageCursedRate /= exchangeItemList.Count;
 
         Debug.Log(averageCursedRate + "   " + averageGrade);
 
         Slot tmp;
 
         // 소모된 아이템들 삭제
-        for (int i = 0; i < ExchangeItemList.Count; i++)
+        for (int i = 0; i < exchangeItemList.Count; i++)
         {
-            tmp = ExchangeItemList[i];
-            ExchangeItemList.Remove(ExchangeItemList[i]);
+            tmp = exchangeItemList[i];
+            exchangeItemList.Remove(exchangeItemList[i]);
             Destroy(tmp.SlotItem.gameObject);
             Destroy(tmp.gameObject);
         }
@@ -80,22 +78,30 @@ public class Exchanger : MonoBehaviour
 
     }
     
-    public void DiscardToExchanger(int index)
+    public void DiscardToExchanger()
     {
-        if (ExchangeItemList.Count != 0)
+        Debug.Log("실행");
+        if (exchangeItemList.Count != 0)
         {
-            ExchangeItemList.Remove(ExchangeItemList[index]);
-
+            Slot tmp;
+            int size = exchangeItemList.Count;
+            Debug.Log("삭제시작");
+            for(int i=size-1;i>=0;i--)
+            {
+                tmp = exchangeItemList[i];
+                exchangeItemList.Remove(exchangeItemList[i]);
+                tmp.GetComponent<Slot>().PullOutExchanger();
+            }
         }
     }
 
     public void AddToExchanger(Slot slot)
     {
-        if (ExchangeItemList.Count < 4)
+        if (exchangeItemList.Count < 4)
         {
-            ExchangeItemList.Add(slot);
+            exchangeItemList.Add(slot);
 
-            slot.transform.SetParent(this.transform);
+            slot.transform.SetParent(transform.Find("Background").transform);
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
             slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
         }
@@ -114,10 +120,13 @@ public class Exchanger : MonoBehaviour
 
         if (gameObject.activeInHierarchy == false)
         {
-            for (int i = 0; i < ExchangeItemList.Count; i++) ExchangeItemList.Remove(ExchangeItemList[0]);
+            for (int i = 0; i < exchangeItemList.Count; i++) exchangeItemList.Remove(exchangeItemList[0]);
         }
 
-        if (ExchangeItemList.Count == 0) transform.parent.transform.Find("ButtonBackground").gameObject.SetActive(false);
-        else transform.parent.transform.Find("ButtonBackground").gameObject.SetActive(true);
+        if (exchangeItemList.Count == 0) transform.Find("ButtonBackground").transform.Find("ExchangeButton").gameObject.SetActive(false);
+        else transform.Find("ButtonBackground").transform.Find("ExchangeButton").gameObject.SetActive(true);
+
+        if (exchangeItemList.Count == 4) transform.Find("ButtonBackground").transform.Find("ChangeableButton").gameObject.SetActive(false);
+        else transform.Find("ButtonBackground").transform.Find("ChangeableButton").gameObject.SetActive(true);
     }
 }

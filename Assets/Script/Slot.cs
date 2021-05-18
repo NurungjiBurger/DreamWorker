@@ -31,11 +31,11 @@ public class Slot : MonoBehaviour
 
     private void CompareMountItem()
     {
-        if (transform.parent.gameObject == inventory)
+        if (transform.parent.gameObject == inventory.transform.Find("Background"))
         {
-            if (inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).childCount == 1)
+            if (inspector.transform.Find("Background").transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).childCount == 1)
             {
-                if (inspector.transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).transform.Find("Slot(Clone)").GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().ItemGrade > slotItem.GetComponent<ItemStatus>().ItemGrade)
+                if (inspector.transform.Find("Background").transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).transform.Find("Slot(Clone)").GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().ItemGrade > slotItem.GetComponent<ItemStatus>().ItemGrade)
                 {
                     if (!ui) ui = Instantiate(prefabUI, transform);
                 }
@@ -56,9 +56,11 @@ public class Slot : MonoBehaviour
     {
         if (!originParent && originIndex == -1)
         {
-            originParent = transform.parent.gameObject;
+            originParent = transform.parent.parent.gameObject;
             originIndex = transform.GetSiblingIndex();
 
+            if (transform.parent == inspector.transform) inspector.GetComponent<Inspector>().DiscardToInspector(this);
+            else if (transform.parent == inventory.transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
             exchanger.GetComponent<Exchanger>().AddToExchanger(this);
         }
     }
@@ -67,9 +69,9 @@ public class Slot : MonoBehaviour
     {
         if (originParent && originIndex != -1)
         {
-            exchanger.GetComponent<Exchanger>().DiscardToExchanger(transform.GetSiblingIndex());
-            transform.SetParent(originParent.transform);
-            transform.SetSiblingIndex(originIndex);
+            if (originParent == inspector.transform) inspector.GetComponent<Inspector>().AddToInspector(this);
+            else if (originParent == inventory.transform) inventory.GetComponent<Inventory>().AddToInventory(this);
+            //transform.SetSiblingIndex(originIndex);
 
             originParent = null;
             originIndex = -1;
@@ -85,7 +87,7 @@ public class Slot : MonoBehaviour
 
     public void DisMounting()
     {
-        inspector.GetComponent<Inspector>().DiscardToInspector(slotItem.GetComponent<ItemStatus>().MountingPart);
+        inspector.GetComponent<Inspector>().DiscardToInspector(this);
         inventory.GetComponent<Inventory>().AddToInventory(this);
     }
 
@@ -129,9 +131,9 @@ public class Slot : MonoBehaviour
     void Update()
     {
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
-        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("Background").gameObject;
-        if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").transform.Find("Background").gameObject;
-        if (!exchanger) exchanger = GameObject.Find("Canvas").transform.Find("Exchanger").transform.Find("Background").gameObject;
+        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+        if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+        if (!exchanger) exchanger = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
         CompareMountItem();
     }
 }

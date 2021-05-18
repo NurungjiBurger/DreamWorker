@@ -12,18 +12,29 @@ public class ButtonUI : MonoBehaviour
 
     public void SelectItem()
     {
-
+        GameObject.Find("Canvas").transform.Find("ExchangeSelecter").GetComponent<ExchangeSelecter>().SelectItem(transform.GetSiblingIndex());
     }
 
     public void CloseButton()
     {
-        if (transform.parent.name.Equals("Exchanger")) GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
+        if (transform.parent.name.Equals("Exchanger"))
+        {
+            GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
+            GameObject.Find("Canvas").transform.Find("Exchanger").GetComponent<Exchanger>().DiscardToExchanger();
+
+        }
+        else if (transform.parent.name.Equals("ExchangeSelecter"))
+        {
+            GameObject.Find("Canvas").transform.Find("Exchanger").transform.Find("ButtonBackground").transform.Find("ChangeableButton").GetComponent<ButtonUI>().UIActive();
+            GameObject.Find("Canvas").transform.Find("ExchangeSelecter").GetComponent<ExchangeSelecter>().DeleteAllList();
+        }
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
     }
 
     public void UIActive()
     {
         onOff = !onOff;
+        if (transform.name == "ChangeableButton" && onOff) GameObject.Find("Canvas").transform.Find("ExchangeSelecter").GetComponent<ExchangeSelecter>().LoadAllItem();
     }
 
     // Start is called before the first frame update
@@ -47,6 +58,9 @@ public class ButtonUI : MonoBehaviour
                     break;
                 case "ExchangerButton":
                     ui = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
+                    break;
+                case "ChangeableButton":
+                    ui = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
                     break;
                 default:
                     break;

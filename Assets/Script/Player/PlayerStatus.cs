@@ -38,7 +38,7 @@ public class PlayerStatus : Status
     public Slot CreateItemSlot(GameObject item)
     {
         GameObject tmp;
-        tmp = Instantiate(prefabSlot, inventory.transform);
+        tmp = Instantiate(prefabSlot, inventory.transform.Find("Background").transform);
 
         tmp.GetComponent<Slot>().InsertImage(item);
   
@@ -99,7 +99,7 @@ public class PlayerStatus : Status
     // Update is called once per frame
     void Update()
     {
-        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("Background").gameObject;
+        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
 
         CalCulateExperience(0);
     }

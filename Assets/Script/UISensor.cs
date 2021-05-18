@@ -22,23 +22,23 @@ public class UISensor : MonoBehaviour
         {
              if (collision.collider.name.Equals("Slot(Clone)"))
             {
-                Debug.Log("ΩΩ∑‘");
+               // Debug.Log("ΩΩ∑‘");
                 discardAble = false;
-                if (collision.collider.transform.parent == inspector) mountAble = true;
+                if (collision.collider.transform.name == inspector.name) mountAble = true;
                 else mountAble = false;
-                if (collision.collider.transform.parent == inventory) toInventory = true;
+                if (collision.collider.transform.name == inventory.name) toInventory = true;
                 else toInventory = false;
             }
             else if (collision.collider.name.Equals("Inventory"))
             {
-               Debug.Log("¿Œ∫•");
+              // Debug.Log("¿Œ∫•");
                 discardAble = false;
                 mountAble = false;
                 toInventory = true;
             }
             else if (collision.collider.name.Equals("Inspector"))
             {
-                Debug.Log("Ω∫∆Â≈Õ");
+               // Debug.Log("Ω∫∆Â≈Õ");
                 discardAble = false;
                 mountAble = true;
                 toInventory = false;
@@ -70,7 +70,7 @@ public class UISensor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("Background").gameObject;
-        if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").transform.Find("Background").gameObject;
+        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+        if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
     }
 }

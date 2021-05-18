@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 2093277372707474024}
   - component: {fileID: 7238424139427408168}
   - component: {fileID: 1683446461283226090}
+  - component: {fileID: -5920693034357568439}
   m_Layer: 5
   m_Name: SlotButton
   m_TagString: Untagged
@@ -197,13 +198,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5687667318584702906, guid: e46800506fc61264fbce2719faab8f17, type: 3}
-        m_TargetAssemblyTypeName: Exchanger, Assembly-CSharp
-        m_MethodName: AddToExchanger
-        m_Mode: 2
+      - m_Target: {fileID: 1683446461283226090}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: SelectItem
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Slot, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -221,6 +222,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3945593910f2b4d439842114172eeaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5920693034357568439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333951713179731267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867179cca61adee4eb304052c3904b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabUI: {fileID: 163630717448231900, guid: abb1499360b550c4ea66c0cc7af76974, type: 3}
 --- !u!1 &3776461598538179254
 GameObject:
   m_ObjectHideFlags: 0
