@@ -19,11 +19,13 @@ public class ItemStatus : Status
 
     private GameObject player;
     private bool isAttack = false;
+    private bool isMount = false;
 
     public int CursedRate { get { return cursedRate; } set { cursedRate = value; } }
     public int ItemGrade { get { return (int)grade; } }
     public string MountingPart { get { return mountingPart; } }
     public bool IsAttack { get { return isAttack; } }
+    public bool IsMount { get { return isMount; } set { isMount = value; } }
     public string Occupation { get { return dedicatedOccupation; } }
 
     private int OccupationCheck()

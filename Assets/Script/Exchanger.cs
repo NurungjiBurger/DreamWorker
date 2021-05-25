@@ -10,6 +10,7 @@ public class Exchanger : MonoBehaviour
     private List<Slot> exchangeItemList = new List<Slot>();
     private GameObject player;
 
+    public List<Slot> ExchangeItemList { get { return exchangeItemList; } }
     public int ItemCount { get { return exchangeItemList.Count; } }
 
     public void Exchange()
@@ -77,16 +78,19 @@ public class Exchanger : MonoBehaviour
         }
 
     }
+
+    public void RemoveExchanger()
+    {
+        
+    }
     
     public void DiscardToExchanger()
     {
-        Debug.Log("실행");
         if (exchangeItemList.Count != 0)
         {
             Slot tmp;
             int size = exchangeItemList.Count;
-            Debug.Log("삭제시작");
-            for(int i=size-1;i>=0;i--)
+            for (int i = size - 1; i >= 0; i--)
             {
                 tmp = exchangeItemList[i];
                 exchangeItemList.Remove(exchangeItemList[i]);

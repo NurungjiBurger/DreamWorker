@@ -10,62 +10,58 @@ public class ExchangeSelecter : MonoBehaviour
     private GameObject inspector;
     private GameObject exchanger;
 
-    [SerializeField]
-    private GameObject prefabSlotButton;
+    private List<Slot> itemList = new List<Slot>();
 
-    private List<GameObject> equipItemList = new List<GameObject>();
-    private List<GameObject> possessItemList = new List<GameObject>();
     private List<bool> selectedList = new List<bool>();
     private int selectedNumber = 0;
 
-    private void DeleteList(int size, List<GameObject> list)
+    public List<bool> SelectedList { get { return selectedList; } }
+
+    public void EnrollItem()
     {
-        if (size != 0)
+        for (int i = 0; i < selectedList.Count; i++)
         {
-            GameObject tmp;
-            for (int i = size - 1; i >= 0; i--)
-            {
-                tmp = list[i];
-                list.Remove(possessItemList[i]);
-                Destroy(tmp.gameObject);
-            }
+
+            itemList[i].GetComponent<Slot>().SetOriginColor();
+
+            if (itemList[i].SlotItem.GetComponent<ItemStatus>().IsMount) inspector.GetComponent<Inspector>().AddToInspector(itemList[i]);
+            else inventory.GetComponent<Inventory>().AddToInventory(itemList[i].GetComponent<Slot>());
+
+            if (selectedList[i]) itemList[i].GetComponent<Slot>().PutInExchanger();
         }
+
+        exchanger.transform.Find("ButtonBackground").transform.Find("ChangeableButton").GetComponent<ButtonUI>().UIActive();
     }
 
     public void DeleteAllList()
     {
-        int size;
-        size = equipItemList.Count;
-        DeleteList(size, equipItemList);
+        EnrollItem();
 
-        size = possessItemList.Count;
-        DeleteList(size, possessItemList);
+        int size = itemList.Count;
 
-        size = selectedList.Count;
-        if (size != 0) selectedList.RemoveAll(x => true);
-    }
-
-    public void EnrollItem()
-    {
-        int i = 0;
-
-        for (i = 0; i < selectedList.Count; i++)
+        if (size != 0)
         {
-            if (selectedList[i])
+            for (int i = size - 1; i >= 0; i--)
             {
-                if (equipItemList.Count > i) equipItemList[i].GetComponent<Slot>().PutInExchanger();
-                else possessItemList[i - equipItemList.Count].GetComponent<Slot>().PutInExchanger();
+                itemList.Remove(itemList[i]);
             }
         }
 
-        DeleteAllList();
-        exchanger.transform.Find("ButtonBackground").transform.Find("ChangeableButton").GetComponent<ButtonUI>().UIActive();
+        size = selectedList.Count;
+
+        if (size != 0)
+        {
+            for (int i = size - 1;i >= 0;i--)
+            {
+                selectedList.Remove(selectedList[i]);
+            }
+        }
+
+        selectedNumber = 0;
     }
 
-    public void SelectItem(int index)
+    public void SelectItem(Slot slot, int index)
     {
-        Color originColor;
-
         if (!selectedList[index])
         {
             if (selectedNumber < 4)
@@ -73,24 +69,7 @@ public class ExchangeSelecter : MonoBehaviour
                 selectedNumber++;
                 selectedList[index] = true;
 
-                if (equipItemList.Count > index)
-                {
-                    originColor = equipItemList[index].GetComponent<Image>().color;
-                    equipItemList[index].GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 100f / 255f);
-                    originColor = equipItemList[index].transform.Find("Background").GetComponent<Image>().color;
-                    equipItemList[index].transform.Find("Background").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 100f / 255f);
-                    originColor = equipItemList[index].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color;
-                    equipItemList[index].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 100f / 255f);
-                }
-                else
-                {
-                    originColor = possessItemList[index - equipItemList.Count].GetComponent<Image>().color;
-                    possessItemList[index - equipItemList.Count].GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 100f / 255f);
-                    originColor = possessItemList[index - equipItemList.Count].transform.Find("Background").GetComponent<Image>().color;
-                    possessItemList[index - equipItemList.Count].transform.Find("Background").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 100f / 255f);
-                    originColor = possessItemList[index - equipItemList.Count].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color;
-                    possessItemList[index - equipItemList.Count].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 100f / 255f);
-                }
+                slot.SetTransParentColor();
 
             }
         }
@@ -101,24 +80,7 @@ public class ExchangeSelecter : MonoBehaviour
                 selectedNumber--;
                 selectedList[index] = false;
 
-                if (equipItemList.Count > index)
-                {
-                    originColor = equipItemList[index].GetComponent<Image>().color;
-                    equipItemList[index].GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 255f / 255f);
-                    originColor = equipItemList[index].transform.Find("Background").GetComponent<Image>().color;
-                    equipItemList[index].transform.Find("Background").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 255f / 255f);
-                    originColor = equipItemList[index].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color;
-                    equipItemList[index].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 255f / 255f);
-                }
-                else
-                {
-                    originColor = possessItemList[index - equipItemList.Count].GetComponent<Image>().color;
-                    possessItemList[index - equipItemList.Count].GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 255f / 255f);
-                    originColor = possessItemList[index - equipItemList.Count].transform.Find("Background").GetComponent<Image>().color;
-                    possessItemList[index - equipItemList.Count].transform.Find("Background").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 255f / 255f);
-                    originColor = possessItemList[index - equipItemList.Count].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color;
-                    possessItemList[index - equipItemList.Count].transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor.r, originColor.g, originColor.b, 255f / 255f);
-                }
+                slot.SetOriginColor();
             }
         }
     }
@@ -126,41 +88,68 @@ public class ExchangeSelecter : MonoBehaviour
     public void LoadAllItem()
     {
         int size;
-        size = inspector.GetComponent<Inspector>().ItemCount;
 
-        for(int i=0;i<size;i++)
+        // exchanger
+        size = exchanger.GetComponent<Exchanger>().ItemCount;
+        for(int i = 0;i < size;i++)
         {
-            GameObject tmp;
-            tmp = Instantiate(prefabSlotButton, transform.Find("Background").transform);
-            tmp.GetComponent<Slot>().InsertImage(inspector.GetComponent<Inspector>().EquipItemList[i].SlotItem);
-            equipItemList.Add(tmp);
+            Slot tmp;
+            tmp = exchanger.GetComponent<Exchanger>().ExchangeItemList[0];
+            if (tmp.SlotItem.GetComponent<ItemStatus>().IsMount)
+            {
+                exchanger.GetComponent<Exchanger>().ExchangeItemList.Remove(tmp);
+                tmp.GetComponent<Slot>().PullOutExchanger();
+                inspector.GetComponent<Inspector>().DiscardToInspector(tmp);
+            }
+            else
+            {
+                exchanger.GetComponent<Exchanger>().ExchangeItemList.Remove(tmp);
+                tmp.GetComponent<Slot>().PullOutExchanger();
+                inventory.GetComponent<Inventory>().DiscardToInventory(inventory.GetComponent<Inventory>().ItemCount - 1);
+            }
+            itemList.Add(tmp);
+            tmp.transform.SetParent(transform.Find("Background").transform);
+            tmp.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+            tmp.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+            selectedList.Add(false);
+            SelectItem(tmp, i);
+        }
+
+        // inspector
+        size = inspector.GetComponent<Inspector>().ItemCount;
+        for(int i = 0;i < size;i++)
+        {
+            itemList.Add(inspector.GetComponent<Inspector>().EquipItemList[0]);
+            inspector.GetComponent<Inspector>().EquipItemList[0].transform.SetParent(transform.Find("Background").transform);
+            inspector.GetComponent<Inspector>().EquipItemList[0].GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+            inspector.GetComponent<Inspector>().EquipItemList[0].transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+            inspector.GetComponent<Inspector>().DiscardToInspector(inspector.GetComponent<Inspector>().EquipItemList[0]);
             selectedList.Add(false);
         }
 
+        // inventory
         size = inventory.GetComponent<Inventory>().ItemCount;
-
-        for (int i=0;i<size;i++)
+        for (int i = 0;i < size;i++)
         {
-            GameObject tmp;
-            tmp = Instantiate(prefabSlotButton, transform.Find("Background").transform);
-            tmp.GetComponent<Slot>().InsertImage(inventory.GetComponent<Inventory>().PossessItemList[i].SlotItem);
-            possessItemList.Add(tmp);
+            itemList.Add(inventory.GetComponent<Inventory>().PossessItemList[0]);
+            inventory.GetComponent<Inventory>().PossessItemList[0].transform.SetParent(transform.Find("Background").transform);
+            inventory.GetComponent<Inventory>().PossessItemList[0].GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+            inventory.GetComponent<Inventory>().PossessItemList[0].transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+            inventory.GetComponent<Inventory>().DiscardToInventory(0);
             selectedList.Add(false);
         }
     }
 
     private void TextUpdate()
     {
-        transform.Find("SelectNumberBackground").transform.Find("SelectNumber").GetComponent<TextMeshProUGUI>().text = selectedNumber.ToString() + " / 4"; 
+        transform.Find("SelectNumberBackground").transform.Find("SelectNumber").GetComponent<TextMeshProUGUI>().text = selectedNumber.ToString() + " / 4"; //(exchanger.GetComponent<Exchanger>().ItemCount + selectedNumber).ToString() + " / 4"; 
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;

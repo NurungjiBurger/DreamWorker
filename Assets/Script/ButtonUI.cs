@@ -10,11 +10,6 @@ public class ButtonUI : MonoBehaviour
 
     private bool onOff = false;
 
-    public void SelectItem()
-    {
-        GameObject.Find("Canvas").transform.Find("ExchangeSelecter").GetComponent<ExchangeSelecter>().SelectItem(transform.GetSiblingIndex());
-    }
-
     public void CloseButton()
     {
         if (transform.parent.name.Equals("Exchanger"))
@@ -22,11 +17,6 @@ public class ButtonUI : MonoBehaviour
             GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
             GameObject.Find("Canvas").transform.Find("Exchanger").GetComponent<Exchanger>().DiscardToExchanger();
 
-        }
-        else if (transform.parent.name.Equals("ExchangeSelecter"))
-        {
-            GameObject.Find("Canvas").transform.Find("Exchanger").transform.Find("ButtonBackground").transform.Find("ChangeableButton").GetComponent<ButtonUI>().UIActive();
-            GameObject.Find("Canvas").transform.Find("ExchangeSelecter").GetComponent<ExchangeSelecter>().DeleteAllList();
         }
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
     }
@@ -37,18 +27,16 @@ public class ButtonUI : MonoBehaviour
         if (transform.name == "ChangeableButton" && onOff) GameObject.Find("Canvas").transform.Find("ExchangeSelecter").GetComponent<ExchangeSelecter>().LoadAllItem();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!ui)
         {
-            switch(transform.name)
+            switch (transform.name)
             {
                 case "InventoryButton":
                     ui = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
@@ -61,11 +49,15 @@ public class ButtonUI : MonoBehaviour
                     break;
                 case "ChangeableButton":
                     ui = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
+                    ui.SetActive(onOff);
                     break;
                 default:
                     break;
             }
         }
-        else ui.SetActive(onOff);
+        else
+        {
+            ui.SetActive(onOff);
+        }
     }
 }

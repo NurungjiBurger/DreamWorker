@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     private GameObject prefab;
     private Animator animator;
 
+    private GameObject inspector;
     private GameObject weapon;
 
     private Timer attackTimer;
@@ -27,13 +28,21 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackAnimatestart()
     {
+        int size = inspector.GetComponent<Inspector>().EquipItemList.Count;
+        weapon = null;
+        for(int i=0;i<size;i++)
+        {
+            if (inspector.GetComponent<Inspector>().EquipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == "Weapon")
+            {
+                weapon = inspector.GetComponent<Inspector>().EquipItemList[i].SlotItem;
+                break;
+            }
+        }
 
-        weapon = GameObject.Find("Canvas").transform.Find("Inspector").transform.Find("Background").transform.Find("Weapon").GetChild(0).GetComponent<Slot>().SlotItem;
-
-        // Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        if (weapon) Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        else Debug.Log("무기없음");
     }
-    // Start is called before the first frame update
+
     private void Start()
     {
         animator = GetComponent<Animator>();        
@@ -77,6 +86,7 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) KeyInput();
+        if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
     }
     
 }

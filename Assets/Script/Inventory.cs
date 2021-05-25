@@ -10,7 +10,6 @@ public class Inventory : MonoBehaviour
     private GameObject prefabSlot;
 
     private List<Slot> possessItemList = new List<Slot>();
-   // private List<GameObject> inventoryItemList = new List<GameObject>();
     private bool acquirable = true;
 
     private GameObject player;
@@ -45,19 +44,17 @@ public class Inventory : MonoBehaviour
             possessItemList.Add(slot);
 
             slot.transform.SetParent(transform.Find("Background").transform);
-            slot.transform.position = slot.transform.parent.position;
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
             slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+            slot.SlotItem.GetComponent<ItemStatus>().IsMount = false;
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         possessItemNumber = 16;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (possessItemList.Count < possessItemNumber) acquirable = true;

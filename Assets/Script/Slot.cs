@@ -4,20 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
     private GameObject prefabUI;
 
     private GameObject ui;
     private GameObject slotItem;
-
+    private Color[] originColor = new Color[3];
     private Sprite itemImage;
 
     private GameObject player;
     private GameObject inventory;
     private GameObject inspector;
     private GameObject exchanger;
+    private GameObject selecter;
 
     private GameObject originParent = null;
     private int originIndex = -1;
@@ -27,6 +28,21 @@ public class Slot : MonoBehaviour
     public void DestroyObject()
     {
         Destroy(gameObject);
+    }
+
+
+    public void SetOriginColor()
+    {
+        GetComponent<Image>().color = originColor[0];
+        transform.Find("Background").GetComponent<Image>().color = originColor[1];
+        transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = originColor[2];
+    }
+
+    public void SetTransParentColor()
+    {
+        GetComponent<Image>().color = new Color(originColor[0].r, originColor[0].g, originColor[0].b, 100f / 255f);
+        transform.Find("Background").GetComponent<Image>().color = new Color(originColor[1].r, originColor[1].g, originColor[1].b, 100f / 255f);
+        transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor[2].r, originColor[2].g, originColor[2].b, 100f / 255f);
     }
 
     private void CompareMountItem()
@@ -51,16 +67,24 @@ public class Slot : MonoBehaviour
         }
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (transform.parent == selecter.transform.GetChild(0))
+        {
+            if (eventData.button == PointerEventData.InputButton.Left) selecter.GetComponent<ExchangeSelecter>().SelectItem(this, transform.GetSiblingIndex());
+        }
+    }
     
     public void PutInExchanger()
     {
         if (!originParent && originIndex == -1)
         {
-            originParent = transform.parent.parent.gameObject;
+            originParent = transform.parent.gameObject;
             originIndex = transform.GetSiblingIndex();
 
-            if (transform.parent == inspector.transform) inspector.GetComponent<Inspector>().DiscardToInspector(this);
-            else if (transform.parent == inventory.transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
+            if (transform.parent == inventory.transform.Find("Background").transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
+            else inspector.GetComponent<Inspector>().DiscardToInspector(this);
+
             exchanger.GetComponent<Exchanger>().AddToExchanger(this);
         }
     }
@@ -69,15 +93,15 @@ public class Slot : MonoBehaviour
     {
         if (originParent && originIndex != -1)
         {
-            if (originParent == inspector.transform) inspector.GetComponent<Inspector>().AddToInspector(this);
-            else if (originParent == inventory.transform) inventory.GetComponent<Inventory>().AddToInventory(this);
-            //transform.SetSiblingIndex(originIndex);
+            if (originParent.transform.parent == inspector.transform) inspector.GetComponent<Inspector>().AddToInspector(this);
+            else if (originParent.transform.parent == inventory.transform) inventory.GetComponent<Inventory>().AddToInventory(this);
+
+            transform.SetSiblingIndex(originIndex);
 
             originParent = null;
             originIndex = -1;
         }
     }
-    
 
     public void Mounting()
     {
@@ -90,7 +114,6 @@ public class Slot : MonoBehaviour
         inspector.GetComponent<Inspector>().DiscardToInspector(this);
         inventory.GetComponent<Inventory>().AddToInventory(this);
     }
-
 
     public void InsertImage(GameObject item)
     {
@@ -119,21 +142,24 @@ public class Slot : MonoBehaviour
                 break;
         }
         transform.Find("Background").transform.Find("Item").GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+
+        originColor[0] = GetComponent<Image>().color;
+        originColor[1] = transform.Find("Background").GetComponent<Image>().color;
+        originColor[2] = transform.Find("Background").transform.Find("Item").GetComponent<Image>().color;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
         if (!exchanger) exchanger = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
+        if (!selecter) selecter = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
         CompareMountItem();
     }
 }
