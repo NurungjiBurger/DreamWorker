@@ -1,0 +1,270 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LightSlash
+  serializedVersion: 6
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves:
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: cd932c1d2c6802549bf28f3fc7fec445, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 5c2a4b794bdc2b44b937fa65593477da, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: 5d47c06f2158ca14e886e4f38fc9baa7, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: a194a5a9288138f4c86c18e9ae8a354a, type: 3}
+    - time: 0.33333334
+      value: {fileID: 21300000, guid: ac08a688b60821845ac07ff3b32b55c7, type: 3}
+    - time: 0.41666666
+      value: {fileID: 21300000, guid: a5c0ab0e0a51d9342808b2f391dc8831, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: 831ca3d8d1c5d754fa5e3f717add7e65, type: 3}
+    - time: 0.5833333
+      value: {fileID: 21300000, guid: a5d568eb6683b694a966ea8c7fc7cf21, type: 3}
+    - time: 0.6666667
+      value: {fileID: 21300000, guid: d40c3e361da3aef4886d1eceef272ce7, type: 3}
+    - time: 0.75
+      value: {fileID: 21300000, guid: 4b4f160e8ed0f2e4a86d288c17e983cb, type: 3}
+    - time: 0.8333333
+      value: {fileID: 21300000, guid: 564436ccf2939e8499763cd003d5a6df, type: 3}
+    - time: 0.9166667
+      value: {fileID: 21300000, guid: 4c7d50a5eb7536d4c984f46ce26205ce, type: 3}
+    - time: 1
+      value: {fileID: 21300000, guid: f140113b9ef0a8e4f87c492d6db53949, type: 3}
+    - time: 1.0833334
+      value: {fileID: 21300000, guid: 18454b8dd44da65469c6e7f8e9ad7689, type: 3}
+    - time: 1.1666666
+      value: {fileID: 21300000, guid: dc95eae5849a09d40a7bb971bde084ee, type: 3}
+    - time: 1.25
+      value: {fileID: 21300000, guid: ddf9ffc45eda9ef4287d9c4768323496, type: 3}
+    - time: 1.3333334
+      value: {fileID: 21300000, guid: bdeb464af012e2749907cb926ba1b5be, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+  m_SampleRate: 12
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: cd932c1d2c6802549bf28f3fc7fec445, type: 3}
+    - {fileID: 21300000, guid: 5c2a4b794bdc2b44b937fa65593477da, type: 3}
+    - {fileID: 21300000, guid: 5d47c06f2158ca14e886e4f38fc9baa7, type: 3}
+    - {fileID: 21300000, guid: a194a5a9288138f4c86c18e9ae8a354a, type: 3}
+    - {fileID: 21300000, guid: ac08a688b60821845ac07ff3b32b55c7, type: 3}
+    - {fileID: 21300000, guid: a5c0ab0e0a51d9342808b2f391dc8831, type: 3}
+    - {fileID: 21300000, guid: 831ca3d8d1c5d754fa5e3f717add7e65, type: 3}
+    - {fileID: 21300000, guid: a5d568eb6683b694a966ea8c7fc7cf21, type: 3}
+    - {fileID: 21300000, guid: d40c3e361da3aef4886d1eceef272ce7, type: 3}
+    - {fileID: 21300000, guid: 4b4f160e8ed0f2e4a86d288c17e983cb, type: 3}
+    - {fileID: 21300000, guid: 564436ccf2939e8499763cd003d5a6df, type: 3}
+    - {fileID: 21300000, guid: 4c7d50a5eb7536d4c984f46ce26205ce, type: 3}
+    - {fileID: 21300000, guid: f140113b9ef0a8e4f87c492d6db53949, type: 3}
+    - {fileID: 21300000, guid: 18454b8dd44da65469c6e7f8e9ad7689, type: 3}
+    - {fileID: 21300000, guid: dc95eae5849a09d40a7bb971bde084ee, type: 3}
+    - {fileID: 21300000, guid: ddf9ffc45eda9ef4287d9c4768323496, type: 3}
+    - {fileID: 21300000, guid: bdeb464af012e2749907cb926ba1b5be, type: 3}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 1.4166667
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 1
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_Events:
+  - time: 0.25
+    functionName: Inputx
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -0.7
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.25
+    functionName: Inputy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -0.7
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.25
+    functionName: Inputsizex
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 4
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.25
+    functionName: Inputsizey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 3
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.25
+    functionName: ModifyTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: Inputx
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -1
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: Inputy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -0.9
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: ModifyTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.41666666
+    functionName: Inputx
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -0.9
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.41666666
+    functionName: Inputy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -0.8
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.41666666
+    functionName: ModifyTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: Inputy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -1.2
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: Inputsizey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 2.5
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: ModifyTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: Inputy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -1.7
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: Inputsizey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 1.5
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: ModifyTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: Inputx
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: Inputy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: Inputsizex
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.01
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: Inputsizey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.01
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.75
+    functionName: ModifyTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

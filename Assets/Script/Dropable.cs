@@ -55,13 +55,11 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
 

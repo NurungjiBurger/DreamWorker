@@ -13,6 +13,19 @@ public class Inspector : MonoBehaviour
     public int ItemCount { get { return equipItemList.Count; } }
     public List<Slot> EquipItemList { get { return equipItemList; } }
 
+    public Slot FindInInspector(Slot slot)
+    {
+        int size = equipItemList.Count;
+        for (int i = 0; i < size; i++)
+        {
+            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
+            {
+                return equipItemList[i];
+            }
+        }
+        return slot;
+    }
+
     public void DiscardToInspector(Slot slot)
     {
         int size = equipItemList.Count;
@@ -27,9 +40,23 @@ public class Inspector : MonoBehaviour
         }
     }
 
+    private void ChangeItemPart(Slot slot)
+    {
+        int size = equipItemList.Count;
+        for (int i = 0; i < size; i++)
+        {
+            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
+            {
+                equipItemList[i].GetComponent<Slot>().DisMounting();
+                break;
+            }
+        }
+
+    }
+
     public void AddToInspector(Slot slot)
     {
-        DiscardToInspector(slot);
+        ChangeItemPart(slot);
 
         equipItemList.Add(slot);
 

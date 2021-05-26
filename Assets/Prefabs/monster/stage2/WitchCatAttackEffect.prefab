@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6000674774695072779}
   - component: {fileID: 210949348237433622}
   - component: {fileID: 6991029077874145103}
-  - component: {fileID: 6846760214057519198}
   - component: {fileID: 255832757989041196}
+  - component: {fileID: -5571741756322404675}
   m_Layer: 0
   m_Name: WitchCatAttackEffect
   m_TagString: Untagged
@@ -105,20 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6846760214057519198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2418626651746336771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f35d9a67238754995a31cf364da73a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabEffect: {fileID: 245358767981902114, guid: 789b6fb963cd69747ade555f3eaffc60, type: 3}
-  attackRange: 2
 --- !u!61 &255832757989041196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,3 +131,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.23, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &-5571741756322404675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418626651746336771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a94bef115cd4042a60c46d74426440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabEffect: {fileID: 245358767981902114, guid: 789b6fb963cd69747ade555f3eaffc60, type: 3}
+  attackRange: 2
+  isComBack: 0

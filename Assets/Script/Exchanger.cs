@@ -40,7 +40,6 @@ public class Exchanger : MonoBehaviour
                 break;
         }
 
-        // 새로 만들어질 아이템의 등급과 저주율 고려
         int averageGrade = 0;
         int averageCursedRate = 0;
 
@@ -52,28 +51,24 @@ public class Exchanger : MonoBehaviour
         Debug.Log(averageCursedRate + "   " + averageGrade);
 
         Slot tmp;
+        int size = ExchangeItemList.Count;
 
-        // 소모된 아이템들 삭제
-        for (int i = 0; i < exchangeItemList.Count; i++)
+        for (int i = 0; i < size; i++)
         {
-            tmp = exchangeItemList[i];
-            exchangeItemList.Remove(exchangeItemList[i]);
+            Debug.Log("삭제");
+            tmp = exchangeItemList[0];
+            exchangeItemList.Remove(exchangeItemList[0]);
             Destroy(tmp.SlotItem.gameObject);
             Destroy(tmp.gameObject);
         }
 
         if (Random.Range(0,101) <= success)
         {
-            // 등급업 성공
-            // 상위 등급 아이템 랜덤 생성
             Debug.Log("등급업!");
-            // Instantiate(prefabItem[((averageGrade+1) * 5) + Random.Range(0, 5)]);
-            Instantiate(prefabItem[(averageGrade * 5) + Random.Range(0, 5)], new Vector3(player.transform.position.x + 1, player.transform.position.y + 1, 0), Quaternion.identity);
+            Instantiate(prefabItem[((averageGrade+1) * 5) + Random.Range(0, 5)], new Vector3(player.transform.position.x + 1, player.transform.position.y + 1, 0), Quaternion.identity);
         }
         else
         {
-            // 등급업 실패
-            // 동급 아이템 랜덤 생성
             Instantiate(prefabItem[(averageGrade * 5) + Random.Range(0, 5)], new Vector3(player.transform.position.x + 1, player.transform.position.y + 1, 0), Quaternion.identity);
         }
 

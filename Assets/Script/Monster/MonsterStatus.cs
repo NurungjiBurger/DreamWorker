@@ -36,14 +36,12 @@ public class MonsterStatus : Status
     public void DestroyObject()
     {
         if (Random.Range(0, 101) <= dropRate) Instantiate(dropItemList[Random.Range(0, dropItemList.Length)], transform.position, Quaternion.identity);
-        // 아이템 떨구기
+
         for(int i=0;i<coinNumber;i++)
         {
             Instantiate(dropCoin[0], transform.position, Quaternion.identity);
-            // 돈 떨구기
         }
         if (isBoss) Instantiate(dropCoin[1], transform.position, Quaternion.identity);
-        // 마일리지 떨구기
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().CalCulateExperience(experience);
         // 경험치 주기
@@ -54,7 +52,6 @@ public class MonsterStatus : Status
         Destroy(hpBar.gameObject);
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         canvas = GameObject.Find("Canvas");
@@ -69,10 +66,8 @@ public class MonsterStatus : Status
 
         if (GetComponent<MonsterStatus>().Boss)
         {
-            // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(0, 4.3f, 0));
-            hpBar.transform.position = new Vector3(transform.position.x + 175.5f, transform.position.y + 177, transform.position.z);
+            hpBar.transform.position = new Vector3(transform.position.x + 200.0f, transform.position.y + 202.5f, transform.position.z);
             hpBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-           // hpBar.transform.position = _hpBarPos;
         }
     }
 

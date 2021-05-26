@@ -27,7 +27,11 @@ public class ExchangeSelecter : MonoBehaviour
             if (itemList[i].SlotItem.GetComponent<ItemStatus>().IsMount) inspector.GetComponent<Inspector>().AddToInspector(itemList[i]);
             else inventory.GetComponent<Inventory>().AddToInventory(itemList[i].GetComponent<Slot>());
 
-            if (selectedList[i]) itemList[i].GetComponent<Slot>().PutInExchanger();
+            if (selectedList[i])
+            {
+                Debug.Log(itemList[i]);
+                itemList[i].GetComponent<Slot>().PutInExchanger();
+            }
         }
 
         exchanger.transform.Find("ButtonBackground").transform.Find("ChangeableButton").GetComponent<ButtonUI>().UIActive();

@@ -4426,6 +4426,11 @@ MonoBehaviour:
   - {fileID: 6968412572008391060, guid: 1a65fa89ae7152643bd0d29141f808cd, type: 3}
   - {fileID: 4432175680456323203, guid: eedcdf2ba92557843bcd0f3bdbb0db24, type: 3}
   - {fileID: 6724252274442110958, guid: 59126ff7bf59f2d448f3dd4cd7165a70, type: 3}
+  - {fileID: 5459144608309049297, guid: e3a91f7376ef1484583178ce9a440c2c, type: 3}
+  - {fileID: 2222554358017998316, guid: f1c1f5da5451fcb4dac107d6d1123ac8, type: 3}
+  - {fileID: 3713112440105438408, guid: 9299fa9972fcf454589a6226a7d4ac2c, type: 3}
+  - {fileID: 1403667913000457209, guid: b094b805f432fe44085b49a8f2e61f1b, type: 3}
+  - {fileID: 5895313664551654932, guid: b41e1c1966c699441aabaff3c6442aeb, type: 3}
 --- !u!114 &64205540039278552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4593,9 +4598,8 @@ GameObject:
   - component: {fileID: 1017126459282744375}
   - component: {fileID: 4538954108868740520}
   - component: {fileID: 8502271444815873175}
-  - component: {fileID: 8060211340021872322}
   m_Layer: 5
-  m_Name: Glove
+  m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5333,32 +5337,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4633238708932760392}
   m_CullTransparentMesh: 1
---- !u!61 &3292508439212805319
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8496960439351281408}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20, y: 20}
-  m_EdgeRadius: 0
 --- !u!222 &3500689256454158568
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5699,9 +5677,8 @@ GameObject:
   - component: {fileID: 137524322383114684}
   - component: {fileID: 6515239649957373728}
   - component: {fileID: 4515991644973114711}
-  - component: {fileID: 6488327030252844574}
   m_Layer: 5
-  m_Name: Shoe
+  m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5877,32 +5854,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8410916046876596034}
   m_CullTransparentMesh: 1
---- !u!61 &5891469030319041505
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7724299149795232344}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20, y: 20}
-  m_EdgeRadius: 0
 --- !u!1 &6069000282346525420
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,7 +5883,6 @@ GameObject:
   - component: {fileID: 6677851538554436940}
   - component: {fileID: 5158015919666466609}
   - component: {fileID: 825031602440375606}
-  - component: {fileID: 6820953590121554003}
   m_Layer: 5
   m_Name: Weapon
   m_TagString: Untagged
@@ -5940,32 +5890,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &6488327030252844574
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786132519485048613}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20, y: 20}
-  m_EdgeRadius: 0
 --- !u!222 &6515239649957373728
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6012,32 +5936,6 @@ RectTransform:
   m_AnchoredPosition: {x: -35.8, y: -20.9}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!61 &6820953590121554003
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6276725679085024000}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20, y: 20}
-  m_EdgeRadius: 0
 --- !u!224 &7540393004301295780
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6073,7 +5971,6 @@ GameObject:
   - component: {fileID: 1530017732408204571}
   - component: {fileID: 3724397987281974477}
   - component: {fileID: 7730184787556665467}
-  - component: {fileID: 5891469030319041505}
   m_Layer: 5
   m_Name: Head
   m_TagString: Untagged
@@ -6111,32 +6008,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!61 &8060211340021872322
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078352230665852864}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20, y: 20}
-  m_EdgeRadius: 0
 --- !u!222 &8307115930330445726
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6174,9 +6045,8 @@ GameObject:
   - component: {fileID: 4076655139239351328}
   - component: {fileID: 1212108420901050404}
   - component: {fileID: 5310371202362216493}
-  - component: {fileID: 3292508439212805319}
   m_Layer: 5
-  m_Name: Suit
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

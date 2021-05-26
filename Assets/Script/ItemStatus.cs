@@ -28,9 +28,18 @@ public class ItemStatus : Status
     public bool IsMount { get { return isMount; } set { isMount = value; } }
     public string Occupation { get { return dedicatedOccupation; } }
 
+    private void StatUP()
+    {
+        maxHP = (int)(maxHP * 1.5f);
+        power = (int)(power * 1.3f);
+        jumpPower = jumpPower * 1.2f;
+        moveSpeed = moveSpeed * 1.2f;
+        attackSpeed = attackSpeed * 1.1f;
+        defenseCapability = defenseCapability * 1.2f;
+    }
+
     private int OccupationCheck()
     {
-        // 무기마다 정해진 전용 직업군이 무기를 장착했을 경우 특별한 효과가 생기도록하기위한 체크
         if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) return 1;
         else return 0;
     }
@@ -39,15 +48,15 @@ public class ItemStatus : Status
         return prefabAttack[OccupationCheck()];
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
+        if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) StatUP();
+
         cursedRate = Random.Range(0, 70); // 저주율 수치 조정 필요
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);

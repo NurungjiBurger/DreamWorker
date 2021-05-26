@@ -9,7 +9,11 @@ public class Projectile : MonoBehaviour
     protected GameObject prefabEffect;
     [SerializeField]
     protected float attackRange;
-
+    [SerializeField]
+    protected bool isComBack;
+    [SerializeField]
+    protected bool isMove;
+    
     protected int cnt;
     protected int flag;
     protected int dir;
@@ -18,13 +22,11 @@ public class Projectile : MonoBehaviour
     protected Animator animator;
     protected bool flip;
 
-    // Start is called before the first frame update
     private void Start()
     {
 
     }
 
-    // Update is called once per frame
     private void Update()
     {
 

@@ -47,11 +47,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     private void CompareMountItem()
     {
-        if (transform.parent.gameObject == inventory.transform.Find("Background"))
+        if (transform.parent.transform.parent == inventory.transform)
         {
-            if (inspector.transform.Find("Background").transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).childCount == 1)
+            if (inspector.GetComponent<Inspector>().ItemCount > 0)
             {
-                if (inspector.transform.Find("Background").transform.Find(slotItem.GetComponent<ItemStatus>().MountingPart).transform.Find("Slot(Clone)").GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().ItemGrade > slotItem.GetComponent<ItemStatus>().ItemGrade)
+                if (inspector.GetComponent<Inspector>().FindInInspector(this).SlotItem.GetComponent<ItemStatus>().ItemGrade < slotItem.GetComponent<ItemStatus>().ItemGrade)
                 {
                     if (!ui) ui = Instantiate(prefabUI, transform);
                 }
@@ -160,6 +160,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
         if (!exchanger) exchanger = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
         if (!selecter) selecter = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
+
         CompareMountItem();
     }
 }
