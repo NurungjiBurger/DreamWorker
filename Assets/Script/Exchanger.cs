@@ -55,7 +55,6 @@ public class Exchanger : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            Debug.Log("»èÁ¦");
             tmp = exchangeItemList[0];
             exchangeItemList.Remove(exchangeItemList[0]);
             Destroy(tmp.SlotItem.gameObject);
@@ -72,11 +71,13 @@ public class Exchanger : MonoBehaviour
             Instantiate(prefabItem[(averageGrade * 5) + Random.Range(0, 5)], new Vector3(player.transform.position.x + 1, player.transform.position.y + 1, 0), Quaternion.identity);
         }
 
-    }
 
-    public void RemoveExchanger()
-    {
-        
+        GameObject.Find("Canvas").transform.Find("Inventory").transform.Find("ExchangerButton").GetComponent<ButtonUI>().UIActive();
+        transform.gameObject.SetActive(false);
+
+        GameObject.Find("Canvas").transform.Find("InspectorButton").GetComponent<ButtonUI>().UIActive();
+        GameObject.Find("Canvas").transform.Find("InventoryButton").GetComponent<ButtonUI>().UIActive();
+
     }
     
     public void DiscardToExchanger()
@@ -96,14 +97,11 @@ public class Exchanger : MonoBehaviour
 
     public void AddToExchanger(Slot slot)
     {
-        if (exchangeItemList.Count < 4)
-        {
-            exchangeItemList.Add(slot);
+        exchangeItemList.Add(slot);
 
-            slot.transform.SetParent(transform.Find("Background").transform);
-            slot.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
-            slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
-        }
+        slot.transform.SetParent(transform.Find("Background").transform);
+        slot.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
+        slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
     }
 
     // Start is called before the first frame update
@@ -124,8 +122,5 @@ public class Exchanger : MonoBehaviour
 
         if (exchangeItemList.Count == 0) transform.Find("ButtonBackground").transform.Find("ExchangeButton").gameObject.SetActive(false);
         else transform.Find("ButtonBackground").transform.Find("ExchangeButton").gameObject.SetActive(true);
-
-        if (exchangeItemList.Count == 4) transform.Find("ButtonBackground").transform.Find("ChangeableButton").gameObject.SetActive(false);
-        else transform.Find("ButtonBackground").transform.Find("ChangeableButton").gameObject.SetActive(true);
     }
 }

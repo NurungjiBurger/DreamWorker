@@ -8,7 +8,7 @@ public class Portal : MonoBehaviour
 
     private void checkdelete()
     {
-        if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().GetGoNext())
+        if(player.GetComponent<PlayerMovement>().GetGoNext())
         {
             Destroy(gameObject);
         }
@@ -23,6 +23,8 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!player) player = GameObject.FindGameObjectWithTag("Player").gameObject;
+
         checkdelete();
     }
 
