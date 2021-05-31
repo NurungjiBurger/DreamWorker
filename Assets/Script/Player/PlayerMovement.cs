@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
 
-
     public bool GetGoNext()
     {
         return isGoNext;
@@ -63,10 +62,9 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("move", true);
         }
         // ∆˜≈ªªÛ»£¿€øÎ?
-        if (Input.GetKey(KeyCode.UpArrow) && GetComponent<PlayerSensor>().Portal)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && GetComponent<PlayerSensor>().Portal)
         {
-            dir = Direction.Up;
-            animator.SetBool("move", true);
+            transform.position = GetComponent<PlayerSensor>().TeleportPosition;
         }
         // ¡°«¡
         if (Input.GetKeyDown(jump) && GetComponent<PlayerSensor>().Ground)
@@ -79,10 +77,9 @@ public class PlayerMovement : MonoBehaviour
             dashing = true;
         }
         // ∏ÿ√„
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             dir = Direction.Stop;
-            isGoNext = false;
         }
     }
 
@@ -99,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
                 break;
             case Direction.Up:
-                isGoNext = true;
+                //transform.position = GetComponent<PlayerSensor>().TeleportPosition;
                 break;
             case Direction.Stop:
             default:

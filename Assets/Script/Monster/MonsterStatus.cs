@@ -66,8 +66,8 @@ public class MonsterStatus : Status
 
         if (GetComponent<MonsterStatus>().Boss)
         {
-            hpBar.transform.position = new Vector3(transform.position.x + 200.0f, transform.position.y + 202.5f, transform.position.z);
-            hpBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            hpBar.transform.position = new Vector3(canvas.transform.position.x, canvas.transform.position.y + 85, transform.position.z);
+            hpBar.transform.localScale = new Vector3(2.0f, 1.5f, 1.5f);
         }
     }
 

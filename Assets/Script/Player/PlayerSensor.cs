@@ -16,10 +16,12 @@ public class PlayerSensor : MonoBehaviour
     private bool isPortal = false;
     private bool isHit = false;
     private bool onOff = false;
+    private Vector3 teleportPosition;
 
     public bool Ground { get { return isGround; } }
     public bool Portal { get { return isPortal; } }
     public Collider2D LastColliderGround { get { return lastColliderGround; } }
+    public Vector3 TeleportPosition { get { return teleportPosition; } }
 
     // 트리거 충돌
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,25 +68,27 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            if (collision.CompareTag("Portal")) isPortal = true;
+            if (collision.CompareTag("Portal"))
             {
-                if (collision.CompareTag("Monster"))
+                teleportPosition = collision.GetComponent<Portal>().ConnectPosition;
+                isPortal = true;
+            }
+            if (collision.CompareTag("Monster"))
+            {
+                if (!isHit) // 피격이 가능한 상태라면
                 {
-                    if (!isHit) // 피격이 가능한 상태라면
-                    {
-                        isHit = true;
-                        hitTimer.TimerSetZero();
-                        onOff = true;
-                    }
+                    isHit = true;
+                    hitTimer.TimerSetZero();
+                    onOff = true;
                 }
-                if (collision.CompareTag("Monster_attack_judgement"))
+            }
+            if (collision.CompareTag("Monster_attack_judgement"))
+            {
+                if (!isHit) // 피격이 가능한 상태라면
                 {
-                    if (!isHit) // 피격이 가능한 상태라면
-                    {
-                        isHit = true;
-                        hitTimer.TimerSetZero();
-                        onOff = true;
-                    }
+                    isHit = true;
+                    hitTimer.TimerSetZero();
+                    onOff = true;
                 }
             }
         }

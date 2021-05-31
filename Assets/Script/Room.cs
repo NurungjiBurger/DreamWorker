@@ -18,52 +18,95 @@ public class Room : MonoBehaviour
     private GameController gameController;
 
     private GameObject[] monsters;
-    private GameObject[] portals;
+
+    private List<GameObject> portals = new List<GameObject>();
 
     //
     private int population;
-    private int counter;
-    private int gx, gy, maxgy;
-    private int mx, my;
+    private float mx, my;
 
     // 스테이지 번호 1-1
     private int roomNumber;
 
     // 상태
+    private bool visible = false;
     private bool isClear;
     private bool subStageEntrance;
     private bool monsterPresence;
     private bool portalPresence;
 
-    void ManagePortal()  // 포탈 관리
+    public bool Visible { get { return visible; } }
+
+    public void DestoryAll()
     {
-        portals = GameObject.FindGameObjectsWithTag("Portal");
-        if (portals.Length == 0) portalPresence = false;
-        else portalPresence = true;
+        GameObject tmp;
+        int cnt = portals.Count;
+        for (int i = 0; i < cnt; i++)
+        {
+            tmp = portals[0];
+            portals.Remove(portals[0]);
+            Destroy(tmp);
+        }
     }
-    void CreatePortal()
+
+    public void AllocateRoomNumber(int num)
+    {
+        roomNumber = num;
+    }
+
+    public GameObject CreatePortal(int direction, bool value)
+    {
+        GameObject portal;
+
+        if (value) portal = Instantiate(prefabPortal[1]);
+        else portal = Instantiate(prefabPortal[0]);
+
+        switch(direction)
+        {
+            case 0: // 동
+                portal.transform.position = new Vector3(transform.position.x + 10.0f, transform.position.y, transform.position.z);
+                break;
+            case 1: // 서
+                portal.transform.position = new Vector3(transform.position.x - 10.0f, transform.position.y, transform.position.z);
+                break;
+            case 2: // 남
+                portal.transform.position = new Vector3(transform.position.x, transform.position.y - 6.0f, transform.position.z);
+                break;
+            case 3: // 북
+                portal.transform.position = new Vector3(transform.position.x, transform.position.y + 6.0f, transform.position.z);
+                break;
+            default:
+                break;
+        } // -60 , 0
+
+        portals.Add(portal);
+
+        return portal;
+    }
+
+    private void ManagePortals() // 몬스터 관리
+    {
+        bool value;
+
+        if (GameObject.FindGameObjectsWithTag("Monster").Length == 0) value = true;
+        else value = false;
+
+        for (int i = 0; i < portals.Count; i++) portals[i].SetActive(value);
+    }
+
+    private void CreateMonster(GameObject prefab, float x, float y)    // 몬스터 생성 함수
+    {
+        Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
+    }
+
+    private void CreateMapTile() // 맵 생성 함수
     {
 
     }
-    void ManageMonster() // 몬스터 관리
-    {
-        monsters = GameObject.FindGameObjectsWithTag("Monster");
-        if (monsters.Length == 0) monsterPresence = false;
-        else monsterPresence = true;
-    }
-    void CreateMonster(GameObject prefab, float x, float y)    // 몬스터 생성 함수
-    {
-        Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
-    }
-    void CreateMapTile() // 맵 생성 함수
-    {
 
-    }
-
-    void CreateStage()    // 스테이지 생성 함수
+    private void CreateStage()    // 스테이지 생성 함수
     {
         CreateMapTile();
-        maxgy = 0;// 최대 높이 가져오기
 
         if (roomNumber != 0) // 부스테이지 번호가 0 일 경우 몬스터가 없는 스테이지.
         {
@@ -73,20 +116,19 @@ public class Room : MonoBehaviour
             {
                 int type;
                 type = Random.Range((gameController.StageNumber - 1) * 4, (gameController.StageNumber * 4) - 1);
-                mx = Random.Range(-5, 5);
-                my = Random.Range(-4, maxgy);
+                mx = Random.Range(transform.position.x - 5, transform.position.x + 5);
+                my = Random.Range(transform.position.y - 4, transform.position.y + 4);
                 type = 0;
-                CreateMonster(prefabMonster[type], (float)mx, (float)my);    // 랜덤 좌표에 몬스터 생성
+                Debug.Log(mx + "  " + my);
+                CreateMonster(prefabMonster[type], mx, my);    // 랜덤 좌표에 몬스터 생성
             }
         }
     }
-    void CreateBossStage()    // 보스맵 생성
+    private void CreateBossStage()    // 보스맵 생성
     {
         Debug.Log("보스전");
         CreateMapTile();
-        CreateMonster(prefabBossMonster[0], 0, 0);
-        Instantiate(prefabPortal[0], new Vector3(0, -2.9f, 0), Quaternion.identity);  // 기본 포탈 생성
-        ManagePortal();
+        CreateMonster(prefabBossMonster[0], transform.position.x, transform.position.y);
     }
 
     void Start()
@@ -98,11 +140,6 @@ public class Room : MonoBehaviour
 
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
-        for (int i=0;i<gameController.Room.Count;i++)
-        {
-            if (gameController.Room[i] == transform.gameObject) roomNumber = i;
-        }
-
         subStageEntrance = false; // 부스테이지에 처음 들어왔는가?
         monsterPresence = false;// 몬스터가 존재하는가?
         portalPresence = false; // 포탈이 존재하는가?
@@ -112,49 +149,41 @@ public class Room : MonoBehaviour
 
     void Update()
     {
-        ManageMonster();
-        ManagePortal();
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
+        ManagePortals();
         
-        if (isClear)
+        if (player.transform.position.x <= transform.position.x + 11.0f && player.transform.position.x >= transform.position.x - 11.0f)
         {
-            if (!subStageEntrance) // 부스테이지 최초 입장
+            if (player.transform.position.y <= transform.position.y + 7.5f && player.transform.position.y >= transform.position.y - 7.5f)
             {
-                subStageEntrance = true;
+                if (!isClear)
+                {
+                    if (!subStageEntrance) // 부스테이지 최초 입장
+                    {
+                        visible = true;
+                        subStageEntrance = true;
 
-                if (roomNumber != 0 && roomNumber == gameController.StageNumber) // 보스포탈을 타고 넘어왔다면.
-                {
-                    CreateBossStage(); // 보스맵 생성
+                        Debug.Log(gameController.SubStageNumber);
+                        if (roomNumber != 0 && roomNumber == gameController.SubStageNumber) // 보스포탈을 타고 넘어왔다면.
+                        {
+                            CreateBossStage(); // 보스맵 생성
+                        }
+                        else CreateStage(); // 그렇지 않으면 일반맵 생성
+                    }
+                    else    // 게임 진행중 
+                    {
+                        if (!monsterPresence) // 몬스터가 맵에 존재하지 않는다면
+                        {
+                            isClear = true;
+                        }
+                    }
                 }
-                else CreateStage(); // 그렇지 않으면 일반맵 생성
-            }
-            else    // 게임 진행중 
-            {
-                //Debug.Log(stageNumber + " - " + subStageNumber + " / " + counter);
-                if (!monsterPresence) // 몬스터가 맵에 존재하지 않는다면
+                else
                 {
-                    if (!portalPresence) CreatePortal(); // 몬스터가 다 죽었으니 포탈을 만들어
-                    else isClear = true;
-                }
-            }
-        }
-        else
-        {
-            /*
-            if (!portalPresence) // 포탈과 상호작용해서 없애버리면
-            {
-                
 
-                if (counter == subStageNumber) // 보스맵이었으면 다음스테이지로 가야지
-                {
-                    Debug.Log("다음스테이지로!");
-                    stageEntrance = false;
-                    subStageEntrance = false;
-                    stageNumber++;
-                    subStageNumber = 0;
                 }
             }
-            */
         }
     }
 }

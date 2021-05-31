@@ -12,11 +12,10 @@ public class GameController : MonoBehaviour
     private GameObject prefabRoom;
     private GameObject player;
 
-    private bool isPause;
+    private bool isPause = false;
     private bool goNext;
 
     private int pastSelectDirection;
-    private int pastSelectNumber;
 
     private int subStageNumber;
     private int stageNumber;
@@ -31,7 +30,21 @@ public class GameController : MonoBehaviour
     public bool IsPause { get { return isPause; } }
     public bool GoNext { get { return goNext; } }
     public int StageNumber { get { return stageNumber; } }
+    public int SubStageNumber { get { return subStageNumber; } }
     public List<GameObject> Room { get { return room; } }
+
+    private void DestroyAll()
+    {
+        GameObject tmp;
+        int cnt = Room.Count;
+        for(int i=0;i<cnt;i++)
+        {
+            tmp = Room[0];
+            Room.Remove(Room[0]);
+            tmp.GetComponent<Room>().DestoryAll();
+            Destroy(tmp);
+        }
+    }
 
     private void CreateRoom(int cnt)
     {
@@ -42,8 +55,8 @@ public class GameController : MonoBehaviour
         else
         {
             pastSelectDirection = 0;
-            pastSelectNumber = 0;
             Room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
+            Room[0].GetComponent<Room>().AllocateRoomNumber(0);
             return;
         }
 
@@ -57,7 +70,6 @@ public class GameController : MonoBehaviour
         {
             create = true;
             int number = Random.Range(0, Room.Count);
-            if (Random.Range(0, 2) == 0) number = pastSelectNumber;
             selectRoom = Room[number];
             Vector3 position = selectRoom.transform.position;
 
@@ -86,20 +98,31 @@ public class GameController : MonoBehaviour
 
             if (create)
             {
-                // 선택된 방과 생성된 방을 이어주는 포탈 생성
-                pastSelectNumber = number;
-                Debug.Log(number + " " + direction);
                 Room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
+                Room[Room.Count - 1].GetComponent<Room>().AllocateRoomNumber(Room.Count - 1);
+
+                GameObject first, second;
+                bool value;
+
+                if (Room.Count - 1 < subStageNumber) value = false;
+                else value = true;
+
+                first = selectRoom.GetComponent<Room>().CreatePortal(direction, value);
+                if (direction % 2 == 0) direction += 1;
+                else direction -= 1;
+                second = Room[Room.Count - 1].GetComponent<Room>().CreatePortal(direction, value);
+
+                first.GetComponent<Portal>().PositionSave(second.GetComponent<Portal>());
+                second.GetComponent<Portal>().PositionSave(first.GetComponent<Portal>());
+
                 complete = true;
             }
         }
     }
 
-    void GoNextStage()
+    private bool CheckRoom(string str)
     {
-        stageEntrance = false;
-        stageNumber++;
-        subStageNumber = 0;
+        return true;
     }
 
     void Start()
@@ -119,9 +142,6 @@ public class GameController : MonoBehaviour
 
 
         textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-
-        // Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(5, -4.2f, 0));
-        // hpBar.transform.position = _hpBarPos;
     }
 
     void Update()
@@ -142,26 +162,16 @@ public class GameController : MonoBehaviour
             if (!stageEntrance) // 처음 스테이지에 입장
             {
                 stageEntrance = true;
-                // 룸 생성
+
                 subStageNumber = Random.Range(10, 16);
                 //subStageNumber = 3;
 
-                Debug.Log("서브스테이지넘버 : " + subStageNumber);
-
                 CreateRoom(subStageNumber);
-
-                /*
-                room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
-                room.Add(Instantiate(prefabRoom, new Vector3(-30, 0, 0), Quaternion.identity));
-                room.Add(Instantiate(prefabRoom, new Vector3(30, 0, 0), Quaternion.identity));
-
                 
-                for(int i=0;i<subStageNumber;i++)
-                {
-                    Instantiate(prefabRoom, )
-                }
-                */
-                
+            }
+            else
+            {
+                CheckRoom("visible");
             }
         }
                 /*
