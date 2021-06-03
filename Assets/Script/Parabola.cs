@@ -59,8 +59,7 @@ public class Parabola : MonoBehaviour
             //isarrived = true;
             GetComponent<Collider2D>().isTrigger = false;
             isGround = true;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            GetComponent<Collider2D>().isTrigger = true;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
     }

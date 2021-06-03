@@ -27,12 +27,6 @@ public class MonsterSensor : MonoBehaviour
                 if (!GetComponent<MonsterStatus>().Boss) animator.SetTrigger("hit");
                 GetComponent<MonsterStatus>().NowHP = GetComponent<MonsterStatus>().NowHP - player.GetComponent<PlayerStatus>().Damage;
             }
-            if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
-            {
-                lastColliderGround = collision;
-                GetComponent<Collider2D>().isTrigger = false;
-                isGround = true;
-            }
             if (collision.CompareTag("Wall"))
             {
                 GetComponent<Collider2D>().isTrigger = false;
@@ -45,7 +39,14 @@ public class MonsterSensor : MonoBehaviour
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
             if (collision.CompareTag("Player")) isPlayer = true;
+            if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                lastColliderGround = collision;
+                GetComponent<Collider2D>().isTrigger = false;
+                isGround = true;
+            }
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -53,6 +54,7 @@ public class MonsterSensor : MonoBehaviour
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
             if (collision.CompareTag("Player")) isPlayer = false;
+            if (collision.CompareTag("Ground")) isGround = false;
         }
     }
 

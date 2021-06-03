@@ -64,16 +64,16 @@ public class Room : MonoBehaviour
         switch(direction)
         {
             case 0: // 동
-                portal.transform.position = new Vector3(transform.position.x + 10.0f, transform.position.y, transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x + 10.5f, transform.position.y , transform.position.z);
                 break;
             case 1: // 서
-                portal.transform.position = new Vector3(transform.position.x - 10.0f, transform.position.y, transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x - 10.5f, transform.position.y + 1.0f , transform.position.z);
                 break;
             case 2: // 남
-                portal.transform.position = new Vector3(transform.position.x, transform.position.y - 6.0f, transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x, transform.position.y - 5.5f, transform.position.z);
                 break;
             case 3: // 북
-                portal.transform.position = new Vector3(transform.position.x, transform.position.y + 6.0f, transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x, transform.position.y + 7.6f, transform.position.z);
                 break;
             default:
                 break;
@@ -164,7 +164,6 @@ public class Room : MonoBehaviour
                         visible = true;
                         subStageEntrance = true;
 
-                        Debug.Log(gameController.SubStageNumber);
                         if (roomNumber != 0 && roomNumber == gameController.SubStageNumber) // 보스포탈을 타고 넘어왔다면.
                         {
                             CreateBossStage(); // 보스맵 생성

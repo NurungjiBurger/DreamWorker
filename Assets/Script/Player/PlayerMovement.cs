@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumping)
         {
             jumping = false;
+            GetComponent<Collider2D>().isTrigger = true;
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
         }
         if (dashing)

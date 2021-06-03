@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     private GameObject[] prefabCharacter;
     [SerializeField]
     private GameObject prefabRoom;
+    [SerializeField]
+    private GameObject[] prefabMapDesign;
     private GameObject player;
 
     private bool isPause = false;
@@ -25,6 +27,7 @@ public class GameController : MonoBehaviour
     private Image nowHPBar;
     private TextMeshProUGUI textHp;
 
+    private List<GameObject> map = new List<GameObject>();
     private List<GameObject> room = new List<GameObject>();
 
     public bool IsPause { get { return isPause; } }
@@ -32,6 +35,7 @@ public class GameController : MonoBehaviour
     public int StageNumber { get { return stageNumber; } }
     public int SubStageNumber { get { return subStageNumber; } }
     public List<GameObject> Room { get { return room; } }
+    public List<GameObject> Map { get { return map; } }
 
     private void DestroyAll()
     {
@@ -56,6 +60,8 @@ public class GameController : MonoBehaviour
         {
             pastSelectDirection = 0;
             Room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
+            map.Add(Instantiate(prefabMapDesign[Random.Range(0,prefabMapDesign.Length)], new Vector3(0, 0, 0), Quaternion.identity));
+            map[0].transform.SetParent(GameObject.Find("Grid").transform);
             Room[0].GetComponent<Room>().AllocateRoomNumber(0);
             return;
         }
@@ -99,6 +105,9 @@ public class GameController : MonoBehaviour
             if (create)
             {
                 Room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
+                if (cnt == SubStageNumber) map.Add(Instantiate(prefabMapDesign[prefabMapDesign.Length-1], position, Quaternion.identity));
+                else map.Add(Instantiate(prefabMapDesign[Random.Range(0, prefabMapDesign.Length)], position, Quaternion.identity));
+                map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
                 Room[Room.Count - 1].GetComponent<Room>().AllocateRoomNumber(Room.Count - 1);
 
                 GameObject first, second;

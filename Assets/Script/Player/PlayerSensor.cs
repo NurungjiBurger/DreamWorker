@@ -28,13 +28,6 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
-            {
-                lastColliderGround = collision;
-                GetComponent<Collider2D>().isTrigger = false;
-                isGround = true;
-            }
-
             if (collision.CompareTag("Wall"))
             {
                 GetComponent<Collider2D>().isTrigger = false;
@@ -68,6 +61,13 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
+
+            if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                lastColliderGround = collision;
+                GetComponent<Collider2D>().isTrigger = false;
+                isGround = true;
+            }
             if (collision.CompareTag("Portal"))
             {
                 teleportPosition = collision.GetComponent<Portal>().ConnectPosition;
@@ -99,6 +99,7 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
+            if (collision.CompareTag("Ground")) isGround = false;
             if (collision.CompareTag("Portal")) isPortal = false;
             if (collision.CompareTag("Monster"))
             {
@@ -163,7 +164,6 @@ public class PlayerSensor : MonoBehaviour
         {
             if (collision.collider.CompareTag("Ground"))
             {
-                GetComponent<Collider2D>().isTrigger = true;
                 isGround = false;
             }
         }
@@ -182,6 +182,8 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
+            if (GetComponent<Rigidbody2D>().velocity.y < 0) GetComponent<Collider2D>().isTrigger = false;
+
             if (onOff)
             {
                 isHit = !hitTimer.CooldownCheck();
