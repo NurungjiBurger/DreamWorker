@@ -162,10 +162,7 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            if (collision.collider.CompareTag("Ground"))
-            {
-                isGround = false;
-            }
+
         }
     }
 

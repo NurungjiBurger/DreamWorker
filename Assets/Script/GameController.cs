@@ -59,10 +59,11 @@ public class GameController : MonoBehaviour
         else
         {
             pastSelectDirection = 0;
-            Room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
+            room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
+            room[0].GetComponent<Room>().AllocateRoomNumber(0);
             map.Add(Instantiate(prefabMapDesign[Random.Range(0,prefabMapDesign.Length)], new Vector3(0, 0, 0), Quaternion.identity));
             map[0].transform.SetParent(GameObject.Find("Grid").transform);
-            Room[0].GetComponent<Room>().AllocateRoomNumber(0);
+            map[0].GetComponent<Map>().Room = room[0];
             return;
         }
 
@@ -97,23 +98,24 @@ public class GameController : MonoBehaviour
                     break;
             }
 
-            for (int i=0;i<Room.Count;i++)
+            for (int i=0;i<room.Count;i++)
             {
-                if (Room[i].transform.position == position) create = false;
+                if (room[i].transform.position == position) create = false;
             }
 
             if (create)
             {
-                Room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
+                room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
+                room[room.Count - 1].GetComponent<Room>().AllocateRoomNumber(Room.Count - 1);
                 if (cnt == SubStageNumber) map.Add(Instantiate(prefabMapDesign[prefabMapDesign.Length-1], position, Quaternion.identity));
                 else map.Add(Instantiate(prefabMapDesign[Random.Range(0, prefabMapDesign.Length)], position, Quaternion.identity));
                 map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
-                Room[Room.Count - 1].GetComponent<Room>().AllocateRoomNumber(Room.Count - 1);
+                map[map.Count - 1].GetComponent<Map>().Room = room[room.Count - 1];
 
                 GameObject first, second;
                 bool value;
 
-                if (Room.Count - 1 < subStageNumber) value = false;
+                if (room.Count - 1 < subStageNumber) value = false;
                 else value = true;
 
                 first = selectRoom.GetComponent<Room>().CreatePortal(direction, value);
@@ -173,7 +175,7 @@ public class GameController : MonoBehaviour
                 stageEntrance = true;
 
                 subStageNumber = Random.Range(10, 16);
-                //subStageNumber = 3;
+                //subStageNumber = 0;
 
                 CreateRoom(subStageNumber);
                 

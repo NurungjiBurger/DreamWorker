@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1467930918842930969}
   - component: {fileID: 3536687271315965350}
   - component: {fileID: 8179473778971907661}
+  - component: {fileID: 6711350439423730637}
   m_Layer: 0
   m_Name: GreenMap_3
   m_TagString: Ground
@@ -2817,3 +2818,15 @@ CompositeCollider2D:
       - {x: -7.9999704, y: -0.6041666}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &6711350439423730637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6644775184080612190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0356f58e3e6860b4ba2d27f6b837d109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
