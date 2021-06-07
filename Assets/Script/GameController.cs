@@ -62,7 +62,6 @@ public class GameController : MonoBehaviour
             room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
             room[0].GetComponent<Room>().AllocateRoomNumber(0);
             map.Add(Instantiate(prefabMapDesign[Random.Range(0,prefabMapDesign.Length)], new Vector3(0, 0, 0), Quaternion.identity));
-            map[0].transform.SetParent(GameObject.Find("Grid").transform);
             map[0].GetComponent<Map>().Room = room[0];
             return;
         }
@@ -109,7 +108,6 @@ public class GameController : MonoBehaviour
                 room[room.Count - 1].GetComponent<Room>().AllocateRoomNumber(Room.Count - 1);
                 if (cnt == SubStageNumber) map.Add(Instantiate(prefabMapDesign[prefabMapDesign.Length-1], position, Quaternion.identity));
                 else map.Add(Instantiate(prefabMapDesign[Random.Range(0, prefabMapDesign.Length)], position, Quaternion.identity));
-                map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
                 map[map.Count - 1].GetComponent<Map>().Room = room[room.Count - 1];
 
                 GameObject first, second;
@@ -155,9 +153,13 @@ public class GameController : MonoBehaviour
         textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         
+    }
+
+    void Update()
+    {
         textHp.text = player.GetComponent<PlayerStatus>().NowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().MaxHP.ToString();
         // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
 
@@ -178,14 +180,13 @@ public class GameController : MonoBehaviour
                 //subStageNumber = 0;
 
                 CreateRoom(subStageNumber);
-                
             }
             else
             {
                 CheckRoom("visible");
             }
         }
-                /*
+        /*
                // CreateMonster(prefabBossMonster[1], 0, 0);
                 if (stageNumber != 0)
                 {
@@ -196,9 +197,10 @@ public class GameController : MonoBehaviour
             }
             else
             {
-               
+
             }
-        }
-        */
+            }
+            */
+
     }
 }

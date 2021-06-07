@@ -22,6 +22,9 @@ public class Room : MonoBehaviour
 
     private List<GameObject> portals = new List<GameObject>();
 
+    private GameObject tester;
+    private bool done = false;
+
     //
     private int population;
     private float mx, my;
@@ -65,38 +68,29 @@ public class Room : MonoBehaviour
         if (value) portal = Instantiate(prefabPortal[1]);
         else portal = Instantiate(prefabPortal[0]);
 
+        List<float> range = map.GetComponent<Map>().SafePortalPosition;
+
         switch(direction)
         {
             case 0: // 동
-                portal.transform.position = new Vector3(transform.position.x + 10.5f, transform.position.y , transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x + Random.Range(range[0], range[1]), transform.position.y + Random.Range(range[2], range[3]), transform.position.z);
                 break;
             case 1: // 서
-                portal.transform.position = new Vector3(transform.position.x - 10.5f, transform.position.y + 1.0f , transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x + Random.Range(range[4], range[5]), transform.position.y + Random.Range(range[6], range[7]), transform.position.z);
                 break;
             case 2: // 남
-                portal.transform.position = new Vector3(transform.position.x, transform.position.y - 5.5f, transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x + Random.Range(range[8], range[9]), transform.position.y + Random.Range(range[10], range[11]), transform.position.z);
                 break;
             case 3: // 북
-                portal.transform.position = new Vector3(transform.position.x, transform.position.y + 7.6f, transform.position.z);
+                portal.transform.position = new Vector3(transform.position.x + Random.Range(range[12], range[13]), transform.position.y + Random.Range(range[14], range[15]), transform.position.z);
                 break;
             default:
                 break;
         } // -60 , 0
 
-        /*
-        Vector3 origin = portal.transform.position;
-        float distance = Vector3.Distance(origin, map.GetComponent<Map>().SafePosition[0]);
-        portal.transform.position = map.GetComponent<Map>().SafePosition[0];
 
-        for(int i=0;i<map.GetComponent<Map>().SafePosition.Count;i++)
-        {
-            if (distance > Vector3.Distance(origin, map.GetComponent<Map>().SafePosition[i]))
-            {
-                distance = Vector3.Distance(origin, map.GetComponent<Map>().SafePosition[i]);
-                portal.transform.position = map.GetComponent<Map>().SafePosition[i];
-            }
-        }
-        */
+
+
         portals.Add(portal);
 
         return portal;
@@ -135,7 +129,7 @@ public class Room : MonoBehaviour
                 int type;
                 Vector3 safePosition;
                 type = Random.Range((gameController.StageNumber - 1) * 4, (gameController.StageNumber * 4) - 1);
-                safePosition = map.GetComponent<Map>().SafePosition[Random.Range(0, map.GetComponent<Map>().SafePosition.Count)];
+                safePosition = map.GetComponent<Map>().SafeMonsterPosition[Random.Range(0, map.GetComponent<Map>().SafeMonsterPosition.Count)];
                 type = 0;
                 CreateMonster(prefabMonster[type], safePosition);    // 랜덤 좌표에 몬스터 생성
             }
@@ -166,37 +160,30 @@ public class Room : MonoBehaviour
     {
         if (player && map)
         {
-            if (map.GetComponent<Map>().SafePosition.Count != 0)
+            if (player.transform.position.x <= transform.position.x + 11.0f && player.transform.position.x >= transform.position.x - 11.0f)
             {
-                if (player.transform.position.x <= transform.position.x + 11.0f && player.transform.position.x >= transform.position.x - 11.0f)
+                if (player.transform.position.y <= transform.position.y + 7.5f && player.transform.position.y >= transform.position.y - 7.5f)
                 {
-                    if (player.transform.position.y <= transform.position.y + 7.5f && player.transform.position.y >= transform.position.y - 7.5f)
+                    if (!isClear)
                     {
-                        if (!isClear)
+                        if (!subStageEntrance) // 부스테이지 최초 입장
                         {
-                            if (!subStageEntrance) // 부스테이지 최초 입장
-                            {
-                                visible = true;
-                                subStageEntrance = true;
+                            visible = true;
+                            subStageEntrance = true;
 
-                                if (roomNumber != 0 && roomNumber == gameController.SubStageNumber) // 보스포탈을 타고 넘어왔다면.
-                                {
-                                    CreateBossStage(); // 보스맵 생성
-                                }
-                                else CreateStage(); // 그렇지 않으면 일반맵 생성
-                            }
-                            else    // 게임 진행중 
+                            if (roomNumber != 0 && roomNumber == gameController.SubStageNumber) // 보스포탈을 타고 넘어왔다면.
                             {
-                                if (!monsterPresence) // 몬스터가 맵에 존재하지 않는다면
-                                {
-                                    isClear = true;
-                                }
+                                CreateBossStage(); // 보스맵 생성
                             }
+                            else CreateStage(); // 그렇지 않으면 일반맵 생성
                         }
-                        else
+                        else    // 게임 진행중 
                         {
-
-                        }
+                            if (!monsterPresence) // 몬스터가 맵에 존재하지 않는다면
+                            {
+                                isClear = true;
+                            }
+                        }                
                     }
                 }
             }

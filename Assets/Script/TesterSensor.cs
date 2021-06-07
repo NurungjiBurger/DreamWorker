@@ -6,29 +6,24 @@ public class TesterSensor : MonoBehaviour
 {
 
     private bool positionSave;
+    public bool test = false;
 
     public bool PositionSave { get { return positionSave; } set { positionSave = value; } }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Item"))
+        if (collision.CompareTag("Ground"))
         {
-
-        }
-        else
-        {
+            // if(test) Debug.Log(transform.position + "  Stay");
             positionSave = false;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Item"))
+        if (collision.CompareTag("Ground"))
         {
-
-        }
-        else
-        {
+           // if(test) Debug.Log(transform.position + "  Stay");
             positionSave = false;
         }
     }

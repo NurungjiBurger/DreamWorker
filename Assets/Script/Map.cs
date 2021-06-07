@@ -8,16 +8,27 @@ public class Map : MonoBehaviour
 {
     private GameObject room;
     [SerializeField]
-    private List<Vector3> position = new List<Vector3>();
+    private List<Vector3> monsterPosition = new List<Vector3>();
+    [SerializeField]
+    private List<float> portalPosition = new List<float>();
+    /*
+    [SerializeField]
+    private List<Vector3> portalPosition = new List<Vector3>();
+    */
+    // 0 ~ 3 right
+    // 4 ~ 7 left
+    // 8 ~ 11 up
+    // 12 ~ 15 down
 
     private GameObject tester;
     private bool done = false;
 
     public bool Done { get { return done; } }
     public GameObject Room { set { room = value; } }
-    public List<Vector3> SafePosition { get { return position; } }
+    public List<Vector3> SafeMonsterPosition { get { return monsterPosition; } }
+    public List<float> SafePortalPosition { get { return portalPosition; } }
 
-    private void FindSafePosition()
+    private void FindSafePosition(List<Vector3> position)
     {
         if (!tester.GetComponent<TesterSensor>().PositionSave)
         {
@@ -43,8 +54,10 @@ public class Map : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
+        transform.SetParent(GameObject.Find("Grid").transform);
+
         tester = new GameObject("Tester");
         tester.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         tester.AddComponent<BoxCollider2D>();
@@ -52,26 +65,38 @@ public class Map : MonoBehaviour
         tester.AddComponent<Rigidbody2D>();
         tester.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         tester.AddComponent<TesterSensor>();
+
+        Update();
+    }
+
+    private void Start()
+    {
+
     }
 
     private void FixedUpdate()
     {
-        if (room)
-        {
-            if (position.Count < 20)
-            {
-                FindSafePosition();
-            }
-            else
-            {
-                done = true;
-                Destroy(tester.gameObject);
-            }
-        }
+
     }
 
     private void Update()
     {
-        if (!room) room = GameObject.Find("GameController").GetComponent<GameController>().Room[transform.GetSiblingIndex()];
+        while (!done)
+        {
+            if (!room) room = GameObject.Find("GameController").GetComponent<GameController>().Room[transform.GetSiblingIndex()];
+            else
+            {
+                if (monsterPosition.Count < 20)
+                {
+                    FindSafePosition(monsterPosition);
+                }
+                else
+                {
+                    done = true;
+                    Destroy(tester.gameObject);
+                }
+            }
+        }
     }
+
 }
