@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 163630717448231875}
   - component: {fileID: 163630717448231874}
   m_Layer: 5
-  m_Name: GradeUP
+  m_Name: CompareArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2cbb48c47c8c97b45ae3606d9cc4c86f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f4a542ba6aa88e4bb3de7d30c904e45, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

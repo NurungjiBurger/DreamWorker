@@ -101,9 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 20
   power: 10
-  jumpPower: 0
+  jumpPower: 1
   moveSpeed: 0.9
-  attackSpeed: 0
+  attackSpeed: 1
   name: "\uC655\uC758\uBC95\uC0AC\uB85C\uBE0C"
   defenseCapability: 10
   prefabAttack: []

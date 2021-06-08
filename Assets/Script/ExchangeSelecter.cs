@@ -6,8 +6,11 @@ using TMPro;
 
 public class ExchangeSelecter : MonoBehaviour
 {
+    [SerializeField]
     private GameObject inventory;
+    [SerializeField]
     private GameObject inspector;
+    [SerializeField]
     private GameObject exchanger;
 
     private List<Slot> itemList = new List<Slot>();
@@ -93,7 +96,6 @@ public class ExchangeSelecter : MonoBehaviour
     {
         int size;
 
-        // exchanger
         size = exchanger.GetComponent<Exchanger>().ItemCount;
         for(int i = 0;i < size;i++)
         {
@@ -151,7 +153,7 @@ public class ExchangeSelecter : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()

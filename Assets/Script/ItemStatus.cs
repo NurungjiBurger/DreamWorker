@@ -28,6 +28,35 @@ public class ItemStatus : Status
     public bool IsMount { get { return isMount; } set { isMount = value; } }
     public string Occupation { get { return dedicatedOccupation; } }
 
+    private void CurseApply()
+    {
+        switch(MountingPart)
+        {
+            case "Head":
+                Debug.Log("체력 감소" + (1 - ((float)cursedRate / 100)).ToString());
+                maxHP = (int)((1.0f - ((float)cursedRate / 100)) * (float)maxHP);
+                break;
+            case "Hand":
+                Debug.Log("공격속도 감소" + (1 - ((float)cursedRate / 100)).ToString());
+                attackSpeed = (1.0f - ((float)cursedRate / 100)) * attackSpeed;
+                break;
+            case "Foot":
+                Debug.Log("이동속도 감소" + (1 - ((float)cursedRate / 100)).ToString());
+                moveSpeed = (1.0f - ((float)cursedRate / 100)) * moveSpeed;
+                break;
+            case "Body":
+                Debug.Log("점프력 감소" + (1 - ((float)cursedRate / 100)).ToString());
+                jumpPower = (1.0f - ((float)cursedRate / 100)) * jumpPower;
+                break;
+            case "Weapon":
+                Debug.Log("공격력 감소" + (1 - ((float)cursedRate / 100)).ToString());
+                power = (int)((1.0f - ((float)cursedRate / 100)) * (float)power);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void StatUP()
     {
         maxHP = (int)(maxHP * 1.5f);
@@ -54,7 +83,9 @@ public class ItemStatus : Status
 
         if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) StatUP();
 
-        cursedRate = Random.Range(0, 70); // 저주율 수치 조정 필요
+        cursedRate = Random.Range(0, 50); // 저주율 수치 조정 필요
+
+        CurseApply();
     }
 
     private void Update()

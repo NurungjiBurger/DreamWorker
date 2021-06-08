@@ -97,8 +97,7 @@ public class PlayerSensor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
-        {
+
             if (collision.CompareTag("Ground")) isGround = false;
             if (collision.CompareTag("Portal")) isPortal = false;
             if (collision.CompareTag("Monster"))
@@ -106,7 +105,7 @@ public class PlayerSensor : MonoBehaviour
                 GetComponent<Collider2D>().isTrigger = false;
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             }
-        }
+        
     }
 
     // 콜리젼 충돌
