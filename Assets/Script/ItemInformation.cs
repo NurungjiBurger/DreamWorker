@@ -55,7 +55,7 @@ public class ItemInformation : MonoBehaviour
 
     private void CompareToInspector(string str, GameObject delta)
     {
-        Color blue = new Color(0 / 255f, 0 / 255f, 255 / 255f);
+        Color blue = new Color(0 / 255f, 150 / 255f, 255 / 255f);
         Color red = new Color(255 / 255f, 0 / 255f, 0 / 255f);
         Color green = new Color(0 / 255f, 255 / 255f, 0 / 255f);
 
@@ -82,161 +82,353 @@ public class ItemInformation : MonoBehaviour
             case "AttackSpeed":
                 if (exist)
                 {
-                    if (compare.AttackSpeed > now.AttackSpeed) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.AttackSpeed < now.AttackSpeed) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.AttackSpeed > now.AttackSpeed)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.AttackSpeed < now.AttackSpeed)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.AttackSpeed - compare.AttackSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.AttackSpeed - compare.AttackSpeed)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.AttackSpeed - compare.AttackSpeed).ToString();
+                    if (now.AttackSpeed - compare.AttackSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.AttackSpeed - compare.AttackSpeed)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.AttackSpeed - compare.AttackSpeed).ToString();
                 }
                 else
                 {
-                    if (now.AttackSpeed > 1) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.AttackSpeed < 1) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.AttackSpeed > 1)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.AttackSpeed < 1)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.AttackSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * now.AttackSpeed).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.AttackSpeed.ToString();
+                    if (now.AttackSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.AttackSpeed).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.AttackSpeed - 1).ToString();
                 }
                 break;
             case "CursedRate":
                 if (exist)
                 {
-                    if (compare.CursedRate > now.CursedRate) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.CursedRate < now.CursedRate) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.CursedRate > now.CursedRate)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.CursedRate < now.CursedRate)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.CursedRate - compare.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.CursedRate - compare.CursedRate)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.CursedRate - compare.CursedRate).ToString();
+                    if (now.CursedRate - compare.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.CursedRate - compare.CursedRate)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.CursedRate - compare.CursedRate).ToString();
                 }
                 else
                 {
-                    if (now.CursedRate > 0) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.CursedRate > 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.CursedRate < 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * now.CursedRate).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.CursedRate.ToString();
+                    if (now.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.CursedRate).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.CursedRate.ToString();
                 }
                 break;
             case "DefenseCapability":
                 if (exist)
                 {
-                    if (compare.Defense > now.Defense) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.Defense < now.Defense) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.Defense > now.Defense)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.Defense < now.Defense)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.Defense - compare.Defense < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.Defense - compare.Defense)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.Defense - compare.Defense).ToString();
+                    if (now.Defense - compare.Defense < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Defense - compare.Defense)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Defense - compare.Defense).ToString();
                 }
                 else
                 {
-                    if (now.Defense > 0) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.Defense < 0) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.Defense > 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.Defense < 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.Defense < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * now.Defense).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.Defense.ToString();
+                    if (now.Defense < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Defense).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.Defense.ToString();
                 }
                 break;
             case "Grade":
                 if (exist)
                 {
-                    if (compare.ItemGrade > now.ItemGrade) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.ItemGrade < now.ItemGrade) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.ItemGrade > now.ItemGrade)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.ItemGrade < now.ItemGrade)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.ItemGrade - compare.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.ItemGrade - compare.ItemGrade)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.ItemGrade - compare.ItemGrade).ToString();
+                    if (now.ItemGrade - compare.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.ItemGrade - compare.ItemGrade)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.ItemGrade - compare.ItemGrade).ToString();
                 }
                 else
                 {
-                    if (now.ItemGrade > 0) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.ItemGrade > 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.ItemGrade < 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text = now.ItemGrade.ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.ItemGrade.ToString();
+                    if (now.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += ( -1 * now.ItemGrade).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.ItemGrade.ToString();
                 }
                 break;
             case "HP":
                 if (exist)
                 {
-                    if (compare.MaxHP > now.MaxHP) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.MaxHP < now.MaxHP) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.MaxHP > now.MaxHP)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.MaxHP < now.MaxHP)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.MaxHP - compare.MaxHP < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.MaxHP - compare.MaxHP)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.MaxHP - compare.MaxHP).ToString();
+                    if (now.MaxHP - compare.MaxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.MaxHP - compare.MaxHP)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.MaxHP - compare.MaxHP).ToString();
                 }
                 else
                 {
-                    if (now.MaxHP > 0) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.MaxHP < 0) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.MaxHP > 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.MaxHP < 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.MaxHP < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * now.MaxHP).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.MaxHP.ToString();
+                    if (now.MaxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.MaxHP).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.MaxHP.ToString();
                 }
                 break;
             case "Jump":
                 if (exist)
                 {
-                    if (compare.JumpPower > now.JumpPower) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.JumpPower < now.JumpPower) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.JumpPower > now.JumpPower)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.JumpPower < now.JumpPower)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.JumpPower - compare.JumpPower < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.JumpPower - compare.JumpPower)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.JumpPower - compare.JumpPower).ToString();
+                    if (now.JumpPower - compare.JumpPower < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.JumpPower - compare.JumpPower)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.JumpPower - compare.JumpPower).ToString();
                 }
                 else
                 {
-                    if (now.JumpPower > 1) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.JumpPower < 1) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.JumpPower > 1)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.JumpPower < 1)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.JumpPower < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * now.JumpPower).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.JumpPower.ToString();
+                    if (now.JumpPower < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.JumpPower).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.JumpPower - 1 ).ToString();
                 }
                 break;
             case "MoveSpeed":
                 if (exist)
                 {
-                    if (compare.MoveSpeed > now.MoveSpeed) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.MoveSpeed < now.MoveSpeed) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.MoveSpeed > now.MoveSpeed)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.MoveSpeed < now.MoveSpeed)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.MoveSpeed - compare.MoveSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.MoveSpeed - compare.MoveSpeed)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.MoveSpeed - compare.MoveSpeed).ToString();
+                    if (now.MoveSpeed - compare.MoveSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.MoveSpeed - compare.MoveSpeed)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.MoveSpeed - compare.MoveSpeed).ToString();
                 }
                 else
                 {
-                    if (now.MoveSpeed > 1) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.MoveSpeed < 1) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.MoveSpeed > 1)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.MoveSpeed < 1)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.MoveSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * now.MoveSpeed).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.MoveSpeed.ToString();
+                    if (now.MoveSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.MoveSpeed).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.MoveSpeed - 1).ToString();
                 }
                 break;
             case "Power":
                 if (exist)
                 {
-                    if (compare.Power > now.Power) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else if (compare.Power < now.Power) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (compare.Power > now.Power)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else if (compare.Power < now.Power)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.Power - compare.Power < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * (now.Power - compare.Power)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = (now.Power - compare.Power).ToString();
+                    if (now.Power - compare.Power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Power - compare.Power)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Power - compare.Power).ToString();
                 }
                 else
                 {
-                    if (now.Power > 0) delta.GetComponent<TextMeshProUGUI>().color = red;
-                    else if (now.Power < 0) delta.GetComponent<TextMeshProUGUI>().color = blue;
-                    else delta.GetComponent<TextMeshProUGUI>().color = green;
+                    if (now.Power > 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = red;
+                        delta.GetComponent<TextMeshProUGUI>().text = "+ ";
+                    }
+                    else if (now.Power < 0)
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = blue;
+                        delta.GetComponent<TextMeshProUGUI>().text = "- ";
+                    }
+                    else
+                    {
+                        delta.GetComponent<TextMeshProUGUI>().color = green;
+                        delta.GetComponent<TextMeshProUGUI>().text = "";
+                    }
 
-                    if (now.Power < 0) delta.GetComponent<TextMeshProUGUI>().text = (-1 * now.Power).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text = now.Power.ToString();
+                    if (now.Power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Power).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.Power.ToString();
                 }
                 break;
             default:

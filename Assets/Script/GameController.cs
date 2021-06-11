@@ -164,6 +164,8 @@ public class GameController : MonoBehaviour
         // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
 
 
+        Debug.Log("∞‘¿”");
+
         if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
         else isPause = true;
 
