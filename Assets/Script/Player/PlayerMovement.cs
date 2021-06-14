@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
         return isGoNext;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -49,34 +48,28 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = GetComponent<PlayerStatus>().MoveSpeed;
 
         animator.SetBool("move", false);
-        // 오른쪽이동
         if (Input.GetKey(KeyCode.RightArrow))
         {
             dir = Direction.Right;
             animator.SetBool("move", true);
         }
-        // 왼쪽이동
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             dir = Direction.Left;
             animator.SetBool("move", true);
         }
-        // 포탈상호작용?
         if (Input.GetKeyDown(KeyCode.UpArrow) && GetComponent<PlayerSensor>().Portal)
         {
             transform.position = GetComponent<PlayerSensor>().TeleportPosition;
         }
-        // 점프
         if (Input.GetKeyDown(jump) && GetComponent<PlayerSensor>().Ground)
         {
             jumping = true;
         }
-        // 대쉬
         if (Input.GetKey(KeyCode.Space) && dashTimer.CooldownCheck())
         {
             dashing = true;
         }
-        // 멈춤
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             dir = Direction.Stop;
@@ -96,11 +89,9 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
                 break;
             case Direction.Up:
-                //transform.position = GetComponent<PlayerSensor>().TeleportPosition;
                 break;
             case Direction.Stop:
             default:
-                //GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0f);
                 break;
         }
 
@@ -143,7 +134,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) KeyInput();

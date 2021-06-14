@@ -24,7 +24,7 @@ public class Parabola : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
+        if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
 
         if (!isArrived)
         {

@@ -11,25 +11,18 @@ public class PlayerStatus : Status
     [SerializeField]
     private GameObject basicItem;
     [SerializeField]
-    private int handMoney;
-    [SerializeField]
     private GameObject prefabSlot;
-
-    [SerializeField]
-    private int experience;
-    [SerializeField]
-    private int needExperience;
-    [SerializeField]
-    private int level;
 
     [SerializeField]
     private int damage;
 
+    private GameData data;
+
     private GameObject inventory;
     private int inventoryItemNumber;
 
-    public int Level { get { return level; } }
-    public int HandMoney { get { return handMoney; } }
+    public int Level { get { return data.player.level; } }
+    public int HandMoney { get { return data.player.handMoney; } }
     public string Occupation { get { return occupation; } }
     public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
     public GameObject Inventory { get { return inventory; } }
@@ -47,15 +40,16 @@ public class PlayerStatus : Status
 
     public void CalCulateExperience(int exp)
     {
-        experience += exp;
-        needExperience = level * 100;
+        data.player.experience += exp;
+        data.player.needExperience = data.player.level * 100;
 
-        if (experience >= needExperience) level++;
+        if (data.player.experience >= data.player.needExperience) data.player.level++;
+
     }
 
     public void AddHandMoney(int money)
     {
-        handMoney += money;
+        data.player.handMoney += money;
     }
 
     private void CalDamage()
@@ -88,18 +82,19 @@ public class PlayerStatus : Status
         CalDamage();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        level = 1;
+        data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+
+        if (data.player.level == 0) data.player.level = 1;
         GameObject obj;
         obj = Instantiate(basicItem, new Vector3(-1,-1,0), Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
 
         CalCulateExperience(0);
     }

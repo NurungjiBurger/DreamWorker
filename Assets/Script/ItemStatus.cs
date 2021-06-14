@@ -17,6 +17,8 @@ public class ItemStatus : Status
     [SerializeField]
     private int cursedRate;
 
+    private GameData data;
+
     private GameObject player;
     private bool isAttack = false;
     private bool isMount = false;
@@ -77,6 +79,11 @@ public class ItemStatus : Status
         return prefabAttack[OccupationCheck()];
     }
 
+    private void Awake()
+    {
+        data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+    }
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -86,10 +93,12 @@ public class ItemStatus : Status
         cursedRate = Random.Range(0, 50); // 저주율 수치 조정 필요
 
         CurseApply();
+
+        data.item.Add(gameObject);
     }
 
     private void Update()
     {
-        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
+        if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
     }
 }

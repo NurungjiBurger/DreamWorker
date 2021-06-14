@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject prefabSlot;
 
-    private List<Slot> possessItemList = new List<Slot>();
+    private GameData data;
     private bool acquirable = true;
 
     private GameObject player;
@@ -17,8 +17,8 @@ public class Inventory : MonoBehaviour
     private int possessItemNumber;
 
     public bool Acquirable { get { return acquirable; } }
-    public int ItemCount { get { return possessItemList.Count; } }
-    public List<Slot> PossessItemList { get { return possessItemList; } }
+    public int ItemCount { get { return data.playerPossessItemList.Count; } }
+    public List<Slot> PossessItemList { get { return data.playerPossessItemList; } }
 
     public void GoldText()
     {
@@ -27,11 +27,11 @@ public class Inventory : MonoBehaviour
 
     public Slot DiscardToInventory(int index)
     {
-        if (possessItemList.Count != 0)
+        if (data.playerPossessItemList.Count != 0)
         {
             Slot tmp;
-            tmp = possessItemList[index];
-            possessItemList.Remove(possessItemList[index]);
+            tmp = data.playerPossessItemList[index];
+            data.playerPossessItemList.Remove(data.playerPossessItemList[index]);
             return tmp;
         }
         else return null;
@@ -39,15 +39,20 @@ public class Inventory : MonoBehaviour
 
     public void AddToInventory(Slot slot)
     {
-        if (possessItemList.Count < 16)
+        if (data.playerPossessItemList.Count < 16)
         {
-            possessItemList.Add(slot);
+            data.playerPossessItemList.Add(slot);
 
             slot.transform.SetParent(transform.Find("Background").transform);
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
             slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             slot.SlotItem.GetComponent<ItemStatus>().IsMount = false;
         }
+    }
+
+    private void Awake()
+    {
+        data = GameObject.Find("Data").GetComponent<DataController>().GameData;
     }
 
     void Start()
@@ -57,11 +62,11 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (possessItemList.Count < possessItemNumber) acquirable = true;
+        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+        if (data.playerPossessItemList.Count < possessItemNumber) acquirable = true;
         else acquirable = false;
 
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
-
-        GoldText();
+        else GoldText();
     }
 }

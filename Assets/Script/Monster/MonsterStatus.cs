@@ -16,7 +16,9 @@ public class MonsterStatus : Status
     [SerializeField]
     private int dropRate;
     [SerializeField]
-    private GameObject[] dropItemList;
+    private int dropItemStartNumber;
+    [SerializeField]
+    private int dropItemFinishNumber;
     [SerializeField]
     private GameObject[] dropCoin;
     [SerializeField]
@@ -28,14 +30,14 @@ public class MonsterStatus : Status
     private Image nowHpBar;
     private RectTransform hpBar;
 
-    
+    private GameObject[] dropItemList;
 
     public bool Boss { get { return isBoss; } }
     public int Dmg { get { return bodyDmg; } }
 
     public void DestroyObject()
     {
-        if (Random.Range(0, 101) <= dropRate) Instantiate(dropItemList[Random.Range(0, dropItemList.Length)], transform.position, Quaternion.identity);
+        if (Random.Range(0, 101) <= dropRate) Instantiate(dropItemList[Random.Range(dropItemStartNumber, dropItemFinishNumber)], transform.position, Quaternion.identity);
 
         for(int i=0;i<coinNumber;i++)
         {
@@ -71,9 +73,10 @@ public class MonsterStatus : Status
         }
     }
 
-    // Update is called once per frame
     private void Update()
     {
+        if (dropItemList == null) dropItemList = GameObject.Find("GameController").GetComponent<GameController>().DropItem;
+
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
             if (!GetComponent<MonsterStatus>().Boss)

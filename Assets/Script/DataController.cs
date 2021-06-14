@@ -5,19 +5,21 @@ using System.IO;
 
 public class DataController : MonoBehaviour
 {
-    public string dataFile = ".json";
+    private string dataFile = ".json";
     private string filePath;
 
-    public GameData gameData;
+    private GameData gameData;
 
     public GameData GameData
     {
         get
-        { if (gameData == null)
+        {
+            if (gameData == null)
             {
                 LoadGameData();
                 SaveGameData();
-            } return gameData;
+            }
+            return gameData;
         }
     }
 
@@ -32,12 +34,12 @@ public class DataController : MonoBehaviour
 
     public void LoadGameData()
     {
-
         if (File.Exists(filePath))
         {
             Debug.Log("ºÒ·¯¿È");
             string jsonData = File.ReadAllText(filePath);
             gameData = JsonUtility.FromJson<GameData>(jsonData);
+            gameData.DataRestore();
         }
         else
         {
@@ -53,15 +55,20 @@ public class DataController : MonoBehaviour
         SaveGameData();
     }
 
-    void Start()
+    private void Awake()
     {
         filePath = Application.persistentDataPath + dataFile;
 
         DontDestroyOnLoad(gameObject);
     }
 
-    void Update()
+    void Start()
     {
 
+    }
+
+    void Update()
+    {
+        gameData.Test();
     }
 }

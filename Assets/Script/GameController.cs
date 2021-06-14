@@ -3,16 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject newButton;
+    [SerializeField]
+    private GameObject loadButton;
+    [SerializeField]
+    private GameObject exitButton;
+
+    public void NewButton()
+    {
+        Debug.Log("new");
+    }
+
+    public void LoadButton()
+    {
+        Debug.Log("Load");
+    }
+
+    public void ExitButton()
+    {
+        Debug.Log("Exit");
+    }
+
+    private GameData data;
+    private GameObject player;
+
     [SerializeField]
     private GameObject[] prefabCharacter;
     [SerializeField]
     private GameObject prefabRoom;
     [SerializeField]
     private GameObject[] prefabMapDesign;
-    private GameObject player;
+    [SerializeField]
+    private GameObject[] dropItemList;
+
+    private bool revert = false;
 
     private bool isPause = false;
     private bool goNext;
@@ -30,6 +60,7 @@ public class GameController : MonoBehaviour
     private List<GameObject> map = new List<GameObject>();
     private List<GameObject> room = new List<GameObject>();
 
+    public GameObject[] DropItem { get { return dropItemList; } }
     public bool IsPause { get { return isPause; } }
     public bool GoNext { get { return goNext; } }
     public int StageNumber { get { return stageNumber; } }
@@ -134,23 +165,33 @@ public class GameController : MonoBehaviour
         return true;
     }
 
-    void Start()
+    private void RevertScene()
     {
+        revert = false;
         stageNumber = 0;
         subStageNumber = 0;
 
         stageEntrance = false;  // 스테이지에 처음 들어왔는가?
         goNext = false;
+        Debug.Log("생성");
+        player = Instantiate(prefabCharacter[0], new Vector3(0, 0, 0), Quaternion.identity);
 
-        // 플레이어 캐릭터 생성
-        Instantiate(prefabCharacter[0], new Vector3(0, 0, 0), Quaternion.identity);
-        player = GameObject.FindGameObjectWithTag("Player");
 
         hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
         nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
 
 
         textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        
     }
 
     private void FixedUpdate()
@@ -160,49 +201,64 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        textHp.text = player.GetComponent<PlayerStatus>().NowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().MaxHP.ToString();
-        // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
-
-
-        Debug.Log("게임");
-
-        if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
-        else isPause = true;
-
-        GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y, -10), Quaternion.identity);
-
-        if (stageNumber <= 5) // // 5스테이지가 마지막
+        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+        else
         {
-            goNext = false;
-            if (!stageEntrance) // 처음 스테이지에 입장
+            if (SceneManager.GetActiveScene().name == "MainMenu")
             {
-                stageEntrance = true;
-
-                subStageNumber = Random.Range(10, 16);
-                //subStageNumber = 0;
-
-                CreateRoom(subStageNumber);
+                if (Input.GetKey(KeyCode.Backspace))
+                {
+                    SceneManager.LoadScene("Dungeon");
+                    revert = true;
+                }
             }
-            else
+            else if (SceneManager.GetActiveScene().name == "Dungeon")
             {
-                CheckRoom("visible");
+                if (revert) RevertScene();
+
+                textHp.text = player.GetComponent<PlayerStatus>().NowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().MaxHP.ToString();
+                // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
+
+
+                if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
+                else isPause = true;
+
+                GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y, -10), Quaternion.identity);
+
+                if (stageNumber <= 5) // // 5스테이지가 마지막
+                {
+                    goNext = false;
+                    if (!stageEntrance) // 처음 스테이지에 입장
+                    {
+                        stageEntrance = true;
+
+                        subStageNumber = Random.Range(10, 16);
+                        //subStageNumber = 0;
+
+                        CreateRoom(subStageNumber);
+                    }
+                    else
+                    {
+                        CheckRoom("visible");
+                    }
+                }
+                /*
+                       // CreateMonster(prefabBossMonster[1], 0, 0);
+                        if (stageNumber != 0)
+                        {
+                            counter = Random.Range(8, 10);
+                            counter = 3;
+                        }
+                        else counter = 0;
+                    }
+                    else
+                    {
+
+                    }
+                    }
+                    */
+
             }
         }
-        /*
-               // CreateMonster(prefabBossMonster[1], 0, 0);
-                if (stageNumber != 0)
-                {
-                    counter = Random.Range(8, 10);
-                    counter = 3;
-                }
-                else counter = 0;
-            }
-            else
-            {
-
-            }
-            }
-            */
-
     }
 }

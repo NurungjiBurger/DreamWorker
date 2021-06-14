@@ -159,10 +159,7 @@ public class PlayerSensor : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
-        {
 
-        }
     }
 
     // Start is called before the first frame update

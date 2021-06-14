@@ -36,6 +36,6 @@ public class MainMenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) SceneManager.LoadScene("Dungeon");
+        
     }
 }

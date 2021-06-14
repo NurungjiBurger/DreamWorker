@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609601340}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: ExitButton
         m_Mode: 1
@@ -256,6 +256,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65447022}
   m_CullTransparentMesh: 1
+--- !u!1 &565247860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565247862}
+  - component: {fileID: 565247861}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &565247861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565247860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1616946a78bc5c649af31a60acab8426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newButton: {fileID: 1131355776}
+  loadButton: {fileID: 1157723543}
+  exitButton: {fileID: 65447022}
+  prefabCharacter:
+  - {fileID: 6485205295942090449, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
+  prefabRoom: {fileID: 2962513356139994595, guid: 90fcf6fe74fa70442b620a2740aa0917, type: 3}
+  prefabMapDesign:
+  - {fileID: 6971374651941252024, guid: 153421095eea4cf49bde629ab65672e7, type: 3}
+  - {fileID: 7056414540493786577, guid: c5c626ee49275dd40a8051b562557048, type: 3}
+  - {fileID: 6022775797231525750, guid: b63a5de4096c4ff48b930f4d89d6e8f5, type: 3}
+  - {fileID: 6644775184080612190, guid: 8297d2df047f65e41aeb4c26b83a602e, type: 3}
+  - {fileID: 4958345909010188095, guid: f3a9113a2d368f4478e3b7bcd4fccbfe, type: 3}
+  - {fileID: 4485420160502130590, guid: 89b97b4b481892f418091ebd1c72c2d5, type: 3}
+  dropItemList:
+  - {fileID: 7831584778518907238, guid: c6ce92a72a8b5304989d04c602cefbaf, type: 3}
+  - {fileID: 8271512806439706280, guid: 7ddb345a5bfd0e14e8d6f4a05d613355, type: 3}
+  - {fileID: 5536535103058591157, guid: 557aebf6cf5322949a5c5c450822a1fe, type: 3}
+  - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
+  - {fileID: 5808481978946914169, guid: 799cfe1cf3a1a304f8e0b8a15801c1e9, type: 3}
+--- !u!4 &565247862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565247860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 166.20952, y: 50.116875, z: -156.38127}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1003938766
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +447,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609601340}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: NewButton
         m_Mode: 1
@@ -518,7 +580,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609601340}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: LoadButton
         m_Mode: 1
@@ -1044,7 +1106,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609601341}
-  - component: {fileID: 1609601340}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1052,21 +1113,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1609601340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609601339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 601196d2a3a44084fa3c98a0445fed3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newButton: {fileID: 1131355776}
-  loadButton: {fileID: 1157723543}
-  exitButton: {fileID: 65447022}
 --- !u!4 &1609601341
 Transform:
   m_ObjectHideFlags: 0
@@ -1379,8 +1425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3fc07409f034346b9f0dc290a654c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataFile: .json
-  gameData: {fileID: 0}
 --- !u!4 &2008387670
 Transform:
   m_ObjectHideFlags: 0

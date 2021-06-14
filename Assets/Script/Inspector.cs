@@ -8,19 +8,19 @@ public class Inspector : MonoBehaviour
 {
     private GameObject player;
 
-    private List<Slot> equipItemList = new List<Slot>();
+    private GameData data;
 
-    public int ItemCount { get { return equipItemList.Count; } }
-    public List<Slot> EquipItemList { get { return equipItemList; } }
+    public int ItemCount { get { return data.playerEquipItemList.Count; } }
+    public List<Slot> EquipItemList { get { return data.playerEquipItemList; } }
 
     public Slot FindInInspector(Slot slot)
     {
-        int size = equipItemList.Count;
+        int size = data.playerEquipItemList.Count;
         for (int i = 0; i < size; i++)
         {
-            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
+            if (data.playerEquipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
             {
-                return equipItemList[i];
+                return data.playerEquipItemList[i];
             }
         }
         return slot;
@@ -28,13 +28,13 @@ public class Inspector : MonoBehaviour
 
     public void DiscardToInspector(Slot slot)
     {
-        int size = equipItemList.Count;
+        int size = data.playerEquipItemList.Count;
         for(int i = 0;i < size;i++)
         {
-            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
+            if (data.playerEquipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
             {
-                player.GetComponent<PlayerStatus>().CalCulateStat(equipItemList[i].SlotItem, -1);
-                equipItemList.Remove(equipItemList[i]);
+                player.GetComponent<PlayerStatus>().CalCulateStat(data.playerEquipItemList[i].SlotItem, -1);
+                data.playerEquipItemList.Remove(data.playerEquipItemList[i]);
                 break;
             }
         }
@@ -42,12 +42,12 @@ public class Inspector : MonoBehaviour
 
     private void ChangeItemPart(Slot slot)
     {
-        int size = equipItemList.Count;
+        int size = data.playerEquipItemList.Count;
         for (int i = 0; i < size; i++)
         {
-            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
+            if (data.playerEquipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
             {
-                equipItemList[i].GetComponent<Slot>().DisMounting();
+                data.playerEquipItemList[i].GetComponent<Slot>().DisMounting();
                 break;
             }
         }
@@ -58,7 +58,7 @@ public class Inspector : MonoBehaviour
     {
         ChangeItemPart(slot);
 
-        equipItemList.Add(slot);
+        data.playerEquipItemList.Add(slot);
 
         slot.transform.SetParent(transform.Find("Background").transform);
         slot.transform.position = transform.Find("Background").transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).position;
@@ -85,13 +85,12 @@ public class Inspector : MonoBehaviour
 
     void Start()
     {
-        
+        data = GameObject.Find("Data").GetComponent<DataController>().GameData;
     }
 
     void Update()
     {
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
-
-        StatusText();
+        else StatusText();
     }
 }
