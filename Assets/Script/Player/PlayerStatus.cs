@@ -17,6 +17,7 @@ public class PlayerStatus : Status
     private int damage;
 
     private GameData data;
+    public int characterPrfNumber;
 
     private GameObject inventory;
     private int inventoryItemNumber;
@@ -82,19 +83,34 @@ public class PlayerStatus : Status
         CalDamage();
     }
 
+    private void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         data = GameObject.Find("Data").GetComponent<DataController>().GameData;
 
+        if (data.player == null)
+        {
+            data.player = new PlayerData(characterPrfNumber);
+            
+            GameObject tmp;
+            data.player = new PlayerData(characterPrfNumber);
+            data.items.Add(new ItemData(3, 0));
+            tmp = Instantiate(basicItem, new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().index = 0;
+        }
+
         if (data.player.level == 0) data.player.level = 1;
-        GameObject obj;
-        obj = Instantiate(basicItem, new Vector3(-1,-1,0), Quaternion.identity);
     }
 
     private void Update()
     {
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+        else data.player.SetPosition(transform.position);
 
         CalCulateExperience(0);
     }

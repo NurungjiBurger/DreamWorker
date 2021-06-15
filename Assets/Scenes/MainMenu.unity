@@ -288,22 +288,32 @@ MonoBehaviour:
   newButton: {fileID: 1131355776}
   loadButton: {fileID: 1157723543}
   exitButton: {fileID: 65447022}
-  prefabCharacter:
+  prefabRoom: {fileID: 1342088508078713797, guid: d92c489fed79f7b4a9d971fca57936ec, type: 3}
+  prefabCharacters:
   - {fileID: 6485205295942090449, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
-  prefabRoom: {fileID: 2962513356139994595, guid: 90fcf6fe74fa70442b620a2740aa0917, type: 3}
-  prefabMapDesign:
+  prefabMapDesigns:
   - {fileID: 6971374651941252024, guid: 153421095eea4cf49bde629ab65672e7, type: 3}
   - {fileID: 7056414540493786577, guid: c5c626ee49275dd40a8051b562557048, type: 3}
   - {fileID: 6022775797231525750, guid: b63a5de4096c4ff48b930f4d89d6e8f5, type: 3}
   - {fileID: 6644775184080612190, guid: 8297d2df047f65e41aeb4c26b83a602e, type: 3}
   - {fileID: 4958345909010188095, guid: f3a9113a2d368f4478e3b7bcd4fccbfe, type: 3}
   - {fileID: 4485420160502130590, guid: 89b97b4b481892f418091ebd1c72c2d5, type: 3}
-  dropItemList:
+  prefabItems:
   - {fileID: 7831584778518907238, guid: c6ce92a72a8b5304989d04c602cefbaf, type: 3}
   - {fileID: 8271512806439706280, guid: 7ddb345a5bfd0e14e8d6f4a05d613355, type: 3}
   - {fileID: 5536535103058591157, guid: 557aebf6cf5322949a5c5c450822a1fe, type: 3}
   - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
   - {fileID: 5808481978946914169, guid: 799cfe1cf3a1a304f8e0b8a15801c1e9, type: 3}
+  prefabMonsters:
+  - {fileID: 3669066004584926201, guid: 7beefb8390bcdfe428d733bae753114f, type: 3}
+  - {fileID: 561254009004928827, guid: 56bcd4872c45ab04f97d3688015f6a2a, type: 3}
+  - {fileID: 4111291780921786306, guid: a845c3cd809734e42af05ceb0465664f, type: 3}
+  - {fileID: 1435551059982855661, guid: f5affcb06e7d94248bba3deda0c4ff12, type: 3}
+  prefabBossMonsters:
+  - {fileID: 7842352421957864564, guid: 9f2091fbf65126249a85b0ae9814484a, type: 3}
+  prefabPortals:
+  - {fileID: 4508550508265296456, guid: bf99970d24134db439cb952dbab788bf, type: 3}
+  - {fileID: 4163875461290686834, guid: b68bd87ee5df83a46a650f7af292c894, type: 3}
 --- !u!4 &565247862
 Transform:
   m_ObjectHideFlags: 0

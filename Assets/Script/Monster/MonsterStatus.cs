@@ -16,15 +16,21 @@ public class MonsterStatus : Status
     [SerializeField]
     private int dropRate;
     [SerializeField]
-    private int dropItemStartNumber;
+    private int dropItemStartindexber;
     [SerializeField]
-    private int dropItemFinishNumber;
+    private int dropItemFinishindexber;
     [SerializeField]
     private GameObject[] dropCoin;
     [SerializeField]
     private int experience;
 
-    private int coinNumber;
+    public int monsterPrfNumber;
+    public bool isFirst = false;
+    public int index;
+
+    private GameData data;
+
+    private int coinindexber;
     private GameObject canvas;
 
     private Image nowHpBar;
@@ -37,9 +43,16 @@ public class MonsterStatus : Status
 
     public void DestroyObject()
     {
-        if (Random.Range(0, 101) <= dropRate) Instantiate(dropItemList[Random.Range(dropItemStartNumber, dropItemFinishNumber)], transform.position, Quaternion.identity);
+        if (Random.Range(0, 101) <= dropRate)
+        {
+            GameObject tmp;
+            int num = Random.Range(dropItemStartindexber, dropItemFinishindexber);
+            tmp = Instantiate(dropItemList[index], transform.position, Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = num;
+            tmp.GetComponent<ItemStatus>().isFirst = true;
+        }
 
-        for(int i=0;i<coinNumber;i++)
+        for(int i=0;i<coinindexber;i++)
         {
             Instantiate(dropCoin[0], transform.position, Quaternion.identity);
         }
@@ -54,6 +67,22 @@ public class MonsterStatus : Status
         Destroy(hpBar.gameObject);
     }
 
+    private void Awake()
+    {
+        data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+        if (isFirst)
+        {
+            index = data.monsters.Count;
+            data.monsters.Add(new MonsterData(monsterPrfNumber, index));
+            data.monsters[index].isBoss = isBoss;
+        }
+        else
+        {
+            
+            // 몬스터 좌표 조정
+        }
+    }
+
     private void Start()
     {
         canvas = GameObject.Find("Canvas");
@@ -63,8 +92,8 @@ public class MonsterStatus : Status
         hpBar = Instantiate(prefabHpBar, canvas.transform).GetComponent<RectTransform>();
         nowHpBar = hpBar.transform.GetChild(0).GetComponent<Image>();
 
-        if (!isBoss) coinNumber = Random.Range(1, 5);
-        else coinNumber = 15;
+        if (!isBoss) coinindexber = Random.Range(1, 5);
+        else coinindexber = 15;
 
         if (GetComponent<MonsterStatus>().Boss)
         {
@@ -76,6 +105,9 @@ public class MonsterStatus : Status
     private void Update()
     {
         if (dropItemList == null) dropItemList = GameObject.Find("GameController").GetComponent<GameController>().DropItem;
+
+        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+        else data.monsters[index].SetPosition(transform.position);
 
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {

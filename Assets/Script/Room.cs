@@ -6,13 +6,11 @@ using TMPro;
 
 public class Room : MonoBehaviour
 {
+
+    private GameData data;
     // 게임 오브젝트
-    [SerializeField]
-    private GameObject[] prefabMonster;
-    [SerializeField]
-    private GameObject[] prefabBossMonster;
-    [SerializeField]
-    private GameObject[] prefabPortal;
+
+    public int index;
 
     private GameObject map;
     private GameObject player;
@@ -65,8 +63,8 @@ public class Room : MonoBehaviour
 
         GameObject portal;
 
-        if (value) portal = Instantiate(prefabPortal[1]);
-        else portal = Instantiate(prefabPortal[0]);
+        if (value) portal = Instantiate(gameController.PrefabReturn("Portal", 1));
+        else portal = Instantiate(gameController.PrefabReturn("Portal", 0));
 
         List<float> range = map.GetComponent<Map>().SafePortalPosition;
 
@@ -127,13 +125,14 @@ public class Room : MonoBehaviour
             for (int i = 0; i < population; i++)
             {
                 int type;
-                Vector3 safePosition = new Vector3(0,0,0);
+                Vector3 safePosition;
                 type = Random.Range((gameController.StageNumber - 1) * 4, (gameController.StageNumber * 4) - 1);
                 List<float> range = map.GetComponent<Map>().SafeMonsterPosition;
                 int cnt = Random.Range(0, range.Count / 4);
                 safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);
                 type = 0;
-                CreateMonster(prefabMonster[type], safePosition);    // 랜덤 좌표에 몬스터 생성
+                CreateMonster(gameController.PrefabReturn("Monster", type), safePosition);    // 랜덤 좌표에 몬스터 생성
+                data.monsters.Add(new MonsterData(type, data.monsters.Count));
             }
         }
     }
@@ -141,7 +140,13 @@ public class Room : MonoBehaviour
     {
         Debug.Log("보스전");
         CreateMapTile();
-        CreateMonster(prefabBossMonster[0], new Vector3(transform.position.x, transform.position.y, transform.position.z));
+        CreateMonster(gameController.PrefabReturn("BossMonster", 0), new Vector3(transform.position.x, transform.position.y, transform.position.z));
+        data.monsters.Add(new MonsterData(0, data.monsters.Count));
+    }
+
+    private void Awake()
+    {
+        data = GameObject.Find("Data").GetComponent<DataController>().GameData;
     }
 
     void Start()
@@ -160,6 +165,7 @@ public class Room : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // 아래 데이터들 저장 필요
         if (player && map)
         {
             if (player.transform.position.x <= transform.position.x + 11.0f && player.transform.position.x >= transform.position.x - 11.0f)
@@ -200,6 +206,9 @@ public class Room : MonoBehaviour
             if (!map) map = gameController.Map[roomNumber];
         }
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
+
+        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+        else data.maps[index].SetPosition(transform.position);
 
         ManagePortals();
                

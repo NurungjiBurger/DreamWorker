@@ -39,7 +39,6 @@ public class DataController : MonoBehaviour
             Debug.Log("ºÒ·¯¿È");
             string jsonData = File.ReadAllText(filePath);
             gameData = JsonUtility.FromJson<GameData>(jsonData);
-            gameData.DataRestore();
         }
         else
         {

@@ -14,6 +14,44 @@ public class GameController : MonoBehaviour
     private GameObject loadButton;
     [SerializeField]
     private GameObject exitButton;
+    [SerializeField]
+    private GameObject prefabRoom;
+    [SerializeField]
+    private GameObject[] prefabCharacters;
+    [SerializeField]
+    private GameObject[] prefabMapDesigns;
+    [SerializeField]
+    private GameObject[] prefabItems;
+    [SerializeField]
+    private GameObject[] prefabMonsters;
+    [SerializeField]
+    private GameObject[] prefabBossMonsters;
+    [SerializeField]
+    private GameObject[] prefabPortals;
+
+    private GameData data;
+
+    private GameObject player;
+
+    private bool revert = false;
+    private bool isPause = false;
+
+    private int pastSelectDirection;
+
+    private List<GameObject> map = new List<GameObject>();
+    private List<GameObject> room = new List<GameObject>();
+
+    RectTransform hpBar;
+    private Image nowHPBar;
+    private TextMeshProUGUI textHp;
+
+    public GameObject[] DropItem { get { return prefabItems; } }
+    public bool IsPause { get { return isPause; } }
+    public bool GoNext { get { return data.goNext; } }
+    public int StageNumber { get { return data.stageNumber; } }
+    public int SubStageNumber { get { return data.subStageNumber; } }
+    public List<GameObject> Room { get { return room; } }
+    public List<GameObject> Map { get { return map; } }
 
     public void NewButton()
     {
@@ -30,43 +68,16 @@ public class GameController : MonoBehaviour
         Debug.Log("Exit");
     }
 
-    private GameData data;
-    private GameObject player;
+    public GameObject PrefabReturn(string str, int idx)
+    {
+        GameObject tmp = null;
+        if (str == "BossMonster") tmp = prefabBossMonsters[idx];
+        else if (str == "Monster") tmp = prefabMonsters[idx];
+        else if (str == "Portal") tmp = prefabPortals[idx];
+        else if (str == "Item") tmp = prefabItems[idx];
 
-    [SerializeField]
-    private GameObject[] prefabCharacter;
-    [SerializeField]
-    private GameObject prefabRoom;
-    [SerializeField]
-    private GameObject[] prefabMapDesign;
-    [SerializeField]
-    private GameObject[] dropItemList;
-
-    private bool revert = false;
-
-    private bool isPause = false;
-    private bool goNext;
-
-    private int pastSelectDirection;
-
-    private int subStageNumber;
-    private int stageNumber;
-    private bool stageEntrance;
-
-    RectTransform hpBar;
-    private Image nowHPBar;
-    private TextMeshProUGUI textHp;
-
-    private List<GameObject> map = new List<GameObject>();
-    private List<GameObject> room = new List<GameObject>();
-
-    public GameObject[] DropItem { get { return dropItemList; } }
-    public bool IsPause { get { return isPause; } }
-    public bool GoNext { get { return goNext; } }
-    public int StageNumber { get { return stageNumber; } }
-    public int SubStageNumber { get { return subStageNumber; } }
-    public List<GameObject> Room { get { return room; } }
-    public List<GameObject> Map { get { return map; } }
+        return tmp;
+    }
 
     private void DestroyAll()
     {
@@ -81,8 +92,26 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void PortalCreate(GameObject selectRoom, int direction)
+    {
+        GameObject first, second;
+        bool value;
+
+        if (room.Count - 1 < data.subStageNumber) value = false;
+        else value = true;
+
+        first = selectRoom.GetComponent<Room>().CreatePortal(direction, value);
+        if (direction % 2 == 0) direction += 1;
+        else direction -= 1;
+        second = Room[Room.Count - 1].GetComponent<Room>().CreatePortal(direction, value);
+
+        first.GetComponent<Portal>().PositionSave(second.GetComponent<Portal>());
+        second.GetComponent<Portal>().PositionSave(first.GetComponent<Portal>());
+    }
+
     private void CreateRoom(int cnt)
     {
+        int mapPrfNumber;
         if (cnt > 0)
         {
             CreateRoom(cnt - 1);
@@ -92,8 +121,14 @@ public class GameController : MonoBehaviour
             pastSelectDirection = 0;
             room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
             room[0].GetComponent<Room>().AllocateRoomNumber(0);
-            map.Add(Instantiate(prefabMapDesign[Random.Range(0,prefabMapDesign.Length)], new Vector3(0, 0, 0), Quaternion.identity));
+            room[0].transform.SetParent(GameObject.Find("Grid").transform);
+            mapPrfNumber = Random.Range(0, prefabMapDesigns.Length);
+            map.Add(Instantiate(prefabMapDesigns[mapPrfNumber], new Vector3(0, 0, 0), Quaternion.identity));
             map[0].transform.SetParent(GameObject.Find("Grid").transform);
+
+            room[room.Count-1].GetComponent<Room>().index = data.maps.Count;
+            data.maps.Add(new MapData(mapPrfNumber, data.maps.Count, 4, -1));
+
             return;
         }
 
@@ -137,23 +172,16 @@ public class GameController : MonoBehaviour
             {
                 room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
                 room[room.Count - 1].GetComponent<Room>().AllocateRoomNumber(Room.Count - 1);
-                if (cnt == SubStageNumber) map.Add(Instantiate(prefabMapDesign[prefabMapDesign.Length-1], position, Quaternion.identity));
-                else map.Add(Instantiate(prefabMapDesign[Random.Range(0, prefabMapDesign.Length)], position, Quaternion.identity));
+                room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+                if (cnt == SubStageNumber) mapPrfNumber = prefabMapDesigns.Length - 1;
+                else mapPrfNumber = Random.Range(0, prefabMapDesigns.Length);
+                map.Add(Instantiate(prefabMapDesigns[mapPrfNumber], position, Quaternion.identity));
                 map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
 
-                GameObject first, second;
-                bool value;
+                room[room.Count-1].GetComponent<Room>().index = data.maps.Count;
+                data.maps.Add(new MapData(mapPrfNumber, data.maps.Count, direction, number));
 
-                if (room.Count - 1 < subStageNumber) value = false;
-                else value = true;
-
-                first = selectRoom.GetComponent<Room>().CreatePortal(direction, value);
-                if (direction % 2 == 0) direction += 1;
-                else direction -= 1;
-                second = Room[Room.Count - 1].GetComponent<Room>().CreatePortal(direction, value);
-
-                first.GetComponent<Portal>().PositionSave(second.GetComponent<Portal>());
-                second.GetComponent<Portal>().PositionSave(first.GetComponent<Portal>());
+                PortalCreate(selectRoom, direction);
 
                 complete = true;
             }
@@ -168,20 +196,20 @@ public class GameController : MonoBehaviour
     private void RevertScene()
     {
         revert = false;
-        stageNumber = 0;
-        subStageNumber = 0;
 
-        stageEntrance = false;  // 스테이지에 처음 들어왔는가?
-        goNext = false;
-        Debug.Log("생성");
-        player = Instantiate(prefabCharacter[0], new Vector3(0, 0, 0), Quaternion.identity);
+        if (data.player == null)
+        {
+            Debug.Log("생성");
+            player = Instantiate(prefabCharacters[0], new Vector3(0, 0, 0), Quaternion.identity);
+            player.GetComponent<PlayerStatus>().characterPrfNumber = 0;
 
+            data.stageNumber = 0;
+            data.subStageNumber = 0;
 
-        hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
-        nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
-
-
-        textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            data.stageEntrance = false;  // 스테이지에 처음 들어왔는가?
+            data.goNext = false;
+        }
+        else Restore();
     }
 
     private void Awake()
@@ -215,50 +243,87 @@ public class GameController : MonoBehaviour
             else if (SceneManager.GetActiveScene().name == "Dungeon")
             {
                 if (revert) RevertScene();
-
-                textHp.text = player.GetComponent<PlayerStatus>().NowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().MaxHP.ToString();
-                // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
-
-
-                if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
-                else isPause = true;
-
-                GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y, -10), Quaternion.identity);
-
-                if (stageNumber <= 5) // // 5스테이지가 마지막
+                else
                 {
-                    goNext = false;
-                    if (!stageEntrance) // 처음 스테이지에 입장
-                    {
-                        stageEntrance = true;
 
-                        subStageNumber = Random.Range(10, 16);
-                        //subStageNumber = 0;
 
-                        CreateRoom(subStageNumber);
-                    }
-                    else
+                    hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
+                    nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
+
+
+                    textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+
+                    textHp.text = player.GetComponent<PlayerStatus>().NowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().MaxHP.ToString();
+                    // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
+
+
+                    if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
+                    else isPause = true;
+
+                    GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y, -10), Quaternion.identity);
+
+                    if (data.stageNumber <= 5) // // 5스테이지가 마지막
                     {
-                        CheckRoom("visible");
+                        data.goNext = false;
+                        if (!data.stageEntrance) // 처음 스테이지에 입장
+                        {
+                            data.stageEntrance = true;
+
+                            data.subStageNumber = Random.Range(10, 16);
+                            //subStageNumber = 0;
+
+                            CreateRoom(data.subStageNumber);
+                        }
+                        else
+                        {
+                            CheckRoom("visible");
+                        }
                     }
                 }
-                /*
-                       // CreateMonster(prefabBossMonster[1], 0, 0);
-                        if (stageNumber != 0)
-                        {
-                            counter = Random.Range(8, 10);
-                            counter = 3;
-                        }
-                        else counter = 0;
-                    }
-                    else
-                    {
-
-                    }
-                    }
-                    */
 
             }
+        }
+    }
+
+
+    /// ////////////////////////////////////////////////////////////////////////////////
+
+
+    public void Restore()
+    {
+        GameObject obj;
+
+        // map
+        for (int idx = 0; idx < data.maps.Count; idx++ )
+        {
+            room.Add(obj = Instantiate(prefabRoom, data.maps[idx].Position(), Quaternion.identity));
+            room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+            map.Add(Instantiate(prefabMapDesigns[data.maps[idx].mapPrfNumber], data.maps[idx].Position(), Quaternion.identity));
+            map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+            obj.GetComponent<Room>().index = data.maps[idx].index;
+
+            if (data.maps[idx].selectRoomIndex != -1) PortalCreate(room[data.maps[idx].selectRoomIndex], data.maps[idx].portalDirection);
+        }
+
+        // player
+        player = Instantiate(prefabCharacters[data.player.characterPrfNumber], data.player.Position(), Quaternion.identity);
+
+        // item
+        for (int idx = 0; idx < data.items.Count; idx++ )
+        {
+            obj = Instantiate(DropItem[data.items[idx].itemPrfNumber], data.items[idx].Position(), Quaternion.identity);
+            obj.GetComponent<ItemStatus>().index = data.items[idx].index;
+            obj.GetComponent<ItemStatus>().isFirst = false;
+
+            // 슬롯화 해서 인벤과 장비창에 넣어주어야함
+        }
+
+        // monster
+        for (int idx = 0; idx < data.monsters.Count; idx++)
+        {
+            if (data.monsters[idx].isBoss) obj = Instantiate(prefabBossMonsters[data.monsters[idx].monsterPrfNumber], data.monsters[idx].Position(), Quaternion.identity);
+            else obj = Instantiate(prefabMonsters[data.monsters[idx].monsterPrfNumber], data.monsters[idx].Position(), Quaternion.identity);
+            obj.GetComponent<MonsterStatus>().index = data.monsters[idx].index;
         }
     }
 }
