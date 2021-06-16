@@ -289,6 +289,7 @@ MonoBehaviour:
   loadButton: {fileID: 1157723543}
   exitButton: {fileID: 65447022}
   prefabRoom: {fileID: 1342088508078713797, guid: d92c489fed79f7b4a9d971fca57936ec, type: 3}
+  prefabSlot: {fileID: 6407902520024726435, guid: 6a92acf727ceb2d4e9d82297cab7a676, type: 3}
   prefabCharacters:
   - {fileID: 6485205295942090449, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
   prefabMapDesigns:

@@ -104,9 +104,9 @@ public class Room : MonoBehaviour
         for (int i = 0; i < portals.Count; i++) portals[i].SetActive(value);
     }
 
-    private void CreateMonster(GameObject prefab, Vector3 position)    // 몬스터 생성 함수
+    private GameObject CreateMonster(GameObject prefab, Vector3 position)    // 몬스터 생성 함수
     {
-        Instantiate(prefab, position, Quaternion.identity);
+        return Instantiate(prefab, position, Quaternion.identity);
     }
 
     private void CreateMapTile() // 맵 생성 함수
@@ -131,8 +131,7 @@ public class Room : MonoBehaviour
                 int cnt = Random.Range(0, range.Count / 4);
                 safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);
                 type = 0;
-                CreateMonster(gameController.PrefabReturn("Monster", type), safePosition);    // 랜덤 좌표에 몬스터 생성
-                data.monsters.Add(new MonsterData(type, data.monsters.Count));
+                CreateMonster(gameController.PrefabReturn("Monster", type), safePosition).GetComponent<MonsterStatus>().monsterPrfNumber = type;    // 랜덤 좌표에 몬스터 생성
             }
         }
     }
@@ -140,8 +139,7 @@ public class Room : MonoBehaviour
     {
         Debug.Log("보스전");
         CreateMapTile();
-        CreateMonster(gameController.PrefabReturn("BossMonster", 0), new Vector3(transform.position.x, transform.position.y, transform.position.z));
-        data.monsters.Add(new MonsterData(0, data.monsters.Count));
+        CreateMonster(gameController.PrefabReturn("BossMonster", 0), new Vector3(transform.position.x, transform.position.y, transform.position.z)).GetComponent<MonsterStatus>().monsterPrfNumber = 0;
     }
 
     private void Awake()

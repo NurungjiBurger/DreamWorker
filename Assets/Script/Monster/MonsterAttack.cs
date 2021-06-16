@@ -78,18 +78,18 @@ public class MonsterAttack : MonoBehaviour
 
             if (attackQuantity == 0)
             {
-                if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().JumpPower) isUp = false;
+                if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().Status.jumpPower) isUp = false;
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 if (attackType == 0) // 점프공격 
                 {
-                    if (isUp) transform.Translate(0, 0.075f * GetComponent<MonsterStatus>().JumpPower / (float)(attackSpeed * 4), 0);
-                    else transform.Translate(-0.01f * dir * GetComponent<MonsterStatus>().MoveSpeed, -(0.075f * GetComponent<MonsterStatus>().JumpPower) / (float)attackSpeed, 0);
+                    if (isUp) transform.Translate(0, 0.075f * GetComponent<MonsterStatus>().Status.jumpPower / (float)(attackSpeed * 4), 0);
+                    else transform.Translate(-0.01f * dir * GetComponent<MonsterStatus>().Status.moveSpeed, -(0.075f * GetComponent<MonsterStatus>().Status.jumpPower) / (float)attackSpeed, 0);
 
                     if (GetComponent<MonsterSensor>().Ground) isAttack = false;
                 }
                 else if (attackType == 1) // 돌진공격
                 {
-                    transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
+                    transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().Status.moveSpeed, 0, 0);
                 }
                 else if (attackType == 2) // 본체 공격애니메이션에 데미지
                 {

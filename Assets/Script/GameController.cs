@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject prefabRoom;
     [SerializeField]
+    private GameObject prefabSlot;
+    [SerializeField]
     private GameObject[] prefabCharacters;
     [SerializeField]
     private GameObject[] prefabMapDesigns;
@@ -32,6 +34,8 @@ public class GameController : MonoBehaviour
     private GameData data;
 
     private GameObject player;
+    private GameObject inventory;
+    private GameObject inspector;
 
     private bool revert = false;
     private bool isPause = false;
@@ -66,6 +70,18 @@ public class GameController : MonoBehaviour
     public void ExitButton()
     {
         Debug.Log("Exit");
+    }
+
+    public Slot CreateItemSlot(GameObject item)
+    {
+        GameObject tmp;
+        tmp = Instantiate(prefabSlot);
+
+        tmp.GetComponent<Slot>().InsertImage(item);
+
+        item.gameObject.SetActive(false);
+
+        return tmp.GetComponent<Slot>();
     }
 
     public GameObject PrefabReturn(string str, int idx)
@@ -199,7 +215,6 @@ public class GameController : MonoBehaviour
 
         if (data.player == null)
         {
-            Debug.Log("생성");
             player = Instantiate(prefabCharacters[0], new Vector3(0, 0, 0), Quaternion.identity);
             player.GetComponent<PlayerStatus>().characterPrfNumber = 0;
 
@@ -232,6 +247,8 @@ public class GameController : MonoBehaviour
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
         else
         {
+            Debug.Log(data.items.Count);
+
             if (SceneManager.GetActiveScene().name == "MainMenu")
             {
                 if (Input.GetKey(KeyCode.Backspace))
@@ -242,10 +259,13 @@ public class GameController : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene().name == "Dungeon")
             {
+                if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+                if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+
+
                 if (revert) RevertScene();
                 else
                 {
-
 
                     hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
                     nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
@@ -253,7 +273,7 @@ public class GameController : MonoBehaviour
 
                     textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-                    textHp.text = player.GetComponent<PlayerStatus>().NowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().MaxHP.ToString();
+                    textHp.text = player.GetComponent<PlayerStatus>().Status.nowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().Status.maxHP.ToString();
                     // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
 
 
@@ -313,10 +333,9 @@ public class GameController : MonoBehaviour
         {
             obj = Instantiate(DropItem[data.items[idx].itemPrfNumber], data.items[idx].Position(), Quaternion.identity);
             obj.GetComponent<ItemStatus>().index = data.items[idx].index;
-            obj.GetComponent<ItemStatus>().isFirst = false;
-
-            // 슬롯화 해서 인벤과 장비창에 넣어주어야함
         }
+
+
 
         // monster
         for (int idx = 0; idx < data.monsters.Count; idx++)

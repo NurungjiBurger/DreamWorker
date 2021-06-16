@@ -13,6 +13,8 @@ public class PlayerAttack : MonoBehaviour
     private GameObject inspector;
     private GameObject weapon;
 
+    private GameData data;
+
     private Timer attackTimer;
     private bool isAttack = false;
 
@@ -43,18 +45,20 @@ public class PlayerAttack : MonoBehaviour
         else Debug.Log("무기없음");
     }
 
+    private void Awake()
+    {
+        data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+    }
+
     private void Start()
     {
         animator = GetComponent<Animator>();        
         attackTimer = Instantiate(prefabTimer).GetComponent<Timer>();
-
-        attackSpeed = GetComponent<PlayerStatus>().AttackSpeed;
-        attackTimer.SetCooldown(attackSpeed);
     }
 
     private void KeyInput()
     {
-        attackSpeed = GetComponent<PlayerStatus>().AttackSpeed;
+        attackSpeed = GetComponent<PlayerStatus>().Status.attackSpeed;
 
         // 캐릭터 공격
         if (attackTimer.CooldownCheck())
@@ -87,6 +91,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) KeyInput();
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+        if (data.player != null)
+        {
+            attackSpeed = GetComponent<PlayerStatus>().Status.attackSpeed;
+            attackTimer.SetCooldown(attackSpeed);
+        }
     }
     
 }

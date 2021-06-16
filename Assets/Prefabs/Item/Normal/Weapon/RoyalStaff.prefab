@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1319612972477713156}
   - component: {fileID: 4154780654488785393}
-  - component: {fileID: 1554819403923729823}
   - component: {fileID: 3406007476486537590}
   - component: {fileID: 2585070544025469761}
   - component: {fileID: 6108375413819436806}
   - component: {fileID: 2980455507548531750}
-  - component: {fileID: 1303204584887128229}
+  - component: {fileID: 1554819403923729823}
   m_Layer: 0
   m_Name: RoyalStaff
   m_TagString: Item
@@ -89,32 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1554819403923729823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8102262969444909037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8930f6a86c226743bc4a89b38f7bc6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 0
-  power: 40
-  jumpPower: 1
-  moveSpeed: 1
-  attackSpeed: 1
-  name: "\uC655\uC758\uC9C0\uD321\uC774"
-  defenseCapability: 0
-  prefabAttack:
-  - {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
-  - {fileID: 3691583726259073126, guid: 6a36db1972bb49c46a5d1c0d6b268516, type: 3}
-  dedicatedOccupation: Wizard
-  mountingPart: Weapon
-  grade: 0
-  cursedRate: 0
 --- !u!50 &3406007476486537590
 Rigidbody2D:
   serializedVersion: 4
@@ -186,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0a163b697b6d54584d7331585e66b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1303204584887128229
+--- !u!114 &1554819403923729823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,14 +172,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 0
-  power: 0
-  jumpPower: 0
-  moveSpeed: 0
-  attackSpeed: 0
-  name: 
-  defenseCapability: 0
-  prefabAttack: []
-  dedicatedOccupation: 
-  mountingPart: 
+  power: 40
+  jumpPower: 1
+  moveSpeed: 1
+  attackSpeed: 1
+  name: "\uC655\uC758\uC9C0\uD321\uC774"
+  defenseRate: 0
+  bloodAbsorptionRate: 0
+  evasionRate: 0
+  prefabAttack:
+  - {fileID: 6837060578034742510, guid: b4bbfbd80f950da4993b0a5824d120b8, type: 3}
+  - {fileID: 3691583726259073126, guid: 6a36db1972bb49c46a5d1c0d6b268516, type: 3}
+  dedicatedOccupation: Wizard
+  mountingPart: Weapon
   grade: 0
-  cursedRate: 0
+  itemPrfNumber: -1
+  index: -1

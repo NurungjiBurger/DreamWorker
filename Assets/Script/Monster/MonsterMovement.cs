@@ -36,11 +36,11 @@ public class MonsterMovement : MonoBehaviour
             {
                 case Direction.Right:
                     animator.SetBool("move", true);
-                    transform.Translate(0.005f * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
+                    transform.Translate(0.005f * GetComponent<MonsterStatus>().Status.moveSpeed, 0, 0);
                     break;
                 case Direction.Left:
                     animator.SetBool("move", true);
-                    transform.Translate(-0.005f * GetComponent<MonsterStatus>().MoveSpeed, 0, 0);
+                    transform.Translate(-0.005f * GetComponent<MonsterStatus>().Status.moveSpeed, 0, 0);
                     break;
                 case Direction.Up:
                     break;
@@ -55,7 +55,7 @@ public class MonsterMovement : MonoBehaviour
             if (jumping)
             {
                 jumping = false;
-                GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().JumpPower);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().Status.jumpPower);
                 //transform.Translate(0, 0.005f * GetComponent<MonsterStatus>().JumpPower, 0);
             }
         }

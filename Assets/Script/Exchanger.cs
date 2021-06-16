@@ -57,7 +57,7 @@ public class Exchanger : MonoBehaviour
         {
             tmp = exchangeItemList[0];
             exchangeItemList.Remove(exchangeItemList[0]);
-            Destroy(tmp.SlotItem.gameObject);
+            tmp.SlotItem.GetComponent<ItemStatus>().DestoryAll();
             Destroy(tmp.gameObject);
         }
 

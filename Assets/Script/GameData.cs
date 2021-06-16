@@ -55,6 +55,34 @@ public class Serialization<T>
 }
 
 [Serializable]
+public class StatData
+{
+    // stat
+    public int maxHP;
+    public int nowHP;
+    public int power;
+    public float defenseRate;
+    public float jumpPower;
+    public float moveSpeed;
+    public float attackSpeed;
+    public float bloodAbsorptionRate;
+    public float evasionRate;
+
+    public StatData(int[] arr, float[] arr2)
+    {
+        maxHP = arr[0];
+        nowHP = arr[0];
+        power = arr[1];
+        defenseRate = arr2[0];
+        jumpPower = arr2[1];
+        moveSpeed = arr2[2];
+        attackSpeed = arr2[3];
+        bloodAbsorptionRate = arr2[4];
+        evasionRate = arr2[5];
+    }
+}
+
+[Serializable]
 public class PlayerData
 {
     public int characterPrfNumber;
@@ -67,17 +95,30 @@ public class PlayerData
     public int experience;
     public int needExperience;
 
-    // stat
-    
+    // 전직?
+    public bool firstTurn;
+    public bool secondTurn;
+    public bool thirdTurn;
+    public bool forthTurn;
 
-    public PlayerData(int num)
-    {
+    // stat
+    public StatData status;
+
+    public PlayerData(int num, int[] arr, float[] arr2)
+    {      
+        status = new StatData(arr, arr2);
+
         characterPrfNumber = num;
 
         handMoney = 0;
-        level = 0;
+        level = 1;
         experience = 0;
         needExperience = 0;
+
+        firstTurn = false;
+        secondTurn = false;
+        thirdTurn = false;
+        forthTurn = false;
     }
 
     public void SetPosition(Vector3 position)
@@ -106,8 +147,16 @@ public class ItemData
     public int cursedRate;
     public bool isMount;
 
-    public ItemData(int num, int idx)
+    public StatData status;
+
+    int test2 = 0;
+
+    public ItemData(int num, int idx, int[] arr, float[] arr2)
     {
+        //Debug.Log(" 번호 " + num + " " + idx + " " + test + " " + test2++);
+
+        status = new StatData(arr, arr2);
+
         itemPrfNumber = num;
         index = idx;
     }
@@ -136,9 +185,12 @@ public class MonsterData
     public bool isBoss;
     public int index;
 
+    public StatData status;
 
-    public MonsterData(int num, int idx)
+    public MonsterData(int num, int idx, int[] arr, float[] arr2)
     {
+        status = new StatData(arr, arr2);
+
         monsterPrfNumber = num;
         index = idx;
     }

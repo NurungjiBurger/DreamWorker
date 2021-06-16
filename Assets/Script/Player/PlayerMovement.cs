@@ -44,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void KeyInput()
     {
-        jumpPower = GetComponent<PlayerStatus>().JumpPower;
-        moveSpeed = GetComponent<PlayerStatus>().MoveSpeed;
+        jumpPower = GetComponent<PlayerStatus>().Status.jumpPower;
+        moveSpeed = GetComponent<PlayerStatus>().Status.moveSpeed;
 
         animator.SetBool("move", false);
         if (Input.GetKey(KeyCode.RightArrow))
