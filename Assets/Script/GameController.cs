@@ -49,7 +49,6 @@ public class GameController : MonoBehaviour
     private Image nowHPBar;
     private TextMeshProUGUI textHp;
 
-    public GameObject[] DropItem { get { return prefabItems; } }
     public bool IsPause { get { return isPause; } }
     public bool GoNext { get { return data.goNext; } }
     public int StageNumber { get { return data.stageNumber; } }
@@ -135,14 +134,12 @@ public class GameController : MonoBehaviour
         else
         {
             pastSelectDirection = 0;
-            room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
-            room[0].GetComponent<Room>().AllocateRoomNumber(0);
-            room[0].transform.SetParent(GameObject.Find("Grid").transform);
             mapPrfNumber = Random.Range(0, prefabMapDesigns.Length);
+            room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
+            room[0].transform.SetParent(GameObject.Find("Grid").transform);
             map.Add(Instantiate(prefabMapDesigns[mapPrfNumber], new Vector3(0, 0, 0), Quaternion.identity));
             map[0].transform.SetParent(GameObject.Find("Grid").transform);
 
-            room[room.Count-1].GetComponent<Room>().index = data.maps.Count;
             data.maps.Add(new MapData(mapPrfNumber, data.maps.Count, 4, -1));
 
             return;
@@ -187,7 +184,6 @@ public class GameController : MonoBehaviour
             if (create)
             {
                 room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
-                room[room.Count - 1].GetComponent<Room>().AllocateRoomNumber(Room.Count - 1);
                 room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
                 if (cnt == SubStageNumber) mapPrfNumber = prefabMapDesigns.Length - 1;
                 else mapPrfNumber = Random.Range(0, prefabMapDesigns.Length);
@@ -287,6 +283,7 @@ public class GameController : MonoBehaviour
                         data.goNext = false;
                         if (!data.stageEntrance) // 처음 스테이지에 입장
                         {
+                            Debug.Log("스테이지 처음진입");
                             data.stageEntrance = true;
 
                             data.subStageNumber = Random.Range(10, 16);
@@ -296,6 +293,7 @@ public class GameController : MonoBehaviour
                         }
                         else
                         {
+                            Debug.Log("스테이지 중복진입");
                             CheckRoom("visible");
                         }
                     }
@@ -331,11 +329,9 @@ public class GameController : MonoBehaviour
         // item
         for (int idx = 0; idx < data.items.Count; idx++ )
         {
-            obj = Instantiate(DropItem[data.items[idx].itemPrfNumber], data.items[idx].Position(), Quaternion.identity);
+            obj = Instantiate(prefabItems[data.items[idx].itemPrfNumber], data.items[idx].Position(), Quaternion.identity);
             obj.GetComponent<ItemStatus>().index = data.items[idx].index;
         }
-
-
 
         // monster
         for (int idx = 0; idx < data.monsters.Count; idx++)

@@ -10,6 +10,11 @@ public class ButtonUI : MonoBehaviour
 
     private bool onOff = false;
 
+    public void SaveButton()
+    {
+        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+    }
+
     public void CloseButton()
     {
         if (transform.parent.name.Equals("Exchanger"))

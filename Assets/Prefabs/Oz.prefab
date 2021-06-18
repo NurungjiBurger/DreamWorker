@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4653240224018148939}
   - component: {fileID: -1517670687863710666}
   - component: {fileID: 4393010736296152136}
+  - component: {fileID: 922939079296402710}
   m_Layer: 0
   m_Name: Oz
   m_TagString: Player
@@ -32,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6485205295942090449}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.015, y: 0.01, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,11 +119,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 6485205295942090449}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2655dfe7b32a1d942a506c22551b8bc0, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08, y: 0}
+  m_Offset: {x: 0.04175672, y: 0.035775974}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.38}
+  m_Size: {x: 0.27779424, y: 0.3222058}
   m_EdgeRadius: 0
 --- !u!50 &3452637295615809757
 Rigidbody2D:
@@ -215,12 +216,26 @@ MonoBehaviour:
   moveSpeed: 0.1
   attackSpeed: 0.5
   name: "\uC624\uC988"
-  defenseCapability: 0
+  defenseRate: 0
+  bloodAbsorptionRate: 0
+  evasionRate: 0
   occupation: Wizard
   basicItem: {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
-  handMoney: 0
-  prefabSlot: {fileID: 6407902520024726435, guid: 6a92acf727ceb2d4e9d82297cab7a676, type: 3}
-  experience: 0
-  needExperience: 0
-  level: 0
   damage: 0
+  characterPrfNumber: 0
+--- !u!70 &922939079296402710
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485205295942090449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.07278561, y: 0.004934624}
+  m_Size: {x: 0.18210949, y: 0.38196144}
+  m_Direction: 0

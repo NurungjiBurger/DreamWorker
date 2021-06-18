@@ -16,16 +16,26 @@ public class PlayerMovement : MonoBehaviour
     private GameObject prefabTimer;
     private Timer dashTimer;
 
+
+    private GameController gameController;
+
     private Direction dir = Direction.Stop;
 
     private float time;
 
     private bool dashing = false;
     private bool jumping = false;
+    private bool trigger = false;
+    private bool isGround = true;
+    private bool downjump = false;
 
     private bool isGoNext = false;
 
     private Animator animator;
+
+    public bool IsGround { get { return isGround; } set { isGround = value; } }
+    public bool Trigger { get { return trigger; } set { trigger = value; } }
+    public bool Jumping { get { return jumping; } }
 
     public bool GetGoNext()
     {
@@ -62,7 +72,12 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = GetComponent<PlayerSensor>().TeleportPosition;
         }
-        if (Input.GetKeyDown(jump) && GetComponent<PlayerSensor>().Ground)
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            jumping = true;
+            downjump = true;
+        }
+        if (Input.GetKeyDown(jump) && isGround)
         {
             jumping = true;
         }
@@ -98,8 +113,10 @@ public class PlayerMovement : MonoBehaviour
         if (jumping)
         {
             jumping = false;
-            GetComponent<Collider2D>().isTrigger = true;
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
+            trigger = true;
+
+            if (downjump) downjump = false;
+            else GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
         }
         if (dashing)
         {
@@ -120,9 +137,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
+
     private void FixedUpdate()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             GetComponent<Rigidbody2D>().isKinematic = false;
             Moving();
@@ -136,6 +158,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) KeyInput();
+        if(!gameController.IsPause) KeyInput();
     }
 }

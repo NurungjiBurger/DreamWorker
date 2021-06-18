@@ -8,7 +8,9 @@ using System;
 [Serializable]
 public class GameData
 {
-    // gmaedata
+    // gameController
+
+    // gamedata
     public int stageNumber;
     public bool stageEntrance;
     public int subStageNumber;
@@ -18,11 +20,7 @@ public class GameData
     public PlayerData player;
 
     // player UI
-    public List<Slot> playerEquipItemList = new List<Slot>();
-    public List<Slot> playerPossessItemList = new List<Slot>();
 
-    public GameObject inspector;
-    public GameObject inventory;
 
     // item
     public List<ItemData> items = new List<ItemData>();
@@ -153,8 +151,6 @@ public class ItemData
 
     public ItemData(int num, int idx, int[] arr, float[] arr2)
     {
-        //Debug.Log(" ¹øÈ£ " + num + " " + idx + " " + test + " " + test2++);
-
         status = new StatData(arr, arr2);
 
         itemPrfNumber = num;
@@ -192,7 +188,7 @@ public class MonsterData
         status = new StatData(arr, arr2);
 
         monsterPrfNumber = num;
-        index = idx;
+        SetIndex(idx);
     }
 
     public void SetPosition(Vector3 position)
@@ -207,6 +203,11 @@ public class MonsterData
         Vector3 tmp = new Vector3(pos[0], pos[1], pos[2]);
         return tmp;
     }
+
+    public void SetIndex(int idx)
+    {
+        index = idx;
+    }
 }
 
 [Serializable]
@@ -219,7 +220,11 @@ public class MapData
     public int selectRoomIndex;
     public int index;
     public int portalDirection;
+
+    public bool subStageEntrance;
     public bool isClear;
+    public bool visible;
+    public bool monsterCreate;
 
     public MapData(int num, int idx, int dir, int sel)
     {
@@ -227,6 +232,11 @@ public class MapData
         index = idx;
         portalDirection = dir;
         selectRoomIndex = sel;
+
+        visible = false;
+        isClear = false;
+        subStageEntrance = false;
+        monsterCreate = false;
     }
 
     public void SetPosition(Vector3 position)

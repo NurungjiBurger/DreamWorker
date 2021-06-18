@@ -27,7 +27,9 @@ public class MonsterStatus : Status
     public int monsterPrfNumber;
     public int index = -1;
 
+    private GameController gameController;
     private GameData data;
+    private MonsterData dataM;
     private StatData status;
 
     private int coinindexber;
@@ -35,8 +37,6 @@ public class MonsterStatus : Status
 
     private Image nowHpBar;
     private RectTransform hpBar;
-
-    private GameObject[] dropItemList;
 
     public StatData Status { get { return status; } }
     public bool Boss { get { return isBoss; } }
@@ -47,9 +47,9 @@ public class MonsterStatus : Status
         if (Random.Range(0, 101) <= dropRate)
         {
             GameObject tmp;
-            int num = Random.Range(dropItemStartindexber, dropItemFinishindexber);
-            tmp = Instantiate(dropItemList[num], transform.position, Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = num;
+            int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber);
+            tmp = Instantiate(gameController.PrefabReturn("Item", idx), transform.position, Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = idx;
         }
 
         for(int i=0;i<coinindexber;i++)
@@ -59,9 +59,12 @@ public class MonsterStatus : Status
         if (isBoss) Instantiate(dropCoin[1], transform.position, Quaternion.identity);
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().CalCulateExperience(experience);
-        // 경험치 주기
 
-        data.monsters.Remove(data.monsters[index]);
+        data.monsters.Remove(dataM);
+        for(int idx = index;idx<data.monsters.Count;idx++)
+        {
+            data.monsters[idx].index = idx;
+        }
         GetComponent<MonsterAttack>().DestroyAll();
         GetComponent<MonsterMovement>().DestroyAll();
         Destroy(gameObject);
@@ -84,15 +87,16 @@ public class MonsterStatus : Status
             index = data.monsters.Count;
 
             data.monsters.Add(new MonsterData(monsterPrfNumber, index, arr, arr2));
+            dataM = data.monsters[index];
 
-            data.monsters[index].isBoss = isBoss;
+            dataM.isBoss = isBoss;
 
-            status = data.monsters[index].status;
+            status = dataM.status;
         }
         else
         {
-            status = data.monsters[index].status;
-            // 몬스터 좌표 조정
+            dataM = data.monsters[index];
+            status = dataM.status;
         }
 
         canvas = GameObject.Find("Canvas");
@@ -112,12 +116,16 @@ public class MonsterStatus : Status
 
     private void Update()
     {
-        if (dropItemList == null) dropItemList = GameObject.Find("GameController").GetComponent<GameController>().DropItem;
+        if (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
-        else data.monsters[index].SetPosition(transform.position);
+        else
+        {
+            dataM.SetPosition(transform.position);
+            index = dataM.index;
+        }
 
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (!GetComponent<MonsterStatus>().Boss)
             {

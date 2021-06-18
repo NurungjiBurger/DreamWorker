@@ -17,7 +17,6 @@ public class DataController : MonoBehaviour
             if (gameData == null)
             {
                 LoadGameData();
-                SaveGameData();
             }
             return gameData;
         }
@@ -43,7 +42,6 @@ public class DataController : MonoBehaviour
         else
         {
             Debug.Log("货肺款颇老积己");
-
             gameData = new GameData();
         }
 
@@ -51,7 +49,7 @@ public class DataController : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveGameData();
+        //SaveGameData();
     }
 
     private void Awake()

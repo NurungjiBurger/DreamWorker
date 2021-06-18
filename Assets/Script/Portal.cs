@@ -24,9 +24,9 @@ public class Portal : MonoBehaviour
         if (!player) player = GameObject.FindGameObjectWithTag("Player").gameObject;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Ground") || collision.CompareTag("Wall"))
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         }

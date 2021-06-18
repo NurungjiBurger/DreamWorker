@@ -12,13 +12,12 @@ public class PlayerSensor : MonoBehaviour
     private Collision2D lastCollisionGround = null;
     private Collider2D lastColliderGround = null;
 
-    private bool isGround = false;
+    private bool ongoing = false;
     private bool isPortal = false;
     private bool isHit = false;
     private bool onOff = false;
     private Vector3 teleportPosition;
 
-    public bool Ground { get { return isGround; } }
     public bool Portal { get { return isPortal; } }
     public Collider2D LastColliderGround { get { return lastColliderGround; } }
     public Vector3 TeleportPosition { get { return teleportPosition; } }
@@ -28,17 +27,29 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
+            if (GetComponent<Rigidbody2D>().velocity.y < 0 && !ongoing)
+            {
+                if (collision.CompareTag("Ground"))
+                {
+                    Debug.Log("걸림");
+                    GetComponent<BoxCollider2D>().isTrigger = false;
+                    GetComponent<CapsuleCollider2D>().isTrigger = false;
+                    GetComponent<PlayerMovement>().Trigger = false;
+                    GetComponent<PlayerMovement>().IsGround = true;
+                }
+            }
+
             if (collision.CompareTag("Wall"))
             {
-                GetComponent<Collider2D>().isTrigger = false;
+                GetComponent<BoxCollider2D>().isTrigger = false;
+                GetComponent<CapsuleCollider2D>().isTrigger = false;
+                GetComponent<PlayerMovement>().Trigger = false;
             }
 
             if (collision.CompareTag("Item"))
             {
                 if (GetComponent<PlayerStatus>().Acquirable)
                 {
-                    // 소지품리스트에 물품을 추가한다.
-                    //GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GetComponent<PlayerStatus>().CreateItemSlot(collision.gameObject));
                     GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject));
                 }
             }
@@ -53,7 +64,7 @@ public class PlayerSensor : MonoBehaviour
                     Destroy(collision.gameObject);
                 }
             }
-
+            //
         }
 
     } 
@@ -62,12 +73,22 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
+            if (GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                if (collision.CompareTag("Ground"))
+                {
+                    Debug.Log("여기도걸림");
+                    ongoing = true;
+                    GetComponent<BoxCollider2D>().isTrigger = true;
+                    GetComponent<CapsuleCollider2D>().isTrigger = true;
+                    GetComponent<PlayerMovement>().Trigger = true;
+                    GetComponent<PlayerMovement>().IsGround = false;
+                }
+            }
 
-            if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
+            if (collision.CompareTag("Ground"))
             {
                 lastColliderGround = collision;
-                GetComponent<Collider2D>().isTrigger = false;
-                isGround = true;
             }
             if (collision.CompareTag("Portal"))
             {
@@ -76,7 +97,7 @@ public class PlayerSensor : MonoBehaviour
             }
             if (collision.CompareTag("Monster"))
             {
-                if (!isHit) // 피격이 가능한 상태라면
+                if (!isHit)
                 {
                     isHit = true;
                     hitTimer.TimerSetZero();
@@ -85,7 +106,7 @@ public class PlayerSensor : MonoBehaviour
             }
             if (collision.CompareTag("Monster_attack_judgement"))
             {
-                if (!isHit) // 피격이 가능한 상태라면
+                if (!isHit)
                 {
                     isHit = true;
                     hitTimer.TimerSetZero();
@@ -98,12 +119,22 @@ public class PlayerSensor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (GetComponent<Rigidbody2D>().velocity.y < 0)
+        {
+            if (collision.CompareTag("Ground"))
+            {
+                Debug.Log("탈출");
+                ongoing = false;
+                GetComponent<BoxCollider2D>().isTrigger = false;
+                GetComponent<CapsuleCollider2D>().isTrigger = false;
+                GetComponent<PlayerMovement>().Trigger = false;
+                GetComponent<PlayerMovement>().IsGround = false;
+            }
+        }
 
-            if (collision.CompareTag("Ground")) isGround = false;
-            if (collision.CompareTag("Portal")) isPortal = false;
+        if (collision.CompareTag("Portal")) isPortal = false;
             if (collision.CompareTag("Monster"))
             {
-                GetComponent<Collider2D>().isTrigger = false;
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             }
         
@@ -118,8 +149,6 @@ public class PlayerSensor : MonoBehaviour
             {
                 if (GetComponent<PlayerStatus>().Acquirable)
                 {
-                    // 소지품리스트에 물품을 추가한다.
-                    //GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GetComponent<PlayerStatus>().CreateItemSlot(collision.gameObject));
                     GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject));
                 }
             }
@@ -138,16 +167,16 @@ public class PlayerSensor : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
-        { 
+        {
+            if (collision.collider.CompareTag("Ground")) GetComponent<PlayerMovement>().IsGround = true;
             if (collision.collider.CompareTag("Ground"))
             {
             lastCollisionGround = collision;
-            isGround = true;
             }
             
             if (collision.collider.CompareTag("Monster"))
             {
-                GetComponent<Collider2D>().isTrigger = true;
+                //GetComponent<Collider2D>().isTrigger = true;
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                 if (!isHit)
                 {
@@ -164,7 +193,6 @@ public class PlayerSensor : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         hitTimer = Instantiate(prefabTimer).GetComponent<Timer>();
@@ -172,22 +200,25 @@ public class PlayerSensor : MonoBehaviour
         hitTimer.SetCooldown(2.0f);
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            if (GetComponent<Rigidbody2D>().velocity.y < 0) GetComponent<Collider2D>().isTrigger = false;
-
             if (onOff)
             {
                 isHit = !hitTimer.CooldownCheck();
                 if (!isHit)
                 {
                     onOff = false;
-                    GetComponent<Collider2D>().isTrigger = false;
                     GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
                 }
+            }
+
+            if (GetComponent<PlayerMovement>().Trigger)
+            {
+                GetComponent<BoxCollider2D>().isTrigger = true;
+                GetComponent<CapsuleCollider2D>().isTrigger = true;
+                GetComponent<PlayerMovement>().IsGround = false;
             }
         }
     }

@@ -14,11 +14,12 @@ public class Inventory : MonoBehaviour
 
     private GameObject player;
 
+    private List<Slot> possessItemList = new List<Slot>();
     private int possessItemNumber;
 
     public bool Acquirable { get { return acquirable; } }
-    public int ItemCount { get { return data.playerPossessItemList.Count; } }
-    public List<Slot> PossessItemList { get { return data.playerPossessItemList; } }
+    public int ItemCount { get { return possessItemList.Count; } }
+    public List<Slot> PossessItemList { get { return possessItemList; } }
 
     public void GoldText()
     {
@@ -27,11 +28,11 @@ public class Inventory : MonoBehaviour
 
     public Slot DiscardToInventory(int index)
     {
-        if (data.playerPossessItemList.Count != 0)
+        if (possessItemList.Count != 0)
         {
             Slot tmp;
-            tmp = data.playerPossessItemList[index];
-            data.playerPossessItemList.Remove(data.playerPossessItemList[index]);
+            tmp = possessItemList[index];
+            possessItemList.Remove(possessItemList[index]);
             return tmp;
         }
         else return null;
@@ -39,9 +40,9 @@ public class Inventory : MonoBehaviour
 
     public void AddToInventory(Slot slot)
     {
-        if (data.playerPossessItemList.Count < 16)
+        if (possessItemList.Count < 16)
         {
-            data.playerPossessItemList.Add(slot);
+            possessItemList.Add(slot);
 
             slot.transform.SetParent(transform.Find("Background").transform);
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
@@ -63,7 +64,7 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
-        if (data.playerPossessItemList.Count < possessItemNumber) acquirable = true;
+        if (possessItemList.Count < possessItemNumber) acquirable = true;
         else acquirable = false;
 
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
