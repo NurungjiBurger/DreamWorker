@@ -10,6 +10,8 @@ public class MonsterMovement : MonoBehaviour
 
     private bool jumping = false;
 
+    private bool isGround = true;
+    private bool trigger = false;
     private bool isMove = false;
     private int moveRandom;
 
@@ -20,8 +22,15 @@ public class MonsterMovement : MonoBehaviour
     private float recognitionRange;
     [SerializeField]
     private GameObject prefabTimer;
+    [SerializeField]
+    private float[] offsetX;
+    [SerializeField]
+    private float[] offsetY;
 
     private Timer moveTimer;
+
+    public bool Trigger { get { return trigger; } set { trigger = value; } }
+    public bool IsGround { get { return isGround; } set { isGround = value; } }
 
     public void DestroyAll()
     {
@@ -36,11 +45,11 @@ public class MonsterMovement : MonoBehaviour
             {
                 case Direction.Right:
                     animator.SetBool("move", true);
-                    transform.Translate(0.005f * GetComponent<MonsterStatus>().Status.moveSpeed, 0, 0);
+                    transform.Translate(0.005f * GetComponent<MonsterStatus>().Data.moveSpeed, 0, 0);
                     break;
                 case Direction.Left:
                     animator.SetBool("move", true);
-                    transform.Translate(-0.005f * GetComponent<MonsterStatus>().Status.moveSpeed, 0, 0);
+                    transform.Translate(-0.005f * GetComponent<MonsterStatus>().Data.moveSpeed, 0, 0);
                     break;
                 case Direction.Up:
                     break;
@@ -48,15 +57,15 @@ public class MonsterMovement : MonoBehaviour
                     animator.SetBool("move", false);
                     break;
                 default:
-                    //GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0f);
                     break;
             }
 
             if (jumping)
             {
                 jumping = false;
-                GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().Status.jumpPower);
-                //transform.Translate(0, 0.005f * GetComponent<MonsterStatus>().JumpPower, 0);
+                trigger = true;
+
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().Data.jumpPower);
             }
         }
 
@@ -102,8 +111,19 @@ public class MonsterMovement : MonoBehaviour
         }
 
         // 방향 바꾸기
-        if(dir == Direction.Right) GetComponent<SpriteRenderer>().flipX = true;
-        else if (dir == Direction.Left) GetComponent<SpriteRenderer>().flipX = false;
+        if (dir == Direction.Right)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+            GetComponent<BoxCollider2D>().offset = new Vector2(-offsetX[0], offsetY[0]);
+            GetComponent<CapsuleCollider2D>().offset = new Vector2(-offsetX[1], offsetY[1]);
+        }
+        else if (dir == Direction.Left)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+            GetComponent<BoxCollider2D>().offset = new Vector2(offsetX[0], offsetY[0]);
+            GetComponent<CapsuleCollider2D>().offset = new Vector2(offsetX[1], offsetY[1]);
+        }
+
 
         // 다 정했으니 움직이자!
         switch (moveRandom)
@@ -115,7 +135,7 @@ public class MonsterMovement : MonoBehaviour
                 dir = Direction.Left;
                 break;
             case 2:
-                if (GetComponent<MonsterSensor>().Ground)
+                if (isGround)
                 {
                     dir = Direction.Up;
                     jumping = true;

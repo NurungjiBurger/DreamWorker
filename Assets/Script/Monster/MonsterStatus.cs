@@ -29,8 +29,7 @@ public class MonsterStatus : Status
 
     private GameController gameController;
     private GameData data;
-    private MonsterData dataM;
-    private StatData status;
+    private Data dataM;
 
     private int coinindexber;
     private GameObject canvas;
@@ -38,7 +37,7 @@ public class MonsterStatus : Status
     private Image nowHpBar;
     private RectTransform hpBar;
 
-    public StatData Status { get { return status; } }
+    public Data Data { get { return dataM; } }
     public bool Boss { get { return isBoss; } }
     public int Dmg { get { return bodyDmg; } }
 
@@ -47,7 +46,7 @@ public class MonsterStatus : Status
         if (Random.Range(0, 101) <= dropRate)
         {
             GameObject tmp;
-            int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber);
+            int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber+1);
             tmp = Instantiate(gameController.PrefabReturn("Item", idx), transform.position, Quaternion.identity);
             tmp.GetComponent<ItemStatus>().itemPrfNumber = idx;
         }
@@ -60,11 +59,12 @@ public class MonsterStatus : Status
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().CalCulateExperience(experience);
 
-        data.monsters.Remove(dataM);
-        for(int idx = index;idx<data.monsters.Count;idx++)
+        data.datas.Remove(dataM);
+        for (int idx = index; idx < data.datas.Count; idx++)
         {
-            data.monsters[idx].index = idx;
+            data.datas[idx].index = idx;
         }
+
         GetComponent<MonsterAttack>().DestroyAll();
         GetComponent<MonsterMovement>().DestroyAll();
         Destroy(gameObject);
@@ -84,19 +84,16 @@ public class MonsterStatus : Status
             float[] arr2 = new float[6];
             arr[0] = maxHP; arr[1] = power;
             arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate;
-            index = data.monsters.Count;
+            index = data.datas.Count;
 
-            data.monsters.Add(new MonsterData(monsterPrfNumber, index, arr, arr2));
-            dataM = data.monsters[index];
+            data.datas.Add(new Data("Monster", monsterPrfNumber, index, arr, arr2, -1, -1));
+            dataM = data.datas[index];
 
             dataM.isBoss = isBoss;
-
-            status = dataM.status;
         }
         else
         {
-            dataM = data.monsters[index];
-            status = dataM.status;
+            dataM = data.datas[index];
         }
 
         canvas = GameObject.Find("Canvas");
@@ -133,9 +130,9 @@ public class MonsterStatus : Status
                 hpBar.transform.position = _hpBarPos;
             }
 
-            nowHpBar.fillAmount = (float)status.nowHP / (float)status.maxHP;
+            nowHpBar.fillAmount = (float)dataM.nowHP / (float)dataM.maxHP;
 
-            if (status.nowHP <= 0)
+            if (dataM.nowHP <= 0)
             {
                 if (GetComponent<MonsterStatus>().isBoss) GetComponent<Animator>().SetTrigger("die");
                 else DestroyObject();

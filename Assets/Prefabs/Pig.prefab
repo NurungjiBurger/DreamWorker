@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3735460739349392319}
   - component: {fileID: 743505792401034281}
   - component: {fileID: 243772758505591359}
+  - component: {fileID: 110791098590639281}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Monster
@@ -122,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04, y: -0.03}
+  m_Offset: {x: -0.04, y: 0.004}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.45}
+  m_Size: {x: 0.6, y: 0.38218558}
   m_EdgeRadius: 0
 --- !u!50 &4200134110261200157
 Rigidbody2D:
@@ -170,6 +171,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recognitionRange: 4
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  offsetX:
+  - -0.04
+  - 0.024
+  offsetY:
+  - 0.004
+  - -0.046
 --- !u!114 &3735460739349392319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +194,8 @@ MonoBehaviour:
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
   attackSpeed: 2
   attackType: 1
+  sizeX: 0
+  sizeY: 0
 --- !u!114 &743505792401034281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,15 +209,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  nowHP: 0
   power: 15
-  jumpPower: 0.1
+  jumpPower: 0.15
   moveSpeed: 5
+  attackSpeed: 0
   name: "\uB9AC\uBCF8\uB3FC\uC9C0"
+  defenseRate: 0
+  bloodAbsorptionRate: 0
+  evasionRate: 0
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
-  canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
+  miniIcon: {fileID: 0}
   isBoss: 0
   bodyDmg: 0
+  dropRate: 0
+  dropItemStartindexber: 0
+  dropItemFinishindexber: 5
+  dropCoin:
+  - {fileID: 684209268223019105, guid: ffc876534464390479fb614286335c96, type: 3}
+  experience: 0
+  monsterPrfNumber: 0
+  index: -1
 --- !u!114 &243772758505591359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,4 +241,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e810935c8b487e478010f1e703bf3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabTimer: {fileID: 0}
+--- !u!70 &110791098590639281
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111291780921786306}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.024, y: -0.046}
+  m_Size: {x: 0.33856025, y: 0.4177746}
+  m_Direction: 0

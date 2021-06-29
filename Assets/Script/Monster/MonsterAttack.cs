@@ -78,18 +78,18 @@ public class MonsterAttack : MonoBehaviour
 
             if (attackQuantity == 0)
             {
-                if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().Status.jumpPower) isUp = false;
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().Data.jumpPower) isUp = false;
+
                 if (attackType == 0) // 점프공격 
                 {
-                    if (isUp) transform.Translate(0, 0.075f * GetComponent<MonsterStatus>().Status.jumpPower / (float)(attackSpeed * 4), 0);
-                    else transform.Translate(-0.01f * dir * GetComponent<MonsterStatus>().Status.moveSpeed, -(0.075f * GetComponent<MonsterStatus>().Status.jumpPower) / (float)attackSpeed, 0);
+                    if (isUp) transform.Translate(0, 0.075f * GetComponent<MonsterStatus>().Data.jumpPower / (float)(attackSpeed * 4), 0);
+                    else transform.Translate(-0.01f * dir * GetComponent<MonsterStatus>().Data.moveSpeed, -(0.075f * GetComponent<MonsterStatus>().Data.jumpPower) / (float)attackSpeed, 0);
 
-                    if (GetComponent<MonsterSensor>().Ground) isAttack = false;
+                    if (GetComponent<MonsterMovement>().IsGround) isAttack = false;
                 }
                 else if (attackType == 1) // 돌진공격
                 {
-                    transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().Status.moveSpeed, 0, 0);
+                    transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().Data.moveSpeed, 0, 0);
                 }
                 else if (attackType == 2) // 본체 공격애니메이션에 데미지
                 {
@@ -119,13 +119,11 @@ public class MonsterAttack : MonoBehaviour
         attackTimer.SetCooldown(attackSpeed);
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         Setting();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) DecideAttack();

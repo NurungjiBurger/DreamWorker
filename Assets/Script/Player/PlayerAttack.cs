@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void KeyInput()
     {
-        attackSpeed = GetComponent<PlayerStatus>().Status.attackSpeed;
+        attackSpeed = GetComponent<PlayerStatus>().Data.attackSpeed;
 
         // 캐릭터 공격
         if (attackTimer.CooldownCheck())
@@ -91,9 +91,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) KeyInput();
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
-        if (data.player != null)
+        if (GetComponent<PlayerStatus>().Data != null)
         {
-            attackSpeed = GetComponent<PlayerStatus>().Status.attackSpeed;
+            attackSpeed = GetComponent<PlayerStatus>().Data.attackSpeed;
             attackTimer.SetCooldown(attackSpeed);
         }
     }

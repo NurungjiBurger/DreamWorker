@@ -19,7 +19,7 @@ public class VonleonAttackEffect : MonsterAttackEffect
         if (!judgement)
         {
             // 공격판정 생성
-            if (GetComponent<MonsterSensor>().Player) Instantiate(prefabJudgement[GetComponent<MonsterAttack>().AttackRandom], GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position, Quaternion.identity);
+            //if (GetComponent<MonsterSensor>().Player) Instantiate(prefabJudgement[GetComponent<MonsterAttack>().AttackRandom], GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position, Quaternion.identity);
 
             judgement = true;
         }

@@ -15,15 +15,16 @@ public class PlayerStatus : Status
     private int damage;
 
     private GameData data;
-    private StatData status;
+    private Data dataP = null;
     public int characterPrfNumber;
+    public int index = -1;
 
     private GameObject inventory;
     private int inventoryItemNumber;
 
-    public StatData Status { get { return status; } }
-    public int Level { get { return data.player.level; } }
-    public int HandMoney { get { return data.player.handMoney; } }
+    public Data Data { get { return dataP; } }
+    public int Level { get { return dataP.level; } }
+    public int HandMoney { get { return dataP.handMoney; } }
     public string Occupation { get { return occupation; } }
     public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
     public GameObject Inventory { get { return inventory; } }
@@ -31,30 +32,30 @@ public class PlayerStatus : Status
 
     public void CalCulateExperience(int exp)
     {
-        data.player.experience += exp;
-        data.player.needExperience = data.player.level * 100;
+        dataP.experience += exp;
+        dataP.needExperience = dataP.level * 100;
 
-        if (data.player.experience >= data.player.needExperience)
+        if (dataP.experience >= dataP.needExperience)
         {
-            status.power += 5;
-            data.player.level++;
+            dataP.power += 5;
+            dataP.level++;
 
-            switch(data.player.level)
+            switch(dataP.level)
             {
                 case 10:
-                    data.player.firstTurn = true;
+                    dataP.firstTurn = true;
                     Turn();
                     break;
                 case 30:
-                    data.player.secondTurn = true;
+                    dataP.secondTurn = true;
                     Turn();
                     break;
                 case 60:
-                    data.player.thirdTurn = true;
+                    dataP.thirdTurn = true;
                     Turn();
                     break;
                 case 100:
-                    data.player.forthTurn = true;
+                    dataP.forthTurn = true;
                     Turn();
                     break;
                 default:
@@ -66,24 +67,24 @@ public class PlayerStatus : Status
 
     public void AddHandMoney(int money)
     {
-        data.player.handMoney += money;
+        dataP.handMoney += money;
     }
 
     private void Turn()
     {
-        if(data.player.forthTurn)
+        if(dataP.forthTurn)
         {
-            status.power += 50;
+            dataP.power += 50;
         }
-        else if (data.player.thirdTurn)
-        {
-
-        }
-        else if (data.player.secondTurn)
+        else if (dataP.thirdTurn)
         {
 
         }
-        else if (data.player.firstTurn)
+        else if (dataP.secondTurn)
+        {
+
+        }
+        else if (dataP.firstTurn)
         {
 
         }
@@ -91,30 +92,33 @@ public class PlayerStatus : Status
 
     private void CalDamage()
     {
-        damage = (int)(status.power * 1.5);
+        damage = (int)(dataP.power * 1.5);
     }
 
     public void CalCulateStat(GameObject item, int how)
     {
-        int coefficient;
-
-        if (item.GetComponent<ItemStatus>().Occupation == occupation) coefficient = 2;
-        else coefficient = 1;
-
-        status.defenseRate += item.GetComponent<ItemStatus>().Status.defenseRate * how;
-        status.maxHP += item.GetComponent<ItemStatus>().Status.maxHP * how;
-        status.power += item.GetComponent<ItemStatus>().Status.power * how * coefficient;
-        if (how == 1)
+        if (item.GetComponent<ItemStatus>().itemPrfNumber != -1)
         {
-            if(item.GetComponent<ItemStatus>().Status.attackSpeed != 0 ) status.attackSpeed *= item.GetComponent<ItemStatus>().Status.attackSpeed;
-            if (item.GetComponent<ItemStatus>().Status.jumpPower != 0) status.jumpPower *= item.GetComponent<ItemStatus>().Status.jumpPower;
-            if (item.GetComponent<ItemStatus>().Status.moveSpeed != 0) status.moveSpeed *= item.GetComponent<ItemStatus>().Status.moveSpeed;
-        }
-        else
-        {
-            if (item.GetComponent<ItemStatus>().Status.attackSpeed != 0) status.attackSpeed /= item.GetComponent<ItemStatus>().Status.attackSpeed;
-            if (item.GetComponent<ItemStatus>().Status.jumpPower != 0) status.jumpPower /= item.GetComponent<ItemStatus>().Status.jumpPower;
-            if (item.GetComponent<ItemStatus>().Status.moveSpeed != 0) status.moveSpeed /= item.GetComponent<ItemStatus>().Status.moveSpeed;
+            int coefficient;
+
+            if (item.GetComponent<ItemStatus>().Occupation == occupation) coefficient = 2;
+            else coefficient = 1;
+
+            dataP.defenseRate += item.GetComponent<ItemStatus>().Data.defenseRate * how;
+            dataP.maxHP += item.GetComponent<ItemStatus>().Data.maxHP * how;
+            dataP.power += item.GetComponent<ItemStatus>().Data.power * how * coefficient;
+            if (how == 1)
+            {
+                if (item.GetComponent<ItemStatus>().Data.attackSpeed != 0) dataP.attackSpeed *= item.GetComponent<ItemStatus>().Data.attackSpeed;
+                if (item.GetComponent<ItemStatus>().Data.jumpPower != 0) dataP.jumpPower *= item.GetComponent<ItemStatus>().Data.jumpPower;
+                if (item.GetComponent<ItemStatus>().Data.moveSpeed != 0) dataP.moveSpeed *= item.GetComponent<ItemStatus>().Data.moveSpeed;
+            }
+            else
+            {
+                if (item.GetComponent<ItemStatus>().Data.attackSpeed != 0) dataP.attackSpeed /= item.GetComponent<ItemStatus>().Data.attackSpeed;
+                if (item.GetComponent<ItemStatus>().Data.jumpPower != 0) dataP.jumpPower /= item.GetComponent<ItemStatus>().Data.jumpPower;
+                if (item.GetComponent<ItemStatus>().Data.moveSpeed != 0) dataP.moveSpeed /= item.GetComponent<ItemStatus>().Data.moveSpeed;
+            }
         }
         CalDamage();
     }
@@ -126,15 +130,17 @@ public class PlayerStatus : Status
 
     private void Start()
     {
-        if (data.player == null)
+        if (index == -1)
         {
             int[] arr = new int[2];
             float[] arr2 = new float[6];
             arr[0] = maxHP; arr[1] = power;
             arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate;
-            data.player = new PlayerData(characterPrfNumber, arr, arr2);
 
-            status = data.player.status;
+            index = data.datas.Count;
+
+            data.datas.Add(new Data("Player", characterPrfNumber, index, arr, arr2, -1, -1));
+            dataP = data.datas[index];
 
             GameObject tmp;
             tmp = Instantiate(basicItem, new Vector3(-1, -1, 0), Quaternion.identity);
@@ -142,15 +148,15 @@ public class PlayerStatus : Status
         }
         else
         {
-            status = data.player.status;
+            dataP = data.datas[index];
         }
     }
 
     private void Update()
     {
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
-        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
-        else data.player.SetPosition(transform.position);
+        if (dataP == null) dataP = data.datas[index];
+        else dataP.SetPosition(transform.position);
 
         CalCulateExperience(0);
     }

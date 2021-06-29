@@ -79,15 +79,15 @@ public class ItemInformation : MonoBehaviour
 
         switch (str)
         {
-            case "Status.attackSpeed":
+            case "Data.attackSpeed":
                 if (exist)
                 {
-                    if (compare.Status.attackSpeed > now.Status.attackSpeed)
+                    if (compare.Data.attackSpeed > now.Data.attackSpeed)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
                     }
-                    else if (compare.Status.attackSpeed < now.Status.attackSpeed)
+                    else if (compare.Data.attackSpeed < now.Data.attackSpeed)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
@@ -98,17 +98,17 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.attackSpeed - compare.Status.attackSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Status.attackSpeed - compare.Status.attackSpeed)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.attackSpeed - compare.Status.attackSpeed).ToString();
+                    if (now.Data.attackSpeed - compare.Data.attackSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.attackSpeed - compare.Data.attackSpeed)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.attackSpeed - compare.Data.attackSpeed).ToString();
                 }
                 else
                 {
-                    if (now.Status.attackSpeed > 1)
+                    if (now.Data.attackSpeed > 1)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
                     }
-                    else if (now.Status.attackSpeed < 1)
+                    else if (now.Data.attackSpeed < 1)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
@@ -119,8 +119,8 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.attackSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Status.attackSpeed).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.attackSpeed - 1).ToString();
+                    if (now.Data.attackSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Data.attackSpeed).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.attackSpeed - 1).ToString();
                 }
                 break;
             case "CursedRate":
@@ -167,15 +167,15 @@ public class ItemInformation : MonoBehaviour
                     else delta.GetComponent<TextMeshProUGUI>().text += now.CursedRate.ToString();
                 }
                 break;
-            case "Status.defenseRateCapability":
+            case "Data.defenseRateCapability":
                 if (exist)
                 {
-                    if (compare.Status.defenseRate > now.Status.defenseRate)
+                    if (compare.Data.defenseRate > now.Data.defenseRate)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
                     }
-                    else if (compare.Status.defenseRate < now.Status.defenseRate)
+                    else if (compare.Data.defenseRate < now.Data.defenseRate)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
@@ -186,17 +186,17 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.defenseRate - compare.Status.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Status.defenseRate - compare.Status.defenseRate)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.defenseRate - compare.Status.defenseRate).ToString();
+                    if (now.Data.defenseRate - compare.Data.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.defenseRate - compare.Data.defenseRate)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.defenseRate - compare.Data.defenseRate).ToString();
                 }
                 else
                 {
-                    if (now.Status.defenseRate > 0)
+                    if (now.Data.defenseRate > 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
                     }
-                    else if (now.Status.defenseRate < 0)
+                    else if (now.Data.defenseRate < 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
@@ -207,8 +207,8 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Status.defenseRate).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.Status.defenseRate.ToString();
+                    if (now.Data.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Data.defenseRate).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.Data.defenseRate.ToString();
                 }
                 break;
             case "Grade":
@@ -258,12 +258,12 @@ public class ItemInformation : MonoBehaviour
             case "HP":
                 if (exist)
                 {
-                    if (compare.Status.maxHP > now.Status.maxHP)
+                    if (compare.Data.maxHP > now.Data.maxHP)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
                     }
-                    else if (compare.Status.maxHP < now.Status.maxHP)
+                    else if (compare.Data.maxHP < now.Data.maxHP)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
@@ -274,17 +274,17 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.maxHP - compare.Status.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Status.maxHP - compare.Status.maxHP)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.maxHP - compare.Status.maxHP).ToString();
+                    if (now.Data.maxHP - compare.Data.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.maxHP - compare.Data.maxHP)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.maxHP - compare.Data.maxHP).ToString();
                 }
                 else
                 {
-                    if (now.Status.maxHP > 0)
+                    if (now.Data.maxHP > 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
                     }
-                    else if (now.Status.maxHP < 0)
+                    else if (now.Data.maxHP < 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
@@ -295,19 +295,19 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Status.maxHP).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.Status.maxHP.ToString();
+                    if (now.Data.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Data.maxHP).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.Data.maxHP.ToString();
                 }
                 break;
             case "Jump":
                 if (exist)
                 {
-                    if (compare.Status.jumpPower > now.Status.jumpPower)
+                    if (compare.Data.jumpPower > now.Data.jumpPower)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
                     }
-                    else if (compare.Status.jumpPower < now.Status.jumpPower)
+                    else if (compare.Data.jumpPower < now.Data.jumpPower)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
@@ -318,17 +318,17 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.jumpPower - compare.Status.jumpPower < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Status.jumpPower - compare.Status.jumpPower)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.jumpPower - compare.Status.jumpPower).ToString();
+                    if (now.Data.jumpPower - compare.Data.jumpPower < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.jumpPower - compare.Data.jumpPower)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.jumpPower - compare.Data.jumpPower).ToString();
                 }
                 else
                 {
-                    if (now.Status.jumpPower > 1)
+                    if (now.Data.jumpPower > 1)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
                     }
-                    else if (now.Status.jumpPower < 1)
+                    else if (now.Data.jumpPower < 1)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
@@ -339,19 +339,19 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.jumpPower < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Status.jumpPower).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.jumpPower - 1 ).ToString();
+                    if (now.Data.jumpPower < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Data.jumpPower).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.jumpPower - 1 ).ToString();
                 }
                 break;
-            case "Status.moveSpeed":
+            case "Data.moveSpeed":
                 if (exist)
                 {
-                    if (compare.Status.moveSpeed > now.Status.moveSpeed)
+                    if (compare.Data.moveSpeed > now.Data.moveSpeed)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
                     }
-                    else if (compare.Status.moveSpeed < now.Status.moveSpeed)
+                    else if (compare.Data.moveSpeed < now.Data.moveSpeed)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
@@ -362,17 +362,17 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.moveSpeed - compare.Status.moveSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Status.moveSpeed - compare.Status.moveSpeed)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.moveSpeed - compare.Status.moveSpeed).ToString();
+                    if (now.Data.moveSpeed - compare.Data.moveSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.moveSpeed - compare.Data.moveSpeed)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.moveSpeed - compare.Data.moveSpeed).ToString();
                 }
                 else
                 {
-                    if (now.Status.moveSpeed > 1)
+                    if (now.Data.moveSpeed > 1)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
                     }
-                    else if (now.Status.moveSpeed < 1)
+                    else if (now.Data.moveSpeed < 1)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
@@ -383,19 +383,19 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.moveSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Status.moveSpeed).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.moveSpeed - 1).ToString();
+                    if (now.Data.moveSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Data.moveSpeed).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.moveSpeed - 1).ToString();
                 }
                 break;
-            case "Status.power":
+            case "Data.power":
                 if (exist)
                 {
-                    if (compare.Status.power > now.Status.power)
+                    if (compare.Data.power > now.Data.power)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
                     }
-                    else if (compare.Status.power < now.Status.power)
+                    else if (compare.Data.power < now.Data.power)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
@@ -406,17 +406,17 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.power - compare.Status.power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Status.power - compare.Status.power)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Status.power - compare.Status.power).ToString();
+                    if (now.Data.power - compare.Data.power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.power - compare.Data.power)).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.power - compare.Data.power).ToString();
                 }
                 else
                 {
-                    if (now.Status.power > 0)
+                    if (now.Data.power > 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
                     }
-                    else if (now.Status.power < 0)
+                    else if (now.Data.power < 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
@@ -427,8 +427,8 @@ public class ItemInformation : MonoBehaviour
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Status.power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Status.power).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.Status.power.ToString();
+                    if (now.Data.power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Data.power).ToString();
+                    else delta.GetComponent<TextMeshProUGUI>().text += now.Data.power.ToString();
                 }
                 break;
             default:
@@ -448,12 +448,12 @@ public class ItemInformation : MonoBehaviour
         transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().MountingPart;
         transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Occupation;
         // 스탯 패널
-        transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:0.#}", item.GetComponent<ItemStatus>().Status.attackSpeed.ToString());
-        CompareToInspector("Status.attackSpeed", transform.GetChild(3).GetChild(0).Find("Delta").gameObject);
+        transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:0.#}", item.GetComponent<ItemStatus>().Data.attackSpeed.ToString());
+        CompareToInspector("Data.attackSpeed", transform.GetChild(3).GetChild(0).Find("Delta").gameObject);
         transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = "저주율  " + item.GetComponent<ItemStatus>().CursedRate.ToString();
         CompareToInspector("CursedRate", transform.GetChild(3).GetChild(1).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(2).GetComponent<TextMeshProUGUI>().text = "방어력  " + item.GetComponent<ItemStatus>().Status.defenseRate.ToString();
-        CompareToInspector("Status.defenseRateCapability", transform.GetChild(3).GetChild(2).Find("Delta").gameObject);
+        transform.GetChild(3).GetChild(2).GetComponent<TextMeshProUGUI>().text = "방어력  " + item.GetComponent<ItemStatus>().Data.defenseRate.ToString();
+        CompareToInspector("Data.defenseRateCapability", transform.GetChild(3).GetChild(2).Find("Delta").gameObject);
         switch (item.GetComponent<ItemStatus>().ItemGrade)
         {
             case 0:
@@ -477,14 +477,14 @@ public class ItemInformation : MonoBehaviour
         }
         transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>().text = "등급  " + grade;
         CompareToInspector("Grade", transform.GetChild(3).GetChild(3).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(4).GetComponent<TextMeshProUGUI>().text = "체력  " + item.GetComponent<ItemStatus>().Status.maxHP.ToString();
+        transform.GetChild(3).GetChild(4).GetComponent<TextMeshProUGUI>().text = "체력  " + item.GetComponent<ItemStatus>().Data.maxHP.ToString();
         CompareToInspector("HP", transform.GetChild(3).GetChild(4).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(5).GetComponent<TextMeshProUGUI>().text = "점프력  " + item.GetComponent<ItemStatus>().Status.jumpPower.ToString();
+        transform.GetChild(3).GetChild(5).GetComponent<TextMeshProUGUI>().text = "점프력  " + item.GetComponent<ItemStatus>().Data.jumpPower.ToString();
         CompareToInspector("Jump", transform.GetChild(3).GetChild(5).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(6).GetComponent<TextMeshProUGUI>().text = "이동속도  " + item.GetComponent<ItemStatus>().Status.moveSpeed.ToString();
-        CompareToInspector("Status.moveSpeed", transform.GetChild(3).GetChild(6).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(7).GetComponent<TextMeshProUGUI>().text = "공격력  " + item.GetComponent<ItemStatus>().Status.power.ToString();
-        CompareToInspector("Status.power", transform.GetChild(3).GetChild(7).Find("Delta").gameObject);
+        transform.GetChild(3).GetChild(6).GetComponent<TextMeshProUGUI>().text = "이동속도  " + item.GetComponent<ItemStatus>().Data.moveSpeed.ToString();
+        CompareToInspector("Data.moveSpeed", transform.GetChild(3).GetChild(6).Find("Delta").gameObject);
+        transform.GetChild(3).GetChild(7).GetComponent<TextMeshProUGUI>().text = "공격력  " + item.GetComponent<ItemStatus>().Data.power.ToString();
+        CompareToInspector("Data.power", transform.GetChild(3).GetChild(7).Find("Delta").gameObject);
     }
 
     public void InputInformation(GameObject obj)

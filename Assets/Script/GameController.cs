@@ -80,6 +80,8 @@ public class GameController : MonoBehaviour
 
         item.gameObject.SetActive(false);
 
+        item.GetComponent<ItemStatus>().Data.isAcquired = true;
+
         return tmp.GetComponent<Slot>();
     }
 
@@ -127,6 +129,7 @@ public class GameController : MonoBehaviour
     private void CreateRoom(int cnt)
     {
         int mapPrfNumber;
+
         if (cnt > 0)
         {
             CreateRoom(cnt - 1);
@@ -135,12 +138,15 @@ public class GameController : MonoBehaviour
         {
             pastSelectDirection = 0;
             mapPrfNumber = Random.Range(0, prefabMapDesigns.Length);
-            room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
-            room[0].transform.SetParent(GameObject.Find("Grid").transform);
             map.Add(Instantiate(prefabMapDesigns[mapPrfNumber], new Vector3(0, 0, 0), Quaternion.identity));
             map[0].transform.SetParent(GameObject.Find("Grid").transform);
+            room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
+            room[0].transform.SetParent(GameObject.Find("Grid").transform);
 
-            data.maps.Add(new MapData(mapPrfNumber, data.maps.Count, 4, -1));
+            room[0].GetComponent<Room>().map = map[0];
+            room[0].GetComponent<Room>().mapPrfNumber = mapPrfNumber;
+            room[0].GetComponent<Room>().dir = 4;
+            room[0].GetComponent<Room>().sel = -1;
 
             return;
         }
@@ -183,15 +189,17 @@ public class GameController : MonoBehaviour
 
             if (create)
             {
-                room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
-                room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
                 if (cnt == SubStageNumber) mapPrfNumber = prefabMapDesigns.Length - 1;
                 else mapPrfNumber = Random.Range(0, prefabMapDesigns.Length);
                 map.Add(Instantiate(prefabMapDesigns[mapPrfNumber], position, Quaternion.identity));
                 map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+                room.Add(Instantiate(prefabRoom, position, Quaternion.identity));
+                room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
 
-                room[room.Count-1].GetComponent<Room>().index = data.maps.Count;
-                data.maps.Add(new MapData(mapPrfNumber, data.maps.Count, direction, number));
+                room[room.Count - 1].GetComponent<Room>().map = map[map.Count - 1];
+                room[room.Count - 1].GetComponent<Room>().mapPrfNumber = mapPrfNumber;
+                room[room.Count - 1].GetComponent<Room>().dir = direction;
+                room[room.Count - 1].GetComponent<Room>().sel = number;
 
                 PortalCreate(selectRoom, direction);
 
@@ -209,12 +217,13 @@ public class GameController : MonoBehaviour
     {
         revert = false;
 
-        if (data.player == null)
+        if (data.datas.Count == 0)
         {
             player = Instantiate(prefabCharacters[0], new Vector3(0, 0, 0), Quaternion.identity);
+
             player.GetComponent<PlayerStatus>().characterPrfNumber = 0;
 
-            data.stageNumber = 0;
+            data.stageNumber = 1;
             data.subStageNumber = 0;
 
             data.stageEntrance = false;  // 스테이지에 처음 들어왔는가?
@@ -242,8 +251,7 @@ public class GameController : MonoBehaviour
     {
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
         else
-        {
-            Debug.Log(data.items.Count);
+        {            
 
             if (SceneManager.GetActiveScene().name == "MainMenu")
             {
@@ -269,8 +277,8 @@ public class GameController : MonoBehaviour
 
                     textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-                    textHp.text = player.GetComponent<PlayerStatus>().Status.nowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().Status.maxHP.ToString();
-                    // nowHPbar.fillAmount = (float)player.Getnowhp() / (float)player.Getmaxhp();
+                    textHp.text = player.GetComponent<PlayerStatus>().Data.nowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().Data.maxHP.ToString();
+                    nowHPBar.fillAmount = (float)player.GetComponent<PlayerStatus>().Data.nowHP / (float)player.GetComponent<PlayerStatus>().Data.maxHP;
 
 
                     if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
@@ -278,22 +286,25 @@ public class GameController : MonoBehaviour
 
                     GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y, -10), Quaternion.identity);
 
+                    if (Input.GetKeyDown(KeyCode.H))
+                    {
+                        Debug.Log("데이터의 수 " + data.datas.Count);
+                        for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName);
+                    }
+
                     if (data.stageNumber <= 5) // // 5스테이지가 마지막
                     {
                         data.goNext = false;
                         if (!data.stageEntrance) // 처음 스테이지에 입장
                         {
-                            Debug.Log("스테이지 처음진입");
                             data.stageEntrance = true;
 
                             data.subStageNumber = Random.Range(10, 16);
-                            //subStageNumber = 0;
 
                             CreateRoom(data.subStageNumber);
                         }
                         else
                         {
-                            Debug.Log("스테이지 중복진입");
                             CheckRoom("visible");
                         }
                     }
@@ -311,34 +322,41 @@ public class GameController : MonoBehaviour
     {
         GameObject obj;
 
-        // map
-        for (int idx = 0; idx < data.maps.Count; idx++ )
+        for(int idx =0; idx < data.datas.Count; idx++)
         {
-            room.Add(obj = Instantiate(prefabRoom, data.maps[idx].Position(), Quaternion.identity));
-            room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
-            map.Add(Instantiate(prefabMapDesigns[data.maps[idx].mapPrfNumber], data.maps[idx].Position(), Quaternion.identity));
-            map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
-            obj.GetComponent<Room>().index = data.maps[idx].index;
+            //Debug.Log(data.datas[idx].structName + "  " + idx);
+            if (data.datas[idx].structName == "Map")
+            {
+                map.Add(Instantiate(prefabMapDesigns[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity));
+                map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+                room.Add(obj = Instantiate(prefabRoom, data.datas[idx].Position(), Quaternion.identity));
+                room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
 
-            if (data.maps[idx].selectRoomIndex != -1) PortalCreate(room[data.maps[idx].selectRoomIndex], data.maps[idx].portalDirection);
-        }
+                room[room.Count - 1].GetComponent<Room>().map = map[map.Count - 1];
 
-        // player
-        player = Instantiate(prefabCharacters[data.player.characterPrfNumber], data.player.Position(), Quaternion.identity);
+                obj.GetComponent<Room>().index = idx;
 
-        // item
-        for (int idx = 0; idx < data.items.Count; idx++ )
-        {
-            obj = Instantiate(prefabItems[data.items[idx].itemPrfNumber], data.items[idx].Position(), Quaternion.identity);
-            obj.GetComponent<ItemStatus>().index = data.items[idx].index;
-        }
+                if (data.datas[idx].selectRoomIndex != -1) PortalCreate(room[data.datas[idx].selectRoomIndex], data.datas[idx].portalDirection);
+            }
+            else if (data.datas[idx].structName == "Player")
+            {
+                player = Instantiate(prefabCharacters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
 
-        // monster
-        for (int idx = 0; idx < data.monsters.Count; idx++)
-        {
-            if (data.monsters[idx].isBoss) obj = Instantiate(prefabBossMonsters[data.monsters[idx].monsterPrfNumber], data.monsters[idx].Position(), Quaternion.identity);
-            else obj = Instantiate(prefabMonsters[data.monsters[idx].monsterPrfNumber], data.monsters[idx].Position(), Quaternion.identity);
-            obj.GetComponent<MonsterStatus>().index = data.monsters[idx].index;
+                player.GetComponent<PlayerStatus>().index = idx;
+            }
+            else if (data.datas[idx].structName == "Item")
+            {
+                obj = Instantiate(prefabItems[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
+
+                obj.GetComponent<ItemStatus>().index = idx;
+            }
+            else if (data.datas[idx].structName == "Monster")
+            {
+                if (data.datas[idx].isBoss) obj = Instantiate(prefabBossMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
+                else obj = Instantiate(prefabMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
+
+                obj.GetComponent<MonsterStatus>().index = idx;
+            }
         }
     }
 }

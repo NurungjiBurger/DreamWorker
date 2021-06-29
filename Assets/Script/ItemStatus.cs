@@ -20,22 +20,26 @@ public class ItemStatus : Status
 
     public int itemPrfNumber = -1;
     public int index = -1;
-    public bool done = false;
 
     private GameData data;
-    private StatData status;
+    private Data dataI;
+
     private GameObject player;
 
-    public StatData Status { get { return status; } }
-    public int CursedRate { get { return data.items[index].cursedRate; } set { data.items[index].cursedRate = value; } }
+    public Data Data { get { return dataI; } }
+    public int CursedRate { get { return dataI.cursedRate; } set { dataI.cursedRate = value; } }
     public int ItemGrade { get { return (int)grade; } }
     public string MountingPart { get { return mountingPart; } }
-    public bool IsMount { get { return data.items[index].isMount; } set { data.items[index].isMount = value; } }
+    public bool IsMount { get { return dataI.isMount; } set { dataI.isMount = value; } }
     public string Occupation { get { return dedicatedOccupation; } }
 
     public void DestoryAll()
     {
-        data.items.Remove(data.items[index]);
+        data.datas.Remove(dataI);
+        for (int idx = index; idx < data.datas.Count; idx++)
+        {
+            data.datas[index].index = idx;
+        }
         Destroy(gameObject);
     }
 
@@ -44,24 +48,24 @@ public class ItemStatus : Status
         switch(MountingPart)
         {
             case "Head":
-                Debug.Log("체력 감소" + (1 - ((float)data.items[index].cursedRate / 100)).ToString());
-                status.maxHP = (int)((1.0f - ((float)data.items[index].cursedRate / 100)) * (float)status.maxHP);
+                Debug.Log("체력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+                dataI.maxHP = (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)dataI.maxHP);
                 break;
             case "Hand":
-                Debug.Log("공격속도 감소" + (1 - ((float)data.items[index].cursedRate / 100)).ToString());
-                status.attackSpeed = (1.0f - ((float)data.items[index].cursedRate / 100)) * status.attackSpeed;
+                Debug.Log("공격속도 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+                dataI.attackSpeed = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.attackSpeed;
                 break;
             case "Foot":
-                Debug.Log("이동속도 감소" + (1 - ((float)data.items[index].cursedRate / 100)).ToString());
-                status.moveSpeed = (1.0f - ((float)data.items[index].cursedRate / 100)) * status.moveSpeed;
+                Debug.Log("이동속도 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+                dataI.moveSpeed = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.moveSpeed;
                 break;
             case "Body":
-                Debug.Log("점프력 감소" + (1 - ((float)data.items[index].cursedRate / 100)).ToString());
-                status.jumpPower = (1.0f - ((float)data.items[index].cursedRate / 100)) * status.jumpPower;
+                Debug.Log("점프력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+                dataI.jumpPower = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.jumpPower;
                 break;
             case "Weapon":
-                Debug.Log("공격력 감소" + (1 - ((float)data.items[index].cursedRate / 100)).ToString());
-                status.power = (int)((1.0f - ((float)data.items[index].cursedRate / 100)) * (float)status.power);
+                Debug.Log("공격력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+                dataI.power = (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)dataI.power);
                 break;
             default:
                 break;
@@ -70,12 +74,12 @@ public class ItemStatus : Status
 
     private void StatUP()
     {
-        status.maxHP = (int)(status.maxHP * 1.5f);
-        status.power = (int)(status.power * 1.3f);
-        status.jumpPower = status.jumpPower * 1.2f;
-        status.moveSpeed = status.moveSpeed * 1.2f;
-        status.attackSpeed = status.attackSpeed * 1.1f;
-        status.defenseRate = status.defenseRate * 1.2f;
+        dataI.maxHP = (int)(dataI.maxHP * 1.5f);
+        dataI.power = (int)(dataI.power * 1.3f);
+        dataI.jumpPower = dataI.jumpPower * 1.2f;
+        dataI.moveSpeed = dataI.moveSpeed * 1.2f;
+        dataI.attackSpeed = dataI.attackSpeed * 1.1f;
+        dataI.defenseRate = dataI.defenseRate * 1.2f;
     }
 
     private int OccupationCheck()
@@ -99,21 +103,20 @@ public class ItemStatus : Status
         inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
 
         player = GameObject.FindGameObjectWithTag("Player");
-        if (index == -1 && itemPrfNumber != -1)
+        if (index == -1)
         {
             int[] arr = new int[2];
             float[] arr2 = new float[6];
             arr[0] = maxHP; arr[1] = power;
             arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate;
-            index = data.items.Count;
+            index = data.datas.Count;
 
-            data.items.Add(new ItemData(itemPrfNumber, index, arr, arr2));
+            data.datas.Add(new Data("Item", itemPrfNumber, index, arr, arr2, -1, -1));
+            dataI = data.datas[index];
 
-            data.items[index].cursedRate = Random.Range(0, 50); // 저주율 수치 조정 필요
-            data.items[index].isMount = false;
-            data.items[index].SetPosition(transform.position);
-
-            status = data.items[index].status;
+            dataI.cursedRate = Random.Range(0, 50); // 저주율 수치 조정 필요
+            dataI.isMount = false;
+            dataI.SetPosition(transform.position);
 
             CurseApply();
 
@@ -121,19 +124,22 @@ public class ItemStatus : Status
         }
         else
         {
-            itemPrfNumber = data.items[index].itemPrfNumber;
-            status = data.items[index].status;
+            dataI = data.datas[index];
+            CursedRate = dataI.cursedRate;
 
-            CursedRate = data.items[index].cursedRate;
-
-            if (data.items[index].isMount) inspector.GetComponent<Inspector>().AddToInspector(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject));
-            else inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject));
+            if (dataI.isAcquired)
+            {
+                if (dataI.isMount) inspector.GetComponent<Inspector>().AddToInspector(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject));
+                else inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject));
+            }
         }
-        done = true;
     }
 
     private void Update()
     {
         if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
+
+        if (dataI == null) dataI = data.datas[index];
+        else dataI.SetPosition(transform.position);
     }
 }

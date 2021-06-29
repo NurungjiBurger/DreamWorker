@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7797724035354353523}
   - component: {fileID: 1897162999201821734}
   - component: {fileID: 7001782665145193983}
+  - component: {fileID: 3607527015006764444}
   m_Layer: 0
   m_Name: WitchCat
   m_TagString: Monster
@@ -123,7 +124,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01, y: -0.15}
+  m_Offset: {x: 0.08, y: -0.065}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -134,7 +135,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47, y: 0.6}
+  m_Size: {x: 0.64205027, y: 0.6030722}
   m_EdgeRadius: 0
 --- !u!50 &5261921711380161352
 Rigidbody2D:
@@ -174,6 +175,8 @@ MonoBehaviour:
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
   attackSpeed: 3
   attackType: 0
+  sizeX: 0
+  sizeY: 0
 --- !u!114 &5687430520542662947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recognitionRange: 4
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  offsetX:
+  - 0.08
+  - 0.053
+  offsetY:
+  - -0.065
+  - -0.144
 --- !u!114 &7797724035354353523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e810935c8b487e478010f1e703bf3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
 --- !u!114 &1897162999201821734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,15 +222,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 300
-  nowHP: 0
   power: 5
   jumpPower: 0.1
   moveSpeed: 3
+  attackSpeed: 0
   name: "\uB9C8\uB140\uACE0\uC591\uC774"
+  defenseRate: 0
+  bloodAbsorptionRate: 0
+  evasionRate: 0
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
-  canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
+  miniIcon: {fileID: 0}
   isBoss: 0
   bodyDmg: 0
+  dropRate: 0
+  dropItemStartindexber: 0
+  dropItemFinishindexber: 5
+  dropCoin:
+  - {fileID: 684209268223019105, guid: ffc876534464390479fb614286335c96, type: 3}
+  experience: 0
+  monsterPrfNumber: 0
+  index: -1
 --- !u!114 &7001782665145193983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,3 +257,19 @@ MonoBehaviour:
   prefabEffect:
   - {fileID: 2418626651746336771, guid: a38e8670490713d40bad5c405f10d7b9, type: 3}
   prefabJudgement: []
+--- !u!70 &3607527015006764444
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550942159688109516}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.053, y: -0.144}
+  m_Size: {x: 0.20475183, y: 0.577346}
+  m_Direction: 0

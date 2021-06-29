@@ -8,9 +8,14 @@ public class Room : MonoBehaviour
 {
 
     private GameData data;
-    public int index = -1;
+    private Data dataM = null;
 
-    private GameObject map;
+    public int mapPrfNumber;
+    public int index = -1;
+    public int dir = -1;
+    public int sel = -1;
+    public GameObject map;
+
     private GameObject player;
     private GameController gameController;
 
@@ -25,7 +30,7 @@ public class Room : MonoBehaviour
 
     private bool monsterPresence;
 
-    public bool Visible { get { return data.maps[index].visible; } }
+    public bool Visible { get { return dataM.visible; } }
 
     public void DestoryAll()
     {
@@ -37,12 +42,17 @@ public class Room : MonoBehaviour
             portals.Remove(portals[0]);
             Destroy(tmp);
         }
+
+        data.datas.Remove(dataM);
+        for (int idx = index; idx < data.datas.Count; idx++)
+        {
+            data.datas[idx].index = idx;
+        }
     }
 
     public GameObject CreatePortal(int direction, bool value)
     {
         while (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        while (!map) map = gameController.Map[index];
 
         GameObject portal;
 
@@ -96,10 +106,10 @@ public class Room : MonoBehaviour
 
     private void CreateStage(bool boss) 
     {
-        if (!data.maps[index].monsterCreate)
+        if (!dataM.monsterCreate)
         {
-            data.maps[index].monsterCreate = true;
-            if (index != 0) // 부스테이지 번호가 0 일 경우 몬스터가 없는 스테이지.
+            dataM.monsterCreate = true;
+            if (data.datas[index-1].structName == "Map")
             {
                 if (boss)
                 {
@@ -107,8 +117,9 @@ public class Room : MonoBehaviour
                 }
                 else
                 {
-                    population = Random.Range(8, 10);  // 현재 스테이지에 생성할 몬스터의 마릿 수.
-                    //population = 2;
+                    population = Random.Range(8, 10);
+                    //population = 1;
+
                     for (int i = 0; i < population; i++)
                     {
                         int type;
@@ -117,8 +128,7 @@ public class Room : MonoBehaviour
                         List<float> range = map.GetComponent<Map>().SafeMonsterPosition;
                         int cnt = Random.Range(0, range.Count / 4);
                         safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);
-                        type = 0;
-                        CreateMonster(gameController.PrefabReturn("Monster", type), safePosition).GetComponent<MonsterStatus>().monsterPrfNumber = type;    // 랜덤 좌표에 몬스터 생성
+                        CreateMonster(gameController.PrefabReturn("Monster", type), safePosition).GetComponent<MonsterStatus>().monsterPrfNumber = type;
                     }
                 }
             }
@@ -134,13 +144,17 @@ public class Room : MonoBehaviour
     {
         if (index == -1)
         {
-            index = data.maps.Count-1;
+            index = data.datas.Count;
+
+            data.datas.Add(new Data("Map", mapPrfNumber, index, null, null, dir, sel));
+
+            dataM = data.datas[index];
 
             monsterPresence = false;
         }
         else
         {
-
+            dataM = data.datas[index];
         }
     }
 
@@ -152,26 +166,24 @@ public class Room : MonoBehaviour
             {
                 if (player.transform.position.y <= transform.position.y + 7.5f && player.transform.position.y >= transform.position.y - 7.5f)
                 {
-                    if (!data.maps[index].isClear)
+                    if (!dataM.isClear)
                     {
-                        if (!data.maps[index].subStageEntrance)
+                        if (!dataM.subStageEntrance)
                         {
-                            data.maps[index].visible = true;
-                            data.maps[index].subStageEntrance = true;
+                            dataM.visible = true;
+                            dataM.subStageEntrance = true;
 
                             if (index != 0 && index == gameController.SubStageNumber)
                             {
-                                Debug.Log("방 처음진입");
                                 CreateStage(true);
                             }
                             else CreateStage(false);
                         }
                         else    // 게임 진행중 
                         {
-                            Debug.Log("방 중복진입");
                             if (!monsterPresence)
                             {
-                                data.maps[index].isClear = true;
+                                dataM.isClear = true;
                             }
                         }                
                     }
@@ -183,14 +195,11 @@ public class Room : MonoBehaviour
     private void Update()
     {
         if (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        else
-        {
-            if (!map) map = gameController.Map[index];
-        }
+
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
-        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
-        else data.maps[index].SetPosition(transform.position);
+        if (dataM == null) dataM = data.datas[index];
+        else dataM.SetPosition(transform.position);
 
         ManageMap();
                

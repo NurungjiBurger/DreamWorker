@@ -18,7 +18,7 @@ public class Parabola : MonoBehaviour
         int x;
         if (Random.Range(0, 2) == 0) x = Random.Range(-5, 0);
         else x = Random.Range(1, 6);
-        targetPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z);
+        targetPoint = new Vector3(transform.position.x + x, transform.position.y + 1, transform.position.z);
         m_StartPosition = transform.position;
     }
 
@@ -43,7 +43,7 @@ public class Parabola : MonoBehaviour
         }
         else
         {
-           if (!isGround) GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            if (!isGround) GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -54,13 +54,21 @@ public class Parabola : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Wall"))
         {
-            //isarrived = true;
             GetComponent<Collider2D>().isTrigger = false;
-            isGround = true;
+            isArrived = true;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            GetComponent<Collider2D>().isTrigger = true;
         }
 
+        if (collision.CompareTag("Ground") && GetComponent<Rigidbody2D>().velocity.y < 0)
+        {
+            isGround = true;
+            GetComponent<Collider2D>().isTrigger = false;
+            isArrived = true;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<Collider2D>().isTrigger = true;
+        }
     }
 }

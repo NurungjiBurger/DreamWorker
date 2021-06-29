@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7416772363351140231}
   - component: {fileID: -3254717292540590565}
   - component: {fileID: 2604391568266412114}
+  - component: {fileID: 7744685219010441108}
   m_Layer: 0
   m_Name: vonleon
   m_TagString: Monster
@@ -143,6 +144,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recognitionRange: 5
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  offsetX:
+  - 0.03
+  - -0.09
+  offsetY:
+  - 0.28
+  - -0.52
 --- !u!114 &-4948215090141789483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e810935c8b487e478010f1e703bf3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
 --- !u!114 &-6844420161648803706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,15 +175,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10000
-  nowHP: 0
   power: 30
   jumpPower: 0.2
   moveSpeed: 2
+  attackSpeed: 0
   name: "\uBC18\uB808\uC628"
+  defenseRate: 0
+  bloodAbsorptionRate: 0
+  evasionRate: 0
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
-  canvas: {fileID: 8987463710341471560, guid: 481ba70bfd2671044893c22b812bceee, type: 3}
+  miniIcon: {fileID: 0}
   isBoss: 1
   bodyDmg: 30
+  dropRate: 0
+  dropItemStartindexber: 0
+  dropItemFinishindexber: 5
+  dropCoin:
+  - {fileID: 452009611832236988, guid: bd9e842d01a16f449bf9b64b774271d2, type: 3}
+  - {fileID: 684209268223019105, guid: ffc876534464390479fb614286335c96, type: 3}
+  experience: 0
+  monsterPrfNumber: 0
+  index: -1
 --- !u!114 &7416772363351140231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +247,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03, y: 0.28}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -240,5 +258,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5, y: 5.08}
+  m_Size: {x: 5.4846005, y: 4.5086756}
   m_EdgeRadius: 0
+--- !u!70 &7744685219010441108
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8887170625428642108}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.09, y: -0.52}
+  m_Size: {x: 2.1921926, y: 3.9061673}
+  m_Direction: 0

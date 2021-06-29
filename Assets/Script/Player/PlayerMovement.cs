@@ -54,8 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void KeyInput()
     {
-        jumpPower = GetComponent<PlayerStatus>().Status.jumpPower;
-        moveSpeed = GetComponent<PlayerStatus>().Status.moveSpeed;
+        jumpPower = GetComponent<PlayerStatus>().Data.jumpPower;
+        moveSpeed = GetComponent<PlayerStatus>().Data.moveSpeed;
 
         animator.SetBool("move", false);
         if (Input.GetKey(KeyCode.RightArrow))
@@ -97,10 +97,14 @@ public class PlayerMovement : MonoBehaviour
         {
             case Direction.Right:
                 GetComponent<SpriteRenderer>().flipX = true;
+                GetComponent<BoxCollider2D>().offset = new Vector2(-0.065f, 0.057f);
+                GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.07f, -0.002f);
                 GetComponent<Rigidbody2D>().AddForce(Vector2.right * moveSpeed);
                 break;
             case Direction.Left:
                 GetComponent<SpriteRenderer>().flipX = false;
+                GetComponent<BoxCollider2D>().offset = new Vector2(0.065f, 0.057f);
+                GetComponent<CapsuleCollider2D>().offset = new Vector2(0.07f, -0.002f);
                 GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
                 break;
             case Direction.Up:

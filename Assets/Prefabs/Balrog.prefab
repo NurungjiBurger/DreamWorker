@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -1797472146437140349}
   - component: {fileID: 8960678136742002029}
   - component: {fileID: -5352225682186780840}
+  - component: {fileID: 3400459876192369940}
   m_Layer: 0
   m_Name: Balrog
   m_TagString: Monster
@@ -123,7 +124,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04, y: -0.2}
+  m_Offset: {x: 0.0146, y: 0.104}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -134,7 +135,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.2}
+  m_Size: {x: 1.5877416, y: 1.3571869}
   m_EdgeRadius: 0
 --- !u!50 &7842352421957864566
 Rigidbody2D:
@@ -175,22 +176,22 @@ MonoBehaviour:
   moveSpeed: 2
   attackSpeed: 0
   name: "\uBC1C\uB85D"
-  defenseCapability: 0
+  defenseRate: 0
+  bloodAbsorptionRate: 0
+  evasionRate: 0
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   miniIcon: {fileID: 0}
   isBoss: 1
   bodyDmg: 10
   dropRate: 100
-  dropItemList:
-  - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
-  - {fileID: 2714758718541124912, guid: a99b15a9ec2eda6439edb6a6acf2b221, type: 3}
-  - {fileID: 6968412572008391060, guid: 1a65fa89ae7152643bd0d29141f808cd, type: 3}
-  - {fileID: 4432175680456323203, guid: eedcdf2ba92557843bcd0f3bdbb0db24, type: 3}
-  - {fileID: 6724252274442110958, guid: 59126ff7bf59f2d448f3dd4cd7165a70, type: 3}
+  dropItemStartindexber: 0
+  dropItemFinishindexber: 5
   dropCoin:
   - {fileID: 452009611832236988, guid: bd9e842d01a16f449bf9b64b774271d2, type: 3}
   - {fileID: 684209268223019105, guid: ffc876534464390479fb614286335c96, type: 3}
   experience: 100
+  monsterPrfNumber: 0
+  index: -1
 --- !u!114 &-6306246261198616340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +218,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recognitionRange: 5
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  offsetX:
+  - 0.0146
+  - 0.041
+  offsetY:
+  - 0.104
+  - -0.25
 --- !u!114 &8960678136742002029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,3 +261,19 @@ MonoBehaviour:
   prefabJudgement:
   - {fileID: 2791982713275079274, guid: da6a4bd6e458a784999cafbfdd2ebe7d, type: 3}
   - {fileID: 2045336948463158510, guid: b689289ba7e8ffc488be5755f9a26f83, type: 3}
+--- !u!70 &3400459876192369940
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842352421957864564}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.041, y: -0.25}
+  m_Size: {x: 0.7662272, y: 1.101103}
+  m_Direction: 0

@@ -9,7 +9,6 @@ public class PlayerSensor : MonoBehaviour
 
     private Timer hitTimer;
 
-    private Collision2D lastCollisionGround = null;
     private Collider2D lastColliderGround = null;
 
     private bool ongoing = false;
@@ -22,7 +21,7 @@ public class PlayerSensor : MonoBehaviour
     public Collider2D LastColliderGround { get { return lastColliderGround; } }
     public Vector3 TeleportPosition { get { return teleportPosition; } }
 
-    // 트리거 충돌
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
@@ -31,7 +30,6 @@ public class PlayerSensor : MonoBehaviour
             {
                 if (collision.CompareTag("Ground"))
                 {
-                    Debug.Log("걸림");
                     GetComponent<BoxCollider2D>().isTrigger = false;
                     GetComponent<CapsuleCollider2D>().isTrigger = false;
                     GetComponent<PlayerMovement>().Trigger = false;
@@ -64,7 +62,6 @@ public class PlayerSensor : MonoBehaviour
                     Destroy(collision.gameObject);
                 }
             }
-            //
         }
 
     } 
@@ -77,7 +74,6 @@ public class PlayerSensor : MonoBehaviour
             {
                 if (collision.CompareTag("Ground"))
                 {
-                    Debug.Log("여기도걸림");
                     ongoing = true;
                     GetComponent<BoxCollider2D>().isTrigger = true;
                     GetComponent<CapsuleCollider2D>().isTrigger = true;
@@ -86,25 +82,20 @@ public class PlayerSensor : MonoBehaviour
                 }
             }
 
-            if (collision.CompareTag("Ground"))
+            if (collision.CompareTag("Wall"))
             {
-                lastColliderGround = collision;
+                GetComponent<BoxCollider2D>().isTrigger = false;
+                GetComponent<CapsuleCollider2D>().isTrigger = false;
+                GetComponent<PlayerMovement>().Trigger = false;
             }
+
             if (collision.CompareTag("Portal"))
             {
                 teleportPosition = collision.GetComponent<Portal>().ConnectPosition;
                 isPortal = true;
             }
-            if (collision.CompareTag("Monster"))
-            {
-                if (!isHit)
-                {
-                    isHit = true;
-                    hitTimer.TimerSetZero();
-                    onOff = true;
-                }
-            }
-            if (collision.CompareTag("Monster_attack_judgement"))
+
+            if (collision.CompareTag("Monster") || collision.CompareTag("Monster_attack_judgement"))
             {
                 if (!isHit)
                 {
@@ -123,7 +114,6 @@ public class PlayerSensor : MonoBehaviour
         {
             if (collision.CompareTag("Ground"))
             {
-                Debug.Log("탈출");
                 ongoing = false;
                 GetComponent<BoxCollider2D>().isTrigger = false;
                 GetComponent<CapsuleCollider2D>().isTrigger = false;
@@ -133,10 +123,6 @@ public class PlayerSensor : MonoBehaviour
         }
 
         if (collision.CompareTag("Portal")) isPortal = false;
-            if (collision.CompareTag("Monster"))
-            {
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            }
         
     }
 
@@ -168,16 +154,13 @@ public class PlayerSensor : MonoBehaviour
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            if (collision.collider.CompareTag("Ground")) GetComponent<PlayerMovement>().IsGround = true;
             if (collision.collider.CompareTag("Ground"))
             {
-            lastCollisionGround = collision;
+                GetComponent<PlayerMovement>().IsGround = true;
             }
             
             if (collision.collider.CompareTag("Monster"))
             {
-                //GetComponent<Collider2D>().isTrigger = true;
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                 if (!isHit)
                 {
                     isHit = true;
@@ -202,6 +185,9 @@ public class PlayerSensor : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log("Box  " + GetComponent<BoxCollider2D>().isTrigger);
+        //Debug.Log("Cap  " + GetComponent<CapsuleCollider2D>().isTrigger);
+
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
             if (onOff)
@@ -210,7 +196,8 @@ public class PlayerSensor : MonoBehaviour
                 if (!isHit)
                 {
                     onOff = false;
-                    GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                    GetComponent<BoxCollider2D>().isTrigger = false;
+                    GetComponent<CapsuleCollider2D>().isTrigger = false;
                 }
             }
 

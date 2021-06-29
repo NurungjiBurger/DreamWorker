@@ -66,6 +66,6 @@ public class DataController : MonoBehaviour
 
     void Update()
     {
-        gameData.Test();
+
     }
 }
