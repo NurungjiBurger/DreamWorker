@@ -221,7 +221,7 @@ MonoBehaviour:
   miniIcon: {fileID: 0}
   isBoss: 0
   bodyDmg: 0
-  dropRate: 0
+  dropRate: 60
   dropItemStartindexber: 0
   dropItemFinishindexber: 5
   dropCoin:

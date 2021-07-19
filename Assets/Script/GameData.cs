@@ -12,7 +12,9 @@ public class GameData
     public int stageNumber;
     public bool stageEntrance;
     public int subStageNumber;
-    public bool goNext;
+    public bool stageClear;
+
+    public bool eventRoomVisit;
 
     public List<Data> datas = new List<Data>();
 }
@@ -63,13 +65,14 @@ public class Data
     //////////////////////////////////////////////// // map data
 
     public int selectRoomIndex;
-
     public int portalDirection;
 
     public bool subStageEntrance;
     public bool isClear;
     public bool visible;
     public bool monsterCreate;
+
+    public int eventRoomIndex;
 
     public Data(string name, int num, int idx, int[] arr, float[] arr2, int dir, int sel)
     {
@@ -86,6 +89,10 @@ public class Data
             isClear = false;
             subStageEntrance = false;
             monsterCreate = false;
+        }
+        else if (name == "EventMap")
+        {
+            eventRoomIndex = idx;
         }
         else
         {

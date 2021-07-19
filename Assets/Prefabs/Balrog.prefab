@@ -172,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 5000
   power: 20
-  jumpPower: 0.2
-  moveSpeed: 2
+  jumpPower: 0.4
+  moveSpeed: 4
   attackSpeed: 0
   name: "\uBC1C\uB85D"
   defenseRate: 0

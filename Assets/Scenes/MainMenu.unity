@@ -299,6 +299,15 @@ MonoBehaviour:
   - {fileID: 6644775184080612190, guid: 8297d2df047f65e41aeb4c26b83a602e, type: 3}
   - {fileID: 4958345909010188095, guid: f3a9113a2d368f4478e3b7bcd4fccbfe, type: 3}
   - {fileID: 4485420160502130590, guid: 89b97b4b481892f418091ebd1c72c2d5, type: 3}
+  - {fileID: 5700975788613850268, guid: 80f7689a2ffbc714da3db30c4577bd3c, type: 3}
+  - {fileID: 5967913289840761412, guid: aade4a175ca8b374187ea8ff6a2d4846, type: 3}
+  - {fileID: 929255639668331646, guid: aa756cf866ef4df46b83fc50ca9329b4, type: 3}
+  - {fileID: 4525699675949598840, guid: 7dd7ee733c70e1446840d0039670e40d, type: 3}
+  - {fileID: 5633953140504464691, guid: 59af157e7143eac41b65175888a1eccf, type: 3}
+  - {fileID: 7901457589732985354, guid: e15e71d2349669440aecbe28c5a3229c, type: 3}
+  prefabEventMapDesigns:
+  - {fileID: 1804582505127061630, guid: 322f2ba6cbd6a7942a1e855896160e14, type: 3}
+  - {fileID: 9174130520824463903, guid: 51856b7567182df4abff87f0767f4087, type: 3}
   prefabItems:
   - {fileID: 7831584778518907238, guid: c6ce92a72a8b5304989d04c602cefbaf, type: 3}
   - {fileID: 8271512806439706280, guid: 7ddb345a5bfd0e14e8d6f4a05d613355, type: 3}
@@ -313,8 +322,10 @@ MonoBehaviour:
   prefabBossMonsters:
   - {fileID: 7842352421957864564, guid: 9f2091fbf65126249a85b0ae9814484a, type: 3}
   prefabPortals:
-  - {fileID: 4508550508265296456, guid: bf99970d24134db439cb952dbab788bf, type: 3}
-  - {fileID: 4163875461290686834, guid: b68bd87ee5df83a46a650f7af292c894, type: 3}
+  - {fileID: 6766317714605634611, guid: f1d063180f8dfb54b9dfb73f016a7370, type: 3}
+  - {fileID: 9145915304862493379, guid: 192b0f4bf0743cf4eb6f359cffcc16d2, type: 3}
+  - {fileID: 3870442352645005099, guid: 174023ea9f8cc8c40973e08f10973b6d, type: 3}
+  - {fileID: 8551896024911556750, guid: 6b55efc0b7f8e2c4b96f9606ff724416, type: 3}
 --- !u!4 &565247862
 Transform:
   m_ObjectHideFlags: 0

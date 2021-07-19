@@ -11,6 +11,8 @@ public class Parabola : MonoBehaviour
     private bool isArrived = false;
     private bool isGround = false;
 
+    private GameObject room;
+
     public bool Arrived { get { return isArrived; } }
 
     void Start()
@@ -20,11 +22,24 @@ public class Parabola : MonoBehaviour
         else x = Random.Range(1, 6);
         targetPoint = new Vector3(transform.position.x + x, transform.position.y + 1, transform.position.z);
         m_StartPosition = transform.position;
+
+        for (int idx = 0; idx < GameObject.Find("GameController").GetComponent<GameController>().Room.Count; idx++)
+        {
+            room = GameObject.Find("GameController").GetComponent<GameController>().Room[idx];
+
+            if (transform.position.x <= room.transform.position.x + 11.0f && transform.position.x >= room.transform.position.x - 11.0f)
+            {
+                if (transform.position.y <= room.transform.position.y + 7.5f && transform.position.y >= room.transform.position.y - 7.5f)
+                {
+                    break;
+                }
+            }
+        }
     }
 
     void Update()
     {
-        if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
+        //if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
 
         if (!isArrived)
         {
@@ -45,6 +60,8 @@ public class Parabola : MonoBehaviour
         {
             if (!isGround) GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
+
+        if (!room.GetComponent<Room>().isPlayer) Destroy(gameObject);
     }
 
     Quaternion LookAt2D(Vector2 forward)

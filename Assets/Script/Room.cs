@@ -16,21 +16,32 @@ public class Room : MonoBehaviour
     public int sel = -1;
     public GameObject map;
 
+    public bool isEvent = false;
+    public bool isPlayer = false;
+
+    private int subStageNumber;
+
     private GameObject player;
     private GameController gameController;
 
     private GameObject[] monsters;
     private List<GameObject> portals = new List<GameObject>();
 
-    private GameObject tester;
-    private bool done = false;
+    private List<GameObject> objects = new List<GameObject>();
 
     private int population;
     private float mx, my;
 
+    private bool isGoNext;
     private bool monsterPresence;
 
     public bool Visible { get { return dataM.visible; } }
+    public Data Data { get { return dataM; } }
+
+    public void AllocateSubStageNumber(int num)
+    {
+        subStageNumber = num;
+    }
 
     public void DestoryAll()
     {
@@ -50,14 +61,13 @@ public class Room : MonoBehaviour
         }
     }
 
-    public GameObject CreatePortal(int direction, bool value)
+    public GameObject CreatePortal(int direction, int value)
     {
         while (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         GameObject portal;
 
-        if (value) portal = Instantiate(gameController.PrefabReturn("Portal", 1));
-        else portal = Instantiate(gameController.PrefabReturn("Portal", 0));
+        portal = Instantiate(gameController.PrefabReturn("Portal", value));
 
         List<float> range = map.GetComponent<Map>().SafePortalPosition;
 
@@ -75,6 +85,15 @@ public class Room : MonoBehaviour
             case 3: // 북
                 portal.transform.position = new Vector3(transform.position.x + Random.Range(range[12], range[13]), transform.position.y + Random.Range(range[14], range[15]), transform.position.z);
                 break;
+            case -1: // 가운데 오른쪽
+                portal.transform.position = new Vector3(transform.position.x + 2.5f, transform.position.y, transform.position.z);
+                break;
+            case -2: // 가운데 왼쪽
+                portal.transform.position = new Vector3(transform.position.x - 3.5f, transform.position.y, transform.position.z);
+                break;
+            case -3: // 가운데
+                portal.transform.position = transform.position;
+                break;
             default:
                 break;
         }
@@ -82,6 +101,12 @@ public class Room : MonoBehaviour
         portals.Add(portal);
 
         return portal;
+    }
+
+    public void BossClearAfter()
+    {
+        gameController.PortalCreate(gameController.EventRoom[0].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -1);
+        gameController.PortalCreate(gameController.EventRoom[1].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -2);
     }
 
     private void ManageMap()
@@ -124,7 +149,7 @@ public class Room : MonoBehaviour
                     {
                         int type;
                         Vector3 safePosition;
-                        type = Random.Range((gameController.StageNumber - 1) * 4, (gameController.StageNumber * 4) - 1);
+                        type = Random.Range((data.stageNumber - 1) * 4, (data.stageNumber * 4) - 1);
                         List<float> range = map.GetComponent<Map>().SafeMonsterPosition;
                         int cnt = Random.Range(0, range.Count / 4);
                         safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);
@@ -143,14 +168,18 @@ public class Room : MonoBehaviour
     void Start()
     {
         if (index == -1)
-        {
-            index = data.datas.Count;
+        { 
+            if (!isEvent)
+            {
 
-            data.datas.Add(new Data("Map", mapPrfNumber, index, null, null, dir, sel));
+                index = data.datas.Count;
 
-            dataM = data.datas[index];
+                data.datas.Add(new Data("Map", mapPrfNumber, index, null, null, dir, sel));
 
-            monsterPresence = false;
+                dataM = data.datas[index];
+
+                monsterPresence = false;
+            }
         }
         else
         {
@@ -166,28 +195,66 @@ public class Room : MonoBehaviour
             {
                 if (player.transform.position.y <= transform.position.y + 7.5f && player.transform.position.y >= transform.position.y - 7.5f)
                 {
-                    if (!dataM.isClear)
+                    isPlayer = true;
+                    if (!isEvent) // 일반 필드 
                     {
-                        if (!dataM.subStageEntrance)
+                        if (!dataM.isClear)
                         {
-                            dataM.visible = true;
-                            dataM.subStageEntrance = true;
+                            if (!dataM.subStageEntrance)
+                            {
+                                dataM.visible = true;
+                                dataM.subStageEntrance = true;
 
-                            if (index != 0 && index == gameController.SubStageNumber)
-                            {
-                                CreateStage(true);
+                                if (subStageNumber != 0 && subStageNumber == data.subStageNumber)
+                                {
+                                    if (Vector3.Distance(player.transform.position, transform.position) <= 6) CreateStage(true);
+                                    else dataM.subStageEntrance = false;
+
+                                }
+                                else CreateStage(false);
                             }
-                            else CreateStage(false);
+                            else    // 게임 진행중 
+                            {
+                                if (!monsterPresence)
+                                {
+                                    if (subStageNumber == data.subStageNumber)
+                                    {
+                                        if (!data.stageClear)
+                                        {
+                                            data.stageClear = true;
+                                            BossClearAfter();
+                                        }
+                                    }
+
+                                    if (!dataM.isClear) dataM.isClear = true;
+                                }
+                            }
                         }
-                        else    // 게임 진행중 
+                        else
                         {
-                            if (!monsterPresence)
+
+                            if (subStageNumber == data.subStageNumber)
                             {
-                                dataM.isClear = true;
+                                if (data.eventRoomVisit)
+                                {
+                                    gameController.DestroyNowStage();
+                                    data.eventRoomVisit = false;
+                                    player.transform.position = new Vector3(0, 0, 0);
+                                }
                             }
-                        }                
+                            //Debug.Log("여기는 " + index + "번째 방이고 클리어 하셨습니다.");
+                        }
+                    }
+                    else // 이벤트 필드
+                    {
+                        data.eventRoomVisit = true;
                     }
                 }
+            }
+            else
+            {
+                isPlayer = false;
+                // 해당 방에 플레이어가 존재하지 않는 경우
             }
         }
     }
@@ -198,10 +265,14 @@ public class Room : MonoBehaviour
 
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
-        if (dataM == null) dataM = data.datas[index];
-        else dataM.SetPosition(transform.position);
+        if (!isEvent)
+        {
+            if (dataM == null) dataM = data.datas[index];
+            else dataM.SetPosition(transform.position);
+        }
 
         ManageMap();
-               
+
+       // Debug.Log("나의 방 번호는 " + subStageNumber + "인덱스는 " + index);
     }
 }

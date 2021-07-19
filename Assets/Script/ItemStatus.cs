@@ -24,6 +24,7 @@ public class ItemStatus : Status
     private GameData data;
     private Data dataI;
 
+    private GameObject room;
     private GameObject player;
 
     public Data Data { get { return dataI; } }
@@ -133,13 +134,29 @@ public class ItemStatus : Status
                 else inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject));
             }
         }
+
+        // ¹æ Ã£±â
+        for(int idx = 0; idx < GameObject.Find("GameController").GetComponent<GameController>().Room.Count; idx++)
+        {
+            room = GameObject.Find("GameController").GetComponent<GameController>().Room[idx];
+
+            if (transform.position.x <= room.transform.position.x + 11.0f && transform.position.x >= room.transform.position.x - 11.0f)
+            {
+                if (transform.position.y <= room.transform.position.y + 7.5f && transform.position.y >= room.transform.position.y - 7.5f)
+                {
+                    break;
+                }
+            }
+        }
     }
 
     private void Update()
     {
-        if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
+        //if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
 
         if (dataI == null) dataI = data.datas[index];
         else dataI.SetPosition(transform.position);
+
+        if (!room.GetComponent<Room>().isPlayer && !dataI.isAcquired) DestoryAll();
     }
 }

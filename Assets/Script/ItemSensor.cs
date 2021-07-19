@@ -17,6 +17,7 @@ public class ItemSensor : MonoBehaviour
                 if (collision.GetComponent<PlayerStatus>().Acquirable)
                 {
                     // 아이템은 사라진다.
+                    GetComponent<ItemStatus>().Data.isAcquired = true;
                     gameObject.SetActive(false);
                 }
         }
@@ -40,6 +41,7 @@ public class ItemSensor : MonoBehaviour
                 if (collision.collider.GetComponent<PlayerStatus>().Acquirable)
                 {
                     // 아이템은 사라진다.
+                    GetComponent<ItemStatus>().Data.isAcquired = true;
                     gameObject.SetActive(false);
                     //Destroy(gameObject);
                 }

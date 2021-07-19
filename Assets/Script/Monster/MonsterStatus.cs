@@ -46,7 +46,7 @@ public class MonsterStatus : Status
         if (Random.Range(0, 101) <= dropRate)
         {
             GameObject tmp;
-            int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber+1);
+            int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber);
             tmp = Instantiate(gameController.PrefabReturn("Item", idx), transform.position, Quaternion.identity);
             tmp.GetComponent<ItemStatus>().itemPrfNumber = idx;
         }
