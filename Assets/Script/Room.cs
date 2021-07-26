@@ -54,10 +54,13 @@ public class Room : MonoBehaviour
             Destroy(tmp);
         }
 
-        data.datas.Remove(dataM);
-        for (int idx = index; idx < data.datas.Count; idx++)
+        if (dataM != null)
         {
-            data.datas[idx].index = idx;
+            data.datas.Remove(dataM);
+            for (int idx = index; idx < data.datas.Count; idx++)
+            {
+                data.datas[idx].index = idx;
+            }
         }
     }
 
@@ -198,6 +201,7 @@ public class Room : MonoBehaviour
                     isPlayer = true;
                     if (!isEvent) // 일반 필드 
                     {
+                        Debug.Log(transform.position + " 이벤트맵 x ");
                         if (!dataM.isClear)
                         {
                             if (!dataM.subStageEntrance)

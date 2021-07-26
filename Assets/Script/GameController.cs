@@ -118,6 +118,14 @@ public class GameController : MonoBehaviour
             Destroy(tmp);
         }
 
+        for (int idx = 0; idx < 1; idx++)
+        {
+            eventRoom[idx].transform.Find("GreenMap_Wall").GetComponent<Room>().DestoryAll();
+            tmp = eventRoom[idx];
+            eventRoom.Remove(eventRoom[idx]);
+            Destroy(tmp);
+        }
+
         data.stageNumber++;
         data.stageEntrance = false;
     }
@@ -356,12 +364,7 @@ public class GameController : MonoBehaviour
                         }
                         else
                         {
-                            if (data.stageClear)
-                            {
 
-                            }
-
-                            CheckRoom("visible");
                         }
                     }
                 }

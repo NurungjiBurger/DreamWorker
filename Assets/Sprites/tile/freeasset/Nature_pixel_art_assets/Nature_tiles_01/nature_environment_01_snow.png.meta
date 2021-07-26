@@ -439,7 +439,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -499,15 +499,18 @@ TextureImporter:
       name: nature_environment_01_snow_0
       rect:
         serializedVersion: 2
-        x: 64
+        x: 111
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 5}
       tessellationDetail: 0
       bones: []
       spriteID: ddd6107dabfc42d30800000000000000
@@ -520,15 +523,18 @@ TextureImporter:
       name: nature_environment_01_snow_1
       rect:
         serializedVersion: 2
-        x: 112
+        x: 159
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 5}
+        - {x: -24, y: -24}
+        - {x: 5, y: -24}
       tessellationDetail: 0
       bones: []
       spriteID: e308a68c10654e4d0800000000000000
@@ -541,15 +547,19 @@ TextureImporter:
       name: nature_environment_01_snow_2
       rect:
         serializedVersion: 2
-        x: 160
+        x: 207
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -24}
+        - {x: 5, y: -24}
+        - {x: 24, y: -5}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 742e8390c46a3f190800000000000000
@@ -562,15 +572,19 @@ TextureImporter:
       name: nature_environment_01_snow_3
       rect:
         serializedVersion: 2
-        x: 208
+        x: 255
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -5}
+        - {x: 24, y: -5}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 7eabe830d8449f660800000000000000
@@ -583,15 +597,19 @@ TextureImporter:
       name: nature_environment_01_snow_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 303
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -5}
+        - {x: 24, y: -5}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 9a7960125743cf550800000000000000
@@ -604,15 +622,19 @@ TextureImporter:
       name: nature_environment_01_snow_5
       rect:
         serializedVersion: 2
-        x: 304
+        x: 351
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -5}
+        - {x: -4, y: -24}
+        - {x: 24, y: -24}
       tessellationDetail: 0
       bones: []
       spriteID: 7ae054ce3222db420800000000000000
@@ -625,15 +647,18 @@ TextureImporter:
       name: nature_environment_01_snow_6
       rect:
         serializedVersion: 2
-        x: 352
+        x: 399
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -24}
       tessellationDetail: 0
       bones: []
       spriteID: 6776649a09489e280800000000000000
@@ -646,15 +671,18 @@ TextureImporter:
       name: nature_environment_01_snow_7
       rect:
         serializedVersion: 2
-        x: 400
+        x: 447
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -19, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -10}
       tessellationDetail: 0
       bones: []
       spriteID: 14b79a27ad2b02680800000000000000
@@ -667,15 +695,19 @@ TextureImporter:
       name: nature_environment_01_snow_8
       rect:
         serializedVersion: 2
-        x: 448
+        x: 495
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -10}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 5}
       tessellationDetail: 0
       bones: []
       spriteID: f67e4d4b3c697b0c0800000000000000
@@ -688,15 +720,19 @@ TextureImporter:
       name: nature_environment_01_snow_9
       rect:
         serializedVersion: 2
-        x: 496
+        x: 543
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 5}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -11}
       tessellationDetail: 0
       bones: []
       spriteID: fba7de9bde8d70590800000000000000
@@ -709,15 +745,18 @@ TextureImporter:
       name: nature_environment_01_snow_10
       rect:
         serializedVersion: 2
-        x: 544
+        x: 591
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -11}
+        - {x: -24, y: -24}
+        - {x: 18, y: -24}
       tessellationDetail: 0
       bones: []
       spriteID: 1ef7ab397757310c0800000000000000
@@ -730,15 +769,18 @@ TextureImporter:
       name: nature_environment_01_snow_11
       rect:
         serializedVersion: 2
-        x: 592
+        x: 639
         y: 336
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -24}
+        - {x: -24, y: -24}
+        - {x: -24, y: -24}
       tessellationDetail: 0
       bones: []
       spriteID: 1cc6e232d98c05780800000000000000
@@ -751,15 +793,19 @@ TextureImporter:
       name: nature_environment_01_snow_12
       rect:
         serializedVersion: 2
-        x: 640
-        y: 336
+        x: 111
+        y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -6, y: 24}
+        - {x: -24, y: 6}
+        - {x: -24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 026d0f7d420b41260800000000000000
@@ -772,15 +818,19 @@ TextureImporter:
       name: nature_environment_01_snow_13
       rect:
         serializedVersion: 2
-        x: 64
+        x: 159
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 5, y: 24}
+        - {x: -24, y: 24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 1e2e67b19ed3b90c0800000000000000
@@ -793,15 +843,18 @@ TextureImporter:
       name: nature_environment_01_snow_14
       rect:
         serializedVersion: 2
-        x: 112
+        x: 207
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 5, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 9251b5eb77a8b8910800000000000000
@@ -814,15 +867,18 @@ TextureImporter:
       name: nature_environment_01_snow_15
       rect:
         serializedVersion: 2
-        x: 160
+        x: 351
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -4, y: 24}
+        - {x: 24, y: -2}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: cbc5bfb659ca57f00800000000000000
@@ -835,15 +891,19 @@ TextureImporter:
       name: nature_environment_01_snow_16
       rect:
         serializedVersion: 2
-        x: 208
+        x: 399
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 5}
+        - {x: -24, y: -24}
+        - {x: 24, y: -8}
+        - {x: 24, y: 21}
       tessellationDetail: 0
       bones: []
       spriteID: f18b7ce202c0bf830800000000000000
@@ -856,15 +916,20 @@ TextureImporter:
       name: nature_environment_01_snow_17
       rect:
         serializedVersion: 2
-        x: 304
+        x: 447
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -19, y: 24}
+        - {x: -24, y: 21}
+        - {x: -24, y: -8}
+        - {x: 24, y: 7}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 605c1f0190957a6a0800000000000000
@@ -877,15 +942,18 @@ TextureImporter:
       name: nature_environment_01_snow_18
       rect:
         serializedVersion: 2
-        x: 352
+        x: 495
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 7}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 39e047c589aa23250800000000000000
@@ -898,15 +966,18 @@ TextureImporter:
       name: nature_environment_01_snow_19
       rect:
         serializedVersion: 2
-        x: 400
+        x: 543
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: 24, y: 7}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 9ab64e73036038050800000000000000
@@ -919,15 +990,20 @@ TextureImporter:
       name: nature_environment_01_snow_20
       rect:
         serializedVersion: 2
-        x: 448
+        x: 591
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 7}
+        - {x: 24, y: -9}
+        - {x: 24, y: 20}
+        - {x: 18, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: b51819fa101b35b30800000000000000
@@ -940,15 +1016,19 @@ TextureImporter:
       name: nature_environment_01_snow_21
       rect:
         serializedVersion: 2
-        x: 496
+        x: 639
         y: 288
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 20}
+        - {x: -24, y: -9}
+        - {x: 24, y: -24}
+        - {x: 24, y: 3}
       tessellationDetail: 0
       bones: []
       spriteID: c7eaeaf8d6d9c0ae0800000000000000
@@ -961,15 +1041,19 @@ TextureImporter:
       name: nature_environment_01_snow_22
       rect:
         serializedVersion: 2
-        x: 544
-        y: 288
+        x: 15
+        y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: cb73fa9431cf54a40800000000000000
@@ -982,15 +1066,19 @@ TextureImporter:
       name: nature_environment_01_snow_23
       rect:
         serializedVersion: 2
-        x: 592
-        y: 288
+        x: 63
+        y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 31a8bb5e68e9129d0800000000000000
@@ -1003,15 +1091,19 @@ TextureImporter:
       name: nature_environment_01_snow_24
       rect:
         serializedVersion: 2
-        x: 640
-        y: 288
+        x: 111
+        y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 9, y: 24}
+        - {x: 9, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 152eb9aff4bd92550800000000000000
@@ -1024,15 +1116,19 @@ TextureImporter:
       name: nature_environment_01_snow_25
       rect:
         serializedVersion: 2
-        x: 16
+        x: 159
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 4bb6fbaa721779510800000000000000
@@ -1045,15 +1141,19 @@ TextureImporter:
       name: nature_environment_01_snow_26
       rect:
         serializedVersion: 2
-        x: 64
+        x: 207
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: f80ba58684064fcf0800000000000000
@@ -1066,15 +1166,19 @@ TextureImporter:
       name: nature_environment_01_snow_27
       rect:
         serializedVersion: 2
-        x: 112
+        x: 255
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: -9, y: -4}
+        - {x: -9, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 02c32224d538fd090800000000000000
@@ -1087,15 +1191,19 @@ TextureImporter:
       name: nature_environment_01_snow_28
       rect:
         serializedVersion: 2
-        x: 160
+        x: 303
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 4e7649471f87394c0800000000000000
@@ -1108,15 +1216,19 @@ TextureImporter:
       name: nature_environment_01_snow_29
       rect:
         serializedVersion: 2
-        x: 208
+        x: 351
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 8bc95c20ef316ed50800000000000000
@@ -1129,15 +1241,18 @@ TextureImporter:
       name: nature_environment_01_snow_30
       rect:
         serializedVersion: 2
-        x: 256
+        x: 399
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -7}
       tessellationDetail: 0
       bones: []
       spriteID: 544af99b0b68e5f50800000000000000
@@ -1150,15 +1265,20 @@ TextureImporter:
       name: nature_environment_01_snow_31
       rect:
         serializedVersion: 2
-        x: 304
+        x: 447
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -7}
+        - {x: -24, y: -24}
+        - {x: 16, y: -24}
+        - {x: 24, y: -19}
+        - {x: 24, y: 9}
       tessellationDetail: 0
       bones: []
       spriteID: de1edea9697030420800000000000000
@@ -1171,15 +1291,19 @@ TextureImporter:
       name: nature_environment_01_snow_32
       rect:
         serializedVersion: 2
-        x: 352
+        x: 495
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 9}
+        - {x: -24, y: -19}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 098a792a8d5264f40800000000000000
@@ -1192,15 +1316,19 @@ TextureImporter:
       name: nature_environment_01_snow_33
       rect:
         serializedVersion: 2
-        x: 400
+        x: 543
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 24, y: -19}
+        - {x: 24, y: 9}
       tessellationDetail: 0
       bones: []
       spriteID: fc4be88d90aac9360800000000000000
@@ -1213,15 +1341,20 @@ TextureImporter:
       name: nature_environment_01_snow_34
       rect:
         serializedVersion: 2
-        x: 448
+        x: 591
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 9}
+        - {x: -24, y: -19}
+        - {x: -17, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -7}
       tessellationDetail: 0
       bones: []
       spriteID: 927e50b1f1a703810800000000000000
@@ -1234,15 +1367,18 @@ TextureImporter:
       name: nature_environment_01_snow_35
       rect:
         serializedVersion: 2
-        x: 496
+        x: 639
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -7}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
       tessellationDetail: 0
       bones: []
       spriteID: b12115f6e8bb660a0800000000000000
@@ -1255,12 +1391,12 @@ TextureImporter:
       name: nature_environment_01_snow_36
       rect:
         serializedVersion: 2
-        x: 544
+        x: 687
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1276,12 +1412,12 @@ TextureImporter:
       name: nature_environment_01_snow_37
       rect:
         serializedVersion: 2
-        x: 592
+        x: 735
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1297,12 +1433,12 @@ TextureImporter:
       name: nature_environment_01_snow_38
       rect:
         serializedVersion: 2
-        x: 640
+        x: 783
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1318,12 +1454,12 @@ TextureImporter:
       name: nature_environment_01_snow_39
       rect:
         serializedVersion: 2
-        x: 688
+        x: 831
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1339,12 +1475,12 @@ TextureImporter:
       name: nature_environment_01_snow_40
       rect:
         serializedVersion: 2
-        x: 736
+        x: 879
         y: 240
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1360,15 +1496,19 @@ TextureImporter:
       name: nature_environment_01_snow_41
       rect:
         serializedVersion: 2
-        x: 784
-        y: 240
+        x: 15
+        y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 0b266524bfdb7ae70800000000000000
@@ -1381,15 +1521,19 @@ TextureImporter:
       name: nature_environment_01_snow_42
       rect:
         serializedVersion: 2
-        x: 832
-        y: 240
+        x: 63
+        y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: bbf0a847f733b49d0800000000000000
@@ -1402,15 +1546,19 @@ TextureImporter:
       name: nature_environment_01_snow_43
       rect:
         serializedVersion: 2
-        x: 880
-        y: 240
+        x: 111
+        y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 91b3a041f19a19350800000000000000
@@ -1423,15 +1571,19 @@ TextureImporter:
       name: nature_environment_01_snow_44
       rect:
         serializedVersion: 2
-        x: 16
+        x: 159
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 098ffa7725838ba30800000000000000
@@ -1444,15 +1596,19 @@ TextureImporter:
       name: nature_environment_01_snow_45
       rect:
         serializedVersion: 2
-        x: 64
+        x: 207
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: d953f908adf5c1ae0800000000000000
@@ -1465,15 +1621,19 @@ TextureImporter:
       name: nature_environment_01_snow_46
       rect:
         serializedVersion: 2
-        x: 112
+        x: 255
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: ef6bc42b6b1e21970800000000000000
@@ -1486,15 +1646,19 @@ TextureImporter:
       name: nature_environment_01_snow_47
       rect:
         serializedVersion: 2
-        x: 160
+        x: 303
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 28c3266f7505021d0800000000000000
@@ -1507,15 +1671,19 @@ TextureImporter:
       name: nature_environment_01_snow_48
       rect:
         serializedVersion: 2
-        x: 208
+        x: 351
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 0eac5af6e2784b4c0800000000000000
@@ -1528,15 +1696,19 @@ TextureImporter:
       name: nature_environment_01_snow_49
       rect:
         serializedVersion: 2
-        x: 256
+        x: 399
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: 11}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: d863b89ef9a5fd7d0800000000000000
@@ -1549,15 +1721,18 @@ TextureImporter:
       name: nature_environment_01_snow_50
       rect:
         serializedVersion: 2
-        x: 304
+        x: 447
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 11}
+        - {x: 16, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: d565da210510e9100800000000000000
@@ -1570,15 +1745,18 @@ TextureImporter:
       name: nature_environment_01_snow_51
       rect:
         serializedVersion: 2
-        x: 352
+        x: 495
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: ae8a783944f0a3420800000000000000
@@ -1591,15 +1769,18 @@ TextureImporter:
       name: nature_environment_01_snow_52
       rect:
         serializedVersion: 2
-        x: 400
+        x: 543
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 24, y: 24}
+        - {x: 24, y: 24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 7c898c1cff720f380800000000000000
@@ -1612,15 +1793,18 @@ TextureImporter:
       name: nature_environment_01_snow_53
       rect:
         serializedVersion: 2
-        x: 448
+        x: 591
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -17, y: 24}
+        - {x: 24, y: 11}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: e28187fb8b280f5f0800000000000000
@@ -1633,15 +1817,19 @@ TextureImporter:
       name: nature_environment_01_snow_54
       rect:
         serializedVersion: 2
-        x: 496
+        x: 639
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 11}
+        - {x: 24, y: -5}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 168db6d9fd74c4350800000000000000
@@ -1654,12 +1842,12 @@ TextureImporter:
       name: nature_environment_01_snow_55
       rect:
         serializedVersion: 2
-        x: 544
+        x: 687
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1675,12 +1863,12 @@ TextureImporter:
       name: nature_environment_01_snow_56
       rect:
         serializedVersion: 2
-        x: 592
+        x: 735
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1696,12 +1884,12 @@ TextureImporter:
       name: nature_environment_01_snow_57
       rect:
         serializedVersion: 2
-        x: 640
+        x: 783
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1717,12 +1905,12 @@ TextureImporter:
       name: nature_environment_01_snow_58
       rect:
         serializedVersion: 2
-        x: 688
+        x: 831
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1738,12 +1926,12 @@ TextureImporter:
       name: nature_environment_01_snow_59
       rect:
         serializedVersion: 2
-        x: 736
+        x: 879
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1759,15 +1947,23 @@ TextureImporter:
       name: nature_environment_01_snow_60
       rect:
         serializedVersion: 2
-        x: 784
+        x: 927
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 12}
+        - {x: -18, y: 12}
+        - {x: -18, y: -24}
+        - {x: -8, y: -24}
+        - {x: -8, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 4187b16dbdd549670800000000000000
@@ -1780,15 +1976,19 @@ TextureImporter:
       name: nature_environment_01_snow_61
       rect:
         serializedVersion: 2
-        x: 832
+        x: 975
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 9d2409aac0a810640800000000000000
@@ -1801,15 +2001,23 @@ TextureImporter:
       name: nature_environment_01_snow_62
       rect:
         serializedVersion: 2
-        x: 880
+        x: 1023
         y: 192
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 8, y: -3}
+        - {x: 8, y: -24}
+        - {x: 18, y: -24}
+        - {x: 18, y: 13}
+        - {x: 24, y: 13}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 256aa0606fdfa2b50800000000000000
@@ -1822,15 +2030,19 @@ TextureImporter:
       name: nature_environment_01_snow_63
       rect:
         serializedVersion: 2
-        x: 928
-        y: 192
+        x: 15
+        y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: e3c152db036bed800800000000000000
@@ -1843,15 +2055,19 @@ TextureImporter:
       name: nature_environment_01_snow_64
       rect:
         serializedVersion: 2
-        x: 976
-        y: 192
+        x: 63
+        y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 02e1c1a6f79f2b350800000000000000
@@ -1864,15 +2080,19 @@ TextureImporter:
       name: nature_environment_01_snow_65
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 192
+        x: 111
+        y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 0513ab83f36b3a040800000000000000
@@ -1885,15 +2105,19 @@ TextureImporter:
       name: nature_environment_01_snow_66
       rect:
         serializedVersion: 2
-        x: 16
+        x: 159
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 0acd783bb0c030920800000000000000
@@ -1906,15 +2130,21 @@ TextureImporter:
       name: nature_environment_01_snow_67
       rect:
         serializedVersion: 2
-        x: 64
+        x: 207
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 7303a1ba76bde63e0800000000000000
@@ -1927,15 +2157,21 @@ TextureImporter:
       name: nature_environment_01_snow_68
       rect:
         serializedVersion: 2
-        x: 112
+        x: 255
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: f5e9db7e0c50f6900800000000000000
@@ -1948,15 +2184,21 @@ TextureImporter:
       name: nature_environment_01_snow_69
       rect:
         serializedVersion: 2
-        x: 160
+        x: 303
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: f07aa89c869a35550800000000000000
@@ -1969,15 +2211,21 @@ TextureImporter:
       name: nature_environment_01_snow_70
       rect:
         serializedVersion: 2
-        x: 208
+        x: 351
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 6d1d3a54c20e473b0800000000000000
@@ -1990,15 +2238,21 @@ TextureImporter:
       name: nature_environment_01_snow_71
       rect:
         serializedVersion: 2
-        x: 256
+        x: 399
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 9, y: -3}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 99f5c36662bb451f0800000000000000
@@ -2011,15 +2265,21 @@ TextureImporter:
       name: nature_environment_01_snow_72
       rect:
         serializedVersion: 2
-        x: 304
+        x: 447
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 9, y: -3}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 522ffe39e99fc20c0800000000000000
@@ -2032,15 +2292,21 @@ TextureImporter:
       name: nature_environment_01_snow_73
       rect:
         serializedVersion: 2
-        x: 352
+        x: 495
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 9, y: -3}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 80f79ae7a5083bb30800000000000000
@@ -2053,15 +2319,21 @@ TextureImporter:
       name: nature_environment_01_snow_74
       rect:
         serializedVersion: 2
-        x: 400
+        x: 543
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 9, y: -3}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 003c95082c558ccd0800000000000000
@@ -2074,15 +2346,19 @@ TextureImporter:
       name: nature_environment_01_snow_75
       rect:
         serializedVersion: 2
-        x: 448
+        x: 591
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 2, y: 5}
+        - {x: 2, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 5}
       tessellationDetail: 0
       bones: []
       spriteID: e69ad8d82f00b1cc0800000000000000
@@ -2095,15 +2371,19 @@ TextureImporter:
       name: nature_environment_01_snow_76
       rect:
         serializedVersion: 2
-        x: 496
+        x: 639
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 5}
+        - {x: -24, y: -24}
+        - {x: -2, y: -24}
+        - {x: -2, y: 5}
       tessellationDetail: 0
       bones: []
       spriteID: d9d92b0e01ac75750800000000000000
@@ -2116,12 +2396,12 @@ TextureImporter:
       name: nature_environment_01_snow_77
       rect:
         serializedVersion: 2
-        x: 544
+        x: 687
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2137,12 +2417,12 @@ TextureImporter:
       name: nature_environment_01_snow_78
       rect:
         serializedVersion: 2
-        x: 592
+        x: 735
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2158,12 +2438,12 @@ TextureImporter:
       name: nature_environment_01_snow_79
       rect:
         serializedVersion: 2
-        x: 640
+        x: 783
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2179,12 +2459,12 @@ TextureImporter:
       name: nature_environment_01_snow_80
       rect:
         serializedVersion: 2
-        x: 688
+        x: 831
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2200,12 +2480,12 @@ TextureImporter:
       name: nature_environment_01_snow_81
       rect:
         serializedVersion: 2
-        x: 736
+        x: 879
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2221,15 +2501,19 @@ TextureImporter:
       name: nature_environment_01_snow_82
       rect:
         serializedVersion: 2
-        x: 784
+        x: 927
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -18, y: 24}
+        - {x: -18, y: -24}
+        - {x: -8, y: -24}
+        - {x: -8, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: cafe5a4bc8d189d50800000000000000
@@ -2242,15 +2526,18 @@ TextureImporter:
       name: nature_environment_01_snow_83
       rect:
         serializedVersion: 2
-        x: 832
+        x: 975
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: c633ed6467d3e7c60800000000000000
@@ -2263,15 +2550,19 @@ TextureImporter:
       name: nature_environment_01_snow_84
       rect:
         serializedVersion: 2
-        x: 880
+        x: 1023
         y: 144
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 18, y: -24}
+        - {x: 18, y: 24}
+        - {x: 8, y: 24}
+        - {x: 8, y: -24}
       tessellationDetail: 0
       bones: []
       spriteID: 959b1061db0ac4700800000000000000
@@ -2284,15 +2575,19 @@ TextureImporter:
       name: nature_environment_01_snow_85
       rect:
         serializedVersion: 2
-        x: 928
-        y: 144
+        x: 15
+        y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: cd5405e4342562fb0800000000000000
@@ -2305,15 +2600,19 @@ TextureImporter:
       name: nature_environment_01_snow_86
       rect:
         serializedVersion: 2
-        x: 976
-        y: 144
+        x: 63
+        y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -4}
+        - {x: 24, y: -4}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 201ca61f837fd3330800000000000000
@@ -2326,15 +2625,19 @@ TextureImporter:
       name: nature_environment_01_snow_87
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 144
+        x: 111
+        y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 2, y: 24}
+        - {x: 2, y: -5}
+        - {x: 24, y: -5}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: f80d612590c6c9170800000000000000
@@ -2347,15 +2650,19 @@ TextureImporter:
       name: nature_environment_01_snow_88
       rect:
         serializedVersion: 2
-        x: 16
+        x: 159
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -5}
+        - {x: -2, y: -5}
+        - {x: -2, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 9074859623f0a6e00800000000000000
@@ -2368,15 +2675,19 @@ TextureImporter:
       name: nature_environment_01_snow_89
       rect:
         serializedVersion: 2
-        x: 64
+        x: 207
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 3d5821121ff06e3e0800000000000000
@@ -2389,15 +2700,19 @@ TextureImporter:
       name: nature_environment_01_snow_90
       rect:
         serializedVersion: 2
-        x: 112
+        x: 255
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: c3fe7c3a581ab2640800000000000000
@@ -2410,15 +2725,19 @@ TextureImporter:
       name: nature_environment_01_snow_91
       rect:
         serializedVersion: 2
-        x: 160
+        x: 303
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 8276a26023cd1e810800000000000000
@@ -2431,15 +2750,19 @@ TextureImporter:
       name: nature_environment_01_snow_92
       rect:
         serializedVersion: 2
-        x: 208
+        x: 351
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 40fc7333f55f62a80800000000000000
@@ -2452,15 +2775,19 @@ TextureImporter:
       name: nature_environment_01_snow_93
       rect:
         serializedVersion: 2
-        x: 256
+        x: 399
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 9, y: 24}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: dcec784d9b3afb700800000000000000
@@ -2473,15 +2800,19 @@ TextureImporter:
       name: nature_environment_01_snow_94
       rect:
         serializedVersion: 2
-        x: 304
+        x: 447
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 9, y: 24}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 95d7447a91f840180800000000000000
@@ -2494,15 +2825,19 @@ TextureImporter:
       name: nature_environment_01_snow_95
       rect:
         serializedVersion: 2
-        x: 352
+        x: 495
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 9, y: 24}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 4b26a0e3707498140800000000000000
@@ -2515,15 +2850,19 @@ TextureImporter:
       name: nature_environment_01_snow_96
       rect:
         serializedVersion: 2
-        x: 400
+        x: 543
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 9, y: 24}
+        - {x: 9, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 0a45f2269d043cc00800000000000000
@@ -2536,15 +2875,19 @@ TextureImporter:
       name: nature_environment_01_snow_97
       rect:
         serializedVersion: 2
-        x: 448
+        x: 591
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 4}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: f81d8a9f88709ab20800000000000000
@@ -2557,15 +2900,19 @@ TextureImporter:
       name: nature_environment_01_snow_98
       rect:
         serializedVersion: 2
-        x: 496
+        x: 639
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 4}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: af295967342449d30800000000000000
@@ -2578,12 +2925,12 @@ TextureImporter:
       name: nature_environment_01_snow_99
       rect:
         serializedVersion: 2
-        x: 544
+        x: 687
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2599,12 +2946,12 @@ TextureImporter:
       name: nature_environment_01_snow_100
       rect:
         serializedVersion: 2
-        x: 592
+        x: 735
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2620,12 +2967,12 @@ TextureImporter:
       name: nature_environment_01_snow_101
       rect:
         serializedVersion: 2
-        x: 640
+        x: 783
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2641,12 +2988,12 @@ TextureImporter:
       name: nature_environment_01_snow_102
       rect:
         serializedVersion: 2
-        x: 688
+        x: 831
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2662,12 +3009,12 @@ TextureImporter:
       name: nature_environment_01_snow_103
       rect:
         serializedVersion: 2
-        x: 736
+        x: 879
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2683,15 +3030,19 @@ TextureImporter:
       name: nature_environment_01_snow_104
       rect:
         serializedVersion: 2
-        x: 784
+        x: 927
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -18, y: 24}
+        - {x: -18, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 3a447fcc47343be30800000000000000
@@ -2704,15 +3055,18 @@ TextureImporter:
       name: nature_environment_01_snow_105
       rect:
         serializedVersion: 2
-        x: 832
+        x: 975
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: a628c5e6aa203dae0800000000000000
@@ -2725,15 +3079,19 @@ TextureImporter:
       name: nature_environment_01_snow_106
       rect:
         serializedVersion: 2
-        x: 880
+        x: 1023
         y: 96
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 8, y: 24}
+        - {x: 8, y: -24}
+        - {x: 18, y: -24}
+        - {x: 18, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 27bb0aaef94c65fe0800000000000000
@@ -2746,15 +3104,19 @@ TextureImporter:
       name: nature_environment_01_snow_107
       rect:
         serializedVersion: 2
-        x: 928
-        y: 96
+        x: 15
+        y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 8, y: 4}
+        - {x: 8, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 3de97b7df4e00a020800000000000000
@@ -2767,15 +3129,20 @@ TextureImporter:
       name: nature_environment_01_snow_108
       rect:
         serializedVersion: 2
-        x: 976
-        y: 96
+        x: 63
+        y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 4}
+        - {x: -24, y: -24}
+        - {x: 21, y: -24}
+        - {x: 24, y: -21}
+        - {x: 24, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 3dc4283b79304bc50800000000000000
@@ -2788,15 +3155,20 @@ TextureImporter:
       name: nature_environment_01_snow_109
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 96
+        x: 111
+        y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 4}
+        - {x: -24, y: -21}
+        - {x: -21, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 3a3779442620c4250800000000000000
@@ -2809,15 +3181,19 @@ TextureImporter:
       name: nature_environment_01_snow_110
       rect:
         serializedVersion: 2
-        x: 16
+        x: 159
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 4}
+        - {x: -24, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 852d7873b63b563c0800000000000000
@@ -2830,15 +3206,22 @@ TextureImporter:
       name: nature_environment_01_snow_111
       rect:
         serializedVersion: 2
-        x: 64
+        x: 207
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 8, y: 4}
+        - {x: -24, y: 4}
+        - {x: -24, y: -24}
+        - {x: 21, y: -24}
+        - {x: 24, y: -21}
+        - {x: 24, y: 24}
+        - {x: 8, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 428526de0189f2300800000000000000
@@ -2851,15 +3234,22 @@ TextureImporter:
       name: nature_environment_01_snow_112
       rect:
         serializedVersion: 2
-        x: 112
+        x: 255
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 3}
+        - {x: -8, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: -21}
+        - {x: -21, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 3}
       tessellationDetail: 0
       bones: []
       spriteID: a59231eaaaeda1d70800000000000000
@@ -2872,12 +3262,12 @@ TextureImporter:
       name: nature_environment_01_snow_113
       rect:
         serializedVersion: 2
-        x: 160
+        x: 303
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2893,12 +3283,12 @@ TextureImporter:
       name: nature_environment_01_snow_114
       rect:
         serializedVersion: 2
-        x: 208
+        x: 351
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2914,15 +3304,19 @@ TextureImporter:
       name: nature_environment_01_snow_115
       rect:
         serializedVersion: 2
-        x: 256
+        x: 399
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -11}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -11}
       tessellationDetail: 0
       bones: []
       spriteID: 8ffcfb263ef2dc400800000000000000
@@ -2935,15 +3329,19 @@ TextureImporter:
       name: nature_environment_01_snow_116
       rect:
         serializedVersion: 2
-        x: 304
+        x: 447
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -11}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -11}
       tessellationDetail: 0
       bones: []
       spriteID: 2a09e3f517a2255a0800000000000000
@@ -2956,15 +3354,19 @@ TextureImporter:
       name: nature_environment_01_snow_117
       rect:
         serializedVersion: 2
-        x: 352
+        x: 495
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -11}
+        - {x: -24, y: -11}
       tessellationDetail: 0
       bones: []
       spriteID: 61bc998c8db526920800000000000000
@@ -2977,15 +3379,19 @@ TextureImporter:
       name: nature_environment_01_snow_118
       rect:
         serializedVersion: 2
-        x: 400
+        x: 543
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -11}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -11}
       tessellationDetail: 0
       bones: []
       spriteID: 3906fd0637384aae0800000000000000
@@ -2998,15 +3404,21 @@ TextureImporter:
       name: nature_environment_01_snow_119
       rect:
         serializedVersion: 2
-        x: 448
+        x: 591
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -3}
+        - {x: -24, y: -14}
+        - {x: -19, y: -14}
+        - {x: -19, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -3}
       tessellationDetail: 0
       bones: []
       spriteID: 148560649f1c9fb20800000000000000
@@ -3019,15 +3431,19 @@ TextureImporter:
       name: nature_environment_01_snow_120
       rect:
         serializedVersion: 2
-        x: 496
+        x: 639
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: -3}
+        - {x: -24, y: -3}
       tessellationDetail: 0
       bones: []
       spriteID: 3b015686744e1e510800000000000000
@@ -3040,15 +3456,21 @@ TextureImporter:
       name: nature_environment_01_snow_121
       rect:
         serializedVersion: 2
-        x: 544
+        x: 687
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -3}
+        - {x: -24, y: -24}
+        - {x: 19, y: -24}
+        - {x: 19, y: -14}
+        - {x: 24, y: -14}
+        - {x: 24, y: -3}
       tessellationDetail: 0
       bones: []
       spriteID: 693a554746351c490800000000000000
@@ -3061,15 +3483,23 @@ TextureImporter:
       name: nature_environment_01_snow_122
       rect:
         serializedVersion: 2
-        x: 592
+        x: 735
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 8}
+        - {x: -24, y: -4}
+        - {x: -18, y: -4}
+        - {x: -18, y: -24}
+        - {x: -8, y: -24}
+        - {x: -8, y: -18}
+        - {x: 24, y: -18}
+        - {x: 24, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: d9592748a646525f0800000000000000
@@ -3082,15 +3512,19 @@ TextureImporter:
       name: nature_environment_01_snow_123
       rect:
         serializedVersion: 2
-        x: 640
+        x: 783
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -18}
+        - {x: 24, y: -18}
+        - {x: 24, y: 8}
+        - {x: -24, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: a827b79450d665730800000000000000
@@ -3103,15 +3537,23 @@ TextureImporter:
       name: nature_environment_01_snow_124
       rect:
         serializedVersion: 2
-        x: 688
+        x: 831
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 8}
+        - {x: -24, y: -18}
+        - {x: 7, y: -18}
+        - {x: 7, y: -24}
+        - {x: 18, y: -24}
+        - {x: 18, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 2a8d6318d1bbd5300800000000000000
@@ -3124,15 +3566,23 @@ TextureImporter:
       name: nature_environment_01_snow_125
       rect:
         serializedVersion: 2
-        x: 736
+        x: 879
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: 11}
+        - {x: -18, y: 11}
+        - {x: -18, y: -24}
+        - {x: -9, y: -24}
+        - {x: -9, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 5d0bc459b0c2d4260800000000000000
@@ -3145,15 +3595,19 @@ TextureImporter:
       name: nature_environment_01_snow_126
       rect:
         serializedVersion: 2
-        x: 784
+        x: 927
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 24, y: -3}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 0262c1579566d5860800000000000000
@@ -3166,82 +3620,27 @@ TextureImporter:
       name: nature_environment_01_snow_127
       rect:
         serializedVersion: 2
-        x: 832
+        x: 975
         y: 48
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: 24}
+        - {x: -24, y: -3}
+        - {x: 8, y: -3}
+        - {x: 8, y: -24}
+        - {x: 18, y: -24}
+        - {x: 18, y: 12}
+        - {x: 24, y: 12}
+        - {x: 24, y: 24}
       tessellationDetail: 0
       bones: []
       spriteID: 1b42221c52c69c1e0800000000000000
       internalID: -2177090035447094095
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: nature_environment_01_snow_128
-      rect:
-        serializedVersion: 2
-        x: 880
-        y: 48
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a37194e6499e8290800000000000000
-      internalID: -7886197367717661792
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: nature_environment_01_snow_129
-      rect:
-        serializedVersion: 2
-        x: 928
-        y: 48
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 38367899543f6c800800000000000000
-      internalID: 632460277946213251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: nature_environment_01_snow_130
-      rect:
-        serializedVersion: 2
-        x: 976
-        y: 48
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e79d0d77a88073b0800000000000000
-      internalID: -5516759290589898783
       vertices: []
       indices: 
       edges: []
