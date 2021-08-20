@@ -146,13 +146,12 @@ public class Room : MonoBehaviour
                 else
                 {
                     population = Random.Range(8, 10);
-                    //population = 1;
 
                     for (int i = 0; i < population; i++)
                     {
                         int type;
                         Vector3 safePosition;
-                        type = Random.Range((data.stageNumber - 1) * 4, (data.stageNumber * 4) - 1);
+                        type = Random.Range(0, gameController.prfMonsters.Length);
                         List<float> range = map.GetComponent<Map>().SafeMonsterPosition;
                         int cnt = Random.Range(0, range.Count / 4);
                         safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);

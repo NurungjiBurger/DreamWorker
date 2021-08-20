@@ -10,7 +10,11 @@ public class MonsterProjectile : Projectile
     {
         if (collision.CompareTag("Player"))
         {
-            Instantiate(prefabEffect, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            Debug.Log("플레이어 타격성공!");
+            if (prefabEffect != null)
+            {
+                Instantiate(prefabEffect, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            }
         }
     }
 
@@ -18,7 +22,7 @@ public class MonsterProjectile : Projectile
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if (Vector3.Distance(player.transform.position, transform.position) > 0) flip = true;
+        if (player.transform.position.x - transform.position.x > 0) flip = true;
         else flip = false;
 
         GetComponent<SpriteRenderer>().flipX = flip;

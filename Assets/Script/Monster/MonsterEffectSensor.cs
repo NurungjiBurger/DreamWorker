@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class MonsterEffectSensor : EffectSensor
 {
+    [SerializeField]
+    private GameObject prefabTimer;
+    [SerializeField]
+    private int durationTime;
+
+    public int dir;
+    public Vector3 position;
+
+    private Timer durationTimer;
+
     private void OnTriggerEnter2D(Collider2D col)
     {
+        /*
         if (type == 1)
         {
             if (col.CompareTag("Ground") || col.CompareTag("Wall"))
@@ -20,12 +31,19 @@ public class MonsterEffectSensor : EffectSensor
             disappear = true;
             if (type == 1) GetComponent<Animator>().SetBool("disappear", true);
         }
+        */
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        dir = GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterAttack>().Direction;
+        if (durationTime != 0)
+        {
+            durationTimer = Instantiate(prefabTimer).GetComponent<Timer>();
+            durationTimer.SetCooldown(durationTime);
+
+            durationTimer.TimerSetZero();
+        }
 
         if (dir == 1) GetComponent<SpriteRenderer>().flipX = false;
         else GetComponent<SpriteRenderer>().flipX = true;
@@ -38,9 +56,15 @@ public class MonsterEffectSensor : EffectSensor
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
         {
-            if (type == 1) // 메테오
+            if (type == 1) // 가스구름
             {
-                transform.Translate(-0.01f * dir, -0.01f, 0);
+                if (durationTimer.CooldownCheck())
+                {
+                    Debug.Log("시간끝!");
+                    disappear = true;
+                    DestroyObject();
+                }
+                Debug.Log("똑딱똑딱");
             }
         }
     }

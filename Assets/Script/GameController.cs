@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
     private bool isPause = false;
 
     private int pastSelectDirection;
+    private int selectStageNumber;
 
     private List<GameObject> map = new List<GameObject>();
     private List<GameObject> room = new List<GameObject>();
@@ -56,6 +57,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> EventRoom { get { return eventRoom;} }
     public List<GameObject> Room { get { return room; } }
     public List<GameObject> Map { get { return map; } }
+    public GameObject[] prfMonsters { get { return prefabMonsters; } }
 
     private void printalldata()
     {
@@ -93,6 +95,7 @@ public class GameController : MonoBehaviour
 
     public GameObject PrefabReturn(string str, int idx)
     {
+
         GameObject tmp = null;
         if (str == "BossMonster") tmp = prefabBossMonsters[idx];
         else if (str == "Monster") tmp = prefabMonsters[idx];
@@ -182,6 +185,7 @@ public class GameController : MonoBehaviour
         {// 0~5 1
             // 6~11 2
             pastSelectDirection = 0;
+
             mapPrfNumber = Random.Range((6 * (data.stageNumber - 1)), (6 * data.stageNumber) - 1);
             map.Add(Instantiate(prefabMapDesigns[mapPrfNumber], new Vector3(0, 0, 0), Quaternion.identity));
             map[0].transform.SetParent(GameObject.Find("Grid").transform);
@@ -336,7 +340,7 @@ public class GameController : MonoBehaviour
                     if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
                     else isPause = true;
 
-                    GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y, -10), Quaternion.identity);
+                    GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 1.55f, -10), Quaternion.identity);
 
                     if (Input.GetKeyDown(KeyCode.H))
                     {
@@ -344,7 +348,7 @@ public class GameController : MonoBehaviour
                         for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName);
                     }
 
-                    if (data.stageNumber <= 5) // // 5스테이지가 마지막
+                    if (true) // 무한 스테이지
                     {
                         Debug.Log(data.stageNumber);
                         data.stageClear = false;
@@ -355,6 +359,9 @@ public class GameController : MonoBehaviour
                             data.subStageNumber = Random.Range(10, 16);
 
                             data.subStageNumber = 3;
+
+                            Debug.Log(prefabMapDesigns.Length / 6);
+                            selectStageNumber = Random.Range(0, prefabMapDesigns.Length / 6);
 
                             CreateRoom(data.subStageNumber);
 

@@ -291,7 +291,7 @@ MonoBehaviour:
   prefabRoom: {fileID: 1342088508078713797, guid: d92c489fed79f7b4a9d971fca57936ec, type: 3}
   prefabSlot: {fileID: 6407902520024726435, guid: 6a92acf727ceb2d4e9d82297cab7a676, type: 3}
   prefabCharacters:
-  - {fileID: 6485205295942090449, guid: f94936c2e9df1ef4e92fe1d9aa31eb23, type: 3}
+  - {fileID: 4129924028584325893, guid: f096dab532b1bbd4ab2ca62569e54d55, type: 3}
   prefabMapDesigns:
   - {fileID: 6971374651941252024, guid: 153421095eea4cf49bde629ab65672e7, type: 3}
   - {fileID: 7056414540493786577, guid: c5c626ee49275dd40a8051b562557048, type: 3}
@@ -321,17 +321,15 @@ MonoBehaviour:
   - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
   - {fileID: 5808481978946914169, guid: 799cfe1cf3a1a304f8e0b8a15801c1e9, type: 3}
   prefabMonsters:
-  - {fileID: 3669066004584926201, guid: 7beefb8390bcdfe428d733bae753114f, type: 3}
-  - {fileID: 561254009004928827, guid: 56bcd4872c45ab04f97d3688015f6a2a, type: 3}
-  - {fileID: 4111291780921786306, guid: a845c3cd809734e42af05ceb0465664f, type: 3}
-  - {fileID: 1435551059982855661, guid: f5affcb06e7d94248bba3deda0c4ff12, type: 3}
-  - {fileID: 1864798779100027704, guid: 33d0e06c9e0f45a4e93fd662a59e5619, type: 3}
-  - {fileID: 7769854020418550967, guid: a05ce65ef9e055a48ac3331975cbfb35, type: 3}
-  - {fileID: 1550942159688109516, guid: 9685ba18de9898042869cb240658db81, type: 3}
-  - {fileID: 383148728429647738, guid: f4102c0afb7775044b41c0ded4721ea0, type: 3}
+  - {fileID: 5174940641465038388, guid: 08fee975a8deb0f40bb8019a210955f5, type: 3}
+  - {fileID: 2512320472427343245, guid: 65fdc769b4d08eb44a6bf7cc93d81d21, type: 3}
+  - {fileID: 7015501384631583583, guid: c36e8e60a04e67c46b04bd66301aa023, type: 3}
+  - {fileID: 6971776360248110561, guid: dd77ba77f05a0a14497f97c144625339, type: 3}
+  - {fileID: 431956713998832168, guid: 67e128a469668714bb51ff9316a40bf4, type: 3}
+  - {fileID: 8816964378265117249, guid: 0bd6822e0d9bc4b49adbf4827aa8b219, type: 3}
   prefabBossMonsters:
-  - {fileID: 7842352421957864564, guid: 9f2091fbf65126249a85b0ae9814484a, type: 3}
-  - {fileID: 8887170625428642108, guid: efa35974fa86af94e9289b16842c101a, type: 3}
+  - {fileID: 5174940641465038388, guid: 08fee975a8deb0f40bb8019a210955f5, type: 3}
+  - {fileID: 5174940641465038388, guid: 08fee975a8deb0f40bb8019a210955f5, type: 3}
   prefabPortals:
   - {fileID: 6766317714605634611, guid: f1d063180f8dfb54b9dfb73f016a7370, type: 3}
   - {fileID: 9145915304862493379, guid: 192b0f4bf0743cf4eb6f359cffcc16d2, type: 3}
@@ -1519,13 +1517,13 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 0.5
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

@@ -84,6 +84,8 @@ public class MonsterMovement : MonoBehaviour
     {
         if (moveTimer.CooldownCheck()) isMove = false;
 
+        if (name == "풍선가스(Clone)") Debug.Log(name + "  " + moveRandom);
+
         // 인식 범위 안
         if (Vector3.Distance(player.transform.position, transform.position) <= recognitionRange)
         {
@@ -175,5 +177,6 @@ public class MonsterMovement : MonoBehaviour
     private void Update()
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)  DecideMove();
+        if (name == "풍선가스(Clone)") Debug.Log(jumping);
     }
 }

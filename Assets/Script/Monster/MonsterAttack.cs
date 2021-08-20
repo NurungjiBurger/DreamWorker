@@ -5,15 +5,17 @@ using UnityEngine;
 public class MonsterAttack : MonoBehaviour
 {
     [SerializeField]
+    private GameObject prefabTimer;
+    [SerializeField]
     private float attackRange;
     [SerializeField]
     private int attackQuantity;
     [SerializeField]
-    private GameObject prefabTimer;
-    [SerializeField]
     private float attackSpeed;
     [SerializeField]
-    private int attackType;
+    private GameObject prefabAttackEffect;
+    [SerializeField]
+    private float[] attackEffectOffset;
     [SerializeField]
     protected float sizeX;
     [SerializeField]
@@ -22,10 +24,11 @@ public class MonsterAttack : MonoBehaviour
     private bool isAttack = false;
     private int attackRandom;
 
-    private bool isUp;
     private int dir;
 
     private GameObject player;
+
+    private GameObject effect;
     private Animator animator;
 
     private Timer attackTimer;
@@ -48,7 +51,26 @@ public class MonsterAttack : MonoBehaviour
         GetComponent<BoxCollider2D>().size = new Vector3(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y, GetComponent<SpriteRenderer>().bounds.size.z);
     }
     public void AnimaotrSetFalse() { animator.SetBool("move", false); }
-    protected void DecideAttack()
+
+    public void AttackEffectCreate()
+    {
+        if (effect == null)
+        {
+            effect = Instantiate(prefabAttackEffect, new Vector3(transform.position.x + (-dir * attackEffectOffset[0]), transform.position.y + (attackEffectOffset[1])), Quaternion.identity);
+            effect.GetComponent<MonsterEffectSensor>().dir = dir;
+        }
+    }
+
+    private void Attacking()
+    {
+        if (isAttack )
+        {
+            animator.SetTrigger("attack");
+            attackTimer.TimerSetZero();
+        }
+    }
+
+    private void DecideAttack()
     {       
         // 공격범위내에 있다면
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
@@ -56,61 +78,17 @@ public class MonsterAttack : MonoBehaviour
             if (!isAttack)
             {
                 isAttack = true;
-                attackTimer.TimerSetZero();
                 if (GetComponent<SpriteRenderer>().flipX) dir = -1;
                 else dir = 1;
-                if (attackQuantity == 1)
-                {
-                    if (attackType == 0) isUp = true;
-                }
-                else
-                {
-                     attackRandom = Random.Range(0, attackQuantity);
-                }
+
+                attackRandom = Random.Range(0, attackQuantity);
+
+                Attacking();
             }
         }
     }
-    protected void Attacking()
-    {
-        if (isAttack)
-        {
-            if (attackTimer.CooldownCheck()) isAttack = false;
 
-            if (attackQuantity == 0)
-            {
-                if (isUp && transform.position.y >= 0.075f * GetComponent<MonsterStatus>().Data.jumpPower) isUp = false;
-
-                if (attackType == 0) // 점프공격 
-                {
-                    if (isUp) transform.Translate(0, 0.075f * GetComponent<MonsterStatus>().Data.jumpPower / (float)(attackSpeed * 4), 0);
-                    else transform.Translate(-0.01f * dir * GetComponent<MonsterStatus>().Data.moveSpeed, -(0.075f * GetComponent<MonsterStatus>().Data.jumpPower) / (float)attackSpeed, 0);
-
-                    if (GetComponent<MonsterMovement>().IsGround) isAttack = false;
-                }
-                else if (attackType == 1) // 돌진공격
-                {
-                    transform.Translate(-0.005f * dir * GetComponent<MonsterStatus>().Data.moveSpeed, 0, 0);
-                }
-                else if (attackType == 2) // 본체 공격애니메이션에 데미지
-                {
-                    animator.SetTrigger("attack");
-                    GetComponent<Collider2D>().isTrigger = true;
-                    GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
-                }
-            }
-            else
-            {
-
-                // 종료조건
-            }
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
-    }
-
-    protected void Setting()
+    private void Setting()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
@@ -126,11 +104,16 @@ public class MonsterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) DecideAttack();
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        {
+            DecideAttack();
+            if (attackTimer.CooldownCheck()) isAttack = false;
+        }
+
     }
 
     private void FixedUpdate()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) Attacking();
+
     }
 }

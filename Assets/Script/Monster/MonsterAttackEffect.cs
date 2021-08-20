@@ -17,6 +17,12 @@ public class MonsterAttackEffect : MonoBehaviour
     public bool Effect { get { return effect; } }
     public bool Judgement { get { return judgement; } }
 
+    public void AttackJudgementCreate() { }
+    public void AttackEffectCreate()
+    {
+       // 이펙트 생성
+    }
+
     public void TriggerOn()
     {
         GetComponent<Collider2D>().isTrigger = true;
