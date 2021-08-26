@@ -321,12 +321,12 @@ MonoBehaviour:
   - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
   - {fileID: 5808481978946914169, guid: 799cfe1cf3a1a304f8e0b8a15801c1e9, type: 3}
   prefabMonsters:
-  - {fileID: 5174940641465038388, guid: 08fee975a8deb0f40bb8019a210955f5, type: 3}
-  - {fileID: 2512320472427343245, guid: 65fdc769b4d08eb44a6bf7cc93d81d21, type: 3}
-  - {fileID: 7015501384631583583, guid: c36e8e60a04e67c46b04bd66301aa023, type: 3}
-  - {fileID: 6971776360248110561, guid: dd77ba77f05a0a14497f97c144625339, type: 3}
-  - {fileID: 431956713998832168, guid: 67e128a469668714bb51ff9316a40bf4, type: 3}
-  - {fileID: 8816964378265117249, guid: 0bd6822e0d9bc4b49adbf4827aa8b219, type: 3}
+  - {fileID: 8093218691599893376, guid: 6dbecec56b7fa6f4ab477f042f6a1d06, type: 3}
+  - {fileID: 7162873750120440306, guid: 99e61b2c2c6df5a49b0a03f11a48b141, type: 3}
+  - {fileID: 5248710280694699747, guid: 20ded061a97efc841b743dcae92ead11, type: 3}
+  - {fileID: 5910397317654605757, guid: af86f7f2419cfb94c96c25c45b8d5649, type: 3}
+  - {fileID: 1090812836103482323, guid: c8f9198cc1813684da53d03982ee3706, type: 3}
+  - {fileID: 6310239780893070421, guid: ca047e04b5acb024385bcb112ec6f95a, type: 3}
   prefabBossMonsters:
   - {fileID: 5174940641465038388, guid: 08fee975a8deb0f40bb8019a210955f5, type: 3}
   - {fileID: 5174940641465038388, guid: 08fee975a8deb0f40bb8019a210955f5, type: 3}
@@ -906,6 +906,7 @@ GameObject:
   - component: {fileID: 1273226685}
   - component: {fileID: 1273226684}
   - component: {fileID: 1273226683}
+  - component: {fileID: 1273226687}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -994,6 +995,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &1273226687
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273226682}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c2a63b3c7e4ca1439583c2510d9a356, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1349054774
 GameObject:
   m_ObjectHideFlags: 0

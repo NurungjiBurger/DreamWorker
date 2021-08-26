@@ -78,7 +78,7 @@ public class MonsterAttack : MonoBehaviour
             if (!isAttack)
             {
                 isAttack = true;
-                if (GetComponent<SpriteRenderer>().flipX) dir = -1;
+                if (GetComponent<ObjectFlip>().flipX) dir = -1;
                 else dir = 1;
 
                 attackRandom = Random.Range(0, attackQuantity);

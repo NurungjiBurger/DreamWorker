@@ -115,13 +115,13 @@ public class MonsterMovement : MonoBehaviour
         // 방향 바꾸기
         if (dir == Direction.Right)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            GetComponent<ObjectFlip>().flip('x', true);
             GetComponent<BoxCollider2D>().offset = new Vector2(-offsetX[0], offsetY[0]);
             GetComponent<CapsuleCollider2D>().offset = new Vector2(-offsetX[1], offsetY[1]);
         }
         else if (dir == Direction.Left)
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            GetComponent<ObjectFlip>().flip('x', false);
             GetComponent<BoxCollider2D>().offset = new Vector2(offsetX[0], offsetY[0]);
             GetComponent<CapsuleCollider2D>().offset = new Vector2(offsetX[1], offsetY[1]);
         }
