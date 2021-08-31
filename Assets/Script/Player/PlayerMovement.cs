@@ -96,15 +96,19 @@ public class PlayerMovement : MonoBehaviour
         switch (dir)
         {
             case Direction.Right:
-                GetComponent<SpriteRenderer>().flipX = true;
+                GetComponent<ObjectFlip>().flip('x', true);
+                /*
                 GetComponent<BoxCollider2D>().offset = new Vector2(-0.065f, 0.057f);
                 GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.07f, -0.002f);
+                */
                 GetComponent<Rigidbody2D>().AddForce(Vector2.right * moveSpeed);
                 break;
             case Direction.Left:
-                GetComponent<SpriteRenderer>().flipX = false;
+                GetComponent<ObjectFlip>().flip('x', false);
+                /*
                 GetComponent<BoxCollider2D>().offset = new Vector2(0.065f, 0.057f);
                 GetComponent<CapsuleCollider2D>().offset = new Vector2(0.07f, -0.002f);
+                */
                 GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
                 break;
             case Direction.Up:

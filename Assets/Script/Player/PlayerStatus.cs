@@ -10,6 +10,8 @@ public class PlayerStatus : Status
     private string occupation;
     [SerializeField]
     private GameObject basicItem;
+    [SerializeField]
+    private GameObject handBone;
 
     [SerializeField]
     private int damage;
@@ -29,6 +31,7 @@ public class PlayerStatus : Status
     public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
     public GameObject Inventory { get { return inventory; } }
     public int Damage { get { return damage; } }
+    public GameObject HandBone { get { return handBone; } }
 
     public void CalCulateExperience(int exp)
     {

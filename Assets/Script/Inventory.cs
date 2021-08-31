@@ -48,6 +48,7 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
             slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             slot.SlotItem.GetComponent<ItemStatus>().IsMount = false;
+            slot.SlotItem.SetActive(false);
         }
     }
 

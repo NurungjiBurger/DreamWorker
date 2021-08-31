@@ -350,7 +350,7 @@ public class GameController : MonoBehaviour
 
                     if (true) // 무한 스테이지
                     {
-                        Debug.Log(data.stageNumber);
+                        //Debug.Log(data.stageNumber);
                         data.stageClear = false;
                         if (!data.stageEntrance) // 처음 스테이지에 입장
                         {
@@ -360,7 +360,6 @@ public class GameController : MonoBehaviour
 
                             data.subStageNumber = 3;
 
-                            Debug.Log(prefabMapDesigns.Length / 6);
                             selectStageNumber = Random.Range(0, prefabMapDesigns.Length / 6);
 
                             CreateRoom(data.subStageNumber);

@@ -153,7 +153,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 transform.Find("Background").GetComponent<Image>().color = new Color(96 / 255f, 236 / 255f, 39 / 255f, 0.5f);
                 break;
         }
-        transform.Find("Background").transform.Find("Item").GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+        transform.Find("Background").transform.Find("Item").GetComponent<Image>().sprite = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
 
         originColor[0] = GetComponent<Image>().color;
         originColor[1] = transform.Find("Background").GetComponent<Image>().color;

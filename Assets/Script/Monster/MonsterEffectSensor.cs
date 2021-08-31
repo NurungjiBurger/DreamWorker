@@ -9,7 +9,7 @@ public class MonsterEffectSensor : EffectSensor
     [SerializeField]
     private int durationTime;
 
-    public int dir;
+
     public Vector3 position;
 
     private Timer durationTimer;
@@ -60,11 +60,9 @@ public class MonsterEffectSensor : EffectSensor
             {
                 if (durationTimer.CooldownCheck())
                 {
-                    Debug.Log("½Ã°£³¡!");
                     disappear = true;
                     DestroyObject();
                 }
-                Debug.Log("¶Èµü¶Èµü");
             }
         }
     }

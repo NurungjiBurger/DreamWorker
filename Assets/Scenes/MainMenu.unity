@@ -291,7 +291,7 @@ MonoBehaviour:
   prefabRoom: {fileID: 1342088508078713797, guid: d92c489fed79f7b4a9d971fca57936ec, type: 3}
   prefabSlot: {fileID: 6407902520024726435, guid: 6a92acf727ceb2d4e9d82297cab7a676, type: 3}
   prefabCharacters:
-  - {fileID: 4129924028584325893, guid: f096dab532b1bbd4ab2ca62569e54d55, type: 3}
+  - {fileID: 5751330250979888369, guid: 066cfb5017865ac4c8874a49dcb86746, type: 3}
   prefabMapDesigns:
   - {fileID: 6971374651941252024, guid: 153421095eea4cf49bde629ab65672e7, type: 3}
   - {fileID: 7056414540493786577, guid: c5c626ee49275dd40a8051b562557048, type: 3}
@@ -315,11 +315,7 @@ MonoBehaviour:
   - {fileID: 1804582505127061630, guid: 322f2ba6cbd6a7942a1e855896160e14, type: 3}
   - {fileID: 9174130520824463903, guid: 51856b7567182df4abff87f0767f4087, type: 3}
   prefabItems:
-  - {fileID: 7831584778518907238, guid: c6ce92a72a8b5304989d04c602cefbaf, type: 3}
-  - {fileID: 8271512806439706280, guid: 7ddb345a5bfd0e14e8d6f4a05d613355, type: 3}
-  - {fileID: 5536535103058591157, guid: 557aebf6cf5322949a5c5c450822a1fe, type: 3}
-  - {fileID: 8102262969444909037, guid: edd920517294d8c4d9d37f2c6c3fcd7f, type: 3}
-  - {fileID: 5808481978946914169, guid: 799cfe1cf3a1a304f8e0b8a15801c1e9, type: 3}
+  - {fileID: 8471935108455472396, guid: 3759c8b3f6fee4746893fc8d4061181b, type: 3}
   prefabMonsters:
   - {fileID: 8093218691599893376, guid: 6dbecec56b7fa6f4ab477f042f6a1d06, type: 3}
   - {fileID: 7162873750120440306, guid: 99e61b2c2c6df5a49b0a03f11a48b141, type: 3}

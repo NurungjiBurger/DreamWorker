@@ -139,23 +139,31 @@ public class Room : MonoBehaviour
             dataM.monsterCreate = true;
             if (data.datas[index-1].structName == "Map")
             {
+                GameObject tmp;
+                int type;
+                type = Random.Range(0, gameController.prfMonsters.Length);
+                population = Random.Range(8, 10);
+
                 if (boss)
                 {
-                    CreateMonster(gameController.PrefabReturn("BossMonster", 0), new Vector3(transform.position.x, transform.position.y, transform.position.z)).GetComponent<MonsterStatus>().monsterPrfNumber = 0;
+                    tmp = CreateMonster(gameController.PrefabReturn("Monster", type), new Vector3(transform.position.x, transform.position.y, transform.position.z));
+                    tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
+                    tmp.GetComponent<ObjectFlip>().BeTheBossMonster();
+
                 }
                 else
                 {
-                    population = Random.Range(8, 10);
+
 
                     for (int i = 0; i < population; i++)
                     {
-                        int type;
-                        Vector3 safePosition;
                         type = Random.Range(0, gameController.prfMonsters.Length);
+                        Vector3 safePosition;
                         List<float> range = map.GetComponent<Map>().SafeMonsterPosition;
                         int cnt = Random.Range(0, range.Count / 4);
                         safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);
-                        CreateMonster(gameController.PrefabReturn("Monster", type), safePosition).GetComponent<MonsterStatus>().monsterPrfNumber = type;
+                        tmp = CreateMonster(gameController.PrefabReturn("Monster", type), safePosition);
+                        tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
                     }
                 }
             }
@@ -200,7 +208,6 @@ public class Room : MonoBehaviour
                     isPlayer = true;
                     if (!isEvent) // 일반 필드 
                     {
-                        Debug.Log(transform.position + " 이벤트맵 x ");
                         if (!dataM.isClear)
                         {
                             if (!dataM.subStageEntrance)

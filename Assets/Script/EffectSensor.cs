@@ -11,7 +11,7 @@ public class EffectSensor : MonoBehaviour
     [SerializeField]
     protected int size;
 
-    protected float dir;
+    public int dir;
     protected bool disappear = false;
 
     public int Damage { get { return dmg; } }

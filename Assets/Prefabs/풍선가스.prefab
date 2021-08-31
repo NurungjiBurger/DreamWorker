@@ -1594,7 +1594,7 @@ Transform:
   m_GameObject: {fileID: 6310239780893070421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 4980956297416172062}
   - {fileID: 8857741789107202288}
@@ -1660,6 +1660,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d462dfab5f3e5418ea53c6f7532402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0.15
+  y: 0.15
+  z: 0.15
+  magnification: 0
   flipX: 0
   flipY: 0
 --- !u!114 &8423308300685423415
@@ -1745,7 +1749,7 @@ MonoBehaviour:
   dropItemStartindexber: 0
   dropItemFinishindexber: 0
   dropCoin:
-  - {fileID: 684209268223019105, guid: ffc876534464390479fb614286335c96, type: 3}
+  - {fileID: 8452382426054345512, guid: c5437a6929825d140a4065aac8cfabe8, type: 3}
   experience: 0
   monsterPrfNumber: 0
   index: -1

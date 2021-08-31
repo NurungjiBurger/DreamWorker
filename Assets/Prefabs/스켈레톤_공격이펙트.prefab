@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7625631061865501340}
   - component: {fileID: 89900819441608737}
   - component: {fileID: 7113702519071799768}
-  - component: {fileID: 7758973268563306137}
   - component: {fileID: 7564014857523930048}
   - component: {fileID: 4572975328775526881}
+  - component: {fileID: 7317660476809368422}
   m_Layer: 0
   m_Name: "\uC2A4\uCF08\uB808\uD1A4_\uACF5\uACA9\uC774\uD399\uD2B8"
   m_TagString: Monster_attack_judgement
@@ -106,22 +106,6 @@ MonoBehaviour:
   durationTime: 0
   dir: 0
   position: {x: 0, y: 0, z: 0}
---- !u!114 &7758973268563306137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3371286919379478663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16a94bef115cd4042a60c46d74426440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabEffect: {fileID: 0}
-  attackRange: 5
-  isComBack: 0
-  isMove: 1
 --- !u!70 &7564014857523930048
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -157,3 +141,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7317660476809368422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371286919379478663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53b924e5950e684d9dca86c98f1389d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabEffect: {fileID: 0}
+  attackRange: 5
+  isComBack: 0
+  isMove: 1

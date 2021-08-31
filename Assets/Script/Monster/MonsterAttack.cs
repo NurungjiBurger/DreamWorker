@@ -50,7 +50,7 @@ public class MonsterAttack : MonoBehaviour
     {
         GetComponent<BoxCollider2D>().size = new Vector3(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y, GetComponent<SpriteRenderer>().bounds.size.z);
     }
-    public void AnimaotrSetFalse() { animator.SetBool("move", false); }
+    //public void AnimaotrSetFalse() { animator.SetBool("move", false); }
 
     public void AttackEffectCreate()
     {
@@ -58,6 +58,7 @@ public class MonsterAttack : MonoBehaviour
         {
             effect = Instantiate(prefabAttackEffect, new Vector3(transform.position.x + (-dir * attackEffectOffset[0]), transform.position.y + (attackEffectOffset[1])), Quaternion.identity);
             effect.GetComponent<MonsterEffectSensor>().dir = dir;
+            if (effect.GetComponent<Projectile>()) effect.GetComponent<Projectile>().EntitySetting(gameObject);
         }
     }
 
@@ -65,7 +66,8 @@ public class MonsterAttack : MonoBehaviour
     {
         if (isAttack )
         {
-            animator.SetTrigger("attack");
+            /*if (!GetComponent<MonsterMovement>().Animaing)*/ animator.SetTrigger("attack");
+            //GetComponent<MonsterMovement>().Animaing = true;
             attackTimer.TimerSetZero();
         }
     }

@@ -98,6 +98,7 @@ public class Data
         {
             StatData(arr, arr2);
             isAcquired = false; // item
+            isMount = false;
 
             if (name == "Player")
             {

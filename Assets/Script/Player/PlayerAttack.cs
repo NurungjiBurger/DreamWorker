@@ -41,7 +41,14 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        if (weapon) Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        GameObject tmp;
+
+        if (weapon)
+        {
+            tmp = Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
+            tmp.GetComponent<Projectile>().EntitySetting(gameObject);
+            tmp.GetComponent<Projectile>().WeaponSetting(weapon);
+        }
         else Debug.Log("무기없음");
     }
 
@@ -77,7 +84,7 @@ public class PlayerAttack : MonoBehaviour
             isAttack = false;
             animator.SetTrigger("attack");
             attackTimer.TimerSetZero();
-            AttackAnimatestart();
+     //       AttackAnimatestart();
         }
     }
 

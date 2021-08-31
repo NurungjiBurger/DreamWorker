@@ -46,8 +46,9 @@ public class PlayerSensor : MonoBehaviour
 
             if (collision.CompareTag("Item"))
             {
-                if (GetComponent<PlayerStatus>().Acquirable)
+                if (GetComponent<PlayerStatus>().Acquirable && !collision.GetComponent<ItemStatus>().Data.isAcquired)
                 {
+                    collision.GetComponent<ItemStatus>().Data.isAcquired = true;
                     GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject));
                 }
             }
@@ -56,9 +57,9 @@ public class PlayerSensor : MonoBehaviour
             {
                 if (collision.GetComponent<Parabola>().Arrived)
                 {
-                    if (collision.name.Equals("Gold(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
-                    if (collision.name.Equals("Golds(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
-                    //if (collision.collider.name.Equals("Mileage(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                    if (collision.name.Equals("°ñµå(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                    if (collision.name.Equals("°ñµåÁÖ¸Ó´Ï(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
+                    //if (collision.collider.name.Equals("½ºÄ³·´(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
                     Destroy(collision.gameObject);
                 }
             }
@@ -133,17 +134,18 @@ public class PlayerSensor : MonoBehaviour
         {
             if (collision.collider.CompareTag("Item"))
             {
-                if (GetComponent<PlayerStatus>().Acquirable)
+                if (GetComponent<PlayerStatus>().Acquirable && !collision.collider.gameObject.GetComponent<ItemStatus>().Data.isAcquired)
                 {
+                    collision.collider.gameObject.GetComponent<ItemStatus>().Data.isAcquired = true;
                     GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject));
                 }
             }
 
             if (collision.collider.CompareTag("Wealth"))
             {
-                if (collision.collider.name.Equals("Gold(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
-                if (collision.collider.name.Equals("Golds(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
-                //if (collision.collider.name.Equals("Mileage(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                if (collision.collider.name.Equals("°ñµå(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
+                if (collision.collider.name.Equals("°ñµåÁÖ¸Ó´Ï(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
+                //if (collision.collider.name.Equals("½ºÄ³·´(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
                 Destroy(collision.collider.gameObject);
             }
 

@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class ObjectFlip : MonoBehaviour
 {
+    [SerializeField]
     float x, y, z;
+    [SerializeField]
+    int magnification;
+
     public bool flipX, flipY;
+
+    public void BeTheBossMonster()
+    {
+        x = x * 3;
+        y = y * 3;
+        z = z * 3;
+    }
 
     public void flip(char axis, bool value)
     {
@@ -26,19 +37,11 @@ public class ObjectFlip : MonoBehaviour
         {
             transform.localScale = new Vector3(x * dir, y, z);
         }
-        else if (axis == 'y')
-        {
-            transform.localScale = new Vector3(x, y * dir, z);
-        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        x = transform.localScale.x;
-        y = transform.localScale.y;
-        z = transform.localScale.z;
-
         flipX = false;
         flipY = false;
     }
@@ -46,6 +49,6 @@ public class ObjectFlip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        flip('x', flipX);
     }
 }

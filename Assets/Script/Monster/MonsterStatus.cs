@@ -113,6 +113,7 @@ public class MonsterStatus : Status
 
     private void Update()
     {
+
         if (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;

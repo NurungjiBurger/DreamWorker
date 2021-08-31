@@ -13,6 +13,7 @@ public class MonsterMovement : MonoBehaviour
     private bool isGround = true;
     private bool trigger = false;
     private bool isMove = false;
+    private bool animating = false;
     private int moveRandom;
 
     private GameObject player;
@@ -84,8 +85,6 @@ public class MonsterMovement : MonoBehaviour
     {
         if (moveTimer.CooldownCheck()) isMove = false;
 
-        if (name == "풍선가스(Clone)") Debug.Log(name + "  " + moveRandom);
-
         // 인식 범위 안
         if (Vector3.Distance(player.transform.position, transform.position) <= recognitionRange)
         {
@@ -103,7 +102,7 @@ public class MonsterMovement : MonoBehaviour
         // 인식 범위 밖일때
         else
         {
-            // 움직이고 있지 않으면 1초 동안 어떻게 움직일지 정해줌
+
             if (!isMove)
             {
                 moveRandom = Random.Range(0, 4);
@@ -143,7 +142,6 @@ public class MonsterMovement : MonoBehaviour
                     jumping = true;
                 }
                 break;
-            case 3:
             default:
                 dir = Direction.Stop;
                 break;
@@ -177,6 +175,5 @@ public class MonsterMovement : MonoBehaviour
     private void Update()
     {
         if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)  DecideMove();
-        if (name == "풍선가스(Clone)") Debug.Log(jumping);
     }
 }
