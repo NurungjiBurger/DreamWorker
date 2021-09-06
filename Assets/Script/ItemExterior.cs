@@ -21,6 +21,11 @@ public class ItemExterior : MonoBehaviour
             GetComponent<Collider2D>().isTrigger = true;
             transform.position = hand.transform.position;
             GetComponent<ObjectFlip>().flip('x', GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFlip>().flipX);
+            if (GetComponent<ItemStatus>().AttackType != "Sting")
+            {
+                transform.rotation = hand.transform.rotation;
+                GetComponent<ObjectFlip>().flip('x', !GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFlip>().flipX);
+            }
         }
     }
 }

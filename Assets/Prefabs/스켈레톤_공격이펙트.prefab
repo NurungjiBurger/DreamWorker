@@ -102,9 +102,9 @@ MonoBehaviour:
   dmg: 0
   type: 0
   size: 0
+  dir: 0
   prefabTimer: {fileID: 0}
   durationTime: 0
-  dir: 0
   position: {x: 0, y: 0, z: 0}
 --- !u!70 &7564014857523930048
 CapsuleCollider2D:

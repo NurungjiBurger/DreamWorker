@@ -16,6 +16,8 @@ public class ItemStatus : Status
     private Grade grade;
     [SerializeField]
     private GameObject effectBone;
+    [SerializeField]
+    private string attackType;
 
     private GameObject inventory;
     private GameObject inspector;
@@ -36,6 +38,7 @@ public class ItemStatus : Status
     public bool IsMount { get { return dataI.isMount; } set { dataI.isMount = value; } }
     public string Occupation { get { return dedicatedOccupation; } }
     public GameObject EffectBone { get { return effectBone; } }
+    public string AttackType { get { return attackType; } }
 
     public void DestoryAll()
     {

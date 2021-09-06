@@ -19,7 +19,21 @@ public class EffectSensor : MonoBehaviour
     public void DestroyObject()
     {
         if (disappear) Destroy(gameObject);
-    }    
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        {
+            if (GetComponent<Rigidbody2D>() && GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                if (collision.CompareTag("Ground"))
+                {
+                    GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+            }
+        }
+    }
 
     // Start is called before the first frame update
     private void Start()

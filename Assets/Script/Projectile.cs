@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
     protected bool isComBack;
     [SerializeField]
     protected bool isMove;
+    [SerializeField]
+    private bool isFall;
     
     protected int cnt;
     protected int flag;
@@ -62,7 +64,8 @@ public class Projectile : MonoBehaviour
 
         flip = entity.GetComponent<ObjectFlip>().flipX;
 
-        GetComponent<SpriteRenderer>().flipX = !flip;
+        if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
+        else GetComponent<ObjectFlip>().flip('x', !flip);
 
         startPosition = transform.position;
 
@@ -73,6 +76,8 @@ public class Projectile : MonoBehaviour
 
         if (flip) dir = -1;
         else dir = 1;
+
+        if (isFall) flag = -1;
     }
 
     public void WeaponSetting(GameObject obj)
@@ -81,7 +86,8 @@ public class Projectile : MonoBehaviour
 
         flip = weapon.GetComponent<ObjectFlip>().flipX;
 
-        GetComponent<SpriteRenderer>().flipX = !flip;
+        if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
+        else GetComponent<ObjectFlip>().flip('x', !flip);
 
     }
 
@@ -92,13 +98,15 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
+
         // 사출된 자리에 고정
         if (flag == 0)
         {
             if ((startPosition.x + (attackRange * dir)) != this.transform.position.x && cnt < (attackRange * 60))
             {
-               // gameObject.transform.position = weapon.transform.position;
-                GetComponent<SpriteRenderer>().flipX = flip;
+                // gameObject.transform.position = weapon.transform.position;
+                if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
+                else GetComponent<ObjectFlip>().flip('x', !flip);
                 cnt++;
             }
             else flag = 3;
@@ -118,7 +126,8 @@ public class Projectile : MonoBehaviour
                 if (isComBack)
                 {
                     flag = 2;
-                    GetComponent<SpriteRenderer>().flipX = !flip;
+                    if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
+                    else GetComponent<ObjectFlip>().flip('x', !flip);
                 }
                 else flag = 3;
             }

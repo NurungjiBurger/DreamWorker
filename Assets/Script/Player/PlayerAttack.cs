@@ -28,11 +28,11 @@ public class PlayerAttack : MonoBehaviour
         isAttack = false;
     }
 
-    private void AttackAnimatestart()
+    private void WeaponEnroll()
     {
         int size = inspector.GetComponent<Inspector>().EquipItemList.Count;
         weapon = null;
-        for(int i=0;i<size;i++)
+        for (int i = 0; i < size; i++)
         {
             if (inspector.GetComponent<Inspector>().EquipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == "Weapon")
             {
@@ -40,16 +40,26 @@ public class PlayerAttack : MonoBehaviour
                 break;
             }
         }
+    }
 
+    private void AttackAnimatestart()
+    {
         GameObject tmp;
 
         if (weapon)
         {
-            tmp = Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
-            tmp.GetComponent<Projectile>().EntitySetting(gameObject);
-            tmp.GetComponent<Projectile>().WeaponSetting(weapon);
+            if (weapon.GetComponent<ItemStatus>().EffectBone != null)
+            {
+                tmp = Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
+            }
+            else tmp = Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
+
+            if (tmp.GetComponent<Projectile>())
+            {
+                tmp.GetComponent<Projectile>().EntitySetting(gameObject);
+                tmp.GetComponent<Projectile>().WeaponSetting(weapon);
+            }
         }
-        else Debug.Log("무기없음");
     }
 
     private void Awake()
@@ -82,8 +92,20 @@ public class PlayerAttack : MonoBehaviour
         if (isAttack)
         {
             isAttack = false;
-            animator.SetTrigger("attack");
-            attackTimer.TimerSetZero();
+            WeaponEnroll();
+
+            if (weapon)
+            {
+                animator.SetTrigger(weapon.GetComponent<ItemStatus>().AttackType);
+
+                //animator.SetTrigger("attack");
+
+                attackTimer.TimerSetZero();
+            }
+            else
+            {
+                Debug.Log("무기없음");
+            }
      //       AttackAnimatestart();
         }
     }
