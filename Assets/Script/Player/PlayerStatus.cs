@@ -147,7 +147,7 @@ public class PlayerStatus : Status
 
             GameObject tmp;
             tmp = Instantiate(basicItem, new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = 3;
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = 1;
         }
         else
         {

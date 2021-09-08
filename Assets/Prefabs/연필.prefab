@@ -304,7 +304,8 @@ MonoBehaviour:
   grade: 0
   effectBone: {fileID: 6981380816942593602}
   attackType: Sting
-  itemPrfNumber: -1
+  price: 10
+  itemPrfNumber: 0
   index: -1
 --- !u!114 &2714297886999317185
 MonoBehaviour:

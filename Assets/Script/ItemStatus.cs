@@ -18,6 +18,8 @@ public class ItemStatus : Status
     private GameObject effectBone;
     [SerializeField]
     private string attackType;
+    [SerializeField]
+    private int price;
 
     private GameObject inventory;
     private GameObject inspector;
@@ -39,6 +41,7 @@ public class ItemStatus : Status
     public string Occupation { get { return dedicatedOccupation; } }
     public GameObject EffectBone { get { return effectBone; } }
     public string AttackType { get { return attackType; } }
+    public int Price { get { return price; } }
 
     public void DestoryAll()
     {
@@ -55,23 +58,23 @@ public class ItemStatus : Status
         switch(MountingPart)
         {
             case "Head":
-                Debug.Log("체력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+               // Debug.Log("체력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
                 dataI.maxHP = (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)dataI.maxHP);
                 break;
             case "Hand":
-                Debug.Log("공격속도 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+              //  Debug.Log("공격속도 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
                 dataI.attackSpeed = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.attackSpeed;
                 break;
             case "Foot":
-                Debug.Log("이동속도 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+              //  Debug.Log("이동속도 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
                 dataI.moveSpeed = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.moveSpeed;
                 break;
             case "Body":
-                Debug.Log("점프력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+              //  Debug.Log("점프력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
                 dataI.jumpPower = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.jumpPower;
                 break;
             case "Weapon":
-                Debug.Log("공격력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+              //  Debug.Log("공격력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
                 dataI.power = (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)dataI.power);
                 break;
             default:

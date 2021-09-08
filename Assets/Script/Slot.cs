@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -20,14 +21,22 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private GameObject itemInform;
     private GameObject exchanger;
     private GameObject selecter;
+    private GameObject smithy;
 
     private GameObject originParent = null;
     private int originIndex = -1;
 
     public GameObject SlotItem { get { return slotItem; } }
 
+    public void ItemSelect()
+    {
+        smithy.GetComponent<Smithy>().ItemPayment(slotItem);
+        itemInform.SetActive(false);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+
         itemInform.GetComponent<ItemInformation>().InputInformation(slotItem);
         itemInform.SetActive(true);
     }
@@ -173,14 +182,22 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (!itemInform) itemInform = GameObject.Find("Canvas").transform.Find("ItemInform").gameObject;
         if (!exchanger) exchanger = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
         if (!selecter) selecter = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
+        if (!smithy) smithy = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
 
         if (itemInform.activeSelf == true)
         {
             if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
             else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
+            else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
             else itemInform.SetActive(false);
         }
 
-        transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = (float)slotItem.GetComponent<ItemStatus>().CursedRate / (float)100;
+        if (slotItem != null)
+        {
+
+            if (transform.parent.parent == smithy.transform) transform.GetChild(0).Find("PriceBackground").Find("Price").GetComponent<TextMeshProUGUI>().text = slotItem.GetComponent<ItemStatus>().Price.ToString();
+
+            if (slotItem.GetComponent<ItemStatus>().Data != null) transform.GetChild(0).Find("Cursedrate").GetComponent<Image>().fillAmount = (float)slotItem.GetComponent<ItemStatus>().CursedRate / (float)100;
+        }
     }
 }

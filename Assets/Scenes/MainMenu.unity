@@ -333,6 +333,8 @@ MonoBehaviour:
   - {fileID: 9145915304862493379, guid: 192b0f4bf0743cf4eb6f359cffcc16d2, type: 3}
   - {fileID: 3870442352645005099, guid: 174023ea9f8cc8c40973e08f10973b6d, type: 3}
   - {fileID: 8551896024911556750, guid: 6b55efc0b7f8e2c4b96f9606ff724416, type: 3}
+  prefabNpcs:
+  - {fileID: 3817412099578108195, guid: ca15f038f8133b74898d66b7c9ef93ba, type: 3}
 --- !u!4 &565247862
 Transform:
   m_ObjectHideFlags: 0

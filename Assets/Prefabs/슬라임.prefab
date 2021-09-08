@@ -341,7 +341,7 @@ MonoBehaviour:
   bodyDmg: 0
   dropRate: 60
   dropItemStartindexber: 0
-  dropItemFinishindexber: 0
+  dropItemFinishindexber: 3
   dropCoin:
   - {fileID: 8452382426054345512, guid: c5437a6929825d140a4065aac8cfabe8, type: 3}
   experience: 0

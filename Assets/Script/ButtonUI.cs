@@ -26,6 +26,11 @@ public class ButtonUI : MonoBehaviour
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
     }
 
+    public void BlackSmith()
+    {
+        GameObject.Find("BlackSmith").transform.position = new Vector3(300, 310);
+    }
+
     public void UIActive()
     {
         onOff = !onOff;
@@ -55,6 +60,9 @@ public class ButtonUI : MonoBehaviour
                 case "ChangeableButton":
                     ui = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
                     ui.SetActive(onOff);
+                    break;
+                case "BlackSmithButton":
+                    ui = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
                     break;
                 default:
                     break;

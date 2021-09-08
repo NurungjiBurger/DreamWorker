@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
     private GameObject[] prefabBossMonsters;
     [SerializeField]
     private GameObject[] prefabPortals;
+    [SerializeField]
+    private GameObject[] prefabNpcs;
 
     private GameData data;
 
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour
     private List<GameObject> map = new List<GameObject>();
     private List<GameObject> room = new List<GameObject>();
     private List<GameObject> eventRoom = new List<GameObject>();
+    private List<GameObject> npc = new List<GameObject>();
 
     RectTransform hpBar;
     private Image nowHPBar;
@@ -59,13 +62,17 @@ public class GameController : MonoBehaviour
     public List<GameObject> Map { get { return map; } }
     public GameObject[] prfMonsters { get { return prefabMonsters; } }
 
+    public GameObject[] Items { get { return prefabItems; } }
+    public GameObject[] Monsters { get { return prefabMonsters; } }
+    public GameObject[] Portals { get { return prefabPortals; } }
+
     private void printalldata()
     {
         for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName + "  " + idx);
     }
 
     public void NewButton()
-    {
+    { 
         Debug.Log("new");
     }
 
@@ -165,9 +172,16 @@ public class GameController : MonoBehaviour
     {
         // -300, 300
         // 300, 300
+        // heaven
         eventRoom.Add(Instantiate(prefabEventMapDesigns[0], new Vector3(300, 300, 0), Quaternion.identity));
         eventRoom[0].transform.SetParent(GameObject.Find("Grid").transform);
         eventRoom[0].transform.Find("GreenMap_Wall").GetComponent<Room>().map = eventRoom[0];
+
+        //npc.Add(Instantiate(prefabNpcs[0], eventRoom[0].transform.position, Quaternion.identity));
+        npc[0].transform.position = new Vector3(eventRoom[0].transform.position.x + 1.0f, eventRoom[0].transform.position.y, eventRoom[0].transform.position.z);
+
+        // 대장장이 생성
+        // hell
         eventRoom.Add(Instantiate(prefabEventMapDesigns[1], new Vector3(-300, -300, 0), Quaternion.identity));
         eventRoom[1].transform.SetParent(GameObject.Find("Grid").transform);
         eventRoom[1].transform.Find("GreenMap_Wall").GetComponent<Room>().map = eventRoom[1];
@@ -266,6 +280,8 @@ public class GameController : MonoBehaviour
     {
         revert = false;
 
+        npc.Add(GameObject.Find("BlackSmith").gameObject);
+
         if (data.datas.Count == 0)
         {
             player = Instantiate(prefabCharacters[0], new Vector3(0, 0, 0), Quaternion.identity);
@@ -282,7 +298,8 @@ public class GameController : MonoBehaviour
         else
         {
             Restore();
-            for (int idx = 0; idx <= data.subStageNumber; idx++) room[idx].GetComponent<Room>().AllocateSubStageNumber(idx);
+
+            //for (int idx = 0; idx <= data.subStageNumber; idx++) room[idx].GetComponent<Room>().AllocateSubStageNumber(idx);
         }
     }
 
@@ -303,7 +320,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A)) printalldata();
+        //if (Input.GetKey(KeyCode.A)) printalldata();
 
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
         else
@@ -401,6 +418,7 @@ public class GameController : MonoBehaviour
                 room[room.Count - 1].GetComponent<Room>().map = map[map.Count - 1];
 
                 obj.GetComponent<Room>().index = idx;
+                obj.GetComponent<Room>().AllocateSubStageNumber(room.Count-1);
 
                 if (data.datas[idx].selectRoomIndex != -1) PortalCreate(room[data.datas[idx].selectRoomIndex], room[room.Count - 1], data.datas[idx].portalDirection);
             }
