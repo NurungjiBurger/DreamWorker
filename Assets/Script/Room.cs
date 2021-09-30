@@ -132,40 +132,53 @@ public class Room : MonoBehaviour
 
     private GameObject CreateMonster(GameObject prefab, Vector3 position) { return Instantiate(prefab, position, Quaternion.identity); }
 
-    private void CreateStage(bool boss) 
+    private void CreateStage(bool boss, bool isevent) 
     {
         if (!dataM.monsterCreate)
         {
             dataM.monsterCreate = true;
-            if (data.datas[index-1].structName == "Map")
+
+            GameObject tmp;
+            int type;
+            type = Random.Range(0, gameController.prfMonsters.Length);
+            population = Random.Range(8, 10);
+
+            if (!isevent)
             {
-                GameObject tmp;
-                int type;
-                type = Random.Range(0, gameController.prfMonsters.Length);
-                population = Random.Range(8, 10);
-
-                if (boss)
-                {
-                    tmp = CreateMonster(gameController.PrefabReturn("Monster", type), new Vector3(transform.position.x, transform.position.y, transform.position.z));
-                    tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
-                    tmp.GetComponent<ObjectFlip>().BeTheBossMonster();
-
-                }
-                else
+                if (data.datas[index - 1].structName == "Map")
                 {
 
-
-                    for (int i = 0; i < population; i++)
+                    if (boss)
                     {
-                        type = Random.Range(0, gameController.prfMonsters.Length);
-                        Vector3 safePosition;
-                        List<float> range = map.GetComponent<Map>().SafeMonsterPosition;
-                        int cnt = Random.Range(0, range.Count / 4);
-                        safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);
-                        tmp = CreateMonster(gameController.PrefabReturn("Monster", type), safePosition);
+
+                        tmp = CreateMonster(gameController.PrefabReturn("Monster", type), new Vector3(transform.position.x, transform.position.y, transform.position.z));
                         tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
+                        tmp.GetComponent<MonsterStatus>().Boss = true;
+                        tmp.GetComponent<MonsterStatus>().BeTheBossMonster(isevent);
+
+                    }
+                    else
+                    {
+
+                        for (int i = 0; i < population; i++)
+                        {
+                            type = Random.Range(0, gameController.prfMonsters.Length);
+                            Vector3 safePosition;
+                            List<float> range = map.GetComponent<Map>().SafeMonsterPosition;
+                            int cnt = Random.Range(0, range.Count / 4);
+                            safePosition = new Vector3(transform.position.x + Random.Range(range[(4 * cnt) + 0], range[(4 * cnt) + 1]), transform.position.y + Random.Range(range[(4 * cnt) + 2], range[(4 * cnt) + 3]), transform.position.z);
+                            tmp = CreateMonster(gameController.PrefabReturn("Monster", type), safePosition);
+                            tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
+                        }
                     }
                 }
+            }
+            else
+            {
+                tmp = CreateMonster(gameController.PrefabReturn("Monster", type), new Vector3(transform.position.x, transform.position.y, transform.position.z));
+                tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
+                tmp.GetComponent<MonsterStatus>().Boss = true;
+                tmp.GetComponent<MonsterStatus>().BeTheBossMonster(isevent);
             }
         }
     }
@@ -179,17 +192,13 @@ public class Room : MonoBehaviour
     {
         if (index == -1)
         { 
-            if (!isEvent)
-            {
+            index = data.datas.Count;
 
-                index = data.datas.Count;
+            data.datas.Add(new Data("Map", mapPrfNumber, index, null, null, dir, sel));
 
-                data.datas.Add(new Data("Map", mapPrfNumber, index, null, null, dir, sel));
+            dataM = data.datas[index];
 
-                dataM = data.datas[index];
-
-                monsterPresence = false;
-            }
+            monsterPresence = false;
         }
         else
         {
@@ -217,11 +226,11 @@ public class Room : MonoBehaviour
 
                                 if (subStageNumber != 0 && subStageNumber == data.subStageNumber)
                                 {
-                                    if (Vector3.Distance(player.transform.position, transform.position) <= 6) CreateStage(true);
+                                    if (Vector3.Distance(player.transform.position, transform.position) <= 6) CreateStage(true, false);
                                     else dataM.subStageEntrance = false;
 
                                 }
-                                else CreateStage(false);
+                                else CreateStage(false, false);
                             }
                             else    // 게임 진행중 
                             {
@@ -258,6 +267,13 @@ public class Room : MonoBehaviour
                     else // 이벤트 필드
                     {
                         data.eventRoomVisit = true;
+
+                        if (transform.parent.name == "GreenMap_HellEvent(Clone)")
+                        {
+                            CreateStage(true, true);
+                            // 보스 출현
+                        }
+
                     }
                 }
             }

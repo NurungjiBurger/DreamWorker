@@ -54,9 +54,10 @@ public class MonsterAttack : MonoBehaviour
 
     public void AttackEffectCreate()
     {
-        if (effect == null)
+        if (effect == null && GetComponent<MonsterStatus>().Bone)
         {
-            effect = Instantiate(prefabAttackEffect, new Vector3(transform.position.x + (-dir * attackEffectOffset[0]), transform.position.y + (attackEffectOffset[1])), Quaternion.identity);
+            effect = Instantiate(prefabAttackEffect, GetComponent<MonsterStatus>().Bone.transform.position, Quaternion.identity);
+            if (GetComponent<MonsterStatus>().Boss) effect.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             effect.GetComponent<MonsterEffectSensor>().dir = dir;
             if (effect.GetComponent<Projectile>()) effect.GetComponent<Projectile>().EntitySetting(gameObject);
         }
@@ -73,7 +74,7 @@ public class MonsterAttack : MonoBehaviour
     }
 
     private void DecideAttack()
-    {       
+    {
         // 공격범위내에 있다면
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
         {

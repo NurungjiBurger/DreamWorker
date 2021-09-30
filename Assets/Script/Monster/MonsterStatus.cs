@@ -23,6 +23,8 @@ public class MonsterStatus : Status
     private GameObject[] dropCoin;
     [SerializeField]
     private int experience;
+    [SerializeField]
+    private GameObject effectBone;
 
     public int monsterPrfNumber;
     public int index = -1;
@@ -38,17 +40,28 @@ public class MonsterStatus : Status
     private RectTransform hpBar;
 
     public Data Data { get { return dataM; } }
-    public bool Boss { get { return isBoss; } }
+    public bool Boss { get { return isBoss; } set { isBoss = value; } }
     public int Dmg { get { return bodyDmg; } }
+    public GameObject Bone { get { return effectBone; } }
 
     public void DestroyObject()
     {
         if (Random.Range(0, 101) <= dropRate)
         {
-            GameObject tmp;
-            int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber);
-            tmp = Instantiate(gameController.PrefabReturn("Item", idx), transform.position, Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = idx;
+            int cnt = 0;
+
+            if (dropRate >= 100)
+            {
+                cnt = (dropRate - 100) / 20;
+            }
+
+            for (int index = 0; index < cnt; index++)
+            {
+                GameObject tmp;
+                int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber);
+                tmp = Instantiate(gameController.PrefabReturn("Item", idx), transform.position, Quaternion.identity);
+                tmp.GetComponent<ItemStatus>().itemPrfNumber = idx;
+            }
         }
 
         for(int i=0;i<coinindexber;i++)
@@ -69,6 +82,25 @@ public class MonsterStatus : Status
         GetComponent<MonsterMovement>().DestroyAll();
         Destroy(gameObject);
         Destroy(hpBar.gameObject);
+    }
+
+    public void BeTheBossMonster(bool isevent)
+    {
+        int magnification = 1;
+
+        if (isevent) magnification++;
+
+        GetComponent<ObjectFlip>().ChangeSize(1.5f);
+        dropRate = (int)((float)dropRate * 1.5 * magnification);
+        maxHP *= 4 * magnification;
+        power = (int)((float)power * 1.5) * magnification;
+        defenseRate *= 1.5f * magnification;
+        jumpPower /= 2 * magnification;
+        moveSpeed /= 2 * magnification;
+        attackSpeed /= 2 * magnification;
+        //bloodAbsorptionRate
+        //evasionRate
+
     }
 
     private void Awake()
@@ -106,6 +138,7 @@ public class MonsterStatus : Status
 
         if (GetComponent<MonsterStatus>().Boss)
         {
+            GetComponent<ObjectFlip>().ChangeSize(1.5f);
             hpBar.transform.position = new Vector3(canvas.transform.position.x, canvas.transform.position.y + 85, transform.position.z);
             hpBar.transform.localScale = new Vector3(2.0f, 1.5f, 1.5f);
         }
@@ -135,8 +168,7 @@ public class MonsterStatus : Status
 
             if (dataM.nowHP <= 0)
             {
-                if (GetComponent<MonsterStatus>().isBoss) GetComponent<Animator>().SetTrigger("die");
-                else DestroyObject();
+                DestroyObject();
             }
         }
     }

@@ -48,6 +48,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (weapon)
         {
+
             if (weapon.GetComponent<ItemStatus>().EffectBone != null)
             {
                 tmp = Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
@@ -96,8 +97,10 @@ public class PlayerAttack : MonoBehaviour
 
             if (weapon)
             {
+
                 animator.SetTrigger(weapon.GetComponent<ItemStatus>().AttackType);
 
+                GetComponent<Audio>().AudioPlay(1);
                 //animator.SetTrigger("attack");
 
                 attackTimer.TimerSetZero();

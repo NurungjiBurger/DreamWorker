@@ -37,9 +37,14 @@ public class Smithy : MonoBehaviour
 
     private void ProductDisplay()
     {
+        int itemidx;
+
         for (int idx = 0; idx < 4; idx++)
         {
-            items.Add(Instantiate(controller.Items[Random.Range(0, controller.Items.Length)], new Vector3(300, 310, 0), Quaternion.identity));
+            itemidx = Random.Range(0, controller.Items.Length);
+
+            items.Add(Instantiate(controller.Items[itemidx], new Vector3(300, 310, 0), Quaternion.identity));
+            items[idx].GetComponent<ItemStatus>().itemPrfNumber = itemidx;
 
             slots[idx].GetComponent<Slot>().InsertImage(items[idx]);
         }

@@ -8,7 +8,7 @@ public class Parabola : MonoBehaviour
     public float m_Speed = 10;
     public float m_HeightArc = 1;
     private Vector3 m_StartPosition;
-    private bool isArrived = false;
+    private bool isArrived = true;
     private bool isGround = false;
 
     private GameObject room;
@@ -17,6 +17,7 @@ public class Parabola : MonoBehaviour
 
     void Start()
     {
+
         int x;
         if (Random.Range(0, 2) == 0) x = Random.Range(-5, 0);
         else x = Random.Range(1, 6);
@@ -86,6 +87,26 @@ public class Parabola : MonoBehaviour
             isArrived = true;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             GetComponent<Collider2D>().isTrigger = true;
+
+            switch(name)
+            {
+                case "골드(Clone)":
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().AddHandMoney(10);
+                    break;
+                case "골드주머니(Clone)":
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().AddHandMoney(30);
+                    break;
+                case "스캐럽(Clone)":
+                    Debug.Log("스캐럽+1");
+                    break;
+                case "스캐럽주머니(Clone)":
+                    Debug.Log("스캐럽+3");
+                    break;
+                default:
+                    break;
+            }
+
+            if (gameObject.tag == "Wealth") Destroy(gameObject);
         }
     }
 }

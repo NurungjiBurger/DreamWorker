@@ -11,11 +11,11 @@ public class ObjectFlip : MonoBehaviour
 
     public bool flipX, flipY;
 
-    public void BeTheBossMonster()
+    public void ChangeSize(float size)
     {
-        x = x * 3;
-        y = y * 3;
-        z = z * 3;
+        x = x * size;
+        y = y * size;
+        z = z * size;
     }
 
     public void flip(char axis, bool value)

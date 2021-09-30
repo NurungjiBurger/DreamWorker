@@ -52,17 +52,6 @@ public class PlayerSensor : MonoBehaviour
                     GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject));
                 }
             }
-
-            if (collision.CompareTag("Wealth"))
-            {
-                if (collision.GetComponent<Parabola>().Arrived)
-                {
-                    if (collision.name.Equals("°ñµå(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
-                    if (collision.name.Equals("°ñµåÁÖ¸Ó´Ï(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
-                    //if (collision.collider.name.Equals("½ºÄ³·´(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
-                    Destroy(collision.gameObject);
-                }
-            }
         }
 
     } 

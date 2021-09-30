@@ -436,7 +436,8 @@ public class GameController : MonoBehaviour
             }
             else if (data.datas[idx].structName == "Monster")
             {
-                if (data.datas[idx].isBoss) obj = Instantiate(prefabBossMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
+                Debug.Log(data.datas[idx].isBoss);
+                if (data.datas[idx].isBoss) obj = Instantiate(prefabMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
                 else obj = Instantiate(prefabMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
 
                 obj.GetComponent<MonsterStatus>().index = idx;
