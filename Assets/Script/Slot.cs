@@ -19,7 +19,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private GameObject inventory;
     private GameObject inspector;
     private GameObject itemInform;
-    private GameObject exchanger;
+    private GameObject enhancer;
+    private GameObject enhancerSelecter;
     private GameObject selecter;
     private GameObject smithy;
 
@@ -92,11 +93,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         if (transform.parent == selecter.transform.GetChild(0))
         {
-            if (eventData.button == PointerEventData.InputButton.Left) selecter.GetComponent<ExchangeSelecter>().SelectItem(this, transform.GetSiblingIndex());
+            if (eventData.button == PointerEventData.InputButton.Left) selecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
         }
     }
     
-    public void PutInExchanger()
+    public void PutInEnhancer()
     {
         if (!originParent && originIndex == -1)
         {
@@ -106,11 +107,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             if (transform.parent == inventory.transform.Find("Background").transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
             else inspector.GetComponent<Inspector>().DiscardToInspector(this);
 
-            exchanger.GetComponent<Exchanger>().AddToExchanger(this);
+            enhancer.GetComponent<Enhancer>().AddToEnhancer(this);
         }
     }
 
-    public void PullOutExchanger()
+    public void PullOutEnhancer()
     {
         if (originParent && originIndex != -1)
         {
@@ -180,8 +181,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
         if (!itemInform) itemInform = GameObject.Find("Canvas").transform.Find("ItemInform").gameObject;
-        if (!exchanger) exchanger = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
-        if (!selecter) selecter = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
+        if (!enhancer) enhancer = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
+        if (!enhancerSelecter) enhancerSelecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
+        if (!selecter) selecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
         if (!smithy) smithy = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
 
         if (itemInform.activeSelf == true)
@@ -189,6 +191,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
             else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
             else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
+            else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
             else itemInform.SetActive(false);
         }
 

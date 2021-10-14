@@ -21,6 +21,8 @@ public class ItemStatus : Status
     [SerializeField]
     private int price;
 
+    private int enhancingLevel;
+
     private GameObject inventory;
     private GameObject inspector;
 
@@ -82,14 +84,32 @@ public class ItemStatus : Status
         }
     }
 
-    private void StatUP()
+    public void StatUP(bool enhance)
     {
-        dataI.maxHP = (int)(dataI.maxHP * 1.5f);
-        dataI.power = (int)(dataI.power * 1.3f);
-        dataI.jumpPower = dataI.jumpPower * 1.2f;
-        dataI.moveSpeed = dataI.moveSpeed * 1.2f;
-        dataI.attackSpeed = dataI.attackSpeed * 1.1f;
-        dataI.defenseRate = dataI.defenseRate * 1.2f;
+
+        player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, -1);
+
+        if (!enhance)
+        {
+            dataI.maxHP = (int)(dataI.maxHP * 1.5f);
+            dataI.power = (int)(dataI.power * 1.3f);
+            dataI.jumpPower = dataI.jumpPower * 1.2f;
+            dataI.moveSpeed = dataI.moveSpeed * 1.2f;
+            dataI.attackSpeed = dataI.attackSpeed * 1.1f;
+            dataI.defenseRate = dataI.defenseRate * 1.2f;
+        }
+        else
+        {
+            dataI.maxHP += (dataI.maxHP / 10);
+            dataI.power += (dataI.power / 10);
+            dataI.attackSpeed += (dataI.attackSpeed / 50);
+            dataI.defenseRate += (dataI.defenseRate / 10);
+            if ((dataI.cursedRate -= 1) < 0) dataI.cursedRate = 0;
+            dataI.enhancingLevel++;
+        }
+
+        player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, 1);
+
     }
 
     private int OccupationCheck()
@@ -141,17 +161,23 @@ public class ItemStatus : Status
             dataI = data.datas[index];
 
             dataI.cursedRate = Random.Range(0, 50); // 저주율 수치 조정 필요
+            dataI.enhancingLevel = 0;
             dataI.isMount = false;
             dataI.SetPosition(transform.position);
 
             CurseApply();
 
-            if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) StatUP();
+            if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) StatUP(false);
         }
         else
         {
             dataI = data.datas[index];
             CursedRate = dataI.cursedRate;
+
+            for(;enhancingLevel<dataI.enhancingLevel;)
+            {
+                StatUP(true);
+            }
 
             if (dataI.isAcquired)
             {

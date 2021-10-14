@@ -55,7 +55,7 @@ public class MonsterStatus : Status
                 cnt = (dropRate - 100) / 20;
             }
 
-            for (int index = 0; index < cnt; index++)
+            for (int index = 0; index <= cnt; index++)
             {
                 GameObject tmp;
                 int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber);

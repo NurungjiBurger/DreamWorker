@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a4ad2e887b42649b8201caecc2a3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handBone: {fileID: 5864893298153090775}
 --- !u!114 &6662886715235095702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +177,7 @@ MonoBehaviour:
   power: 40
   jumpPower: 1
   moveSpeed: 1
-  attackSpeed: 1
+  attackSpeed: 1.1
   name: "\uBA3C\uC9C0\uD138\uC774"
   defenseRate: 0
   bloodAbsorptionRate: 0
@@ -312,7 +313,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 7
   m_Sprite: {fileID: -1951560435497708081, guid: 1bbb716edb25fff44a0f3ba0d12d7854, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

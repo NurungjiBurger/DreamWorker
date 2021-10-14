@@ -45,6 +45,7 @@ public class Data
     public int cursedRate;
     public bool isMount;
     public bool isAcquired;
+    public int enhancingLevel;
 
     //////////////////////////////////////////////// // stat
 

@@ -67,7 +67,7 @@ public class Inspector : MonoBehaviour
         slot.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
         slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
         slot.SlotItem.GetComponent<ItemStatus>().IsMount = true;
-        slot.SlotItem.SetActive(true);
+        if(slot.SlotItem.GetComponent<ItemStatus>().MountingPart == "Weapon") slot.SlotItem.SetActive(true);
         player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, 1);
     }
 

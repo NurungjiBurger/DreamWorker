@@ -43,9 +43,15 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject tmp;
+
         if (collision.CompareTag("Monster") && gameObject.tag == "Player_attack_judgement")
         {
-           // Instantiate(prefabEffect, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            if (prefabEffect != null)
+            {
+                tmp = Instantiate(prefabEffect, transform.position, Quaternion.identity);
+                tmp.GetComponent<Projectile>().FlipSetting(flip);
+            }
         }
 
         if (collision.CompareTag("Player") && gameObject.tag == "Monster_attack_judgement")
@@ -58,14 +64,19 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    public void FlipSetting(bool value)
+    {
+        flip = value;
+
+        if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
+        else transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = !flip;
+    }
+
     public void EntitySetting(GameObject obj)
     {
         entity = obj;
 
-        flip = entity.GetComponent<ObjectFlip>().flipX;
-
-        if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
-        else GetComponent<ObjectFlip>().flip('x', !flip);
+        FlipSetting(entity.GetComponent<ObjectFlip>().flipX);
 
         startPosition = transform.position;
 
@@ -84,11 +95,7 @@ public class Projectile : MonoBehaviour
     {
         weapon = obj;
 
-        flip = weapon.GetComponent<ObjectFlip>().flipX;
-
-        if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
-        else GetComponent<ObjectFlip>().flip('x', !flip);
-
+        FlipSetting(weapon.GetComponent<ObjectFlip>().flipX);
     }
 
     private void Start()
@@ -104,9 +111,6 @@ public class Projectile : MonoBehaviour
         {
             if ((startPosition.x + (attackRange * dir)) != this.transform.position.x && cnt < (attackRange * 60))
             {
-                // gameObject.transform.position = weapon.transform.position;
-                if (GetComponent<SpriteRenderer>()) GetComponent<SpriteRenderer>().flipX = !flip;
-                else GetComponent<ObjectFlip>().flip('x', !flip);
                 cnt++;
             }
             else flag = 3;

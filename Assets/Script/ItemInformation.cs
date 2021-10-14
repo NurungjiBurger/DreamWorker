@@ -442,7 +442,7 @@ public class ItemInformation : MonoBehaviour
     {
         string grade;
         // 이름 , 이미지
-        transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Name;
+        transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Name + "  (+" + item.GetComponent<ItemStatus>().Data.enhancingLevel + ")";
         transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         // 정보 패널
         transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().MountingPart;

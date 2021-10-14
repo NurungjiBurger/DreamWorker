@@ -17,10 +17,10 @@ public class ButtonUI : MonoBehaviour
 
     public void CloseButton()
     {
-        if (transform.parent.name.Equals("Exchanger"))
+        if (transform.parent.name.Equals("Enhancer"))
         {
             GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
-            GameObject.Find("Canvas").transform.Find("Exchanger").GetComponent<Exchanger>().DiscardToExchanger();
+            GameObject.Find("Canvas").transform.Find("Enhancer").GetComponent<Enhancer>().DiscardToEnhancer(true);
 
         }
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
@@ -34,7 +34,7 @@ public class ButtonUI : MonoBehaviour
     public void UIActive()
     {
         onOff = !onOff;
-        if (transform.name == "ChangeableButton" && onOff) GameObject.Find("Canvas").transform.Find("ExchangeSelecter").GetComponent<ExchangeSelecter>().LoadAllItem();
+        if (transform.name == "LoadButton" && onOff) GameObject.Find("Canvas").transform.Find("EnhancerSelecter").GetComponent<EnhancerSelecter>().LoadAllItem();
     }
 
     void Start()
@@ -54,11 +54,11 @@ public class ButtonUI : MonoBehaviour
                 case "InspectorButton":
                     ui = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
                     break;
-                case "ExchangerButton":
-                    ui = GameObject.Find("Canvas").transform.Find("Exchanger").gameObject;
+                case "EnhancerButton":
+                    ui = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
                     break;
-                case "ChangeableButton":
-                    ui = GameObject.Find("Canvas").transform.Find("ExchangeSelecter").gameObject;
+                case "LoadButton":
+                    ui = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
                     ui.SetActive(onOff);
                     break;
                 case "BlackSmithButton":

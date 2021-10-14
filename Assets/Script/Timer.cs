@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+//    [SerializeField] private float duration;
+
     private float time;
     private float cooldown;
 
@@ -39,5 +41,17 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime;
+
+        /*
+            if (duration != 0)
+            {
+                Debug.Log(time + " " + duration);
+                if (time >= duration)
+                {
+                    Debug.Log("¿Ö ½ÇÇà?");
+                    DestroyAll();
+                }
+            }
+            */
     }
 }

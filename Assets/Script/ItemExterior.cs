@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemExterior : MonoBehaviour
 {
+    [SerializeField] private GameObject handBone;
+
     private GameObject hand;
 
     // Start is called before the first frame update
