@@ -12,6 +12,8 @@ public class PlayerStatus : Status
     private GameObject basicItem;
     [SerializeField]
     private GameObject handBone;
+    [SerializeField]
+    private GameObject playerIcon;
 
     [SerializeField]
     private int damage;
@@ -133,6 +135,8 @@ public class PlayerStatus : Status
 
     private void Start()
     {
+        GameObject tmp;
+
         if (index == -1)
         {
             int[] arr = new int[2];
@@ -145,14 +149,18 @@ public class PlayerStatus : Status
             data.datas.Add(new Data("Player", characterPrfNumber, index, arr, arr2, -1, -1));
             dataP = data.datas[index];
 
-            GameObject tmp;
             tmp = Instantiate(basicItem, new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = 1;
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = 5;
         }
         else
         {
             dataP = data.datas[index];
         }
+
+        tmp = Instantiate(playerIcon, transform.position, Quaternion.identity);
+        tmp.transform.SetParent(GameObject.Find("Canvas").transform.Find("MiniMap").transform.Find("Background"));
+        tmp.GetComponent<Icon>().obj = gameObject;
+
     }
 
     private void Update()
@@ -163,6 +171,6 @@ public class PlayerStatus : Status
 
         CalCulateExperience(0);
 
-        Debug.Log(dataP.attackSpeed);
+        //Debug.Log(dataP.attackSpeed);
     }
 }

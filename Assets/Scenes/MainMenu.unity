@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 65447025}
   - component: {fileID: 65447024}
   m_Layer: 5
-  m_Name: Background
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,9 +206,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ExitButton
+      - m_Target: {fileID: 2008387669}
+        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 1131355778}
   - component: {fileID: 1131355777}
   m_Layer: 5
-  m_Name: Background
+  m_Name: NewButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,9 +491,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: NewButton
+      - m_Target: {fileID: 2008387669}
+        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_MethodName: NewGameData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 1157723545}
   - component: {fileID: 1157723544}
   m_Layer: 5
-  m_Name: Background
+  m_Name: LoadButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,9 +624,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: LoadButton
+      - m_Target: {fileID: 2008387669}
+        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_MethodName: LoadGameData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

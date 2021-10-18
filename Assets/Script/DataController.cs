@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 
 public class DataController : MonoBehaviour
@@ -10,17 +11,7 @@ public class DataController : MonoBehaviour
 
     private GameData gameData;
 
-    public GameData GameData
-    {
-        get
-        {
-            if (gameData == null)
-            {
-                LoadGameData();
-            }
-            return gameData;
-        }
-    }
+    public GameData GameData { get { return gameData;} }
 
 
     public void SaveGameData()
@@ -31,6 +22,19 @@ public class DataController : MonoBehaviour
 
     }
 
+    public void NewGameData()
+    {
+        if (File.Exists(filePath))
+        {
+            Debug.Log("저장 파일을 삭제합니다.");
+            File.Delete(filePath);
+        }
+        gameData = new GameData();
+        Debug.Log("새로운파일생성 완료.");
+
+        GameObject.Find("GameController").GetComponent<GameController>().GameStart = true;
+    }
+
     public void LoadGameData()
     {
         if (File.Exists(filePath))
@@ -38,13 +42,24 @@ public class DataController : MonoBehaviour
             Debug.Log("불러옴");
             string jsonData = File.ReadAllText(filePath);
             gameData = JsonUtility.FromJson<GameData>(jsonData);
+
+            GameObject.Find("GameController").GetComponent<GameController>().GameStart = true;
         }
         else
         {
-            Debug.Log("새로운파일생성");
-            gameData = new GameData();
+            Debug.Log("불러올 데이터가 없습니다.");
         }
 
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("게임종료");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 
     private void OnApplicationQuit()

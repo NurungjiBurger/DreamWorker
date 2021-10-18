@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
     private GameObject inventory;
     private GameObject inspector;
 
+    private bool gameStart = false;
     private bool revert = false;
     private bool isPause = false;
 
@@ -56,6 +57,7 @@ public class GameController : MonoBehaviour
     private Image nowHPBar;
     private TextMeshProUGUI textHp;
 
+    public bool GameStart { set { gameStart = value; } }
     public bool IsPause { get { return isPause; } }
     public List<GameObject> EventRoom { get { return eventRoom;} }
     public List<GameObject> Room { get { return room; } }
@@ -174,6 +176,7 @@ public class GameController : MonoBehaviour
         // 300, 300
         // heaven
         eventRoom.Add(Instantiate(prefabEventMapDesigns[0], new Vector3(300, 300, 0), Quaternion.identity));
+        eventRoom[0].transform.Find("GreenMap_Wall").GetComponent<Room>().index = -2;
         eventRoom[0].transform.SetParent(GameObject.Find("Grid").transform);
         eventRoom[0].transform.Find("GreenMap_Wall").GetComponent<Room>().map = eventRoom[0];
 
@@ -183,6 +186,7 @@ public class GameController : MonoBehaviour
         // 대장장이 생성
         // hell
         eventRoom.Add(Instantiate(prefabEventMapDesigns[1], new Vector3(-300, -300, 0), Quaternion.identity));
+        eventRoom[1].transform.Find("GreenMap_Wall").GetComponent<Room>().index = -2;
         eventRoom[1].transform.SetParent(GameObject.Find("Grid").transform);
         eventRoom[1].transform.Find("GreenMap_Wall").GetComponent<Room>().map = eventRoom[1];
     }
@@ -322,13 +326,22 @@ public class GameController : MonoBehaviour
     {
         //if (Input.GetKey(KeyCode.A)) printalldata();
 
+        if (Input.GetKey("escape"))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
         else
         {            
 
             if (SceneManager.GetActiveScene().name == "MainMenu")
             {
-                if (Input.GetKey(KeyCode.Backspace))
+                if (gameStart)
                 {
                     SceneManager.LoadScene("Dungeon");
                     revert = true;
@@ -436,7 +449,6 @@ public class GameController : MonoBehaviour
             }
             else if (data.datas[idx].structName == "Monster")
             {
-                Debug.Log(data.datas[idx].isBoss);
                 if (data.datas[idx].isBoss) obj = Instantiate(prefabMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
                 else obj = Instantiate(prefabMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
 

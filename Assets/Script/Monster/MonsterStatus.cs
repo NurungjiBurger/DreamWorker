@@ -25,6 +25,8 @@ public class MonsterStatus : Status
     private int experience;
     [SerializeField]
     private GameObject effectBone;
+    [SerializeField]
+    private GameObject monsterIcon;
 
     public int monsterPrfNumber;
     public int index = -1;
@@ -32,6 +34,7 @@ public class MonsterStatus : Status
     private GameController gameController;
     private GameData data;
     private Data dataM;
+    private GameObject miniMapMonsterIcon;
 
     private int coinindexber;
     private GameObject canvas;
@@ -46,6 +49,8 @@ public class MonsterStatus : Status
 
     public void DestroyObject()
     {
+        Destroy(miniMapMonsterIcon);
+
         if (Random.Range(0, 101) <= dropRate)
         {
             int cnt = 0;
@@ -110,6 +115,8 @@ public class MonsterStatus : Status
 
     private void Start()
     {
+        GameObject tmp;
+
         if (index == -1)
         {
             int[] arr = new int[2];
@@ -139,9 +146,13 @@ public class MonsterStatus : Status
         if (GetComponent<MonsterStatus>().Boss)
         {
             GetComponent<ObjectFlip>().ChangeSize(1.5f);
-            hpBar.transform.position = new Vector3(canvas.transform.position.x, canvas.transform.position.y + 85, transform.position.z);
-            hpBar.transform.localScale = new Vector3(2.0f, 1.5f, 1.5f);
+            hpBar.transform.position = new Vector3(canvas.transform.position.x + 85, canvas.transform.position.y + 100, transform.position.z);
+            hpBar.transform.localScale = new Vector3(2.0f, 1.25f, 1.25f);
         }
+
+        miniMapMonsterIcon = Instantiate(monsterIcon, transform.position, Quaternion.identity);
+        miniMapMonsterIcon.transform.SetParent(GameObject.Find("Canvas").transform.Find("MiniMap").transform.Find("Background"));
+        miniMapMonsterIcon.GetComponent<Icon>().obj = gameObject;
     }
 
     private void Update()

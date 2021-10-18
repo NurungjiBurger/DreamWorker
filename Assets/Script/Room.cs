@@ -51,6 +51,7 @@ public class Room : MonoBehaviour
         {
             tmp = portals[0];
             portals.Remove(portals[0]);
+            if (tmp.GetComponent<Portal>().MiniMapPortalIcon) Destroy(tmp.GetComponent<Portal>().MiniMapPortalIcon);
             Destroy(tmp);
         }
 
@@ -114,6 +115,7 @@ public class Room : MonoBehaviour
 
     private void ManageMap()
     {
+
         bool value;
 
         if (GameObject.FindGameObjectsWithTag("Monster").Length == 0)
@@ -128,6 +130,15 @@ public class Room : MonoBehaviour
         }
 
         for (int i = 0; i < portals.Count; i++) portals[i].SetActive(value);
+
+        for (int i = 0; i < portals.Count; i++)
+        {
+            if (portals[i].GetComponent<Portal>().MiniMapPortalIcon)
+            {
+                if (portals[i].activeSelf && isPlayer) portals[i].GetComponent<Portal>().MiniMapPortalIcon.SetActive(true);
+                else portals[i].GetComponent<Portal>().MiniMapPortalIcon.SetActive(false);
+            }
+        }
     }
 
     private GameObject CreateMonster(GameObject prefab, Vector3 position) { return Instantiate(prefab, position, Quaternion.identity); }
@@ -202,7 +213,7 @@ public class Room : MonoBehaviour
         }
         else
         {
-            dataM = data.datas[index];
+            if (index > -1 ) dataM = data.datas[index];
         }
     }
 
@@ -210,7 +221,7 @@ public class Room : MonoBehaviour
     {
         if (player && map)
         {
-            if (player.transform.position.x <= transform.position.x + 11.0f && player.transform.position.x >= transform.position.x - 11.0f)
+            if (player.transform.position.x <= transform.position.x + 12.0f && player.transform.position.x >= transform.position.x - 12.0f)
             {
                 if (player.transform.position.y <= transform.position.y + 7.5f && player.transform.position.y >= transform.position.y - 7.5f)
                 {

@@ -7,7 +7,13 @@ public class Portal : MonoBehaviour
     private GameObject player;
     private Portal connectPortal;
 
+    [SerializeField]
+    private GameObject portalIcon;
+
+    private GameObject miniMapPortalIcon;
+
     public Vector3 ConnectPosition { get { return connectPortal.transform.position; } }
+    public GameObject MiniMapPortalIcon { get { return miniMapPortalIcon; } }
 
     public void PositionSave(Portal portal)
     {
@@ -16,7 +22,12 @@ public class Portal : MonoBehaviour
 
     private void Start()
     {
-
+        if (portalIcon)
+        {
+            miniMapPortalIcon = Instantiate(portalIcon, transform.position, Quaternion.identity);
+            miniMapPortalIcon.transform.SetParent(GameObject.Find("Canvas").transform.Find("MiniMap").transform.Find("Background"));
+            miniMapPortalIcon.GetComponent<Icon>().obj = gameObject;
+        }
     }
 
     private void Update()
