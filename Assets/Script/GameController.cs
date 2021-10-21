@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
     private bool revert = false;
     private bool isPause = false;
 
+    private int selectedPlayerIndex;
     private int pastSelectDirection;
     private int selectStageNumber;
 
@@ -73,20 +74,16 @@ public class GameController : MonoBehaviour
         for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName + "  " + idx);
     }
 
-    public void NewButton()
-    { 
-        Debug.Log("new");
+    public void PlayerSelect(int value)
+    {
+        selectedPlayerIndex = value;
+
+        GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(false);
+        gameStart = true;
+
+        Debug.Log("게임을시작하지");
     }
 
-    public void LoadButton()
-    {
-        Debug.Log("Load");
-    }
-
-    public void ExitButton()
-    {
-        Debug.Log("Exit");
-    }
 
     public Slot CreateItemSlot(GameObject item)
     {
@@ -288,9 +285,9 @@ public class GameController : MonoBehaviour
 
         if (data.datas.Count == 0)
         {
-            player = Instantiate(prefabCharacters[0], new Vector3(0, 0, 0), Quaternion.identity);
+            player = Instantiate(prefabCharacters[selectedPlayerIndex], new Vector3(0, 0, 0), Quaternion.identity);
 
-            player.GetComponent<PlayerStatus>().characterPrfNumber = 0;
+            player.GetComponent<PlayerStatus>().characterPrfNumber = selectedPlayerIndex;
 
             data.stageNumber = 1;
             data.subStageNumber = 0;
@@ -302,8 +299,6 @@ public class GameController : MonoBehaviour
         else
         {
             Restore();
-
-            //for (int idx = 0; idx <= data.subStageNumber; idx++) room[idx].GetComponent<Room>().AllocateSubStageNumber(idx);
         }
     }
 

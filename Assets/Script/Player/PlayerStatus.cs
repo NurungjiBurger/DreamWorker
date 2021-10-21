@@ -9,7 +9,7 @@ public class PlayerStatus : Status
     [SerializeField]
     private string occupation;
     [SerializeField]
-    private GameObject basicItem;
+    private int basicItemNum;
     [SerializeField]
     private GameObject handBone;
     [SerializeField]
@@ -149,8 +149,8 @@ public class PlayerStatus : Status
             data.datas.Add(new Data("Player", characterPrfNumber, index, arr, arr2, -1, -1));
             dataP = data.datas[index];
 
-            tmp = Instantiate(basicItem, new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = 5;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
         }
         else
         {

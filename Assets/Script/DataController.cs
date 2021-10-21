@@ -32,7 +32,7 @@ public class DataController : MonoBehaviour
         gameData = new GameData();
         Debug.Log("货肺款颇老积己 肯丰.");
 
-        GameObject.Find("GameController").GetComponent<GameController>().GameStart = true;
+        GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(true);
     }
 
     public void LoadGameData()
