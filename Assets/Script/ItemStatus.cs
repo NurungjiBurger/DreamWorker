@@ -217,10 +217,6 @@ public class ItemStatus : Status
             dataI = data.datas[index];
             CursedRate = dataI.cursedRate;
 
-            for(;enhancingLevel<dataI.enhancingLevel;)
-            {
-                StatUP(true);
-            }
 
             if (dataI.isAcquired)
             {
