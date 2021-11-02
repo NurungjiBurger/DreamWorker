@@ -12,41 +12,65 @@ public class ItemInformation : MonoBehaviour
 
     public void ModifyPosition(int direction, Vector3 position)
     {
-        // 16 슬롯은 마우스의 오른쪽 가운데에 정보창
+        // 36 슬롯은 마우스의 오른쪽 가운데에 정보창
+        // 37 슬롯은 마우스의 왼쪽 가운데에 정보창
 
-        // 0, 1, 4, 5 슬롯은 마우스의 오른쪽 아래에 정보창
-        // 2, 3, 6, 7 슬롯은 마우스의 왼쪽 아래에 정보창
-        // 8, 9, 12, 13 슬롯은 마우스의 오른쪽 위에 정보창
-        // 10, 11, 14, 15 슬롯은 마우스의 왼쪽 위에 정보창
+        // 0, 1, 2, 6, 7, 8, 12, 13, 14 슬롯은 마우스의 오른쪽 아래에 정보창
+        // 3, 4, 5, 9, 10, 11, 15, 16, 17 슬롯은 마우스의 왼쪽 아래에 정보창
+        // 18, 19, 20, 24, 25, 26, 30, 31, 32 슬롯은 마우스의 오른쪽 위에 정보창
+        // 21, 22, 23, 27, 28, 29, 33, 34, 35 슬롯은 마우스의 왼쪽 위에 정보창
 
         switch (direction)
         {
             case 0:
             case 1:
-            case 4:
-            case 5:
-                transform.position = new Vector3(position.x + 55, position.y - 50, position.z);
-                break;
             case 2:
-            case 3:
             case 6:
             case 7:
-                transform.position = new Vector3(position.x - 55, position.y - 50, position.z);
-                break;
             case 8:
-            case 9:
             case 12:
             case 13:
-                transform.position = new Vector3(position.x + 55, position.y + 50, position.z);
+            case 14:
+                transform.position = new Vector3(position.x + 55, position.y - 50, position.z);
                 break;
+            case 3:
+            case 4:
+            case 5:
+            case 9:
             case 10:
             case 11:
-            case 14:
             case 15:
+            case 16:
+            case 17:
+                transform.position = new Vector3(position.x - 55, position.y - 50, position.z);
+                break;
+            case 18:
+            case 19:
+            case 20:
+            case 24:
+            case 25:
+            case 26:
+            case 30:
+            case 31:
+            case 32:
+                transform.position = new Vector3(position.x + 55, position.y + 50, position.z);
+                break;
+            case 21:
+            case 22:
+            case 23:
+            case 27:
+            case 28:
+            case 29:
+            case 33:
+            case 34:
+            case 35:
                 transform.position = new Vector3(position.x - 55, position.y + 50, position.z);
                 break;
-            case 16:
+            case 36:
                 transform.position = new Vector3(position.x + 55, position.y, position.z);
+                break;
+            case 37:
+                transform.position = new Vector3(position.x - 55, position.y, position.z);
                 break;
             default:
                 break;

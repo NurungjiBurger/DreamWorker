@@ -16,6 +16,8 @@ public class DataController : MonoBehaviour
 
     public void SaveGameData()
     {
+        GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatInit();
+
         string jsonData = JsonUtility.ToJson(gameData);
         File.WriteAllText(filePath, jsonData);
         Debug.Log("¿˙¿Â");

@@ -15,6 +15,14 @@ public class Inspector : MonoBehaviour
     public int ItemCount { get { return equipItemList.Count; } }
     public List<Slot> EquipItemList { get { return equipItemList; } }
 
+    public void InspectorStatInit()
+    {
+        for(int idx = 0; idx < EquipItemList.Count; idx++)
+        {
+            player.GetComponent<PlayerStatus>().CalCulateStat(equipItemList[idx].GetComponent<Slot>().SlotItem, -1);
+        }
+    }
+
     public Slot FindInInspector(Slot slot)
     {
         int size = equipItemList.Count;
@@ -64,8 +72,8 @@ public class Inspector : MonoBehaviour
 
         slot.transform.SetParent(transform.Find("Background").transform);
         slot.transform.position = transform.Find("Background").transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).position;
-        slot.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
-        slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+        slot.GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
+        slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
         slot.SlotItem.GetComponent<ItemStatus>().IsMount = true;
         if(slot.SlotItem.GetComponent<ItemStatus>().MountingPart == "Weapon") slot.SlotItem.SetActive(true);
         player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, 1);
@@ -93,7 +101,13 @@ public class Inspector : MonoBehaviour
 
     void Update()
     {
-        if (!player) player = GameObject.FindGameObjectWithTag("Player");
+        if (!player)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            transform.Find("Background").transform.Find("Character").transform.GetComponent<Image>().sprite = player.GetComponent<PlayerStatus>().PlayerImage;
+        }
         else StatusText();
+
+
     }
 }

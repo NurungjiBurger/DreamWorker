@@ -40,7 +40,8 @@ public class Inventory : MonoBehaviour
 
     public void AddToInventory(Slot slot)
     {
-        if (possessItemList.Count < 16)
+
+        if (possessItemList.Count < 30)
         {
             possessItemList.Add(slot);
 
@@ -59,7 +60,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        possessItemNumber = 16;
+        possessItemNumber = 30;
     }
 
     void Update()

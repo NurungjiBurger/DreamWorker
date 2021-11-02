@@ -81,26 +81,27 @@ public class PlayerAttack : MonoBehaviour
         // 캐릭터 공격
         if (attackTimer.CooldownCheck())
         {
-            if (Input.GetKey(KeyCode.Q) && attackTimer.CooldownCheck())
+            if (Input.GetKey(KeyCode.Q))
             {
-                isAttack = true;
+                Attacking();
             }
         }
     }
 
     private void Attacking()
     {
-        if (isAttack)
+        if (!isAttack)
         {
-            isAttack = false;
+            isAttack = true;
+
             WeaponEnroll();
 
             if (weapon)
             {
 
-                animator.SetTrigger(weapon.GetComponent<ItemStatus>().AttackType);
-
                 GetComponent<Audio>().AudioPlay(1);
+
+                animator.SetTrigger(weapon.GetComponent<ItemStatus>().AttackType);
                 //animator.SetTrigger("attack");
 
                 attackTimer.TimerSetZero();
@@ -108,6 +109,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 Debug.Log("무기없음");
+                isAttack = false;
             }
      //       AttackAnimatestart();
         }
@@ -115,7 +117,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) Attacking();
+        //if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause) Attacking();
     }
 
     // Update is called once per frame

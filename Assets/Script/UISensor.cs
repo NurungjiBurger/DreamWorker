@@ -32,16 +32,17 @@ public class UISensor : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        
+        /*
         if (name.Equals("Slot(Clone)"))
         {
             if (collision.collider.name.Equals("Inventory") || collision.collider.name.Equals("Inspector"))
             {
+                Debug.Log("빠져나감");
                 mountAble = false;
                 toInventory = false;
             }
         }
-        
+        */
     }
 
     void Start()

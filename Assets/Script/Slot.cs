@@ -23,7 +23,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private GameObject enhancerSelecter;
     private GameObject selecter;
     private GameObject smithy;
-
+    private bool hovering = false;
+    
     private GameObject originParent = null;
     private int originIndex = -1;
 
@@ -40,11 +41,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         itemInform.GetComponent<ItemInformation>().InputInformation(slotItem);
         itemInform.SetActive(true);
+        hovering = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         itemInform.SetActive(false);
+        hovering = false;
     }
 
     public void DestroyObject()
@@ -186,12 +189,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (!selecter) selecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
         if (!smithy) smithy = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
 
-        if (itemInform.activeSelf == true)
+        if (itemInform.activeSelf && hovering)
         {
             if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
-            else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
-            else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
-            else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(16, Input.mousePosition);
+            else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
+            else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
+            else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
             else itemInform.SetActive(false);
         }
 

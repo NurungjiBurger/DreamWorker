@@ -19,7 +19,7 @@ public class ItemExterior : MonoBehaviour
     {
         if (GetComponent<ItemStatus>().Data.isMount)
         {
-            Debug.Log(transform.position + " before " + hand.transform.position);
+            //Debug.Log(transform.position + " before " + hand.transform.position);
 
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             GetComponent<Collider2D>().isTrigger = true;
@@ -31,7 +31,7 @@ public class ItemExterior : MonoBehaviour
                 GetComponent<ObjectFlip>().flip('x', !GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFlip>().flipX);
             }
 
-            Debug.Log(transform.position + " after " + hand.transform.position);
+            //Debug.Log(transform.position + " after " + hand.transform.position);
         }
     }
 }

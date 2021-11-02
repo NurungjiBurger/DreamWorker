@@ -72,15 +72,15 @@ public class ItemStatus : Status
                 dataI.moveSpeed = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.moveSpeed;
                 break;
             case "Body":
-              //  Debug.Log("점프력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
-                dataI.jumpPower = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.jumpPower;
+              //  Debug.Log("방어력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
+                dataI.defenseRate = (1.0f - ((float)dataI.cursedRate / 100)) * dataI.defenseRate;
                 break;
             case "Weapon":
               //  Debug.Log("공격력 감소" + (1 - ((float)dataI.cursedRate / 100)).ToString());
                 dataI.power = (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)dataI.power);
                 break;
             default:
-                break;
+                break;//
         }
     }
 
@@ -100,10 +100,53 @@ public class ItemStatus : Status
         }
         else
         {
-            dataI.maxHP += (dataI.maxHP / 10);
-            dataI.power += (dataI.power / 10);
-            dataI.attackSpeed += (dataI.attackSpeed / 50);
-            dataI.defenseRate += (dataI.defenseRate / 10);
+            int delta;
+
+            if (Data.enhancingLevel <= 10)
+            {
+                delta = 70;
+            }
+            else if (Data.enhancingLevel > 10 && Data.enhancingLevel <= 30)
+            {
+                delta = 50;
+            }
+            else if (Data.enhancingLevel > 30 && Data.enhancingLevel <= 60)
+            {
+                delta = 30;
+            }
+            else
+            {
+                delta = 10;
+            }
+
+            switch (MountingPart)
+            {
+                case "Head":
+                    dataI.maxHP += (maxHP / delta);
+                    dataI.defenseRate += (defenseRate / delta);
+                    break;
+                case "Hand":
+                    dataI.maxHP += (maxHP / delta);
+                    dataI.power += (power / delta);
+                    dataI.attackSpeed += (attackSpeed / 50);
+                    dataI.defenseRate += (defenseRate / delta);
+                    break;
+                case "Foot":
+                    dataI.defenseRate += (defenseRate / delta);
+                    dataI.moveSpeed += (moveSpeed / delta);
+                    break;
+                case "Body":
+                    dataI.maxHP += (maxHP / delta);
+                    dataI.defenseRate += (defenseRate / delta);
+                    break;
+                case "Weapon":
+                    dataI.power += (power / delta);
+                    dataI.attackSpeed += (attackSpeed / 50);
+                    break;
+                default:
+                    break;
+            }
+
             if ((dataI.cursedRate -= 1) < 0) dataI.cursedRate = 0;
             dataI.enhancingLevel++;
         }
@@ -152,9 +195,9 @@ public class ItemStatus : Status
         if (index == -1)
         {
             int[] arr = new int[2];
-            float[] arr2 = new float[6];
-            arr[0] = maxHP; arr[1] = power;
-            arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate;
+            float[] arr2 = new float[7];
+            arr[0] = maxHP;
+            arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate; arr2[6] = power;
             index = data.datas.Count;
 
             data.datas.Add(new Data("Item", itemPrfNumber, index, arr, arr2, -1, -1));

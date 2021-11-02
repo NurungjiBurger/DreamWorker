@@ -23,36 +23,52 @@ public class Enhancer : MonoBehaviour
 
     public void Enhance()
     {
-        // 아이템의 enhancinglevel * 투자한 아이템 수 ( 1 , 1.125 , 1.25 , 1.375 , 1.5 )
+        int success = 0;
 
-        int success = enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel;
-
-        if (success >= 100)
+        // 강화레벨이 높을수록 성공확률은 감소해야한다.
+        if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 10)
         {
-            success %= 100;
+            success = 100;
+           
+        }
+        else if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel > 10 && enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 30)
+        {
+            success = 75;
+        }
+        else if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel > 30 && enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 60)
+        {
+            success = 50;
+        }
+        else if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel > 60 && enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 100)
+        {
+            success = 25;
+        }
+        else
+        {
+            success = 15;
         }
 
+        // 아이템의 enhancinglevel * 투자한 아이템 수 ( 1 , 1.125 , 1.25 , 1.375 , 1.5 )
         switch (devoteItemList.Count)
         {
-            case 0:
-                success *= 1;
-                break;
             case 1:
-                success = (int)(success * 1.125f);
+                success *= 1;
                 break;
             case 2:
                 success = (int)(success * 1.25f);
                 break;
             case 3:
-                success = (int)(success * 1.375f);
+                success = (int)(success * 1.5f);
                 break;
             case 4:
-                success = (int)(success * 1.5f);
+                success = (int)(success * 1.75f);
                 break;
             default:
                 success *= 1;
                 break;
         }
+
+        Debug.Log("Success " + (100 - success));
 
         Slot tmp;
         int size = devoteItemList.Count;
@@ -64,9 +80,6 @@ public class Enhancer : MonoBehaviour
             tmp.SlotItem.GetComponent<ItemStatus>().DestoryAll();
             Destroy(tmp.gameObject);
         }
-
-        // 현재 강화성공률 100퍼
-        success = 100;
 
         if (Random.Range(0,101) <= success)
         {

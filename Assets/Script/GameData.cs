@@ -10,8 +10,8 @@ public class GameData
 {
     // gamedata
     public int stageNumber;
-    public bool stageEntrance;
     public int subStageNumber;
+    public bool stageEntrance;
     public bool stageClear;
 
     public bool eventRoomVisit;
@@ -51,7 +51,7 @@ public class Data
 
     public int maxHP;
     public int nowHP;
-    public int power;
+    public float power;
     public float defenseRate;
     public float jumpPower;
     public float moveSpeed;
@@ -120,13 +120,13 @@ public class Data
     {
         maxHP = arr[0];
         nowHP = arr[0];
-        power = arr[1];
         defenseRate = arr2[0];
         jumpPower = arr2[1];
         moveSpeed = arr2[2];
         attackSpeed = arr2[3];
         bloodAbsorptionRate = arr2[4];
         evasionRate = arr2[5];
+        power = arr2[6];
     }
 
     public void SetPosition(Vector3 position)

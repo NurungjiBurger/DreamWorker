@@ -26,6 +26,8 @@ public class MonsterStatus : Status
     [SerializeField]
     private GameObject effectBone;
     [SerializeField]
+    private GameObject dropBone;
+    [SerializeField]
     private GameObject monsterIcon;
 
     public int monsterPrfNumber;
@@ -64,7 +66,7 @@ public class MonsterStatus : Status
             {
                 GameObject tmp;
                 int idx = Random.Range(dropItemStartindexber, dropItemFinishindexber);
-                tmp = Instantiate(gameController.PrefabReturn("Item", idx), transform.position, Quaternion.identity);
+                tmp = Instantiate(gameController.PrefabReturn("Item", idx), dropBone.transform.position, Quaternion.identity);
                 tmp.GetComponent<ItemStatus>().itemPrfNumber = idx;
             }
         }
@@ -120,9 +122,9 @@ public class MonsterStatus : Status
         if (index == -1)
         {
             int[] arr = new int[2];
-            float[] arr2 = new float[6];
-            arr[0] = maxHP; arr[1] = power;
-            arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate;
+            float[] arr2 = new float[7];
+            arr[0] = maxHP;
+            arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate; arr2[6] = power;
             index = data.datas.Count;
 
             data.datas.Add(new Data("Monster", monsterPrfNumber, index, arr, arr2, -1, -1));

@@ -47,7 +47,6 @@ public class GameController : MonoBehaviour
 
     private int selectedPlayerIndex;
     private int pastSelectDirection;
-    private int selectStageNumber;
 
     private List<GameObject> map = new List<GameObject>();
     private List<GameObject> room = new List<GameObject>();
@@ -135,7 +134,6 @@ public class GameController : MonoBehaviour
             Destroy(tmp);
         }
 
-        data.stageNumber++;
         data.stageEntrance = false;
     }
 
@@ -379,13 +377,14 @@ public class GameController : MonoBehaviour
                         data.stageClear = false;
                         if (!data.stageEntrance) // 처음 스테이지에 입장
                         {
+
                             data.stageEntrance = true;
 
                             data.subStageNumber = Random.Range(10, 16);
 
                             data.subStageNumber = 3;
 
-                            selectStageNumber = Random.Range(0, prefabMapDesigns.Length / 6);
+                            data.stageNumber = Random.Range(3, prefabMapDesigns.Length / 6);
 
                             CreateRoom(data.subStageNumber);
 
@@ -395,7 +394,10 @@ public class GameController : MonoBehaviour
                         }
                         else
                         {
-
+                            for (int idx = 0; idx < data.subStageNumber; idx++)
+                            {
+                                //Debug.Log(room[idx].transform.position + " 좌표에 있는 " + idx + " 번 방에 " + room[idx].GetComponent<Room>().isPlayer);
+                            }
                         }
                     }
                 }
@@ -440,6 +442,7 @@ public class GameController : MonoBehaviour
             {
                 obj = Instantiate(prefabItems[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
 
+                obj.GetComponent<ItemStatus>().itemPrfNumber = data.datas[idx].prfNumber;
                 obj.GetComponent<ItemStatus>().index = idx;
             }
             else if (data.datas[idx].structName == "Monster")

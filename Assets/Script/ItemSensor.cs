@@ -9,6 +9,8 @@ public class ItemSensor : MonoBehaviour
         if (collision.CompareTag("Ground") || collision.CompareTag("Wall"))
         {
             GetComponent<Collider2D>().isTrigger = false;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<Collider2D>().isTrigger = true;
         }
     }
 

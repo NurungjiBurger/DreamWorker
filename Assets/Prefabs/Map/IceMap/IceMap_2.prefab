@@ -616,6 +616,26 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 1, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 8
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 3
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 2, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 8
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 3
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 9, y: -2, z: 0}
     second:
       serializedVersion: 2
@@ -1094,8 +1114,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: 0161b00262d103c4098297cff8ac180d, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: fa597b3ab69b57149af283d1cfa822a8, type: 2}
   - m_RefCount: 2
@@ -1191,8 +1211,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 2955219024881376416, guid: 93d6cfacc4acdad4586dab4303ce4b0c, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 6136677103822430801, guid: 93d6cfacc4acdad4586dab4303ce4b0c, type: 3}
   - m_RefCount: 2
@@ -1326,7 +1346,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 94
+  - m_RefCount: 96
     m_Data:
       e00: 1
       e01: 0
@@ -1345,7 +1365,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 103
+  - m_RefCount: 105
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -1583,6 +1603,14 @@ CompositeCollider2D:
         Y: -5833333
       - X: -70000000
         Y: -5833333
+    - - X: 30000000
+        Y: -10000000
+      - X: 10000000
+        Y: -10000000
+      - X: 10000000
+        Y: -15833333
+      - X: 30000000
+        Y: -15833333
     - - X: -90000000
         Y: -56041664
       - X: -90000000
@@ -1780,6 +1808,10 @@ CompositeCollider2D:
       - {x: -6.0000043, y: -4}
       - {x: -8.000008, y: -4.0000076}
       - {x: -9.999913, y: -6}
+    - - {x: 2.999971, y: -1.5833334}
+      - {x: 2.999971, y: -1}
+      - {x: 1, y: -1.0000293}
+      - {x: 1.0000293, y: -1.5833334}
     - - {x: -10.00003, y: -2.5833333}
       - {x: -10.00003, y: -2}
       - {x: -12, y: -2.0000293}
@@ -1803,22 +1835,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPosition:
-  - -10.5
+  - -11
   - 2
+  - 6
+  - 6
+  - -11
   - 7
-  - 7.2
-  - -10.5
-  - 7
-  - 2.6
-  - 3.4
+  - 2
+  - 2
   - -9
   - 7
-  - -2.4
-  - -1.6
+  - -3
+  - -3
   - -7
-  - 10.5
-  - -6.3
-  - -5.6
+  - 10
+  - -7
+  - -6
   portalPosition:
   - 11
   - 11
@@ -1926,6 +1958,10 @@ PrefabInstance:
     - target: {fileID: 4640126190214359173, guid: ca934b1e62c66694eb0f06bd69a5c813, type: 3}
       propertyPath: m_Name
       value: OuterWall_Thick (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913006979377534358, guid: ca934b1e62c66694eb0f06bd69a5c813, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7913006979377534358, guid: ca934b1e62c66694eb0f06bd69a5c813, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
@@ -2068,6 +2104,10 @@ PrefabInstance:
     - target: {fileID: 4640126190214359173, guid: ca934b1e62c66694eb0f06bd69a5c813, type: 3}
       propertyPath: m_Name
       value: OuterWall_Thick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913006979377534358, guid: ca934b1e62c66694eb0f06bd69a5c813, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7913006979377534358, guid: ca934b1e62c66694eb0f06bd69a5c813, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size

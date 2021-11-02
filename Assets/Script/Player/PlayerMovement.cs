@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private Timer dashTimer;
 
 
+    private float test = 5.5f;
+
     private GameController gameController;
 
     private Direction dir = Direction.Stop;
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool trigger = false;
     private bool isGround = true;
     private bool downjump = false;
+    private float lastYVelocity = 1;
 
     private bool isGoNext = false;
 
@@ -93,23 +96,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Moving()
     {
+        if (GetComponent<Rigidbody2D>().velocity.y > 0 && lastYVelocity > 0) lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;
+
         switch (dir)
         {
             case Direction.Right:
                 GetComponent<ObjectFlip>().flip('x', true);
-                /*
-                GetComponent<BoxCollider2D>().offset = new Vector2(-0.065f, 0.057f);
-                GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.07f, -0.002f);
-                */
-                GetComponent<Rigidbody2D>().AddForce(Vector2.right * moveSpeed);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.right * moveSpeed, ForceMode2D.Impulse);
                 break;
             case Direction.Left:
                 GetComponent<ObjectFlip>().flip('x', false);
-                /*
-                GetComponent<BoxCollider2D>().offset = new Vector2(0.065f, 0.057f);
-                GetComponent<CapsuleCollider2D>().offset = new Vector2(0.07f, -0.002f);
-                */
-                GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed, ForceMode2D.Impulse);
                 break;
             case Direction.Up:
                 break;
@@ -124,7 +121,9 @@ public class PlayerMovement : MonoBehaviour
             trigger = true;
 
             if (downjump) downjump = false;
-            else GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
+            else GetComponent<Rigidbody2D>().AddForce(Vector2.up * (jumpPower), ForceMode2D.Impulse);
+
+            lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;
         }
         if (dashing)
         {
@@ -135,6 +134,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 속도 제한
+        //
+        if (lastYVelocity < 2f && lastYVelocity > 0) //GetComponent<Rigidbody2D>().velocity.y < 0 && lastYVelocity > 1.5f)
+        {
+            //Debug.Log("실행");
+            lastYVelocity = -1;
+            GetComponent<Rigidbody2D>().AddForce(Vector2.down * (jumpPower / 1.1f), ForceMode2D.Impulse);
+        }
+        
         if (GetComponent<Rigidbody2D>().velocity.x >= 2.5f)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(2.5f, GetComponent<Rigidbody2D>().velocity.y);
@@ -166,6 +173,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(!gameController.IsPause) KeyInput();
+        if (!gameController.IsPause)
+        {
+            KeyInput();
+        }
     }
 }

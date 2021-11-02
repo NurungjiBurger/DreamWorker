@@ -8,7 +8,7 @@ public class Status : MonoBehaviour
     [SerializeField]
     protected int maxHP;
     [SerializeField]
-    protected int power;
+    protected float power;
     [SerializeField]
     protected float jumpPower;
     [SerializeField]

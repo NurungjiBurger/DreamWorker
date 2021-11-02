@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class PlayerStatus : Status
 {
     [SerializeField]
+    private Sprite[] playerImage;
+    [SerializeField]
     private string occupation;
     [SerializeField]
     private int basicItemNum;
@@ -26,6 +28,7 @@ public class PlayerStatus : Status
     private GameObject inventory;
     private int inventoryItemNumber;
 
+    public Sprite PlayerImage { get { return playerImage[1]; } }
     public Data Data { get { return dataP; } }
     public int Level { get { return dataP.level; } }
     public int HandMoney { get { return dataP.handMoney; } }
@@ -140,9 +143,9 @@ public class PlayerStatus : Status
         if (index == -1)
         {
             int[] arr = new int[2];
-            float[] arr2 = new float[6];
-            arr[0] = maxHP; arr[1] = power;
-            arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate;
+            float[] arr2 = new float[7];
+            arr[0] = maxHP;
+            arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate; arr2[6] = power;
 
             index = data.datas.Count;
 
@@ -155,6 +158,7 @@ public class PlayerStatus : Status
         else
         {
             dataP = data.datas[index];
+
         }
 
         tmp = Instantiate(playerIcon, transform.position, Quaternion.identity);
@@ -171,6 +175,7 @@ public class PlayerStatus : Status
 
         CalCulateExperience(0);
 
+        Debug.Log(dataP.maxHP);
         //Debug.Log(dataP.attackSpeed);
     }
 }

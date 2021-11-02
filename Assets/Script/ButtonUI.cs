@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonUI : MonoBehaviour
 {
-    private GameObject ui;
+    private GameObject[] ui = new GameObject [2];
 
     private bool onOff = false;
 
@@ -22,6 +22,10 @@ public class ButtonUI : MonoBehaviour
             GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
             GameObject.Find("Canvas").transform.Find("Enhancer").GetComponent<Enhancer>().DiscardToEnhancer(true);
 
+        }
+        else if (transform.parent.name.Equals("Inventory") || transform.parent.name.Equals("Inspector"))
+        {
+            GameObject.Find("Canvas").transform.Find("Inventory&InspectorButton").GetComponent<ButtonUI>().UIActive();
         }
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
     }
@@ -44,25 +48,23 @@ public class ButtonUI : MonoBehaviour
 
     void Update()
     {
-        if (!ui)
+        if (!ui[0])
         {
             switch (transform.name)
             {
-                case "InventoryButton":
-                    ui = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
-                    break;
-                case "InspectorButton":
-                    ui = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+                case "Inventory&InspectorButton":
+                    ui[0] = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+                    ui[1] = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
                     break;
                 case "EnhancerButton":
-                    ui = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
+                    ui[0] = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
                     break;
                 case "LoadButton":
-                    ui = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
-                    ui.SetActive(onOff);
+                    ui[0] = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
+                    ui[0].SetActive(onOff);
                     break;
                 case "BlackSmithButton":
-                    ui = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
+                    ui[0] = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
                     break;
                 default:
                     break;
@@ -70,7 +72,8 @@ public class ButtonUI : MonoBehaviour
         }
         else
         {
-            ui.SetActive(onOff);
+            ui[0].SetActive(onOff);
+            if (ui[1]) ui[1].SetActive(onOff);
         }
     }
 }

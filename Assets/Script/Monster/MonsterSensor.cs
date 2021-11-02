@@ -36,6 +36,32 @@ public class MonsterSensor : MonoBehaviour
 
                 GetComponent<MonsterStatus>().Data.nowHP = GetComponent<MonsterStatus>().Data.nowHP - player.GetComponent<PlayerStatus>().Damage;
             }
+            else if (collision.CompareTag("Item") && player.GetComponent<PlayerAttack>().IsAttack)
+            {
+                bool value = false;
+
+                switch (collision.gameObject.GetComponent<ItemStatus>().AttackType)
+                {
+                    case "oneHandWield":
+                        value = true;
+                        break;
+                    case "Sting":
+                        value = true;
+                        break;
+                    default :
+                        value = false;
+                        break;
+                }
+
+                if (value)
+                {
+                    player.GetComponent<PlayerAttack>().IsAttackFalse();
+
+                    GetComponent<Audio>().AudioPlay(0);
+
+                    GetComponent<MonsterStatus>().Data.nowHP = GetComponent<MonsterStatus>().Data.nowHP - player.GetComponent<PlayerStatus>().Damage;
+                }
+            }
             if (collision.CompareTag("Wall"))
             {
                 GetComponent<BoxCollider2D>().isTrigger = false;

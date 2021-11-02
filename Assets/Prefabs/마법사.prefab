@@ -903,13 +903,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   power: 20
-  jumpPower: 0.4
-  moveSpeed: 0.1
+  jumpPower: 8
+  moveSpeed: 1
   attackSpeed: 1
   name: "\uB9C8\uBC95\uC0AC"
   defenseRate: 0
   bloodAbsorptionRate: 0
   evasionRate: 0
+  playerImage:
+  - {fileID: 8028680832453401255, guid: c8aaa48d8644c8445aba1797110622b3, type: 3}
+  - {fileID: -3022620115696231728, guid: 2329680b1d838aa4493022ee361cba7d, type: 3}
   occupation: Wizard
   basicItemNum: 0
   handBone: {fileID: 3840391632728447356}
@@ -989,7 +992,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

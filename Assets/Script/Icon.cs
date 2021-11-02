@@ -52,7 +52,6 @@ public class Icon : MonoBehaviour
 
         if (obj && room)
         {
-
             position = obj.transform.position - room.transform.position;
 
             position.x *= 5.5f;

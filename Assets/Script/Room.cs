@@ -287,6 +287,11 @@ public class Room : MonoBehaviour
 
                     }
                 }
+                else
+                {
+                    isPlayer = false;
+                    // 해당 방에 플레이어가 존재하지 않는 경우
+                }
             }
             else
             {
