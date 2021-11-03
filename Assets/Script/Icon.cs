@@ -54,11 +54,11 @@ public class Icon : MonoBehaviour
         {
             position = obj.transform.position - room.transform.position;
 
-            position.x *= 5.5f;
-            position.y *= 3.5f;
+            position.x *= 20.8f;
+            position.y *= 16.25f;
 
-            position.x %= 75;
-            position.y %= 40;
+            position.x %= 250;
+            position.y %= 130;
 
             GetComponent<RectTransform>().localPosition = position;
         }

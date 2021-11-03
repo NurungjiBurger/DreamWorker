@@ -85,13 +85,26 @@ public class PlayerSensor : MonoBehaviour
                 isPortal = true;
             }
 
-            if (collision.CompareTag("Monster") || collision.CompareTag("Monster_attack_judgement"))
+            if (collision.CompareTag("Monster"))
             {
                 if (!isHit)
                 {
                     isHit = true;
                     hitTimer.TimerSetZero();
                     onOff = true;
+
+                    GetComponent<PlayerStatus>().CalCulateHealth(collision.gameObject.GetComponent<MonsterStatus>().Dmg, '-');
+                }
+            }
+            else if (collision.CompareTag("Monster_attack_judgement"))
+            {
+                if (!isHit)
+                {
+                    isHit = true;
+                    hitTimer.TimerSetZero();
+                    onOff = true;
+
+                    GetComponent<PlayerStatus>().CalCulateHealth(collision.gameObject.GetComponent<MonsterEffectSensor>().Dmg, '-');
                 }
             }
         }
@@ -132,8 +145,8 @@ public class PlayerSensor : MonoBehaviour
 
             if (collision.collider.CompareTag("Wealth"))
             {
-                if (collision.collider.name.Equals("∞ÒµÂ(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
-                if (collision.collider.name.Equals("∞ÒµÂ¡÷∏”¥œ(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(30);
+                if (collision.collider.name.Equals("∞ÒµÂ(Clone)")) GetComponent<PlayerStatus>().CalCulateHandMoney(10, '+');
+                if (collision.collider.name.Equals("∞ÒµÂ¡÷∏”¥œ(Clone)")) GetComponent<PlayerStatus>().CalCulateHandMoney(30, '+');
                 //if (collision.collider.name.Equals("Ω∫ƒ≥∑¥(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
                 Destroy(collision.collider.gameObject);
             }
@@ -157,6 +170,8 @@ public class PlayerSensor : MonoBehaviour
                     isHit = true;
                     hitTimer.TimerSetZero();
                     onOff = true;
+
+                    GetComponent<PlayerStatus>().CalCulateHealth(collision.collider.gameObject.GetComponent<MonsterStatus>().Dmg, '-');
                 }
             }
         }

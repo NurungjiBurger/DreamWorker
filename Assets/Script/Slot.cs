@@ -200,7 +200,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         if (slotItem != null)
         {
-
             if (transform.parent.parent == smithy.transform) transform.GetChild(0).Find("PriceBackground").Find("Price").GetComponent<TextMeshProUGUI>().text = slotItem.GetComponent<ItemStatus>().Price.ToString();
 
             if (slotItem.GetComponent<ItemStatus>().Data != null) transform.GetChild(0).Find("Cursedrate").GetComponent<Image>().fillAmount = (float)slotItem.GetComponent<ItemStatus>().CursedRate / (float)100;

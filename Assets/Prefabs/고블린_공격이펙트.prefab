@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 667868050988047152}
   - component: {fileID: -4703658144983520725}
   - component: {fileID: 8665062391331625054}
+  - component: {fileID: 6858685216036344284}
   m_Layer: 0
   m_Name: "\uACE0\uBE14\uB9B0_\uACF5\uACA9\uC774\uD399\uD2B8"
   m_TagString: Monster_attack_judgement
@@ -120,9 +121,9 @@ MonoBehaviour:
   dmg: 0
   type: 0
   size: 0
+  dir: 0
   prefabTimer: {fileID: 0}
   durationTime: 0
-  dir: 0
   position: {x: 0, y: 0, z: 0}
 --- !u!61 &8665062391331625054
 BoxCollider2D:
@@ -150,3 +151,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.35, y: 0.71}
   m_EdgeRadius: 0
+--- !u!114 &6858685216036344284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473880864565127662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53b924e5950e684d9dca86c98f1389d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabEffect: {fileID: 0}
+  attackRange: 0.5
+  isComBack: 0
+  isMove: 1
+  isFall: 0

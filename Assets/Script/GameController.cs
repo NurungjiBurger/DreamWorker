@@ -53,17 +53,14 @@ public class GameController : MonoBehaviour
     private List<GameObject> eventRoom = new List<GameObject>();
     private List<GameObject> npc = new List<GameObject>();
 
-    RectTransform hpBar;
-    private Image nowHPBar;
-    private TextMeshProUGUI textHp;
-
     public bool GameStart { set { gameStart = value; } }
     public bool IsPause { get { return isPause; } }
+
     public List<GameObject> EventRoom { get { return eventRoom;} }
     public List<GameObject> Room { get { return room; } }
     public List<GameObject> Map { get { return map; } }
-    public GameObject[] prfMonsters { get { return prefabMonsters; } }
 
+    public GameObject[] prfMonsters { get { return prefabMonsters; } }
     public GameObject[] Items { get { return prefabItems; } }
     public GameObject[] Monsters { get { return prefabMonsters; } }
     public GameObject[] Portals { get { return prefabPortals; } }
@@ -270,39 +267,85 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void ReturntoMain()
+    {
+        Destroy(GameObject.Find("GameController"));
+        Destroy(GameObject.Find("Data"));
+        GameObject.Find("GameController").GetComponent<GameController>().RevertScene("MainMenu");
+    }
+
     private bool CheckRoom(string str)
     {
         return true;
     }
 
-    private void RevertScene()
+    public void RevertScene(string scenename)
     {
         revert = false;
 
-        npc.Add(GameObject.Find("BlackSmith").gameObject);
-
-        if (data.datas.Count == 0)
+        if (scenename == "Dungeon")
         {
-            player = Instantiate(prefabCharacters[selectedPlayerIndex], new Vector3(0, 0, 0), Quaternion.identity);
+            npc.Add(GameObject.Find("BlackSmith").gameObject);
 
-            player.GetComponent<PlayerStatus>().characterPrfNumber = selectedPlayerIndex;
+            if (data.datas.Count == 0)
+            {
+                player = Instantiate(prefabCharacters[selectedPlayerIndex], new Vector3(0, 0, 0), Quaternion.identity);
 
-            data.stageNumber = 1;
-            data.subStageNumber = 0;
+                player.GetComponent<PlayerStatus>().characterPrfNumber = selectedPlayerIndex;
 
-            data.stageEntrance = false;  // 스테이지에 처음 들어왔는가?
-            data.stageClear = false;
-            data.eventRoomVisit = false;
+                data.round = 0;
+                data.stageNumber = 1;
+                data.subStageNumber = 0;
+
+                data.stageEntrance = false;  // 스테이지에 처음 들어왔는가?
+                data.stageClear = false;
+                data.eventRoomVisit = false;
+            }
+            else
+            {
+                Restore();
+            }
         }
-        else
+        else if (scenename == "MainMenu")
         {
-            Restore();
+            SceneManager.UnloadSceneAsync("Dungeon");
+            SceneManager.LoadScene("MainMenu");
+
+            GameStart = false;
+        }
+
+        //revert = true;
+    }
+
+    private void SetResolution()
+    {
+        int setWidth = 1920; // 사용자 설정 너비
+        int setHeight = 1080; // 사용자 설정 높이
+
+        int deviceWidth = Screen.width; // 기기 너비 저장
+        int deviceHeight = Screen.height; // 기기 높이 저장
+
+        Screen.SetResolution(setWidth, (int)(((float)deviceHeight / deviceWidth) * setWidth), true); // SetResolution 함수 제대로 사용하기
+
+        if ((float)setWidth / setHeight < (float)deviceWidth / deviceHeight) // 기기의 해상도 비가 더 큰 경우
+        {
+            float newWidth = ((float)setWidth / setHeight) / ((float)deviceWidth / deviceHeight); // 새로운 너비
+            Camera.main.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f); // 새로운 Rect 적용
+        }
+        else // 게임의 해상도 비가 더 큰 경우
+        {
+            float newHeight = ((float)deviceWidth / deviceHeight) / ((float)setWidth / setHeight); // 새로운 높이
+            Camera.main.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight); // 새로운 Rect 적용
         }
     }
 
     private void Awake()
     {
+        SetResolution();
+
         DontDestroyOnLoad(gameObject);
+
+
     }
 
     void Start()
@@ -331,13 +374,13 @@ public class GameController : MonoBehaviour
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
         else
         {            
-
             if (SceneManager.GetActiveScene().name == "MainMenu")
             {
                 if (gameStart)
                 {
                     SceneManager.LoadScene("Dungeon");
                     revert = true;
+                    gameStart = false;
                 }
             }
             else if (SceneManager.GetActiveScene().name == "Dungeon")
@@ -345,20 +388,10 @@ public class GameController : MonoBehaviour
                 if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
                 if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
 
-
-                if (revert) RevertScene();
+                if (revert) RevertScene("Dungeon");
                 else
                 {
-
-                    hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
-                    nowHPBar = hpBar.transform.GetChild(0).GetComponent<Image>();
-
-
-                    textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-
-                    textHp.text = player.GetComponent<PlayerStatus>().Data.nowHP.ToString() + "    /    " + player.GetComponent<PlayerStatus>().Data.maxHP.ToString();
-                    nowHPBar.fillAmount = (float)player.GetComponent<PlayerStatus>().Data.nowHP / (float)player.GetComponent<PlayerStatus>().Data.maxHP;
-
+                    if (Input.GetKeyDown(KeyCode.Backspace)) ReturntoMain();
 
                     if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
                     else isPause = true;
@@ -377,6 +410,7 @@ public class GameController : MonoBehaviour
                         data.stageClear = false;
                         if (!data.stageEntrance) // 처음 스테이지에 입장
                         {
+                            data.round++;
 
                             data.stageEntrance = true;
 
@@ -384,7 +418,7 @@ public class GameController : MonoBehaviour
 
                             data.subStageNumber = 3;
 
-                            data.stageNumber = Random.Range(3, prefabMapDesigns.Length / 6);
+                            data.stageNumber = Random.Range(1, prefabMapDesigns.Length / 6);
 
                             CreateRoom(data.subStageNumber);
 
@@ -401,7 +435,6 @@ public class GameController : MonoBehaviour
                         }
                     }
                 }
-
             }
         }
     }

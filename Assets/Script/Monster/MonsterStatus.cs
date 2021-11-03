@@ -29,6 +29,8 @@ public class MonsterStatus : Status
     private GameObject dropBone;
     [SerializeField]
     private GameObject monsterIcon;
+    [SerializeField]
+    private float hpBarYAxis;
 
     public int monsterPrfNumber;
     public int index = -1;
@@ -46,7 +48,7 @@ public class MonsterStatus : Status
 
     public Data Data { get { return dataM; } }
     public bool Boss { get { return isBoss; } set { isBoss = value; } }
-    public int Dmg { get { return bodyDmg; } }
+    public int Dmg { get { return bodyDmg * GameObject.Find("Data").GetComponent<DataController>().GameData.round; } }
     public GameObject Bone { get { return effectBone; } }
 
     public void DestroyObject()
@@ -173,7 +175,8 @@ public class MonsterStatus : Status
         {
             if (!GetComponent<MonsterStatus>().Boss)
             {
-                Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + 0.7f, 0));
+                Debug.Log("Ω««‡¡ﬂ");
+                Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + hpBarYAxis, 0));
                 hpBar.transform.position = _hpBarPos;
             }
 

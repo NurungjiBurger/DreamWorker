@@ -115,8 +115,8 @@ public class Enhancer : MonoBehaviour
         devoteItemList.Add(slot);
 
         slot.transform.SetParent(transform.Find("Background").transform);
-        slot.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
-        slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+       // slot.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
+       // slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
     }
 
     void Start()

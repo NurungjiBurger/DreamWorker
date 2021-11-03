@@ -91,10 +91,10 @@ public class Parabola : MonoBehaviour
             switch(name)
             {
                 case "골드(Clone)":
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().AddHandMoney(10);
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().CalCulateHandMoney(10,'+');
                     break;
                 case "골드주머니(Clone)":
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().AddHandMoney(30);
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().CalCulateHandMoney(30, '+');
                     break;
                 case "스캐럽(Clone)":
                     Debug.Log("스캐럽+1");

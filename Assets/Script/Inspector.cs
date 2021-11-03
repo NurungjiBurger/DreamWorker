@@ -72,8 +72,8 @@ public class Inspector : MonoBehaviour
 
         slot.transform.SetParent(transform.Find("Background").transform);
         slot.transform.position = transform.Find("Background").transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).position;
-        slot.GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
-        slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
+        //slot.GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
+        //slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
         slot.SlotItem.GetComponent<ItemStatus>().IsMount = true;
         if(slot.SlotItem.GetComponent<ItemStatus>().MountingPart == "Weapon") slot.SlotItem.SetActive(true);
         player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, 1);

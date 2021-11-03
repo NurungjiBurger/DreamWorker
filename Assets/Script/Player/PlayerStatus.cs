@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class PlayerStatus : Status
 {
@@ -19,6 +20,10 @@ public class PlayerStatus : Status
 
     [SerializeField]
     private int damage;
+
+    RectTransform hpBar;
+    private Image nowHPBar;
+    private TextMeshProUGUI textHp;
 
     private GameData data;
     private Data dataP = null;
@@ -38,6 +43,26 @@ public class PlayerStatus : Status
     public int Damage { get { return damage; } }
     public GameObject HandBone { get { return handBone; } }
 
+    private void Evolution()
+    {
+        if (dataP.forthEvolution)
+        {
+            // 공격력, 이동속도, 방어력 소폭 증가
+        }
+        else if (dataP.thirdEvolution)
+        {
+            // 공격력, 점프력, 체력 소폭 증가
+        }
+        else if (dataP.secondEvolution)
+        {
+            // 공격력, 흡혈 증가
+        }
+        else if (dataP.firstEvolution)
+        {
+            // 공격력, 회피 대폭 증가
+        }
+    }
+
     public void CalCulateExperience(int exp)
     {
         dataP.experience += exp;
@@ -51,20 +76,20 @@ public class PlayerStatus : Status
             switch(dataP.level)
             {
                 case 10:
-                    dataP.firstTurn = true;
-                    Turn();
+                    dataP.firstEvolution = true;
+                    Evolution();
                     break;
                 case 30:
-                    dataP.secondTurn = true;
-                    Turn();
+                    dataP.secondEvolution = true;
+                    Evolution();
                     break;
                 case 60:
-                    dataP.thirdTurn = true;
-                    Turn();
+                    dataP.thirdEvolution = true;
+                    Evolution();
                     break;
                 case 100:
-                    dataP.forthTurn = true;
-                    Turn();
+                    dataP.forthEvolution = true;
+                    Evolution();
                     break;
                 default:
                     break;
@@ -73,29 +98,45 @@ public class PlayerStatus : Status
 
     }
 
-    public void AddHandMoney(int money)
+    public void CalCulateHealth(int Dmg, char oper)
     {
-        dataP.handMoney += money;
+        if (oper == '+')
+        {
+
+        }
+        else if (oper == '-')
+        {
+            dataP.nowHP -= Dmg;
+            if (dataP.nowHP < 0)
+            {
+                Debug.Log("사망했습니다");
+                // 저장된 파일 삭제후 메인메뉴로 돌아가기 or 게임 종료
+                /*
+                Destroy(GameObject.Find("GameController"));
+                Destroy(GameObject.Find("Data"));
+                GameObject.Find("Data").GetComponent<DataController>().DeleteGameData();
+                GameObject.Find("GameController").GetComponent<GameController>().RevertScene("MainMenu");
+                /*
+                GameObject.Find("Data").GetComponent<DataController>().DeleteGameData();
+                GameObject.Find("Data").GetComponent<DataController>().ExitGame();
+                */
+            }
+        }
     }
 
-    private void Turn()
+    public bool CalCulateHandMoney(int money, char oper)
     {
-        if(dataP.forthTurn)
+        if (oper == '+') { dataP.handMoney += money; return true; }
+        else if (oper == '-')
         {
-            dataP.power += 50;
+            if (dataP.handMoney >= money)
+            {
+                dataP.handMoney -= money;
+                return true;
+            }
+            else return false;
         }
-        else if (dataP.thirdTurn)
-        {
-
-        }
-        else if (dataP.secondTurn)
-        {
-
-        }
-        else if (dataP.firstTurn)
-        {
-
-        }
+        else return false;
     }
 
     private void CalDamage()
@@ -165,6 +206,10 @@ public class PlayerStatus : Status
         tmp.transform.SetParent(GameObject.Find("Canvas").transform.Find("MiniMap").transform.Find("Background"));
         tmp.GetComponent<Icon>().obj = gameObject;
 
+        hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
+        nowHPBar = hpBar.Find("php_bar").GetComponent<Image>();
+        textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+
     }
 
     private void Update()
@@ -173,9 +218,10 @@ public class PlayerStatus : Status
         if (dataP == null) dataP = data.datas[index];
         else dataP.SetPosition(transform.position);
 
-        CalCulateExperience(0);
+        textHp.text = dataP.nowHP.ToString() + "    /    " + dataP.maxHP.ToString();
+        nowHPBar.fillAmount = (float)dataP.nowHP / (float)dataP.maxHP;
 
-        Debug.Log(dataP.maxHP);
+        // 체력
         //Debug.Log(dataP.attackSpeed);
     }
 }

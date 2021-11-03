@@ -13,6 +13,11 @@ public class DataController : MonoBehaviour
 
     public GameData GameData { get { return gameData;} }
 
+    public void DeleteGameData()
+    {
+        Debug.Log("저장 파일을 삭제합니다.");
+        File.Delete(filePath);
+    }
 
     public void SaveGameData()
     {
@@ -28,8 +33,7 @@ public class DataController : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
-            Debug.Log("저장 파일을 삭제합니다.");
-            File.Delete(filePath);
+            DeleteGameData();
         }
         gameData = new GameData();
         Debug.Log("새로운파일생성 완료.");

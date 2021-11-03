@@ -41,13 +41,13 @@ public class Inventory : MonoBehaviour
     public void AddToInventory(Slot slot)
     {
 
-        if (possessItemList.Count < 30)
+        if (possessItemList.Count < 20)
         {
             possessItemList.Add(slot);
 
             slot.transform.SetParent(transform.Find("Background").transform);
-            slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
-            slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+            //slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+            //slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             slot.SlotItem.GetComponent<ItemStatus>().IsMount = false;
             slot.SlotItem.SetActive(false);
         }
@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        possessItemNumber = 30;
+        possessItemNumber = 20;
     }
 
     void Update()

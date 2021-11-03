@@ -432,7 +432,7 @@ MonoBehaviour:
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   miniIcon: {fileID: 0}
   isBoss: 0
-  bodyDmg: 0
+  bodyDmg: 2
   dropRate: 60
   dropItemStartindexber: 0
   dropItemFinishindexber: 14
@@ -443,6 +443,7 @@ MonoBehaviour:
   effectBone: {fileID: 3959524358794252885}
   dropBone: {fileID: 5848157575213800838}
   monsterIcon: {fileID: 1821452458296802910, guid: b9a3059e3fd8e134f8251f7c5010e922, type: 3}
+  hpBarYAxis: 0.9
   monsterPrfNumber: 0
   index: -1
 --- !u!114 &2227057809407427525

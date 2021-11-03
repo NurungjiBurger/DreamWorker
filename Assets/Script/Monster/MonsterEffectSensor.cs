@@ -13,25 +13,24 @@ public class MonsterEffectSensor : EffectSensor
     public Vector3 position;
 
     private Timer durationTimer;
+    private GameObject monster;
+
+    public int Dmg { get { return dmg; } }
+
+    private void CalCulateDamage()
+    {
+        dmg = (int)monster.GetComponent<MonsterStatus>().Data.power * GameObject.Find("Data").GetComponent<DataController>().GameData.round;
+    }
+
+    public void AllocateObject(GameObject obj)
+    {
+        monster = obj;
+        CalCulateDamage();
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        /*
-        if (type == 1)
-        {
-            if (col.CompareTag("Ground") || col.CompareTag("Wall"))
-            {
-                disappear = true;
-                GetComponent<Animator>().SetBool("disappear", true);
-            }
-        }
 
-        if (col.CompareTag("Player"))
-        {
-            disappear = true;
-            if (type == 1) GetComponent<Animator>().SetBool("disappear", true);
-        }
-        */
     }
 
     // Start is called before the first frame update

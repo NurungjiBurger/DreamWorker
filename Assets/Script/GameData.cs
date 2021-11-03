@@ -9,6 +9,7 @@ using System;
 public class GameData
 {
     // gamedata
+    public int round;
     public int stageNumber;
     public int subStageNumber;
     public bool stageEntrance;
@@ -35,10 +36,10 @@ public class Data
     public int experience;
     public int needExperience;
 
-    public bool firstTurn;
-    public bool secondTurn;
-    public bool thirdTurn;
-    public bool forthTurn;
+    public bool firstEvolution;
+    public bool secondEvolution;
+    public bool thirdEvolution;
+    public bool forthEvolution;
 
     //////////////////////////////////////////////// // item
 
@@ -108,10 +109,10 @@ public class Data
                 experience = 0;
                 needExperience = 0;
 
-                firstTurn = false;
-                secondTurn = false;
-                thirdTurn = false;
-                forthTurn = false;
+                firstEvolution = false;
+                secondEvolution = false;
+                thirdEvolution = false;
+                forthEvolution = false;
             }
         }
     }

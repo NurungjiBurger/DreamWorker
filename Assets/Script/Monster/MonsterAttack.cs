@@ -59,6 +59,7 @@ public class MonsterAttack : MonoBehaviour
             effect = Instantiate(prefabAttackEffect, GetComponent<MonsterStatus>().Bone.transform.position, Quaternion.identity);
             if (GetComponent<MonsterStatus>().Boss) effect.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             effect.GetComponent<MonsterEffectSensor>().dir = dir;
+            effect.GetComponent<MonsterEffectSensor>().AllocateObject(gameObject);
             if (effect.GetComponent<Projectile>()) effect.GetComponent<Projectile>().EntitySetting(gameObject);
         }
     }
@@ -67,8 +68,7 @@ public class MonsterAttack : MonoBehaviour
     {
         if (isAttack )
         {
-            /*if (!GetComponent<MonsterMovement>().Animaing)*/ animator.SetTrigger("attack");
-            //GetComponent<MonsterMovement>().Animaing = true;
+            animator.SetTrigger("attack");
             attackTimer.TimerSetZero();
         }
     }

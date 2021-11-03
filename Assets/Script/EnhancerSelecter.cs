@@ -118,8 +118,8 @@ public class EnhancerSelecter : MonoBehaviour
             }
             itemList.Add(tmp);
             tmp.transform.SetParent(transform.Find("Background").transform);
-            tmp.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
-            tmp.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+            //tmp.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+            //tmp.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             selectedList.Add(false);
             SelectItem(tmp, i);
         }
@@ -132,8 +132,8 @@ public class EnhancerSelecter : MonoBehaviour
 
             itemList.Add(inspector.GetComponent<Inspector>().EquipItemList[i]);
             inspector.GetComponent<Inspector>().EquipItemList[i].transform.SetParent(transform.Find("Background").transform);
-            inspector.GetComponent<Inspector>().EquipItemList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
-            inspector.GetComponent<Inspector>().EquipItemList[i].transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+           // inspector.GetComponent<Inspector>().EquipItemList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+            //inspector.GetComponent<Inspector>().EquipItemList[i].transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             inspector.GetComponent<Inspector>().DiscardToInspector(inspector.GetComponent<Inspector>().EquipItemList[i]);
             selectedList.Add(false);
         }
@@ -161,8 +161,8 @@ public class EnhancerSelecter : MonoBehaviour
 
             itemList.Add(inventory.GetComponent<Inventory>().PossessItemList[0]);
             inventory.GetComponent<Inventory>().PossessItemList[0].transform.SetParent(transform.Find("Background").transform);
-            inventory.GetComponent<Inventory>().PossessItemList[0].GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
-            inventory.GetComponent<Inventory>().PossessItemList[0].transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+            //inventory.GetComponent<Inventory>().PossessItemList[0].GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
+           // inventory.GetComponent<Inventory>().PossessItemList[0].transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             inventory.GetComponent<Inventory>().DiscardToInventory(0);
             selectedList.Add(false);
         }
