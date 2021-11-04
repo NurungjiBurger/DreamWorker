@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class UISensor : MonoBehaviour
 {
+    /*
+    enum Direction { Left, Right, Up, Down, Stop };
+
+    private Direction dir = Direction.Stop;
+    */
+    private int direction = 0;
+
     private bool mountAble = false;
     private bool toInventory = false;
 
@@ -12,6 +19,32 @@ public class UISensor : MonoBehaviour
 
     public bool MountAble { get { return mountAble ; } }
     public bool ToInventory { get { return toInventory; } }
+
+    //public Direction direction { get { return dir; } }
+    public int Direction { get { return direction; } }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (name.Equals("Lever"))
+        {
+            if (collision.gameObject.name == "RightBox") direction = 1;
+            else if (collision.gameObject.name == "LeftBox") direction = 2;
+            else if (collision.gameObject.name == "UpBox") direction = 3;
+            else if (collision.gameObject.name == "DownBox") direction = 4;
+            else
+            {
+                direction = 0;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(name.Equals("Lever"))
+        {
+            direction = 0;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

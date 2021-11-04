@@ -5,9 +5,10 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class ItemInformation : MonoBehaviour
+public class ItemInformation : MonoBehaviour, IPointerClickHandler
 {
     private GameObject item;
+    private Slot slot;
     private GameObject inspector;
 
     public void ModifyPosition(int direction, Vector3 position)
@@ -446,6 +447,11 @@ public class ItemInformation : MonoBehaviour
 
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        slot.GetComponent<Slot>().OnPointerEnter(eventData);
+    }
+
     private void UpdateItemInformation()
     {
         string grade;
@@ -497,7 +503,8 @@ public class ItemInformation : MonoBehaviour
 
     public void InputInformation(GameObject obj)
     {
-        item = obj;
+        slot = obj.GetComponent<Slot>();
+        item = slot.SlotItem;
     }
 
     private void Start()

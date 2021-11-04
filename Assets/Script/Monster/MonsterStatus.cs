@@ -129,7 +129,7 @@ public class MonsterStatus : Status
             arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate; arr2[6] = power;
             index = data.datas.Count;
 
-            data.datas.Add(new Data("Monster", monsterPrfNumber, index, arr, arr2, -1, -1));
+            data.datas.Add(new Data("Monster", monsterPrfNumber, index, arr, arr2, -1, -1, false));
             dataM = data.datas[index];
 
             dataM.isBoss = isBoss;
@@ -150,6 +150,7 @@ public class MonsterStatus : Status
         if (GetComponent<MonsterStatus>().Boss)
         {
             GetComponent<ObjectFlip>().ChangeSize(1.5f);
+            hpBarYAxis *= 1.5f;
             hpBar.transform.position = new Vector3(canvas.transform.position.x + 85, canvas.transform.position.y + 100, transform.position.z);
             hpBar.transform.localScale = new Vector3(2.0f, 1.25f, 1.25f);
         }
@@ -173,12 +174,8 @@ public class MonsterStatus : Status
 
         if (!gameController.IsPause)
         {
-            if (!GetComponent<MonsterStatus>().Boss)
-            {
-                Debug.Log("Ω««‡¡ﬂ");
-                Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + hpBarYAxis, 0));
-                hpBar.transform.position = _hpBarPos;
-            }
+            Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + hpBarYAxis, 0));
+            hpBar.transform.position = _hpBarPos;
 
             nowHpBar.fillAmount = (float)dataM.nowHP / (float)dataM.maxHP;
 

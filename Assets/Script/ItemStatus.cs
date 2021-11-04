@@ -200,7 +200,7 @@ public class ItemStatus : Status
             arr2[0] = defenseRate; arr2[1] = jumpPower; arr2[2] = moveSpeed; arr2[3] = attackSpeed; arr2[4] = bloodAbsorptionRate; arr2[5] = evasionRate; arr2[6] = power;
             index = data.datas.Count;
 
-            data.datas.Add(new Data("Item", itemPrfNumber, index, arr, arr2, -1, -1));
+            data.datas.Add(new Data("Item", itemPrfNumber, index, arr, arr2, -1, -1, false));
             dataI = data.datas[index];
 
             dataI.cursedRate = Random.Range(0, 50); // 저주율 수치 조정 필요

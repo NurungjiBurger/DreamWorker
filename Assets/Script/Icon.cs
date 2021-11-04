@@ -15,14 +15,6 @@ public class Icon : MonoBehaviour
     {
         int idx;
 
-        for (idx = 0; idx < gameController.EventRoom.Count; idx++)
-        {
-            if (gameController.EventRoom[idx].transform.GetChild(0).GetComponent<Room>().isPlayer)
-            {
-                room = gameController.EventRoom[idx];
-                break;
-            }
-        }
         for (idx = 0; idx < gameController.Room.Count; idx++)
         {
             if (gameController.Room[idx].GetComponent<Room>().isPlayer)

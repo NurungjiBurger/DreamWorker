@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
@@ -50,13 +51,11 @@ public class GameController : MonoBehaviour
 
     private List<GameObject> map = new List<GameObject>();
     private List<GameObject> room = new List<GameObject>();
-    private List<GameObject> eventRoom = new List<GameObject>();
     private List<GameObject> npc = new List<GameObject>();
 
     public bool GameStart { set { gameStart = value; } }
     public bool IsPause { get { return isPause; } }
 
-    public List<GameObject> EventRoom { get { return eventRoom;} }
     public List<GameObject> Room { get { return room; } }
     public List<GameObject> Map { get { return map; } }
 
@@ -123,6 +122,7 @@ public class GameController : MonoBehaviour
             Destroy(tmp);
         }
 
+        /*
         for (int idx = 0; idx < 1; idx++)
         {
             eventRoom[idx].transform.Find("GreenMap_Wall").GetComponent<Room>().DestoryAll();
@@ -130,6 +130,7 @@ public class GameController : MonoBehaviour
             eventRoom.Remove(eventRoom[idx]);
             Destroy(tmp);
         }
+        */
 
         data.stageEntrance = false;
     }
@@ -167,6 +168,7 @@ public class GameController : MonoBehaviour
         // -300, 300
         // 300, 300
         // heaven
+        /*
         eventRoom.Add(Instantiate(prefabEventMapDesigns[0], new Vector3(300, 300, 0), Quaternion.identity));
         eventRoom[0].transform.Find("GreenMap_Wall").GetComponent<Room>().index = -2;
         eventRoom[0].transform.SetParent(GameObject.Find("Grid").transform);
@@ -181,6 +183,7 @@ public class GameController : MonoBehaviour
         eventRoom[1].transform.Find("GreenMap_Wall").GetComponent<Room>().index = -2;
         eventRoom[1].transform.SetParent(GameObject.Find("Grid").transform);
         eventRoom[1].transform.Find("GreenMap_Wall").GetComponent<Room>().map = eventRoom[1];
+        */
     }
 
     private void CreateRoom(int cnt)
@@ -192,24 +195,48 @@ public class GameController : MonoBehaviour
             CreateRoom(cnt - 1);
         }
         else
-        {// 0~5 1
-            // 6~11 2
+        {
+            // eventroom »ý¼º
+            // heaven
+            map.Add(Instantiate(prefabMapDesigns[prefabMapDesigns.Length-2], new Vector3(300, 300, 0), Quaternion.identity));
+            map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+            room.Add(Instantiate(prefabRoom, new Vector3(300, 300, 0), Quaternion.identity));
+            room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+
+            room[room.Count - 1].GetComponent<Room>().isEvent = true;
+            room[room.Count - 1].GetComponent<Room>().map = map[map.Count - 1];
+            room[room.Count - 1].GetComponent<Room>().mapPrfNumber = prefabMapDesigns.Length-2;
+            room[room.Count - 1].GetComponent<Room>().dir = -1;
+            room[room.Count - 1].GetComponent<Room>().sel = -1;
+
+
+            npc[0].transform.position = room[room.Count-1].transform.position;
+            // hell
+            map.Add(Instantiate(prefabMapDesigns[prefabMapDesigns.Length - 1], new Vector3(-300, -300, 0), Quaternion.identity));
+            map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+            room.Add(Instantiate(prefabRoom, new Vector3(300, 300, 0), Quaternion.identity));
+            room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+
+            room[room.Count - 1].GetComponent<Room>().isEvent = true;
+            room[room.Count - 1].GetComponent<Room>().map = map[map.Count - 1];
+            room[room.Count - 1].GetComponent<Room>().mapPrfNumber = prefabMapDesigns.Length - 1;
+            room[room.Count - 1].GetComponent<Room>().dir = -1;
+            room[room.Count - 1].GetComponent<Room>().sel = -1;
+
+            // dungeon
             pastSelectDirection = 0;
 
             mapPrfNumber = Random.Range((6 * (data.stageNumber - 1)), (6 * data.stageNumber) - 1);
             map.Add(Instantiate(prefabMapDesigns[mapPrfNumber], new Vector3(0, 0, 0), Quaternion.identity));
-            map[0].transform.SetParent(GameObject.Find("Grid").transform);
+            map[map.Count-1].transform.SetParent(GameObject.Find("Grid").transform);
             room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
-            room[0].transform.SetParent(GameObject.Find("Grid").transform);
-
-            room[0].GetComponent<Room>().map = map[0];
-            room[0].GetComponent<Room>().mapPrfNumber = mapPrfNumber;
-            room[0].GetComponent<Room>().dir = 4;
-            room[0].GetComponent<Room>().sel = -1;
-
+            room[room.Count-1].transform.SetParent(GameObject.Find("Grid").transform);
+            room[room.Count-1].GetComponent<Room>().map = map[map.Count-1];
+            room[room.Count-1].GetComponent<Room>().mapPrfNumber = mapPrfNumber;
+            room[room.Count-1].GetComponent<Room>().dir = 4;
+            room[room.Count-1].GetComponent<Room>().sel = -1;
             return;
         }
-
         bool complete = false;
         bool create = true;
         GameObject selectRoom;
@@ -219,7 +246,7 @@ public class GameController : MonoBehaviour
         while (!complete)
         {
             create = true;
-            int number = Random.Range(0, Room.Count);
+            int number = Random.Range(2, Room.Count);
             selectRoom = Room[number];
             Vector3 position = selectRoom.transform.position;
 
@@ -241,7 +268,7 @@ public class GameController : MonoBehaviour
                     break;
             }
 
-            for (int i=0;i<room.Count;i++)
+            for (int i=2;i<room.Count;i++)
             {
                 if (room[i].transform.position == position) create = false;
             }
@@ -360,6 +387,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+       // Debug.Log(Input.mousePosition);
         //if (Input.GetKey(KeyCode.A)) printalldata();
 
         if (Input.GetKey("escape"))
@@ -418,13 +446,16 @@ public class GameController : MonoBehaviour
 
                             data.subStageNumber = 3;
 
-                            data.stageNumber = Random.Range(1, prefabMapDesigns.Length / 6);
+                            data.stageNumber = Random.Range(1, (prefabMapDesigns.Length - 2) / 6);
 
                             CreateRoom(data.subStageNumber);
 
                             CreateEventRoom();
 
-                            for (int idx = 0; idx <= data.subStageNumber; idx++) room[idx].GetComponent<Room>().AllocateSubStageNumber(idx);
+                            for (int idx = 0; idx < room.Count; idx++)
+                            {
+                                room[idx].GetComponent<Room>().AllocateSubStageNumber(idx);
+                            }
                         }
                         else
                         {

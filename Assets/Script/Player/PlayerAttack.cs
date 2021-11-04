@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     public void IsAttackFalse()
     {
         isAttack = false;
+        GameObject.Find("Canvas").transform.Find("AttackButton").GetComponent<ButtonUI>().UIActive();
     }
 
     private void WeaponEnroll()
@@ -81,7 +82,7 @@ public class PlayerAttack : MonoBehaviour
         // 캐릭터 공격
         if (attackTimer.CooldownCheck())
         {
-            if (Input.GetKey(KeyCode.Q))
+            if (GameObject.Find("Canvas").transform.Find("AttackButton").GetComponent<ButtonUI>().OnOff)
             {
                 Attacking();
             }

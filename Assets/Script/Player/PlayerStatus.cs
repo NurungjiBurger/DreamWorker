@@ -190,7 +190,7 @@ public class PlayerStatus : Status
 
             index = data.datas.Count;
 
-            data.datas.Add(new Data("Player", characterPrfNumber, index, arr, arr2, -1, -1));
+            data.datas.Add(new Data("Player", characterPrfNumber, index, arr, arr2, -1, -1, false));
             dataP = data.datas[index];
 
             tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);

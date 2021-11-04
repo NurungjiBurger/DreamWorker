@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     protected float attackRange;
     [SerializeField]
+    protected float speed;
+    [SerializeField]
     protected bool isComBack;
     [SerializeField]
     protected bool isMove;
@@ -105,6 +107,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
+        speed = 0.06f;
 
         // 사출된 자리에 고정
         if (flag == 0)
@@ -121,7 +124,7 @@ public class Projectile : MonoBehaviour
         {
             if ((startPosition.x + (attackRange * dir)) != this.transform.position.x && cnt < (attackRange * 60))
             {
-                gameObject.transform.Translate(-0.02f * dir, 0, 0);
+                gameObject.transform.Translate(-speed * dir, 0, 0);
                 cnt++;
             }
             else
@@ -142,7 +145,7 @@ public class Projectile : MonoBehaviour
         {
             if (startPosition.x != this.transform.position.x && cnt < (attackRange * 60 * 2))
             {
-                gameObject.transform.Translate(0.02f * dir, 0, 0);
+                gameObject.transform.Translate(speed * dir, 0, 0);
                 cnt++;
             }
             else

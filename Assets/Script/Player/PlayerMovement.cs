@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    enum Direction { Left, Right, Up, Stop };
+    enum Direction { Left, Right, Up, Stop, Down };
 
     [SerializeField]
     private KeyCode jump = KeyCode.D;
@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
     private float test = 5.5f;
 
     private GameController gameController;
+    private UISensor joyStick;
 
+    private int action;
     private Direction dir = Direction.Stop;
 
     private float time;
@@ -55,43 +57,53 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
     private void KeyInput()
     {
+        action = joyStick.Direction;
+
         jumpPower = GetComponent<PlayerStatus>().Data.jumpPower;
         moveSpeed = GetComponent<PlayerStatus>().Data.moveSpeed;
 
-        animator.SetBool("move", false);
-        if (Input.GetKey(KeyCode.RightArrow))
+
+
+        animator.SetBool("move", true);
+
+        switch (action)
         {
-            dir = Direction.Right;
-            animator.SetBool("move", true);
+            case 0:
+                dir = Direction.Stop;
+                animator.SetBool("move", false);
+                break;
+            case 1:
+                dir = Direction.Right;
+                break;
+            case 2:
+                dir = Direction.Left;
+                break;
+            case 3:
+                dir = Direction.Up;
+                break;
+            case 4:
+                dir = Direction.Down;
+                break;
+            default:
+                break;
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            dir = Direction.Left;
-            animator.SetBool("move", true);
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && GetComponent<PlayerSensor>().Portal)
-        {
-            transform.position = GetComponent<PlayerSensor>().TeleportPosition;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            jumping = true;
-            downjump = true;
-        }
-        if (Input.GetKeyDown(jump) && isGround)
-        {
-            jumping = true;
-        }
-        if (Input.GetKey(KeyCode.Space) && dashTimer.CooldownCheck())
+
+        if (GameObject.Find("Canvas").transform.Find("DashButton").GetComponent<ButtonUI>().OnOff && dashTimer.CooldownCheck())
         {
             dashing = true;
+            GameObject.Find("Canvas").transform.Find("DashButton").GetComponent<ButtonUI>().UIActive();
         }
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+
+        if (GameObject.Find("Canvas").transform.Find("JumpButton").GetComponent<ButtonUI>().OnOff)
         {
-            dir = Direction.Stop;
+            if (isGround) jumping = true;
+            animator.SetBool("move", true);
+            GameObject.Find("Canvas").transform.Find("JumpButton").GetComponent<ButtonUI>().UIActive();
         }
+
     }
 
     private void Moving()
@@ -109,8 +121,13 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed, ForceMode2D.Impulse);
                 break;
             case Direction.Up:
+                if (GetComponent<PlayerSensor>().Portal) transform.position = GetComponent<PlayerSensor>().TeleportPosition;
                 break;
             case Direction.Stop:
+                break;
+            case Direction.Down:
+                downjump = true;
+                break;
             default:
                 break;
         }
@@ -120,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
             jumping = false;
             trigger = true;
 
-            if (downjump) downjump = false;
+            if (dir == Direction.Down) downjump = false;
             else GetComponent<Rigidbody2D>().AddForce(Vector2.up * (jumpPower), ForceMode2D.Impulse);
 
             lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;
@@ -129,8 +146,8 @@ public class PlayerMovement : MonoBehaviour
         {
             dashTimer.TimerSetZero();
             dashing = false;
-            if (GetComponent<SpriteRenderer>().flipX) GetComponent<Transform>().Translate(1.5f, 0, 0);
-            else GetComponent<Transform>().Translate(-1.5f, 0, 0);
+            if (GetComponent<ObjectFlip>().flipX) transform.position += new Vector3(1.5f, 0f, 0f);
+            else transform.position -= new Vector3(1.5f, 0f, 0f);
         }
 
         // 속도 제한
@@ -175,7 +192,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!gameController.IsPause)
         {
-            KeyInput();
+            if (!joyStick) joyStick = GameObject.Find("Canvas").transform.Find("JoyStick").transform.Find("Lever").GetComponent<UISensor>();
+            else KeyInput();
         }
     }
 }

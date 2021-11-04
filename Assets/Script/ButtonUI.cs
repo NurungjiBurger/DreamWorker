@@ -10,6 +10,8 @@ public class ButtonUI : MonoBehaviour
 
     private bool onOff = false;
 
+    public bool OnOff { get { return onOff; } }
+
     public void SaveButton()
     {
         GameObject.Find("Data").GetComponent<DataController>().SaveGameData();

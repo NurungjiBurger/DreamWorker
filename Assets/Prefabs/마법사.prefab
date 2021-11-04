@@ -904,7 +904,7 @@ MonoBehaviour:
   maxHP: 100
   power: 20
   jumpPower: 8
-  moveSpeed: 1
+  moveSpeed: 0.8
   attackSpeed: 1
   name: "\uB9C8\uBC95\uC0AC"
   defenseRate: 0

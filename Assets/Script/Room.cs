@@ -109,8 +109,8 @@ public class Room : MonoBehaviour
 
     public void BossClearAfter()
     {
-        gameController.PortalCreate(gameController.EventRoom[0].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -1);
-        gameController.PortalCreate(gameController.EventRoom[1].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -2);
+        gameController.PortalCreate(gameController.Room[0].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -1);
+        gameController.PortalCreate(gameController.Room[1].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -2);
     }
 
     private void ManageMap()
@@ -186,10 +186,13 @@ public class Room : MonoBehaviour
             }
             else
             {
-                tmp = CreateMonster(gameController.PrefabReturn("Monster", type), new Vector3(transform.position.x, transform.position.y, transform.position.z));
-                tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
-                tmp.GetComponent<MonsterStatus>().Boss = true;
-                tmp.GetComponent<MonsterStatus>().BeTheBossMonster(isevent);
+                if (subStageNumber == 1)
+                {
+                    tmp = CreateMonster(gameController.PrefabReturn("Monster", type), new Vector3(transform.position.x, transform.position.y, transform.position.z));
+                    tmp.GetComponent<MonsterStatus>().monsterPrfNumber = type;
+                    tmp.GetComponent<MonsterStatus>().Boss = true;
+                    tmp.GetComponent<MonsterStatus>().BeTheBossMonster(isevent);
+                }
             }
         }
     }
@@ -205,7 +208,7 @@ public class Room : MonoBehaviour
         { 
             index = data.datas.Count;
 
-            data.datas.Add(new Data("Map", mapPrfNumber, index, null, null, dir, sel));
+            data.datas.Add(new Data("Map", mapPrfNumber, index, null, null, dir, sel, isEvent));
 
             dataM = data.datas[index];
 
@@ -235,7 +238,7 @@ public class Room : MonoBehaviour
                                 dataM.visible = true;
                                 dataM.subStageEntrance = true;
 
-                                if (subStageNumber != 0 && subStageNumber == data.subStageNumber)
+                                if (subStageNumber != 2 && subStageNumber == data.subStageNumber + 2)
                                 {
                                     if (Vector3.Distance(player.transform.position, transform.position) <= 6) CreateStage(true, false);
                                     else dataM.subStageEntrance = false;
@@ -315,6 +318,6 @@ public class Room : MonoBehaviour
 
         ManageMap();
 
-       // Debug.Log("나의 방 번호는 " + subStageNumber + "인덱스는 " + index);
+        if(isPlayer)  Debug.Log("나의 방 번호는 " + subStageNumber + "인덱스는 " + index);
     }
 }

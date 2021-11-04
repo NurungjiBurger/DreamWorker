@@ -38,16 +38,22 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
-        itemInform.GetComponent<ItemInformation>().InputInformation(slotItem);
-        itemInform.SetActive(true);
-        hovering = true;
+        itemInform.GetComponent<ItemInformation>().InputInformation(gameObject);
+        hovering = !hovering;
+        itemInform.SetActive(hovering);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        itemInform.SetActive(false);
-        hovering = false;
+        
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (transform.parent == selecter.transform.GetChild(0))
+        {
+            if (eventData.button == PointerEventData.InputButton.Left) selecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
+        }
     }
 
     public void DestroyObject()
@@ -89,14 +95,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         else
         {
             if (ui) Destroy(ui.gameObject);
-        }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (transform.parent == selecter.transform.GetChild(0))
-        {
-            if (eventData.button == PointerEventData.InputButton.Left) selecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
         }
     }
     
@@ -195,7 +193,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
             else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
             else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
-            else itemInform.SetActive(false);
+           // else itemInform.SetActive(false);
         }
 
         if (slotItem != null)

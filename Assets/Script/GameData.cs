@@ -69,6 +69,7 @@ public class Data
     public int selectRoomIndex;
     public int portalDirection;
 
+    public bool isEvent;
     public bool subStageEntrance;
     public bool isClear;
     public bool visible;
@@ -76,7 +77,7 @@ public class Data
 
     public int eventRoomIndex;
 
-    public Data(string name, int num, int idx, int[] arr, float[] arr2, int dir, int sel)
+    public Data(string name, int num, int idx, int[] arr, float[] arr2, int dir, int sel, bool isevent)
     {
         structName = name;
         prfNumber = num;
@@ -84,6 +85,7 @@ public class Data
 
         if (name == "Map")
         {
+            isEvent = isevent;
             portalDirection = dir;
             selectRoomIndex = sel;
 

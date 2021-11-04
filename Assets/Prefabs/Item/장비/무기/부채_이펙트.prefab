@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabEffect: {fileID: 0}
-  attackRange: 3
+  attackRange: 1.5
   isComBack: 0
   isMove: 1
   isFall: 0
