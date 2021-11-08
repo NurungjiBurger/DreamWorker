@@ -15,11 +15,11 @@ public class Inspector : MonoBehaviour
     public int ItemCount { get { return equipItemList.Count; } }
     public List<Slot> EquipItemList { get { return equipItemList; } }
 
-    public void InspectorStatInit()
+    public void InspectorStatRerange(int oper)
     {
         for(int idx = 0; idx < EquipItemList.Count; idx++)
         {
-            player.GetComponent<PlayerStatus>().CalCulateStat(equipItemList[idx].GetComponent<Slot>().SlotItem, -1);
+            player.GetComponent<PlayerStatus>().CalCulateStat(equipItemList[idx].GetComponent<Slot>().SlotItem, oper);
         }
     }
 
@@ -81,17 +81,18 @@ public class Inspector : MonoBehaviour
 
     public void StatusText()
     {
+        Debug.Log("실행중이야");
         transform.Find("Background").transform.Find("Infomation").transform.Find("Level").GetComponent<TextMeshProUGUI>().text = "Level  " + player.GetComponent<PlayerStatus>().Level.ToString();
         transform.Find("Background").transform.Find("Infomation").transform.Find("Occupation").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().Occupation;
 
         transform.Find("Background").transform.Find("Status").transform.Find("MaxHP").GetComponent<TextMeshProUGUI>().text = "최대체력  " + player.GetComponent<PlayerStatus>().Data.maxHP.ToString();
-        transform.Find("Background").transform.Find("Status").transform.Find("AttackPower").GetComponent<TextMeshProUGUI>().text = "공격력  " + player.GetComponent<PlayerStatus>().Data.power.ToString();
-        transform.Find("Background").transform.Find("Status").transform.Find("JumpPower").GetComponent<TextMeshProUGUI>().text = "점프력  " + player.GetComponent<PlayerStatus>().Data.jumpPower.ToString();
-        transform.Find("Background").transform.Find("Status").transform.Find("MoveSpeed").GetComponent<TextMeshProUGUI>().text = "이동속도  " + player.GetComponent<PlayerStatus>().Data.moveSpeed.ToString();
-        transform.Find("Background").transform.Find("Status").transform.Find("DefenseCapability").GetComponent<TextMeshProUGUI>().text = "방어력  " + player.GetComponent<PlayerStatus>().Data.defenseRate.ToString();
-        transform.Find("Background").transform.Find("Status").transform.Find("AttackSpeed").GetComponent<TextMeshProUGUI>().text = "공격속도  " + player.GetComponent<PlayerStatus>().Data.attackSpeed.ToString();
-        transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "흡혈  " + player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate.ToString();
-        transform.Find("Background").transform.Find("Status").transform.Find("EvasionRate").GetComponent<TextMeshProUGUI>().text = "회피  " + player.GetComponent<PlayerStatus>().Data.evasionRate.ToString();
+        transform.Find("Background").transform.Find("Status").transform.Find("AttackPower").GetComponent<TextMeshProUGUI>().text = "공격력  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.power);
+        transform.Find("Background").transform.Find("Status").transform.Find("JumpPower").GetComponent<TextMeshProUGUI>().text = "점프력  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.jumpPower);
+        transform.Find("Background").transform.Find("Status").transform.Find("MoveSpeed").GetComponent<TextMeshProUGUI>().text = "이동속도  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.moveSpeed);
+        transform.Find("Background").transform.Find("Status").transform.Find("DefenseCapability").GetComponent<TextMeshProUGUI>().text = "방어력  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.defenseRate);
+        transform.Find("Background").transform.Find("Status").transform.Find("AttackSpeed").GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.attackSpeed);
+        transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "흡혈  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate);
+        transform.Find("Background").transform.Find("Status").transform.Find("EvasionRate").GetComponent<TextMeshProUGUI>().text = "회피  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.evasionRate);
     }
 
     void Start()

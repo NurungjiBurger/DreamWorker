@@ -35,6 +35,7 @@ public class Room : MonoBehaviour
     private bool isGoNext;
     private bool monsterPresence;
 
+    public int SubStageNumber { get { return subStageNumber; } }
     public bool Visible { get { return dataM.visible; } }
     public Data Data { get { return dataM; } }
 
@@ -109,8 +110,8 @@ public class Room : MonoBehaviour
 
     public void BossClearAfter()
     {
-        gameController.PortalCreate(gameController.Room[0].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -1);
-        gameController.PortalCreate(gameController.Room[1].transform.Find("GreenMap_Wall").gameObject , gameController.Room[gameController.Room.Count - 1], -2);
+        gameController.PortalCreate(gameController.Room[1].gameObject , gameController.Room[gameController.Room.Count - 1], -3);
+        gameController.PortalCreate(gameController.Room[0].gameObject , gameController.Room[gameController.Room.Count - 1], -3);
     }
 
     private void ManageMap()
@@ -197,6 +198,11 @@ public class Room : MonoBehaviour
         }
     }
 
+    public void ConnectData()
+    {
+        if (index > -1) dataM = data.datas[index];
+    }
+
     private void Awake()
     {
         data = GameObject.Find("Data").GetComponent<DataController>().GameData;
@@ -204,6 +210,7 @@ public class Room : MonoBehaviour
 
     void Start()
     {
+        if (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
         if (index == -1)
         { 
             index = data.datas.Count;
@@ -218,6 +225,11 @@ public class Room : MonoBehaviour
         {
             if (index > -1 ) dataM = data.datas[index];
         }
+
+        if (!dataM.isEvent && dataM.selectRoomIndex != -1)
+        {
+            gameController.PortalCreate(gameController.Room[dataM.selectRoomIndex], gameController.Room[subStageNumber], dataM.portalDirection);
+        }
     }
 
     private void FixedUpdate()
@@ -229,7 +241,7 @@ public class Room : MonoBehaviour
                 if (player.transform.position.y <= transform.position.y + 7.5f && player.transform.position.y >= transform.position.y - 7.5f)
                 {
                     isPlayer = true;
-                    if (!isEvent) // 일반 필드 
+                    if (!dataM.isEvent) // 일반 필드 
                     {
                         if (!dataM.isClear)
                         {
@@ -244,18 +256,22 @@ public class Room : MonoBehaviour
                                     else dataM.subStageEntrance = false;
 
                                 }
+                                else if (subStageNumber == 2)
+                                {
+                                    dataM.isClear = true;
+                                }
                                 else CreateStage(false, false);
                             }
                             else    // 게임 진행중 
                             {
                                 if (!monsterPresence)
                                 {
-                                    if (subStageNumber == data.subStageNumber)
+                                    if (subStageNumber == data.subStageNumber+2)
                                     {
                                         if (!data.stageClear)
                                         {
                                             data.stageClear = true;
-                                            BossClearAfter();
+                                           // BossClearAfter();
                                         }
                                     }
 
@@ -266,7 +282,9 @@ public class Room : MonoBehaviour
                         else
                         {
 
-                            if (subStageNumber == data.subStageNumber)
+                            if (!GameObject.Find("heavendoor(Clone)") && !GameObject.Find("helldoor(Clone)")) BossClearAfter();
+
+                            if (subStageNumber == gameController.Room.Count - 1)
                             {
                                 if (data.eventRoomVisit)
                                 {
@@ -275,18 +293,20 @@ public class Room : MonoBehaviour
                                     player.transform.position = new Vector3(0, 0, 0);
                                 }
                             }
-                            //Debug.Log("여기는 " + index + "번째 방이고 클리어 하셨습니다.");
+                           // Debug.Log("여기는 " + index + "번째 방이고 클리어 하셨습니다.");
                         }
                     }
                     else // 이벤트 필드
                     {
                         data.eventRoomVisit = true;
 
-                        if (transform.parent.name == "GreenMap_HellEvent(Clone)")
+                        if (gameObject == gameController.Room[1])
                         {
+                            Debug.Log("ㅇㅇ");
                             CreateStage(true, true);
                             // 보스 출현
                         }
+                        Debug.Log("읭?");
 
                     }
                 }
@@ -310,14 +330,12 @@ public class Room : MonoBehaviour
 
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
-        if (!isEvent)
-        {
-            if (dataM == null) dataM = data.datas[index];
-            else dataM.SetPosition(transform.position);
-        }
+
+        if (dataM == null) dataM = data.datas[index];
+        else dataM.SetPosition(transform.position);
 
         ManageMap();
 
-        if(isPlayer)  Debug.Log("나의 방 번호는 " + subStageNumber + "인덱스는 " + index);
+        //if (isPlayer)  Debug.Log("나의 방 번호는 " + subStageNumber + "인덱스는 " + (index-2) + "방의 속성은 " + isEvent + "방의 위치는 " + transform.position  );
     }
 }

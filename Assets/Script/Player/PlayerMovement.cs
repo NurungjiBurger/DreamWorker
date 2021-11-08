@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private bool trigger = false;
     private bool isGround = true;
     private bool downjump = false;
-    private float lastYVelocity = 1;
+    private float lastYVelocity = 0;
 
     private bool isGoNext = false;
 
@@ -65,7 +65,11 @@ public class PlayerMovement : MonoBehaviour
         jumpPower = GetComponent<PlayerStatus>().Data.jumpPower;
         moveSpeed = GetComponent<PlayerStatus>().Data.moveSpeed;
 
-
+        if (Input.GetKey(KeyCode.RightArrow)) action = 1;
+        else if (Input.GetKey(KeyCode.LeftArrow)) action = 2;
+        else if (Input.GetKey(KeyCode.UpArrow)) action = 3;
+        else if (Input.GetKey(KeyCode.DownArrow)) action = 4;
+        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow))
 
         animator.SetBool("move", true);
 
@@ -91,13 +95,13 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        if (GameObject.Find("Canvas").transform.Find("DashButton").GetComponent<ButtonUI>().OnOff && dashTimer.CooldownCheck())
+        if (GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().OnOff && dashTimer.CooldownCheck())
         {
-            dashing = true;
-            GameObject.Find("Canvas").transform.Find("DashButton").GetComponent<ButtonUI>().UIActive();
+            if (GetComponent<PlayerSensor>().Portal) transform.position = GetComponent<PlayerSensor>().TeleportPosition;
+            GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().UIActive();
         }
 
-        if (GameObject.Find("Canvas").transform.Find("JumpButton").GetComponent<ButtonUI>().OnOff)
+        if (GameObject.Find("Canvas").transform.Find("JumpButton").GetComponent<ButtonUI>().OnOff || (isGround && Input.GetKeyDown(KeyCode.D)))
         {
             if (isGround) jumping = true;
             animator.SetBool("move", true);
@@ -121,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(Vector2.left * moveSpeed, ForceMode2D.Impulse);
                 break;
             case Direction.Up:
-                if (GetComponent<PlayerSensor>().Portal) transform.position = GetComponent<PlayerSensor>().TeleportPosition;
+                //if (GetComponent<PlayerSensor>().Portal) transform.position = GetComponent<PlayerSensor>().TeleportPosition;
                 break;
             case Direction.Stop:
                 break;
@@ -151,10 +155,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 속도 제한
-        //
         if (lastYVelocity < 2f && lastYVelocity > 0) //GetComponent<Rigidbody2D>().velocity.y < 0 && lastYVelocity > 1.5f)
         {
-            //Debug.Log("실행");
+            //
             lastYVelocity = -1;
             GetComponent<Rigidbody2D>().AddForce(Vector2.down * (jumpPower / 1.1f), ForceMode2D.Impulse);
         }

@@ -21,11 +21,13 @@ public class DataController : MonoBehaviour
 
     public void SaveGameData()
     {
-        GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatInit();
+        GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatRerange(-1);
 
         string jsonData = JsonUtility.ToJson(gameData);
         File.WriteAllText(filePath, jsonData);
         Debug.Log("¿˙¿Â");
+
+        GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatRerange(+1);
 
     }
 

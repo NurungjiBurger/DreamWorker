@@ -17,6 +17,11 @@ public class ButtonUI : MonoBehaviour
         GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
     }
 
+    public void MainButton()
+    {
+        GameObject.Find("GameController").GetComponent<GameController>().ReturntoMain();
+    }
+
     public void CloseButton()
     {
         if (transform.parent.name.Equals("Enhancer"))
@@ -67,6 +72,9 @@ public class ButtonUI : MonoBehaviour
                     break;
                 case "BlackSmithButton":
                     ui[0] = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
+                    break;
+                case "SaveButton":
+                    ui[0] = GameObject.Find("Canvas").transform.Find("Save").gameObject;
                     break;
                 default:
                     break;

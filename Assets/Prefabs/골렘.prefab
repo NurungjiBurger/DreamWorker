@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 200
   power: 20
-  jumpPower: 0.1
+  jumpPower: 3
   moveSpeed: 1
   attackSpeed: 2
   name: "\uACE8\uB818"
@@ -176,7 +176,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

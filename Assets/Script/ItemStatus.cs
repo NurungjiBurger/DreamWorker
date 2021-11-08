@@ -20,6 +20,8 @@ public class ItemStatus : Status
     private string attackType;
     [SerializeField]
     private int price;
+    [SerializeField]
+    private string description;
 
     private int enhancingLevel;
 
@@ -44,6 +46,7 @@ public class ItemStatus : Status
     public GameObject EffectBone { get { return effectBone; } }
     public string AttackType { get { return attackType; } }
     public int Price { get { return price; } }
+    public string Description { get { return description; } }
 
     public void DestoryAll()
     {

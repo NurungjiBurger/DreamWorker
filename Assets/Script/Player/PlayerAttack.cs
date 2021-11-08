@@ -82,7 +82,7 @@ public class PlayerAttack : MonoBehaviour
         // 캐릭터 공격
         if (attackTimer.CooldownCheck())
         {
-            if (GameObject.Find("Canvas").transform.Find("AttackButton").GetComponent<ButtonUI>().OnOff)
+            if (GameObject.Find("Canvas").transform.Find("AttackButton").GetComponent<ButtonUI>().OnOff || Input.GetKey(KeyCode.Q))
             {
                 Attacking();
             }

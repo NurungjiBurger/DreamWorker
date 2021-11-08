@@ -27,22 +27,14 @@ public class UISensor : MonoBehaviour
     {
         if (name.Equals("Lever"))
         {
-            if (collision.gameObject.name == "RightBox") direction = 1;
-            else if (collision.gameObject.name == "LeftBox") direction = 2;
+            if (collision.gameObject.name == "RightBox" || Input.GetKey(KeyCode.RightArrow)) direction = 1;
+            else if (collision.gameObject.name == "LeftBox" || Input.GetKey(KeyCode.LeftArrow)) direction = 2;
             else if (collision.gameObject.name == "UpBox") direction = 3;
-            else if (collision.gameObject.name == "DownBox") direction = 4;
-            else
+            else if (collision.gameObject.name == "DownBox" || Input.GetKey(KeyCode.DownArrow)) direction = 4;
+            else //if (collision.gameObject.name == "StopBox") direction = 0;
             {
                 direction = 0;
             }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(name.Equals("Lever"))
-        {
-            direction = 0;
         }
     }
 

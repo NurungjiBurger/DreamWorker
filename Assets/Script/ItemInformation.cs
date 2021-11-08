@@ -449,7 +449,7 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        slot.GetComponent<Slot>().OnPointerEnter(eventData);
+        slot.GetComponent<Slot>().ActiveItemInform();
     }
 
     private void UpdateItemInformation()
@@ -457,16 +457,34 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         string grade;
         // 이름 , 이미지
         transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Name + "  (+" + item.GetComponent<ItemStatus>().Data.enhancingLevel + ")";
+
+        float ratio = 0;
+
+        Sprite img = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+
+        if (img.bounds.size.x >= img.bounds.size.y)
+        {
+            ratio = 130 / img.bounds.size.x;
+        }
+        else
+        {
+            ratio = 130 / img.bounds.size.y;
+        }
+
+        transform.GetChild(1).GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(img.bounds.size.x * ratio, img.bounds.size.y * ratio);
+
         transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+
         // 정보 패널
         transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().MountingPart;
         transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Occupation;
+        transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Description;
         // 스탯 패널
-        transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:0.#}", item.GetComponent<ItemStatus>().Data.attackSpeed.ToString());
+        transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.attackSpeed);
         CompareToInspector("Data.attackSpeed", transform.GetChild(3).GetChild(0).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = "저주율  " + item.GetComponent<ItemStatus>().CursedRate.ToString();
+        transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = "저주율  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().CursedRate);
         CompareToInspector("CursedRate", transform.GetChild(3).GetChild(1).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(2).GetComponent<TextMeshProUGUI>().text = "방어력  " + item.GetComponent<ItemStatus>().Data.defenseRate.ToString();
+        transform.GetChild(3).GetChild(2).GetComponent<TextMeshProUGUI>().text = "방어력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.defenseRate);
         CompareToInspector("Data.defenseRateCapability", transform.GetChild(3).GetChild(2).Find("Delta").gameObject);
         switch (item.GetComponent<ItemStatus>().ItemGrade)
         {
@@ -493,11 +511,11 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         CompareToInspector("Grade", transform.GetChild(3).GetChild(3).Find("Delta").gameObject);
         transform.GetChild(3).GetChild(4).GetComponent<TextMeshProUGUI>().text = "체력  " + item.GetComponent<ItemStatus>().Data.maxHP.ToString();
         CompareToInspector("HP", transform.GetChild(3).GetChild(4).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(5).GetComponent<TextMeshProUGUI>().text = "점프력  " + item.GetComponent<ItemStatus>().Data.jumpPower.ToString();
+        transform.GetChild(3).GetChild(5).GetComponent<TextMeshProUGUI>().text = "점프력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.jumpPower);
         CompareToInspector("Jump", transform.GetChild(3).GetChild(5).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(6).GetComponent<TextMeshProUGUI>().text = "이동속도  " + item.GetComponent<ItemStatus>().Data.moveSpeed.ToString();
+        transform.GetChild(3).GetChild(6).GetComponent<TextMeshProUGUI>().text = "이동속도  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.moveSpeed);
         CompareToInspector("Data.moveSpeed", transform.GetChild(3).GetChild(6).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(7).GetComponent<TextMeshProUGUI>().text = "공격력  " + item.GetComponent<ItemStatus>().Data.power.ToString();
+        transform.GetChild(3).GetChild(7).GetComponent<TextMeshProUGUI>().text = "공격력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.power);
         CompareToInspector("Data.power", transform.GetChild(3).GetChild(7).Find("Delta").gameObject);
     }
 

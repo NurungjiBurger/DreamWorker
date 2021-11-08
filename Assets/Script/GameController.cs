@@ -131,24 +131,27 @@ public class GameController : MonoBehaviour
             Destroy(tmp);
         }
         */
-
+        // 0 천국 1 지옥 ( 2 ~ (2+data.substagenumber)) 던전
         data.stageEntrance = false;
     }
 
     public void PortalCreate(GameObject selectRoom, GameObject nowRoom, int direction)
     {
         GameObject first, second;
-        int value;
+        int value=0;
 
-        if (room.Count - 1 < data.subStageNumber) value = 0;
-        else value = 1;
-
-        if (data.stageClear)
+        if (!selectRoom.GetComponent<Room>().Data.isEvent)
         {
-            if (direction == -1) value = 2;
-            else if (direction == -2) value = 3;
-
-            direction = -3;
+            if (nowRoom.GetComponent<Room>().SubStageNumber < room.Count - 1) value = 0;
+            else
+            {
+                value = 1;
+            }
+        }
+        else
+        {
+            if (selectRoom.transform.position == room[0].transform.position) value = 2;
+            else value = 3;
         }
 
         first = selectRoom.GetComponent<Room>().CreatePortal(direction, value);
@@ -165,25 +168,7 @@ public class GameController : MonoBehaviour
 
     private void CreateEventRoom()
     {
-        // -300, 300
-        // 300, 300
-        // heaven
-        /*
-        eventRoom.Add(Instantiate(prefabEventMapDesigns[0], new Vector3(300, 300, 0), Quaternion.identity));
-        eventRoom[0].transform.Find("GreenMap_Wall").GetComponent<Room>().index = -2;
-        eventRoom[0].transform.SetParent(GameObject.Find("Grid").transform);
-        eventRoom[0].transform.Find("GreenMap_Wall").GetComponent<Room>().map = eventRoom[0];
 
-        //npc.Add(Instantiate(prefabNpcs[0], eventRoom[0].transform.position, Quaternion.identity));
-        npc[0].transform.position = new Vector3(eventRoom[0].transform.position.x + 1.0f, eventRoom[0].transform.position.y, eventRoom[0].transform.position.z);
-
-        // 대장장이 생성
-        // hell
-        eventRoom.Add(Instantiate(prefabEventMapDesigns[1], new Vector3(-300, -300, 0), Quaternion.identity));
-        eventRoom[1].transform.Find("GreenMap_Wall").GetComponent<Room>().index = -2;
-        eventRoom[1].transform.SetParent(GameObject.Find("Grid").transform);
-        eventRoom[1].transform.Find("GreenMap_Wall").GetComponent<Room>().map = eventRoom[1];
-        */
     }
 
     private void CreateRoom(int cnt)
@@ -209,12 +194,13 @@ public class GameController : MonoBehaviour
             room[room.Count - 1].GetComponent<Room>().dir = -1;
             room[room.Count - 1].GetComponent<Room>().sel = -1;
 
+            room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(0);
 
             npc[0].transform.position = room[room.Count-1].transform.position;
             // hell
             map.Add(Instantiate(prefabMapDesigns[prefabMapDesigns.Length - 1], new Vector3(-300, -300, 0), Quaternion.identity));
             map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
-            room.Add(Instantiate(prefabRoom, new Vector3(300, 300, 0), Quaternion.identity));
+            room.Add(Instantiate(prefabRoom, new Vector3(-300, -300, 0), Quaternion.identity));
             room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
 
             room[room.Count - 1].GetComponent<Room>().isEvent = true;
@@ -223,6 +209,7 @@ public class GameController : MonoBehaviour
             room[room.Count - 1].GetComponent<Room>().dir = -1;
             room[room.Count - 1].GetComponent<Room>().sel = -1;
 
+            room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(1);
             // dungeon
             pastSelectDirection = 0;
 
@@ -231,10 +218,14 @@ public class GameController : MonoBehaviour
             map[map.Count-1].transform.SetParent(GameObject.Find("Grid").transform);
             room.Add(Instantiate(prefabRoom, new Vector3(0, 0, 0), Quaternion.identity));
             room[room.Count-1].transform.SetParent(GameObject.Find("Grid").transform);
+
             room[room.Count-1].GetComponent<Room>().map = map[map.Count-1];
             room[room.Count-1].GetComponent<Room>().mapPrfNumber = mapPrfNumber;
             room[room.Count-1].GetComponent<Room>().dir = 4;
             room[room.Count-1].GetComponent<Room>().sel = -1;
+
+            room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(2);
+
             return;
         }
         bool complete = false;
@@ -287,14 +278,15 @@ public class GameController : MonoBehaviour
                 room[room.Count - 1].GetComponent<Room>().dir = direction;
                 room[room.Count - 1].GetComponent<Room>().sel = number;
 
-                PortalCreate(selectRoom, Room[Room.Count - 1], direction);
+                room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(room.Count - 1);
+                //PortalCreate(selectRoom, Room[Room.Count - 1], direction);
 
                 complete = true;
             }
         }
     }
 
-    private void ReturntoMain()
+    public void ReturntoMain()
     {
         Destroy(GameObject.Find("GameController"));
         Destroy(GameObject.Find("Data"));
@@ -387,7 +379,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-       // Debug.Log(Input.mousePosition);
+        // Debug.Log(Input.mousePosition);
         //if (Input.GetKey(KeyCode.A)) printalldata();
 
         if (Input.GetKey("escape"))
@@ -419,7 +411,6 @@ public class GameController : MonoBehaviour
                 if (revert) RevertScene("Dungeon");
                 else
                 {
-                    if (Input.GetKeyDown(KeyCode.Backspace)) ReturntoMain();
 
                     if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
                     else isPause = true;
@@ -450,12 +441,7 @@ public class GameController : MonoBehaviour
 
                             CreateRoom(data.subStageNumber);
 
-                            CreateEventRoom();
 
-                            for (int idx = 0; idx < room.Count; idx++)
-                            {
-                                room[idx].GetComponent<Room>().AllocateSubStageNumber(idx);
-                            }
                         }
                         else
                         {
@@ -493,8 +479,7 @@ public class GameController : MonoBehaviour
 
                 obj.GetComponent<Room>().index = idx;
                 obj.GetComponent<Room>().AllocateSubStageNumber(room.Count-1);
-
-                if (data.datas[idx].selectRoomIndex != -1) PortalCreate(room[data.datas[idx].selectRoomIndex], room[room.Count - 1], data.datas[idx].portalDirection);
+                obj.GetComponent<Room>().ConnectData();
             }
             else if (data.datas[idx].structName == "Player")
             {
@@ -518,7 +503,9 @@ public class GameController : MonoBehaviour
             }
         }
 
-        CreateEventRoom();
-       // if (Room[Room.Count - 1].GetComponent<Room>().Data.isClear) Room[Room.Count - 1].GetComponent<Room>().BossClearAfter();
+        npc.Add(GameObject.Find("BlackSmith").gameObject);
+        npc[0].transform.position = room[0].transform.position;
+
+        // if (Room[Room.Count - 1].GetComponent<Room>().Data.isClear) Room[Room.Count - 1].GetComponent<Room>().BossClearAfter();
     }
 }

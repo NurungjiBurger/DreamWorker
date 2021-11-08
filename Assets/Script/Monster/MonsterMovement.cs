@@ -28,6 +28,8 @@ public class MonsterMovement : MonoBehaviour
     [SerializeField]
     private float[] offsetY;
 
+    private float lastYVelocity = 0;
+
     private Timer moveTimer;
 
     public bool Trigger { get { return trigger; } set { trigger = value; } }
@@ -40,6 +42,8 @@ public class MonsterMovement : MonoBehaviour
 
     private void Moving()
     {
+        if (GetComponent<Rigidbody2D>().velocity.y > 0 && lastYVelocity > 0) lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;
+
         if (!GetComponent<MonsterAttack>().Attack) // 몬스터가 공격중이 아니라면 무빙 가능
         {
             switch (dir)
@@ -66,8 +70,18 @@ public class MonsterMovement : MonoBehaviour
                 jumping = false;
                 trigger = true;
 
-                GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().Data.jumpPower);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * GetComponent<MonsterStatus>().Data.jumpPower, ForceMode2D.Impulse);
+
+                lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;
             }
+        }
+
+        if (lastYVelocity < 2f && lastYVelocity > 0) //GetComponent<Rigidbody2D>().velocity.y < 0 && lastYVelocity > 1.5f)
+        {
+            //
+            Debug.Log("실행~");
+            lastYVelocity = -1;
+            GetComponent<Rigidbody2D>().AddForce(Vector2.down * (GetComponent<MonsterStatus>().Data.jumpPower / 1.1f), ForceMode2D.Impulse);
         }
 
         // 속도 제한

@@ -303,7 +303,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 150
   power: 5
-  jumpPower: 0.1
+  jumpPower: 3
   moveSpeed: 0.5
   attackSpeed: 2
   name: "\uC2AC\uB77C\uC784"
