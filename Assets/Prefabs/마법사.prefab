@@ -907,9 +907,9 @@ MonoBehaviour:
   moveSpeed: 0.8
   attackSpeed: 1
   name: "\uB9C8\uBC95\uC0AC"
-  defenseRate: 0
-  bloodAbsorptionRate: 0
-  evasionRate: 0
+  defenseRate: 5
+  bloodAbsorptionRate: 5
+  evasionRate: 5
   playerImage:
   - {fileID: 8028680832453401255, guid: c8aaa48d8644c8445aba1797110622b3, type: 3}
   - {fileID: -3022620115696231728, guid: 2329680b1d838aa4493022ee361cba7d, type: 3}

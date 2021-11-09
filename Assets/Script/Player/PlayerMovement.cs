@@ -6,18 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     enum Direction { Left, Right, Up, Stop, Down };
 
-    [SerializeField]
-    private KeyCode jump = KeyCode.D;
-
     private float moveSpeed;
     private float jumpPower;
 
     [SerializeField]
     private GameObject prefabTimer;
     private Timer dashTimer;
-
-
-    private float test = 5.5f;
 
     private GameController gameController;
     private UISensor joyStick;
@@ -69,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftArrow)) action = 2;
         else if (Input.GetKey(KeyCode.UpArrow)) action = 3;
         else if (Input.GetKey(KeyCode.DownArrow)) action = 4;
-        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow))
+        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow)) action = 0;
 
         animator.SetBool("move", true);
 
@@ -141,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
             jumping = false;
             trigger = true;
 
-            if (dir == Direction.Down) downjump = false;
+            if (downjump) downjump = false;
             else GetComponent<Rigidbody2D>().AddForce(Vector2.up * (jumpPower), ForceMode2D.Impulse);
 
             lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;

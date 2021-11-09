@@ -428,7 +428,7 @@ MonoBehaviour:
   name: "\uC2AC\uB77C\uC784"
   defenseRate: 0
   bloodAbsorptionRate: 0
-  evasionRate: 0
+  evasionRate: 5
   prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
   miniIcon: {fileID: 0}
   isBoss: 0
@@ -439,7 +439,7 @@ MonoBehaviour:
   dropCoin:
   - {fileID: 8452382426054345512, guid: c5437a6929825d140a4065aac8cfabe8, type: 3}
   - {fileID: 7103391790794157746, guid: 038db4b916c01e6498ab67b068ce16ca, type: 3}
-  experience: 0
+  experience: 25
   effectBone: {fileID: 3959524358794252885}
   dropBone: {fileID: 5848157575213800838}
   monsterIcon: {fileID: 1821452458296802910, guid: b9a3059e3fd8e134f8251f7c5010e922, type: 3}

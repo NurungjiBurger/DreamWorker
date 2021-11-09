@@ -31,35 +31,53 @@ public class MonsterSensor : MonoBehaviour
             }
             if (collision.CompareTag("Player_attack_judgement"))
             {
-                //if (!GetComponent<MonsterStatus>().Boss) animator.SetTrigger("hit");
-                GetComponent<Audio>().AudioPlay(0);
+                // 회피 실패
+                if (Random.Range(0, 101) > GetComponent<MonsterStatus>().Data.evasionRate)
+                {
+                    GetComponent<Audio>().AudioPlay(0);
 
-                GetComponent<MonsterStatus>().Data.nowHP = GetComponent<MonsterStatus>().Data.nowHP - player.GetComponent<PlayerStatus>().Damage;
+                    // 방어율 만큼 데미지 감소
+                    int Dmg = (int)(player.GetComponent<PlayerStatus>().Damage * ((100 - GetComponent<MonsterStatus>().Data.defenseRate) / 100));
+                    GetComponent<MonsterStatus>().Data.nowHP -= Dmg;
+
+                    // 플레이어 피흡
+                    player.GetComponent<PlayerStatus>().CalCulateHealth((int)(Dmg * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100)), '+');
+                }
             }
             else if (collision.CompareTag("Item") && player.GetComponent<PlayerAttack>().IsAttack)
             {
-                bool value = false;
-
-                switch (collision.gameObject.GetComponent<ItemStatus>().AttackType)
+                // 회피 실패
+                if (Random.Range(0, 101) > GetComponent<MonsterStatus>().Data.evasionRate)
                 {
-                    case "oneHandWield":
-                        value = true;
-                        break;
-                    case "Sting":
-                        value = true;
-                        break;
-                    default :
-                        value = false;
-                        break;
-                }
+                    bool value = false;
 
-                if (value)
-                {
-                    player.GetComponent<PlayerAttack>().IsAttackFalse();
+                    switch (collision.gameObject.GetComponent<ItemStatus>().AttackType)
+                    {
+                        case "oneHandWield":
+                            value = true;
+                            break;
+                        case "Sting":
+                            value = true;
+                            break;
+                        default:
+                            value = false;
+                            break;
+                    }
 
-                    GetComponent<Audio>().AudioPlay(0);
+                    if (value)
+                    {
+                        player.GetComponent<PlayerAttack>().IsAttackFalse();
 
-                    GetComponent<MonsterStatus>().Data.nowHP = GetComponent<MonsterStatus>().Data.nowHP - player.GetComponent<PlayerStatus>().Damage;
+                        GetComponent<Audio>().AudioPlay(0);
+
+                        // 방어율 만큼 데미지 감소
+                        int Dmg = (int)(player.GetComponent<PlayerStatus>().Damage * ((100 - GetComponent<MonsterStatus>().Data.defenseRate) / 100));
+
+                        GetComponent<MonsterStatus>().Data.nowHP -= Dmg;
+
+                        // 플레이어 피흡
+                        player.GetComponent<PlayerStatus>().CalCulateHealth((int)(Dmg * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100)), '+');
+                    }
                 }
             }
             if (collision.CompareTag("Wall"))

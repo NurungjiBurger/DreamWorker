@@ -81,7 +81,6 @@ public class Inspector : MonoBehaviour
 
     public void StatusText()
     {
-        Debug.Log("실행중이야");
         transform.Find("Background").transform.Find("Infomation").transform.Find("Level").GetComponent<TextMeshProUGUI>().text = "Level  " + player.GetComponent<PlayerStatus>().Level.ToString();
         transform.Find("Background").transform.Find("Infomation").transform.Find("Occupation").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().Occupation;
 
@@ -91,7 +90,7 @@ public class Inspector : MonoBehaviour
         transform.Find("Background").transform.Find("Status").transform.Find("MoveSpeed").GetComponent<TextMeshProUGUI>().text = "이동속도  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.moveSpeed);
         transform.Find("Background").transform.Find("Status").transform.Find("DefenseCapability").GetComponent<TextMeshProUGUI>().text = "방어력  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.defenseRate);
         transform.Find("Background").transform.Find("Status").transform.Find("AttackSpeed").GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.attackSpeed);
-        transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "흡혈  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate);
+        transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "피흡  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate);
         transform.Find("Background").transform.Find("Status").transform.Find("EvasionRate").GetComponent<TextMeshProUGUI>().text = "회피  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.evasionRate);
     }
 

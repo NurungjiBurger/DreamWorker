@@ -13,7 +13,6 @@ public class MonsterMovement : MonoBehaviour
     private bool isGround = true;
     private bool trigger = false;
     private bool isMove = false;
-    private bool animating = false;
     private int moveRandom;
 
     private GameObject player;
@@ -78,8 +77,6 @@ public class MonsterMovement : MonoBehaviour
 
         if (lastYVelocity < 2f && lastYVelocity > 0) //GetComponent<Rigidbody2D>().velocity.y < 0 && lastYVelocity > 1.5f)
         {
-            //
-            Debug.Log("½ÇÇà~");
             lastYVelocity = -1;
             GetComponent<Rigidbody2D>().AddForce(Vector2.down * (GetComponent<MonsterStatus>().Data.jumpPower / 1.1f), ForceMode2D.Impulse);
         }

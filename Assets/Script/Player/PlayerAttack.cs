@@ -52,9 +52,9 @@ public class PlayerAttack : MonoBehaviour
 
             if (weapon.GetComponent<ItemStatus>().EffectBone != null)
             {
-                tmp = Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
+                tmp = Instantiate(weapon.GetComponent<ItemStatus>().AttackEffect, weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
             }
-            else tmp = Instantiate(weapon.GetComponent<ItemStatus>().GetAttackAnimation(), weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
+            else tmp = Instantiate(weapon.GetComponent<ItemStatus>().AttackEffect, weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
 
             if (tmp.GetComponent<Projectile>())
             {

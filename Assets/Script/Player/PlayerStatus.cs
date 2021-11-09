@@ -102,10 +102,15 @@ public class PlayerStatus : Status
     {
         if (oper == '+')
         {
+            dataP.nowHP += Dmg;
 
+            if (dataP.nowHP > dataP.maxHP) dataP.nowHP = dataP.maxHP;
         }
         else if (oper == '-')
         {
+            // 방어율 만큼 데미지 감소
+            Dmg = (int)(Dmg * ((100 - dataP.defenseRate) / 100));
+
             dataP.nowHP -= Dmg;
             if (dataP.nowHP < 0)
             {
@@ -155,18 +160,25 @@ public class PlayerStatus : Status
 
             dataP.defenseRate += item.GetComponent<ItemStatus>().Data.defenseRate * how;
             dataP.maxHP += item.GetComponent<ItemStatus>().Data.maxHP * how;
+            dataP.nowHP += item.GetComponent<ItemStatus>().Data.nowHP * how;
             dataP.power += item.GetComponent<ItemStatus>().Data.power * how * coefficient;
             if (how == 1)
             {
                 if (item.GetComponent<ItemStatus>().Data.attackSpeed != 0) dataP.attackSpeed /= item.GetComponent<ItemStatus>().Data.attackSpeed;
                 if (item.GetComponent<ItemStatus>().Data.jumpPower != 0) dataP.jumpPower *= item.GetComponent<ItemStatus>().Data.jumpPower;
                 if (item.GetComponent<ItemStatus>().Data.moveSpeed != 0) dataP.moveSpeed *= item.GetComponent<ItemStatus>().Data.moveSpeed;
+                if (item.GetComponent<ItemStatus>().Data.defenseRate != 0) dataP.defenseRate *= item.GetComponent<ItemStatus>().Data.defenseRate;
+                if (item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate != 0) dataP.bloodAbsorptionRate *= item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate;
+                if (item.GetComponent<ItemStatus>().Data.evasionRate != 0) dataP.evasionRate *= item.GetComponent<ItemStatus>().Data.evasionRate;
             }
             else
             {
                 if (item.GetComponent<ItemStatus>().Data.attackSpeed != 0) dataP.attackSpeed *= item.GetComponent<ItemStatus>().Data.attackSpeed;
                 if (item.GetComponent<ItemStatus>().Data.jumpPower != 0) dataP.jumpPower /= item.GetComponent<ItemStatus>().Data.jumpPower;
                 if (item.GetComponent<ItemStatus>().Data.moveSpeed != 0) dataP.moveSpeed /= item.GetComponent<ItemStatus>().Data.moveSpeed;
+                if (item.GetComponent<ItemStatus>().Data.defenseRate != 0) dataP.defenseRate /= item.GetComponent<ItemStatus>().Data.defenseRate;
+                if (item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate != 0) dataP.bloodAbsorptionRate /= item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate;
+                if (item.GetComponent<ItemStatus>().Data.evasionRate != 0) dataP.evasionRate /= item.GetComponent<ItemStatus>().Data.evasionRate;
             }
         }
         CalDamage();

@@ -20,7 +20,6 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         // 3, 4, 8, 9 슬롯은 마우스의 왼쪽 아래에 정보창
         // 10, 11, 12, 15, 16, 17 슬롯은 마우스의 오른쪽 위에 정보창
         // 13, 14, 18, 19 슬롯은 마우스의 왼쪽 위에 정보창
-
         switch (direction)
         {
             case 0:
@@ -60,6 +59,7 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
             default:
                 break;
         }
+        Debug.Log(transform.position + " // " + position);
     }
 
     private void CompareToInspector(string str, GameObject delta)
@@ -107,8 +107,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.attackSpeed - compare.Data.attackSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.attackSpeed - compare.Data.attackSpeed)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.attackSpeed - compare.Data.attackSpeed).ToString();
+                    if (now.Data.attackSpeed - compare.Data.attackSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.Data.attackSpeed - compare.Data.attackSpeed)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}" , (now.Data.attackSpeed - compare.Data.attackSpeed));
                 }
                 else
                 {
@@ -128,8 +128,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.attackSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Data.attackSpeed).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.attackSpeed - 1).ToString();
+                    if (now.Data.attackSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (1 - now.Data.attackSpeed));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.attackSpeed - 1));
                 }
                 break;
             case "CursedRate":
@@ -151,8 +151,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.CursedRate - compare.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.CursedRate - compare.CursedRate)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.CursedRate - compare.CursedRate).ToString();
+                    if (now.CursedRate - compare.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.CursedRate - compare.CursedRate)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.CursedRate - compare.CursedRate));
                 }
                 else
                 {
@@ -172,8 +172,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.CursedRate).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.CursedRate.ToString();
+                    if (now.CursedRate < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * now.CursedRate));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.CursedRate);
                 }
                 break;
             case "Data.defenseRateCapability":
@@ -195,8 +195,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.defenseRate - compare.Data.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.defenseRate - compare.Data.defenseRate)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.defenseRate - compare.Data.defenseRate).ToString();
+                    if (now.Data.defenseRate - compare.Data.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.Data.defenseRate - compare.Data.defenseRate)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.defenseRate - compare.Data.defenseRate));
                 }
                 else
                 {
@@ -216,11 +216,12 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Data.defenseRate).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.Data.defenseRate.ToString();
+                    if (now.Data.defenseRate < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * now.Data.defenseRate));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.Data.defenseRate);
                 }
                 break;
             case "Grade":
+                /*
                 if (exist)
                 {
                     if (compare.ItemGrade > now.ItemGrade)
@@ -239,8 +240,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.ItemGrade - compare.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.ItemGrade - compare.ItemGrade)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.ItemGrade - compare.ItemGrade).ToString();
+                    if (now.ItemGrade - compare.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.ItemGrade - compare.ItemGrade)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.ItemGrade - compare.ItemGrade));
                 }
                 else
                 {
@@ -260,9 +261,10 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += ( -1 * now.ItemGrade).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.ItemGrade.ToString();
+                    if (now.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", ( -1 * now.ItemGrade));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.ItemGrade);
                 }
+                */
                 break;
             case "HP":
                 if (exist)
@@ -283,8 +285,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.maxHP - compare.Data.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.maxHP - compare.Data.maxHP)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.maxHP - compare.Data.maxHP).ToString();
+                    if (now.Data.maxHP - compare.Data.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.Data.maxHP - compare.Data.maxHP)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.maxHP - compare.Data.maxHP));
                 }
                 else
                 {
@@ -304,8 +306,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Data.maxHP).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.Data.maxHP.ToString();
+                    if (now.Data.maxHP < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * now.Data.maxHP));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.Data.maxHP);
                 }
                 break;
             case "Jump":
@@ -327,8 +329,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.jumpPower - compare.Data.jumpPower < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.jumpPower - compare.Data.jumpPower)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.jumpPower - compare.Data.jumpPower).ToString();
+                    if (now.Data.jumpPower - compare.Data.jumpPower < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.Data.jumpPower - compare.Data.jumpPower)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.jumpPower - compare.Data.jumpPower));
                 }
                 else
                 {
@@ -348,8 +350,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.jumpPower < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Data.jumpPower).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.jumpPower - 1 ).ToString();
+                    if (now.Data.jumpPower < 1) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (1 - now.Data.jumpPower));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.jumpPower - 1 ));
                 }
                 break;
             case "Data.moveSpeed":
@@ -371,8 +373,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.moveSpeed - compare.Data.moveSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.moveSpeed - compare.Data.moveSpeed)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.moveSpeed - compare.Data.moveSpeed).ToString();
+                    if (now.Data.moveSpeed - compare.Data.moveSpeed < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.Data.moveSpeed - compare.Data.moveSpeed)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.moveSpeed - compare.Data.moveSpeed));
                 }
                 else
                 {
@@ -392,8 +394,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.moveSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += (1 - now.Data.moveSpeed).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.moveSpeed - 1).ToString();
+                    if (now.Data.moveSpeed < 1) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (1 - now.Data.moveSpeed));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.moveSpeed - 1));
                 }
                 break;
             case "Data.power":
@@ -415,8 +417,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.power - compare.Data.power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * (now.Data.power - compare.Data.power)).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += (now.Data.power - compare.Data.power).ToString();
+                    if (now.Data.power - compare.Data.power < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.Data.power - compare.Data.power)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.power - compare.Data.power));
                 }
                 else
                 {
@@ -436,8 +438,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.Data.power < 0) delta.GetComponent<TextMeshProUGUI>().text += (-1 * now.Data.power).ToString();
-                    else delta.GetComponent<TextMeshProUGUI>().text += now.Data.power.ToString();
+                    if (now.Data.power < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * now.Data.power));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.Data.power);
                 }
                 break;
             default:
@@ -458,6 +460,7 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         // 이름 , 이미지
         transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Name + "  (+" + item.GetComponent<ItemStatus>().Data.enhancingLevel + ")";
 
+        /*
         float ratio = 0;
 
         Sprite img = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
@@ -474,18 +477,18 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         transform.GetChild(1).GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(img.bounds.size.x * ratio, img.bounds.size.y * ratio);
 
         transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-
+        */
         // 정보 패널
-        transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().MountingPart;
-        transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Occupation;
-        transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Description;
+        transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().MountingPart;
+        transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Occupation;
+        transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Description;
         // 스탯 패널
-        transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.attackSpeed);
-        CompareToInspector("Data.attackSpeed", transform.GetChild(3).GetChild(0).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = "저주율  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().CursedRate);
-        CompareToInspector("CursedRate", transform.GetChild(3).GetChild(1).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(2).GetComponent<TextMeshProUGUI>().text = "방어력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.defenseRate);
-        CompareToInspector("Data.defenseRateCapability", transform.GetChild(3).GetChild(2).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.attackSpeed);
+        CompareToInspector("Data.attackSpeed", transform.GetChild(2).GetChild(0).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = "저주율  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().CursedRate);
+        CompareToInspector("CursedRate", transform.GetChild(2).GetChild(1).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = "방어력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.defenseRate);
+        CompareToInspector("Data.defenseRateCapability", transform.GetChild(2).GetChild(2).Find("Delta").gameObject);
         switch (item.GetComponent<ItemStatus>().ItemGrade)
         {
             case 0:
@@ -507,16 +510,16 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                 grade = "None";
                 break;
         }
-        transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>().text = "등급  " + grade;
-        CompareToInspector("Grade", transform.GetChild(3).GetChild(3).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(4).GetComponent<TextMeshProUGUI>().text = "체력  " + item.GetComponent<ItemStatus>().Data.maxHP.ToString();
-        CompareToInspector("HP", transform.GetChild(3).GetChild(4).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(5).GetComponent<TextMeshProUGUI>().text = "점프력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.jumpPower);
-        CompareToInspector("Jump", transform.GetChild(3).GetChild(5).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(6).GetComponent<TextMeshProUGUI>().text = "이동속도  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.moveSpeed);
-        CompareToInspector("Data.moveSpeed", transform.GetChild(3).GetChild(6).Find("Delta").gameObject);
-        transform.GetChild(3).GetChild(7).GetComponent<TextMeshProUGUI>().text = "공격력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.power);
-        CompareToInspector("Data.power", transform.GetChild(3).GetChild(7).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = "등급  " + grade;
+        CompareToInspector("Grade", transform.GetChild(2).GetChild(3).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = "체력  " + item.GetComponent<ItemStatus>().Data.maxHP.ToString();
+        CompareToInspector("HP", transform.GetChild(2).GetChild(4).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(5).GetComponent<TextMeshProUGUI>().text = "점프력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.jumpPower);
+        CompareToInspector("Jump", transform.GetChild(2).GetChild(5).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(6).GetComponent<TextMeshProUGUI>().text = "이동속도  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.moveSpeed);
+        CompareToInspector("Data.moveSpeed", transform.GetChild(2).GetChild(6).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(7).GetComponent<TextMeshProUGUI>().text = "공격력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.power);
+        CompareToInspector("Data.power", transform.GetChild(2).GetChild(7).Find("Delta").gameObject);
     }
 
     public void InputInformation(GameObject obj)

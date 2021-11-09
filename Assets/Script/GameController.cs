@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
+    private int timer;
+
     [SerializeField]
     private GameObject newButton;
     [SerializeField]
@@ -369,7 +371,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        
+        timer = 0;
     }
 
     private void FixedUpdate()
@@ -411,6 +413,8 @@ public class GameController : MonoBehaviour
                 if (revert) RevertScene("Dungeon");
                 else
                 {
+
+                    //Debug.Log(timer++);
 
                     if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
                     else isPause = true;

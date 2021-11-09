@@ -1522,8 +1522,8 @@ MonoBehaviour:
   moveSpeed: 0.3
   attackSpeed: 1.8
   name: "\uC804\uC0AC"
-  defenseRate: 0
-  bloodAbsorptionRate: 0
+  defenseRate: 10
+  bloodAbsorptionRate: 5
   evasionRate: 0
   playerImage:
   - {fileID: -4958174520814758285, guid: 021f55bd2fce8ab4793b486038790a54, type: 3}

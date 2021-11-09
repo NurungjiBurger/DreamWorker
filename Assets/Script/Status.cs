@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    
+    [SerializeField]
+    protected new string name;    
     [SerializeField]
     protected int maxHP;
     [SerializeField]
@@ -15,8 +16,6 @@ public class Status : MonoBehaviour
     protected float moveSpeed;
     [SerializeField]
     protected float attackSpeed;
-    [SerializeField]
-    protected string name;
     [SerializeField]
     protected float defenseRate;
     [SerializeField]

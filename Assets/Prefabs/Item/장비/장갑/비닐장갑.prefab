@@ -66,9 +66,9 @@ MonoBehaviour:
   moveSpeed: 1
   attackSpeed: 1
   name: "\uBE44\uB2D0\uC7A5\uAC11"
-  defenseRate: 10
-  bloodAbsorptionRate: 0
-  evasionRate: 0
+  defenseRate: 1
+  bloodAbsorptionRate: 1
+  evasionRate: 1
   prefabAttack: []
   dedicatedOccupation: 
   mountingPart: Hand

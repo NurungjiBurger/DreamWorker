@@ -18,7 +18,6 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector3 startPosition;
     private Vector3 diff;
 
-    private bool isDrag = false;
     private GameObject tmp;
     private int index;
 
@@ -48,7 +47,6 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 index = transform.GetSiblingIndex();
                 transform.SetSiblingIndex(transform.parent.childCount);
             }
-            isDrag = true;
             startPosition = transform.position;
             diff = new Vector3(Input.mousePosition.x - transform.position.x, Input.mousePosition.y - transform.position.y, Input.mousePosition.z - transform.position.z);
         }
@@ -68,7 +66,6 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         else
         {
-            isDrag = true;
             transform.position = new Vector3(Input.mousePosition.x - diff.x, Input.mousePosition.y - diff.y, Input.mousePosition.z - diff.z);
         }
     }
@@ -80,7 +77,6 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             lever.anchoredPosition = Vector2.zero;
         }
 
-        isDrag = false;
         if (name.Equals("Slot(Clone)"))
         {
             transform.SetParent(tmp.transform);

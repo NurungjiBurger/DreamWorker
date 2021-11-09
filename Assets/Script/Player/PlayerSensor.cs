@@ -89,22 +89,30 @@ public class PlayerSensor : MonoBehaviour
             {
                 if (!isHit)
                 {
-                    isHit = true;
-                    hitTimer.TimerSetZero();
-                    onOff = true;
+                    // 회피 실패
+                    if (Random.Range(0, 101) > GetComponent<PlayerStatus>().Data.evasionRate)
+                    {
+                        isHit = true;
+                        hitTimer.TimerSetZero();
+                        onOff = true;
 
-                    GetComponent<PlayerStatus>().CalCulateHealth(collision.gameObject.GetComponent<MonsterStatus>().Dmg, '-');
+                        GetComponent<PlayerStatus>().CalCulateHealth(collision.gameObject.GetComponent<MonsterStatus>().Dmg, '-');
+                    }
                 }
             }
             else if (collision.CompareTag("Monster_attack_judgement"))
             {
                 if (!isHit)
                 {
-                    isHit = true;
-                    hitTimer.TimerSetZero();
-                    onOff = true;
+                    // 회피 실패
+                    if (Random.Range(0, 101) > GetComponent<PlayerStatus>().Data.evasionRate)
+                    {
+                        isHit = true;
+                        hitTimer.TimerSetZero();
+                        onOff = true;
 
-                    GetComponent<PlayerStatus>().CalCulateHealth(collision.gameObject.GetComponent<MonsterEffectSensor>().Dmg, '-');
+                        GetComponent<PlayerStatus>().CalCulateHealth(collision.gameObject.GetComponent<MonsterEffectSensor>().Dmg, '-');
+                    }
                 }
             }
         }
@@ -165,13 +173,16 @@ public class PlayerSensor : MonoBehaviour
             
             if (collision.collider.CompareTag("Monster"))
             {
-                if (!isHit)
-                {
-                    isHit = true;
-                    hitTimer.TimerSetZero();
-                    onOff = true;
+                // 회피 실패
+                if (Random.Range(0, 101) > GetComponent<PlayerStatus>().Data.evasionRate) {
+                    if (!isHit)
+                    {
+                        isHit = true;
+                        hitTimer.TimerSetZero();
+                        onOff = true;
 
-                    GetComponent<PlayerStatus>().CalCulateHealth(collision.collider.gameObject.GetComponent<MonsterStatus>().Dmg, '-');
+                        GetComponent<PlayerStatus>().CalCulateHealth(collision.collider.gameObject.GetComponent<MonsterStatus>().Dmg, '-');
+                    }
                 }
             }
         }

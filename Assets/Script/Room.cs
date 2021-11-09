@@ -116,28 +116,20 @@ public class Room : MonoBehaviour
 
     private void ManageMap()
     {
+        if (GameObject.FindGameObjectsWithTag("Monster").Length == 0) monsterPresence = false;
+        else monsterPresence = true;
 
-        bool value;
-
-        if (GameObject.FindGameObjectsWithTag("Monster").Length == 0)
+        if (true)
         {
-            monsterPresence = false;
-            value = true;
-        }
-        else
-        {
-            monsterPresence = true;
-            value = false;
-        }
+            for (int i = 0; i < portals.Count; i++) portals[i].SetActive(!monsterPresence);
 
-        for (int i = 0; i < portals.Count; i++) portals[i].SetActive(value);
-
-        for (int i = 0; i < portals.Count; i++)
-        {
-            if (portals[i].GetComponent<Portal>().MiniMapPortalIcon)
+            for (int i = 0; i < portals.Count; i++)
             {
-                if (portals[i].activeSelf && isPlayer) portals[i].GetComponent<Portal>().MiniMapPortalIcon.SetActive(true);
-                else portals[i].GetComponent<Portal>().MiniMapPortalIcon.SetActive(false);
+                if (portals[i].GetComponent<Portal>().MiniMapPortalIcon)
+                {
+                    if (portals[i].activeSelf && isPlayer) portals[i].GetComponent<Portal>().MiniMapPortalIcon.SetActive(true);
+                    else portals[i].GetComponent<Portal>().MiniMapPortalIcon.SetActive(false);
+                }
             }
         }
     }
@@ -266,12 +258,12 @@ public class Room : MonoBehaviour
                             {
                                 if (!monsterPresence)
                                 {
-                                    if (subStageNumber == data.subStageNumber+2)
+                                    if (subStageNumber == gameController.Room.Count - 1)
                                     {
                                         if (!data.stageClear)
                                         {
                                             data.stageClear = true;
-                                           // BossClearAfter();
+                                            BossClearAfter();
                                         }
                                     }
 
@@ -281,11 +273,10 @@ public class Room : MonoBehaviour
                         }
                         else
                         {
-
-                            if (!GameObject.Find("heavendoor(Clone)") && !GameObject.Find("helldoor(Clone)")) BossClearAfter();
-
+                            // º¸½º¹æ
                             if (subStageNumber == gameController.Room.Count - 1)
                             {
+
                                 if (data.eventRoomVisit)
                                 {
                                     gameController.DestroyNowStage();

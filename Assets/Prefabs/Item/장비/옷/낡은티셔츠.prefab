@@ -149,9 +149,9 @@ MonoBehaviour:
   moveSpeed: 0.995
   attackSpeed: 1
   name: "\uB0A1\uC740\uD2F0\uC154\uCE20"
-  defenseRate: 15
-  bloodAbsorptionRate: 0
-  evasionRate: 0
+  defenseRate: 1
+  bloodAbsorptionRate: 1
+  evasionRate: 1.1
   prefabAttack: []
   dedicatedOccupation: 
   mountingPart: Body

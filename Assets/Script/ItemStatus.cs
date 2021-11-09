@@ -47,6 +47,7 @@ public class ItemStatus : Status
     public string AttackType { get { return attackType; } }
     public int Price { get { return price; } }
     public string Description { get { return description; } }
+    public GameObject AttackEffect { get { return prefabAttack[0]; } }
 
     public void DestoryAll()
     {
@@ -89,17 +90,18 @@ public class ItemStatus : Status
 
     public void StatUP(bool enhance)
     {
-
-        player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, -1);
+        if (dataI.isMount) player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, -1);
 
         if (!enhance)
         {
             dataI.maxHP = (int)(dataI.maxHP * 1.5f);
-            dataI.power = (int)(dataI.power * 1.3f);
-            dataI.jumpPower = dataI.jumpPower * 1.2f;
-            dataI.moveSpeed = dataI.moveSpeed * 1.2f;
-            dataI.attackSpeed = dataI.attackSpeed * 1.1f;
-            dataI.defenseRate = dataI.defenseRate * 1.2f;
+            dataI.power *= dataI.power * 1.3f;
+            dataI.jumpPower *= 1.2f;
+            dataI.moveSpeed *= 1.2f;
+            dataI.attackSpeed *= 1.1f;
+            dataI.defenseRate *= 1.1f;
+            dataI.bloodAbsorptionRate *= 1.1f;
+            dataI.evasionRate *= 1.1f;
         }
         else
         {
@@ -161,11 +163,8 @@ public class ItemStatus : Status
     private int OccupationCheck()
     {
         if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) return 1;
+        else if (dedicatedOccupation == "전직업") return 2;
         else return 0;
-    }
-    public GameObject GetAttackAnimation()
-    {
-        return prefabAttack[OccupationCheck()];
     }
 
     private void FindRoom()
@@ -212,6 +211,23 @@ public class ItemStatus : Status
             dataI.SetPosition(transform.position);
 
             CurseApply();
+
+            switch (OccupationCheck())
+            {
+                case 0:
+                    // 다른직업
+                    break;
+                case 1:
+                    // 같은직업
+                    StatUP(false);
+                    break;
+                case 2:
+                    // 같은직업
+                    StatUP(false);
+                    break;
+                default:
+                    break;
+            }
 
             if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) StatUP(false);
         }

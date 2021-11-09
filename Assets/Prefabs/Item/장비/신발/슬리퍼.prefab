@@ -149,9 +149,9 @@ MonoBehaviour:
   moveSpeed: 1.1
   attackSpeed: 1
   name: "\uC2AC\uB9AC\uD37C"
-  defenseRate: 10
-  bloodAbsorptionRate: 0
-  evasionRate: 0
+  defenseRate: 1
+  bloodAbsorptionRate: 1
+  evasionRate: 1.2
   prefabAttack: []
   dedicatedOccupation: 
   mountingPart: Foot

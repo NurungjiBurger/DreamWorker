@@ -66,11 +66,11 @@ MonoBehaviour:
   moveSpeed: 1
   attackSpeed: 1
   name: "\uC57C\uAD6C\uBAA8\uC790"
-  defenseRate: 10
-  bloodAbsorptionRate: 0
-  evasionRate: 0
+  defenseRate: 1.2
+  bloodAbsorptionRate: 1
+  evasionRate: 1
   prefabAttack: []
-  dedicatedOccupation: 
+  dedicatedOccupation: "\uAD81\uC218"
   mountingPart: Head
   grade: 0
   effectBone: {fileID: 0}

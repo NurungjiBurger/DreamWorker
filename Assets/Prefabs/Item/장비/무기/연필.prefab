@@ -295,9 +295,9 @@ MonoBehaviour:
   moveSpeed: 1
   attackSpeed: 1
   name: "\uC5F0\uD544"
-  defenseRate: 0
-  bloodAbsorptionRate: 0
-  evasionRate: 0
+  defenseRate: 1
+  bloodAbsorptionRate: 1.2
+  evasionRate: 1
   prefabAttack:
   - {fileID: 549368765847645379, guid: b14ec046c4983974ca9137423fb56000, type: 3}
   dedicatedOccupation: "\uC804\uC0AC"

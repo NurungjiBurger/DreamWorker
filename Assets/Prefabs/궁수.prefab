@@ -1703,9 +1703,9 @@ MonoBehaviour:
   moveSpeed: 1
   attackSpeed: 1.8
   name: "\uAD81\uC218"
-  defenseRate: 0
-  bloodAbsorptionRate: 0
-  evasionRate: 0
+  defenseRate: 5
+  bloodAbsorptionRate: 5
+  evasionRate: 5
   playerImage:
   - {fileID: -2487460197355101067, guid: 6581560465c771743b0f3ad1144b4f7e, type: 3}
   - {fileID: 1506378578506205021, guid: 1084ff68752c6484bb2aba4ea97311c6, type: 3}

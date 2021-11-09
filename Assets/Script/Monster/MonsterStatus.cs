@@ -107,7 +107,7 @@ public class MonsterStatus : Status
         jumpPower /= 2 * magnification;
         moveSpeed /= 2 * magnification;
         attackSpeed /= 2 * magnification;
-        //bloodAbsorptionRate
+        //bloodAbsorptionRate 
         //evasionRate
 
     }
@@ -119,8 +119,6 @@ public class MonsterStatus : Status
 
     private void Start()
     {
-        GameObject tmp;
-
         if (index == -1)
         {
             int[] arr = new int[2];
@@ -142,6 +140,7 @@ public class MonsterStatus : Status
         canvas = GameObject.Find("Canvas");
 
         hpBar = Instantiate(prefabHpBar, canvas.transform).GetComponent<RectTransform>();
+        hpBar.SetParent(GameObject.Find("Canvas").transform.Find("GameCanvas"));
         nowHpBar = hpBar.transform.GetChild(0).GetComponent<Image>();
 
         if (!isBoss) coinindexber = Random.Range(1, 5);
