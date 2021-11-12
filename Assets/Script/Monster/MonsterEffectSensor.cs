@@ -5,17 +5,21 @@ using UnityEngine;
 public class MonsterEffectSensor : EffectSensor
 {
     [SerializeField]
-    private GameObject prefabTimer;
-    [SerializeField]
     private int durationTime;
+    [SerializeField]
+    private GameObject prefabTimer;
 
-
-    public Vector3 position;
-
-    private Timer durationTimer;
     private GameObject monster;
 
+    public Vector3 position;
+    private Timer durationTimer;
+
     public int Dmg { get { return dmg; } }
+    //
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
 
     private void CalCulateDamage()
     {
@@ -53,7 +57,7 @@ public class MonsterEffectSensor : EffectSensor
 
     private void FixedUpdate()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (type == 1) // 가스구름
             {

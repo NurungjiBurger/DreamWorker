@@ -874,7 +874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2a075cefe005741852d828a3d32d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: 100
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
 --- !u!114 &5172015967391395762
 MonoBehaviour:
@@ -904,20 +903,20 @@ MonoBehaviour:
   maxHP: 100
   power: 20
   jumpPower: 8
-  moveSpeed: 0.8
+  moveSpeed: 1
   attackSpeed: 1
-  name: "\uB9C8\uBC95\uC0AC"
   defenseRate: 5
   bloodAbsorptionRate: 5
   evasionRate: 5
+  name: "\uB9C8\uBC95\uC0AC"
+  damage: 0
+  basicItemNum: 0
+  occupation: Wizard
+  handBone: {fileID: 3840391632728447356}
+  playerIcon: {fileID: 7876186749358279507, guid: 3e8490a723c7f204f9acd2eb49f031cb, type: 3}
   playerImage:
   - {fileID: 8028680832453401255, guid: c8aaa48d8644c8445aba1797110622b3, type: 3}
   - {fileID: -3022620115696231728, guid: 2329680b1d838aa4493022ee361cba7d, type: 3}
-  occupation: Wizard
-  basicItemNum: 0
-  handBone: {fileID: 3840391632728447356}
-  playerIcon: {fileID: 7876186749358279507, guid: 3e8490a723c7f204f9acd2eb49f031cb, type: 3}
-  damage: 0
   characterPrfNumber: 0
   index: -1
 --- !u!114 &9062916807988296804

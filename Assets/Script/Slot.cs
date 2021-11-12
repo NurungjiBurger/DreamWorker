@@ -9,12 +9,18 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 {
     [SerializeField]
     private GameObject prefabUI;
+    [SerializeField]
+    private Sprite[] gradeImage = new Sprite[5];
+
+    private bool hovering = false;
+    private bool isOneClick = false;
+
+    private int originIndex = -1;
+    private float doubleClickSecond = 0.25f;
+    private double timer = 0;
 
     private GameObject ui;
     private GameObject slotItem;
-    private Color[] originColor = new Color[3];
-    private Sprite itemImage;
-
     private GameObject player;
     private GameObject inventory;
     private GameObject inspector;
@@ -22,15 +28,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private GameObject enhancer;
     private GameObject enhancerSelecter;
     private GameObject selecter;
-    private GameObject smithy;
-    private bool hovering = false;
-    
+    private GameObject smithy;   
     private GameObject originParent = null;
-    private int originIndex = -1;
 
-    private float doubleClickSecond = 0.25f;
-    private bool isOneClick = false;
-    private double timer = 0;
+    private Color[] originColor = new Color[3];
+    private Sprite itemImage;
 
     public GameObject SlotItem { get { return slotItem; } }
 
@@ -42,11 +44,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        /*
-        itemInform.GetComponent<ItemInformation>().InputInformation(gameObject);
-        hovering = !hovering;
-        itemInform.SetActive(hovering);
-        */
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -60,7 +58,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         hovering = !hovering;
         itemInform.SetActive(hovering);
 
-        Debug.Log(Input.mousePosition);
         if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
         else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
         else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
@@ -76,16 +73,17 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         if (!isOneClick)
         {
-            if (transform.parent == selecter.transform.GetChild(0))
+            timer = Time.time;
+            isOneClick = true;
+
+            if (transform.parent == enhancerSelecter.transform.GetChild(0))
             {
-                if (eventData.button == PointerEventData.InputButton.Left) selecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
+                enhancerSelecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
             }
             else
             {
-                timer = Time.time;
-                isOneClick = true;
+
             }
-            return;
 
         }
         else if (isOneClick && (Time.time - timer) < doubleClickSecond)
@@ -93,6 +91,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             isOneClick = false;
             // 처리
             ActiveItemInform();
+            if (transform.parent == enhancerSelecter.transform.GetChild(0))
+            {
+                enhancerSelecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
+            }
         }
     }
 
@@ -101,20 +103,25 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         Destroy(gameObject);
     }
 
-
-    public void SetOriginColor()
+    public void ShowSelect(bool value)
+    {
+        transform.GetChild(0).Find("Select").gameObject.SetActive(value);
+    }
+    
+    private void SetOriginColor()
     {
         GetComponent<Image>().color = originColor[0];
         transform.Find("Background").GetComponent<Image>().color = originColor[1];
         transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = originColor[2];
     }
 
-    public void SetTransParentColor()
+    private void SetTransParentColor()
     {
-        GetComponent<Image>().color = new Color(originColor[0].r, originColor[0].g, originColor[0].b, 100f / 255f);
-        transform.Find("Background").GetComponent<Image>().color = new Color(originColor[1].r, originColor[1].g, originColor[1].b, 100f / 255f);
-        transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor[2].r, originColor[2].g, originColor[2].b, 100f / 255f);
+        GetComponent<Image>().color = new Color(originColor[0].r, originColor[0].g, originColor[0].b, 75f / 255f);
+        transform.Find("Background").GetComponent<Image>().color = new Color(originColor[1].r, originColor[1].g, originColor[1].b, 75f / 255f);
+        transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor[2].r, originColor[2].g, originColor[2].b, 75f / 255f);
     }
+    
 
     private void CompareMountItem()
     {
@@ -182,27 +189,31 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         slotItem = item;
 
-        switch(slotItem.GetComponent<ItemStatus>().ItemGrade)
+        transform.GetChild(0).Find("Grade").GetComponent<Image>().sprite = gradeImage[slotItem.GetComponent<ItemStatus>().ItemGrade];
+
+        // 0 ~ 100
+        // 0 ~ 24 / 25 ~ 49 / 50 ~ 74 / 75 ~ 100
+        // rate / 25
+        // 0 / 1 / 2 / 3,4
+
+        switch (slotItem.GetComponent<ItemStatus>().CursedRate / 25)
         {
             case 0:
-                // 노멀 하양
-                transform.Find("Background").GetComponent<Image>().color = new Color(255/255f, 255/255f, 255/255f, 0.5f);
+                // 하양
+                transform.GetChild(0).Find("Cursedrate").GetComponent<Image>().color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 0.5f);
                 break;
             case 1:
-                // 레어 하늘
-                transform.Find("Background").GetComponent<Image>().color = new Color(23 / 255f, 224 / 255f, 224 / 255f, 0.5f);
+                // 노랑
+                transform.GetChild(0).Find("Cursedrate").GetComponent<Image>().color = new Color(255 / 255f, 255 / 255f, 0 / 255f, 0.5f);
                 break;
             case 2:
-                // 에픽 보라
-                transform.Find("Background").GetComponent<Image>().color = new Color(159 / 255f, 14 / 255f, 224 / 255f, 0.5f);
+                // 빨강
+                transform.GetChild(0).Find("Cursedrate").GetComponent<Image>().color = new Color(255 / 255f, 0 / 255f, 0 / 255f, 0.5f);
                 break;
             case 3:
-                // 유니크 노랑
-                transform.Find("Background").GetComponent<Image>().color = new Color(233 / 255f, 241 / 255f, 35 / 255f, 0.5f);
-                break;
             case 4:
-                // 레전더리 초록
-                transform.Find("Background").GetComponent<Image>().color = new Color(96 / 255f, 236 / 255f, 39 / 255f, 0.5f);
+                // 검정
+                transform.GetChild(0).Find("Cursedrate").GetComponent<Image>().color = new Color(0 / 255f, 0 / 255f, 0 / 255f, 0.5f);
                 break;
             default:
                 break;
@@ -244,25 +255,19 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (!itemInform) itemInform = GameObject.Find("Canvas").transform.Find("ItemInform").gameObject;
         if (!enhancer) enhancer = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
         if (!enhancerSelecter) enhancerSelecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
-        if (!selecter) selecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
         if (!smithy) smithy = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
-
-        /*
-        if (itemInform.activeSelf && hovering)
-        {
-            if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
-            else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
-            else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
-            else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition); 
-           // else itemInform.SetActive(false);
-        }
-        */
 
         if (slotItem != null)
         {
             if (transform.parent.parent == smithy.transform) transform.GetChild(0).Find("PriceBackground").Find("Price").GetComponent<TextMeshProUGUI>().text = slotItem.GetComponent<ItemStatus>().Price.ToString();
 
-            if (slotItem.GetComponent<ItemStatus>().Data != null) transform.GetChild(0).Find("Cursedrate").GetComponent<Image>().fillAmount = (float)slotItem.GetComponent<ItemStatus>().CursedRate / (float)100;
+            if (transform.parent.parent != enhancerSelecter.transform)
+            {
+                if (slotItem.GetComponent<ItemStatus>().IsMount) SetTransParentColor();
+                else SetOriginColor();
+
+                ShowSelect(false);
+            }
         }
     }
 }

@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class ItemInformation : MonoBehaviour, IPointerClickHandler
 {
     private GameObject item;
-    private Slot slot;
     private GameObject inspector;
+    private Slot slot;
 
     public void ModifyPosition(int direction, Vector3 position)
     {
@@ -28,13 +28,13 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
             case 5:
             case 6:
             case 7:
-                transform.position = new Vector3(position.x + 55, position.y - 50, position.z);
+                transform.position = new Vector3(position.x + 220, position.y - 200, position.z);
                 break;
             case 3:
             case 4:
             case 8:
             case 9:
-                transform.position = new Vector3(position.x - 55, position.y - 50, position.z);
+                transform.position = new Vector3(position.x - 220, position.y - 200, position.z);
                 break;
             case 10:
             case 11:
@@ -42,24 +42,24 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
             case 15:
             case 16:
             case 17:
-                transform.position = new Vector3(position.x + 55, position.y + 50, position.z);
+                transform.position = new Vector3(position.x + 220, position.y + 200, position.z);
                 break;
             case 13:
             case 14:
             case 18:
             case 19:
-                transform.position = new Vector3(position.x - 55, position.y + 50, position.z);
+                transform.position = new Vector3(position.x - 220, position.y + 200, position.z);
                 break;
             case 36:
-                transform.position = new Vector3(position.x + 55, position.y, position.z);
+                transform.position = new Vector3(position.x + 220, position.y, position.z);
                 break;
             case 37:
-                transform.position = new Vector3(position.x - 55, position.y, position.z);
+                transform.position = new Vector3(position.x - 220, position.y, position.z);
                 break;
             default:
                 break;
         }
-        Debug.Log(transform.position + " // " + position);
+
     }
 
     private void CompareToInspector(string str, GameObject delta)
@@ -220,16 +220,15 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                     else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.Data.defenseRate);
                 }
                 break;
-            case "Grade":
-                /*
+            case "Data.evasionRate":                
                 if (exist)
                 {
-                    if (compare.ItemGrade > now.ItemGrade)
+                    if (compare.Data.evasionRate > now.Data.evasionRate)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
                     }
-                    else if (compare.ItemGrade < now.ItemGrade)
+                    else if (compare.Data.evasionRate < now.Data.evasionRate)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
@@ -240,17 +239,17 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.ItemGrade - compare.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.ItemGrade - compare.ItemGrade)));
-                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.ItemGrade - compare.ItemGrade));
+                    if (now.Data.evasionRate - compare.Data.evasionRate < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (-1 * (now.Data.evasionRate - compare.Data.evasionRate)));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", (now.Data.evasionRate - compare.Data.evasionRate));
                 }
                 else
                 {
-                    if (now.ItemGrade > 0)
+                    if (now.Data.evasionRate > 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = red;
                         delta.GetComponent<TextMeshProUGUI>().text = "+ ";
                     }
-                    else if (now.ItemGrade < 0)
+                    else if (now.Data.evasionRate < 0)
                     {
                         delta.GetComponent<TextMeshProUGUI>().color = blue;
                         delta.GetComponent<TextMeshProUGUI>().text = "- ";
@@ -261,10 +260,9 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
                         delta.GetComponent<TextMeshProUGUI>().text = "";
                     }
 
-                    if (now.ItemGrade < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", ( -1 * now.ItemGrade));
-                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.ItemGrade);
+                    if (now.Data.evasionRate < 0) delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", ( -1 * now.Data.evasionRate));
+                    else delta.GetComponent<TextMeshProUGUI>().text += string.Format("{0:N2}", now.Data.evasionRate);
                 }
-                */
                 break;
             case "HP":
                 if (exist)
@@ -456,10 +454,34 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
 
     private void UpdateItemInformation()
     {
-        string grade;
         // 이름 , 이미지
         transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.GetComponent<ItemStatus>().Name + "  (+" + item.GetComponent<ItemStatus>().Data.enhancingLevel + ")";
 
+        switch (item.GetComponent<ItemStatus>().ItemGrade)
+        {
+            case 0:
+                // 노멀 하양
+                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 1f);
+                break;
+            case 1:
+                // 레어 하늘
+                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(23 / 255f, 224 / 255f, 224 / 255f, 1f);
+                break;
+            case 2:
+                // 에픽 보라
+                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(159 / 255f, 14 / 255f, 224 / 255f, 1f);
+                break;
+            case 3:
+                // 유니크 노랑
+                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(233 / 255f, 241 / 255f, 35 / 255f, 1f);
+                break;
+            case 4:
+                // 레전더리 초록
+                transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(96 / 255f, 236 / 255f, 39 / 255f, 1f);
+                break;
+            default:
+                break;
+        }
         /*
         float ratio = 0;
 
@@ -489,29 +511,8 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         CompareToInspector("CursedRate", transform.GetChild(2).GetChild(1).Find("Delta").gameObject);
         transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = "방어력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.defenseRate);
         CompareToInspector("Data.defenseRateCapability", transform.GetChild(2).GetChild(2).Find("Delta").gameObject);
-        switch (item.GetComponent<ItemStatus>().ItemGrade)
-        {
-            case 0:
-                grade = "Normal";
-                break;
-            case 1:
-                grade = "Rare";
-                break;
-            case 2:
-                grade = "Epic";
-                break;
-            case 3:
-                grade = "Unique";
-                break;
-            case 4:
-                grade = "Legendary";
-                break;
-            default:
-                grade = "None";
-                break;
-        }
-        transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = "등급  " + grade;
-        CompareToInspector("Grade", transform.GetChild(2).GetChild(3).Find("Delta").gameObject);
+        transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = "회피  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.evasionRate); 
+        CompareToInspector("Data.evasionRate", transform.GetChild(2).GetChild(3).Find("Delta").gameObject);
         transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = "체력  " + item.GetComponent<ItemStatus>().Data.maxHP.ToString();
         CompareToInspector("HP", transform.GetChild(2).GetChild(4).Find("Delta").gameObject);
         transform.GetChild(2).GetChild(5).GetComponent<TextMeshProUGUI>().text = "점프력  " + string.Format("{0:N2}", item.GetComponent<ItemStatus>().Data.jumpPower);

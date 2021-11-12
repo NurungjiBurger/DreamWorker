@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
-    [SerializeField]
-    protected GameObject prefabEffect;
-    [SerializeField]
-    protected float attackRange;
-    [SerializeField]
-    protected float speed;
     [SerializeField]
     protected bool isComBack;
     [SerializeField]
     protected bool isMove;
     [SerializeField]
     private bool isFall;
-    
+    [SerializeField]
+    protected float attackRange;
+    [SerializeField]
+    protected float speed = 0;
+    [SerializeField]
+    protected GameObject prefabEffect;
+
+    protected bool flip;
+
     protected int cnt;
     protected int flag;
     protected int dir;
-
-    protected Vector3 startPosition;
-    protected Animator animator;
-    protected bool flip;
+    float x, y, sizex, sizey;
 
     private GameObject entity;
     private GameObject weapon;
 
-    float x, y, sizex, sizey;
+    protected Vector3 startPosition;
+    protected Animator animator;
+
 
     public void Inputx(float mx) { x = mx; }
     public void Inputy(float my) { y = my; }
@@ -107,7 +107,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        speed = 0.06f;
+        if ( speed == 0 ) speed = 0.06f;
 
         // 사출된 자리에 고정
         if (flag == 0)

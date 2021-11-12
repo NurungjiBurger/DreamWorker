@@ -1734,12 +1734,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9550ccff60b474f98a3a5deb92d1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: "\uD48D\uC120\uAC00\uC2A4"
   maxHP: 300
   power: 30
   jumpPower: 4
   moveSpeed: 2
   attackSpeed: 1
-  name: "\uD48D\uC120\uAC00\uC2A4"
   defenseRate: 0
   bloodAbsorptionRate: 0
   evasionRate: 0
@@ -1821,7 +1821,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &-6708149296762435937
 MonoBehaviour:

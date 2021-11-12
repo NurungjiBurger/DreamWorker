@@ -8,40 +8,40 @@ using TMPro;
 public class PlayerStatus : Status
 {
     [SerializeField]
-    private Sprite[] playerImage;
-    [SerializeField]
-    private string occupation;
+    private int damage;
     [SerializeField]
     private int basicItemNum;
+    [SerializeField]
+    private string occupation;
     [SerializeField]
     private GameObject handBone;
     [SerializeField]
     private GameObject playerIcon;
-
     [SerializeField]
-    private int damage;
+    private Sprite[] playerImage;
+
+    public int characterPrfNumber;
+    public int index = -1;
+    private int inventoryItemNumber;
+
+    private GameObject inventory;
 
     RectTransform hpBar;
     private Image nowHPBar;
     private TextMeshProUGUI textHp;
-
     private GameData data;
     private Data dataP = null;
-    public int characterPrfNumber;
-    public int index = -1;
 
-    private GameObject inventory;
-    private int inventoryItemNumber;
 
-    public Sprite PlayerImage { get { return playerImage[1]; } }
-    public Data Data { get { return dataP; } }
+    public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
     public int Level { get { return dataP.level; } }
     public int HandMoney { get { return dataP.handMoney; } }
-    public string Occupation { get { return occupation; } }
-    public bool Acquirable { get { return inventory.GetComponent<Inventory>().Acquirable; } }
-    public GameObject Inventory { get { return inventory; } }
     public int Damage { get { return damage; } }
+    public string Occupation { get { return occupation; } }
+    public GameObject Inventory { get { return inventory; } }
     public GameObject HandBone { get { return handBone; } }
+    public Sprite PlayerImage { get { return playerImage[1]; } }
+    public Data Data { get { return dataP; } }
 
     private void Evolution()
     {
@@ -233,6 +233,8 @@ public class PlayerStatus : Status
         textHp.text = dataP.nowHP.ToString() + "    /    " + dataP.maxHP.ToString();
         nowHPBar.fillAmount = (float)dataP.nowHP / (float)dataP.maxHP;
 
+        if (dataP.jumpPower > 10) dataP.jumpPower = 10;
+        if (dataP.moveSpeed > 3) dataP.moveSpeed = 3;
         // Ã¼·Â
         //Debug.Log(dataP.attackSpeed);
     }

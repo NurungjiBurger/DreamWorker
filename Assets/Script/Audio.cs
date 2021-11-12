@@ -24,9 +24,10 @@ audioSource.Stop();
 
 public class Audio : MonoBehaviour
 {
-    private AudioSource audioSource;
     [SerializeField]
     private AudioClip[] audioClips;
+
+    private AudioSource audioSource;
 
     public void AudioPlay(int idx)
     {

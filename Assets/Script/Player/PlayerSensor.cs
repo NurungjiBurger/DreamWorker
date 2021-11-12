@@ -7,14 +7,14 @@ public class PlayerSensor : MonoBehaviour
     [SerializeField]
     private GameObject prefabTimer;
 
-    private Timer hitTimer;
-
-    private Collider2D lastColliderGround = null;
-
     private bool ongoing = false;
     private bool isPortal = false;
     private bool isHit = false;
     private bool onOff = false;
+
+    private Timer hitTimer;
+    private Collider2D lastColliderGround = null;
+    private GameController gameController;
     private Vector3 teleportPosition;
 
     public bool Portal { get { return isPortal; } }
@@ -22,9 +22,16 @@ public class PlayerSensor : MonoBehaviour
     public Vector3 TeleportPosition { get { return teleportPosition; } }
 
 
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
+
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (GetComponent<Rigidbody2D>().velocity.y < 0 && !ongoing)
             {
@@ -58,7 +65,7 @@ public class PlayerSensor : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (GetComponent<Rigidbody2D>().velocity.y < 0)
             {
@@ -81,7 +88,7 @@ public class PlayerSensor : MonoBehaviour
 
             if (collision.CompareTag("Portal"))
             {
-                teleportPosition = collision.GetComponent<Portal>().ConnectPosition;
+                teleportPosition = (collision.GetComponent<Portal>().ConnectPosition - new Vector3(0, 0.5f, 0));
                 isPortal = true;
             }
 
@@ -140,7 +147,7 @@ public class PlayerSensor : MonoBehaviour
     // 콜리젼 충돌
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (collision.collider.CompareTag("Item"))
             {
@@ -164,7 +171,7 @@ public class PlayerSensor : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (collision.collider.CompareTag("Ground"))
             {
@@ -202,10 +209,7 @@ public class PlayerSensor : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("Box  " + GetComponent<BoxCollider2D>().isTrigger);
-        //Debug.Log("Cap  " + GetComponent<CapsuleCollider2D>().isTrigger);
-
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (onOff)
             {

@@ -4,50 +4,47 @@ using UnityEngine;
 
 public class ItemStatus : Status
 {
-    enum Grade { Normal, Rare, Epic, Unique, Legendary };
-
     [SerializeField]
-    private GameObject[] prefabAttack;
+    private int price;
     [SerializeField]
     private string dedicatedOccupation;
     [SerializeField]
     private string mountingPart;
     [SerializeField]
-    private Grade grade;
-    [SerializeField]
     private GameObject effectBone;
     [SerializeField]
     private string attackType;
     [SerializeField]
-    private int price;
-    [SerializeField]
     private string description;
+    [SerializeField]
+    private GameObject[] prefabAttack;
+    [SerializeField]
+    private Grade grade;
 
     private int enhancingLevel;
-
-    private GameObject inventory;
-    private GameObject inspector;
-
     public int itemPrfNumber = -1;
     public int index = -1;
 
-    private GameData data;
-    private Data dataI;
-
+    private GameObject inventory;
+    private GameObject inspector;
     private GameObject room;
     private GameObject player;
 
-    public Data Data { get { return dataI; } }
+    private GameData data;
+    private Data dataI;
+    enum Grade { Normal, Rare, Epic, Unique, Legendary };
+
+    public bool IsMount { get { return dataI.isMount; } set { dataI.isMount = value; } }
     public int CursedRate { get { return dataI.cursedRate; } set { dataI.cursedRate = value; } }
     public int ItemGrade { get { return (int)grade; } }
-    public string MountingPart { get { return mountingPart; } }
-    public bool IsMount { get { return dataI.isMount; } set { dataI.isMount = value; } }
-    public string Occupation { get { return dedicatedOccupation; } }
-    public GameObject EffectBone { get { return effectBone; } }
-    public string AttackType { get { return attackType; } }
     public int Price { get { return price; } }
+    public string MountingPart { get { return mountingPart; } }
+    public string Occupation { get { return dedicatedOccupation; } }
+    public string AttackType { get { return attackType; } }
     public string Description { get { return description; } }
     public GameObject AttackEffect { get { return prefabAttack[0]; } }
+    public GameObject EffectBone { get { return effectBone; } }
+    public Data Data { get { return dataI; } }
 
     public void DestoryAll()
     {
@@ -188,7 +185,7 @@ public class ItemStatus : Status
         data = GameObject.Find("Data").GetComponent<DataController>().GameData;
     }
 
-    private void Start()
+    public void Start()
     {
         inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
         inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
@@ -246,6 +243,7 @@ public class ItemStatus : Status
 
         // 방 찾기
         FindRoom();
+        if (transform.position.x >= 300 && transform.position.y >= 300) Debug.Log("아이템생성완료");
     }
 
     private void Update()

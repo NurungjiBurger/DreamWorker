@@ -9,13 +9,14 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject prefabSlot;
 
-    private GameData data;
     private bool acquirable = true;
+
+    private int possessItemNumber;
 
     private GameObject player;
 
+    private GameData data;
     private List<Slot> possessItemList = new List<Slot>();
-    private int possessItemNumber;
 
     public bool Acquirable { get { return acquirable; } }
     public int ItemCount { get { return possessItemList.Count; } }
@@ -46,8 +47,6 @@ public class Inventory : MonoBehaviour
             possessItemList.Add(slot);
 
             slot.transform.SetParent(transform.Find("Background").transform);
-            //slot.GetComponent<RectTransform>().sizeDelta = new Vector2(36, 36);
-            //slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
             slot.SlotItem.GetComponent<ItemStatus>().IsMount = false;
             slot.SlotItem.SetActive(false);
         }
@@ -61,6 +60,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         possessItemNumber = 20;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()

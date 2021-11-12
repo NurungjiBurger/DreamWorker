@@ -5,11 +5,9 @@ using UnityEngine;
 public class MonsterAttack : MonoBehaviour
 {
     [SerializeField]
-    private GameObject prefabTimer;
+    private int attackQuantity;
     [SerializeField]
     private float attackRange;
-    [SerializeField]
-    private int attackQuantity;
     [SerializeField]
     private float attackSpeed;
     [SerializeField]
@@ -20,26 +18,33 @@ public class MonsterAttack : MonoBehaviour
     protected float sizeX;
     [SerializeField]
     protected float sizeY;
+    [SerializeField]
+    private GameObject prefabTimer;
 
     private bool isAttack = false;
-    private int attackRandom;
 
+    private int attackRandom;
     private int dir;
 
     private GameObject player;
-
     private GameObject effect;
+
     private Animator animator;
-
     private Timer attackTimer;
+    private GameController gameController;
 
-    
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
+
+
     public bool Attack { get { return isAttack; } }
-    public float Range {  get { return attackRange; } }
-    public int Quantity { get { return attackQuantity; } }
     public bool CoolDownCheck { get { return attackTimer.CooldownCheck(); } }
+    public int Quantity { get { return attackQuantity; } }
     public int AttackRandom { get { return attackRandom; } }
     public int Direction { get { return dir; } }
+    public float Range { get { return attackRange; } }
     public void DestroyAll() { attackTimer.DestroyAll(); }
 
     public void RestoreCollidersize()
@@ -107,7 +112,7 @@ public class MonsterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             DecideAttack();
             if (attackTimer.CooldownCheck()) isAttack = false;

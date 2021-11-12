@@ -1670,7 +1670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2a075cefe005741852d828a3d32d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: 100
   prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
 --- !u!114 &7080662040223852556
 MonoBehaviour:
@@ -1700,20 +1699,20 @@ MonoBehaviour:
   maxHP: 100
   power: 20
   jumpPower: 8
-  moveSpeed: 1
+  moveSpeed: 1.2
   attackSpeed: 1.8
-  name: "\uAD81\uC218"
   defenseRate: 5
   bloodAbsorptionRate: 5
   evasionRate: 5
+  name: "\uAD81\uC218"
+  damage: 0
+  basicItemNum: 7
+  occupation: archer
+  handBone: {fileID: 1567140013943674303}
+  playerIcon: {fileID: 7876186749358279507, guid: 3e8490a723c7f204f9acd2eb49f031cb, type: 3}
   playerImage:
   - {fileID: -2487460197355101067, guid: 6581560465c771743b0f3ad1144b4f7e, type: 3}
   - {fileID: 1506378578506205021, guid: 1084ff68752c6484bb2aba4ea97311c6, type: 3}
-  occupation: archer
-  basicItemNum: 2
-  handBone: {fileID: 1567140013943674303}
-  playerIcon: {fileID: 7876186749358279507, guid: 3e8490a723c7f204f9acd2eb49f031cb, type: 3}
-  damage: 0
   characterPrfNumber: 0
   index: -1
 --- !u!114 &-116477432384223821

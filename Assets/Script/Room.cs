@@ -7,36 +7,31 @@ using TMPro;
 public class Room : MonoBehaviour
 {
 
-    private GameData data;
-    private Data dataM = null;
-
-    public int mapPrfNumber;
-    public int index = -1;
-    public int dir = -1;
-    public int sel = -1;
-    public GameObject map;
-
+    private bool isGoNext;
+    private bool monsterPresence;
     public bool isEvent = false;
     public bool isPlayer = false;
 
     private int subStageNumber;
-
-    private GameObject player;
-    private GameController gameController;
-
-    private GameObject[] monsters;
-    private List<GameObject> portals = new List<GameObject>();
-
-    private List<GameObject> objects = new List<GameObject>();
-
     private int population;
     private float mx, my;
+    public int mapPrfNumber;
+    public int index = -1;
+    public int dir = -1;
+    public int sel = -1;
 
-    private bool isGoNext;
-    private bool monsterPresence;
+    private GameObject player;
+    private GameObject[] monsters;
+    public GameObject map;
 
-    public int SubStageNumber { get { return subStageNumber; } }
+    private GameController gameController;
+    private List<GameObject> portals = new List<GameObject>();
+    private List<GameObject> objects = new List<GameObject>();
+    private GameData data;
+    private Data dataM = null;
+
     public bool Visible { get { return dataM.visible; } }
+    public int SubStageNumber { get { return subStageNumber; } }
     public Data Data { get { return dataM; } }
 
     public void AllocateSubStageNumber(int num)
@@ -293,11 +288,9 @@ public class Room : MonoBehaviour
 
                         if (gameObject == gameController.Room[1])
                         {
-                            Debug.Log("ㅇㅇ");
                             CreateStage(true, true);
                             // 보스 출현
                         }
-                        Debug.Log("읭?");
 
                     }
                 }

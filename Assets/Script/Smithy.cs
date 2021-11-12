@@ -6,11 +6,10 @@ using UnityEngine.EventSystems;
 
 public class Smithy : MonoBehaviour
 {
-    private GameController controller;
     private GameObject player;
 
+    private GameController controller;
     private ButtonUI blackSmith;
-
     private Slot[] slots;
     private List<GameObject> items = new List<GameObject>();
 
@@ -66,6 +65,7 @@ public class Smithy : MonoBehaviour
 
             items.Add(Instantiate(controller.Items[itemidx], new Vector3(300, 310, 0), Quaternion.identity));
             items[idx].GetComponent<ItemStatus>().itemPrfNumber = itemidx;
+            items[idx].GetComponent<ItemStatus>().Start();
 
             slots[idx].GetComponent<Slot>().InsertImage(items[idx]);
         }
@@ -80,11 +80,11 @@ public class Smithy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {//
-        if(!player) player = GameObject.FindGameObjectWithTag("Player");
-        if(!controller) controller = GameObject.Find("GameController").GetComponent<GameController>();
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
+        if (!controller) controller = GameObject.Find("GameController").GetComponent<GameController>();
         if (!blackSmith) blackSmith = GameObject.Find("BlackSmith").transform.Find("BlackSmithButton").GetComponent<ButtonUI>();
 
-        if (gameObject.activeSelf == true && items.Count == 0)
+        if (items.Count == 0)
         {
             if (slots == null)
             {
@@ -92,8 +92,8 @@ public class Smithy : MonoBehaviour
 
                 for (int idx = 0; idx < 4; idx++) slots[idx] = transform.GetChild(0).GetChild(idx).gameObject.GetComponent<Slot>();
             }
-
-            ProductDisplay();
+            else ProductDisplay();
         }
+
     }
 }

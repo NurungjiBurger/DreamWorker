@@ -5,19 +5,26 @@ using UnityEngine.UI;
 
 public class MonsterSensor : MonoBehaviour
 {
-    private Collider2D lastColliderGround = null;
+    private bool ongoing = false;
 
-
-    private Animator animator;
     private GameObject player;
 
-    private bool ongoing = false;
+    private Collider2D lastColliderGround = null;
+    private Animator animator;
+    private GameController gameController;
 
     public Collider2D LastColliderGround { get { return lastColliderGround; } }
 
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
+
+        if (!gameController.IsPause)
         {
             if (GetComponent<Rigidbody2D>().velocity.y < 0 && !ongoing)
             {
@@ -91,7 +98,8 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+
+        if (!gameController.IsPause)
         {
             if (GetComponent<Rigidbody2D>().velocity.y < 0)
             {
@@ -115,7 +123,7 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (GetComponent<Rigidbody2D>().velocity.y < 0)
             {
@@ -133,7 +141,7 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
 
         }
@@ -141,7 +149,7 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (collision.collider.CompareTag("Ground"))
             {
@@ -152,7 +160,7 @@ public class MonsterSensor : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
 
         }
@@ -166,7 +174,7 @@ public class MonsterSensor : MonoBehaviour
 
     private void Update()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
 
 

@@ -17,7 +17,9 @@ public class Inspector : MonoBehaviour
 
     public void InspectorStatRerange(int oper)
     {
-        for(int idx = 0; idx < EquipItemList.Count; idx++)
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
+
+        for (int idx = 0; idx < EquipItemList.Count; idx++)
         {
             player.GetComponent<PlayerStatus>().CalCulateStat(equipItemList[idx].GetComponent<Slot>().SlotItem, oper);
         }
@@ -39,7 +41,10 @@ public class Inspector : MonoBehaviour
     public void DiscardToInspector(Slot slot)
     {
         int size = equipItemList.Count;
-        for(int i = 0;i < size;i++)
+
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
+
+        for (int i = 0;i < size;i++)
         {
             if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
             {
@@ -72,10 +77,10 @@ public class Inspector : MonoBehaviour
 
         slot.transform.SetParent(transform.Find("Background").transform);
         slot.transform.position = transform.Find("Background").transform.Find(slot.SlotItem.GetComponent<ItemStatus>().MountingPart).position;
-        //slot.GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
-        //slot.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
         slot.SlotItem.GetComponent<ItemStatus>().IsMount = true;
         if(slot.SlotItem.GetComponent<ItemStatus>().MountingPart == "Weapon") slot.SlotItem.SetActive(true);
+
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, 1);
     }
 

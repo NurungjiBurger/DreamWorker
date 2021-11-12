@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    private int timer;
 
     [SerializeField]
     private GameObject newButton;
@@ -38,12 +37,6 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject[] prefabNpcs;
 
-    private GameData data;
-
-    private GameObject player;
-    private GameObject inventory;
-    private GameObject inspector;
-
     private bool gameStart = false;
     private bool revert = false;
     private bool isPause = false;
@@ -51,9 +44,14 @@ public class GameController : MonoBehaviour
     private int selectedPlayerIndex;
     private int pastSelectDirection;
 
+    private GameObject player;
+    private GameObject inventory;
+    private GameObject inspector;
+
     private List<GameObject> map = new List<GameObject>();
     private List<GameObject> room = new List<GameObject>();
     private List<GameObject> npc = new List<GameObject>();
+    private GameData data;
 
     public bool GameStart { set { gameStart = value; } }
     public bool IsPause { get { return isPause; } }
@@ -362,7 +360,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        SetResolution();
+        //SetResolution();
 
         DontDestroyOnLoad(gameObject);
 
@@ -371,7 +369,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        timer = 0;
+
     }
 
     private void FixedUpdate()
@@ -413,8 +411,6 @@ public class GameController : MonoBehaviour
                 if (revert) RevertScene("Dungeon");
                 else
                 {
-
-                    //Debug.Log(timer++);
 
                     if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
                     else isPause = true;

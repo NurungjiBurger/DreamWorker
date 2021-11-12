@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ItemExterior : MonoBehaviour
 {
-    [SerializeField] private GameObject handBone;
+    [SerializeField]
+    private GameObject handBone;
 
     private GameObject hand;
 

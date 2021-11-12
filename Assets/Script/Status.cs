@@ -5,8 +5,6 @@ using UnityEngine;
 public class Status : MonoBehaviour
 {
     [SerializeField]
-    protected new string name;    
-    [SerializeField]
     protected int maxHP;
     [SerializeField]
     protected float power;
@@ -22,6 +20,8 @@ public class Status : MonoBehaviour
     protected float bloodAbsorptionRate;
     [SerializeField]
     protected float evasionRate;
+    [SerializeField]
+    protected new string name;
 
     // 현상유지 할거면 1을 넣어주고
     // 너프 할거면 1보다 작게

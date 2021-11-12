@@ -4,37 +4,38 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    enum Direction { Left, Right, Up, Stop, Down };
-
-    private float moveSpeed;
-    private float jumpPower;
-
     [SerializeField]
     private GameObject prefabTimer;
-    private Timer dashTimer;
-
-    private GameController gameController;
-    private UISensor joyStick;
-
-    private int action;
-    private Direction dir = Direction.Stop;
-
-    private float time;
 
     private bool dashing = false;
     private bool jumping = false;
     private bool trigger = false;
     private bool isGround = true;
     private bool downjump = false;
-    private float lastYVelocity = 0;
-
     private bool isGoNext = false;
 
+    private int action;
+    private float time;
+    private float lastYVelocity = 0;
+    private float moveSpeed;
+    private float jumpPower;
+
+    private Timer dashTimer;
+    private GameController gameController;
+    private UISensor joyStick;
     private Animator animator;
+    enum Direction { Left, Right, Up, Stop, Down };
+    private Direction dir = Direction.Stop;
+
 
     public bool IsGround { get { return isGround; } set { isGround = value; } }
     public bool Trigger { get { return trigger; } set { trigger = value; } }
     public bool Jumping { get { return jumping; } }
+
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
 
     public bool GetGoNext()
     {
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        if (GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().OnOff && dashTimer.CooldownCheck())
+        if (GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().OnOff)
         {
             if (GetComponent<PlayerSensor>().Portal) transform.position = GetComponent<PlayerSensor>().TeleportPosition;
             GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().UIActive();

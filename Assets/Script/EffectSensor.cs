@@ -11,10 +11,18 @@ public class EffectSensor : MonoBehaviour
     [SerializeField]
     protected int size;
 
-    public int dir;
     protected bool disappear = false;
 
+    public int dir;
+
+    protected GameController gameController;
+
     public int Damage { get { return dmg; } }
+
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
 
     public void DestroyObject()
     {
@@ -23,7 +31,7 @@ public class EffectSensor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             if (GetComponent<Rigidbody2D>() && GetComponent<Rigidbody2D>().velocity.y < 0)
             {

@@ -6,10 +6,6 @@ using UnityEngine.UI;
 public class MonsterStatus : Status
 {
     [SerializeField]
-    private GameObject prefabHpBar;
-    [SerializeField]
-    private Sprite miniIcon;
-    [SerializeField]
     private bool isBoss;
     [SerializeField]
     private int bodyDmg;
@@ -20,7 +16,7 @@ public class MonsterStatus : Status
     [SerializeField]
     private int dropItemFinishindexber;
     [SerializeField]
-    private GameObject[] dropCoin;
+    private float hpBarYAxis;
     [SerializeField]
     private int experience;
     [SerializeField]
@@ -30,26 +26,35 @@ public class MonsterStatus : Status
     [SerializeField]
     private GameObject monsterIcon;
     [SerializeField]
-    private float hpBarYAxis;
+    private GameObject prefabHpBar;
+    [SerializeField]
+    private GameObject[] dropCoin;
+    [SerializeField]
+    private Sprite miniIcon;
 
+    private int coinindexber;
     public int monsterPrfNumber;
     public int index = -1;
+
+    private GameObject room;
+    private GameObject miniMapMonsterIcon;
+    private GameObject canvas;
 
     private GameController gameController;
     private GameData data;
     private Data dataM;
-    private GameObject miniMapMonsterIcon;
-
-    private int coinindexber;
-    private GameObject canvas;
-
     private Image nowHpBar;
     private RectTransform hpBar;
 
-    public Data Data { get { return dataM; } }
     public bool Boss { get { return isBoss; } set { isBoss = value; } }
     public int Dmg { get { return bodyDmg * GameObject.Find("Data").GetComponent<DataController>().GameData.round; } }
     public GameObject Bone { get { return effectBone; } }
+    public Data Data { get { return dataM; } }
+
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
 
     public void DestroyObject()
     {
@@ -112,6 +117,18 @@ public class MonsterStatus : Status
 
     }
 
+    private void RoomFind()
+    {
+        for (int idx = 0; idx < GameObject.Find("GameController").GetComponent<GameController>().Room.Count; idx++)
+        {
+            if (GameObject.Find("GameController").GetComponent<GameController>().Room[idx].GetComponent<Room>().isPlayer)
+            {
+                room = GameObject.Find("GameController").GetComponent<GameController>().Room[idx];
+                break;
+            }
+        }
+    }
+
     private void Awake()
     {
         data = GameObject.Find("Data").GetComponent<DataController>().GameData;
@@ -157,13 +174,12 @@ public class MonsterStatus : Status
         miniMapMonsterIcon = Instantiate(monsterIcon, transform.position, Quaternion.identity);
         miniMapMonsterIcon.transform.SetParent(GameObject.Find("Canvas").transform.Find("MiniMap").transform.Find("Background"));
         miniMapMonsterIcon.GetComponent<Icon>().obj = gameObject;
+
+        RoomFind();
     }
 
     private void Update()
     {
-
-        if (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
-
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
         else
         {
@@ -181,6 +197,16 @@ public class MonsterStatus : Status
             if (dataM.nowHP <= 0)
             {
                 DestroyObject();
+            }
+        }
+
+        if (room != null)
+        {
+            // 해당 방을 벗어난다면
+            if (transform.position.x > room.transform.position.x + 12.0f || transform.position.x < room.transform.position.x - 12.0f || transform.position.y > room.transform.position.y + 7.5f || transform.position.y < room.transform.position.y - 7.5f)
+            {
+                transform.position = room.transform.position;
+                Debug.Log("몬스터 구출!");
             }
         }
     }

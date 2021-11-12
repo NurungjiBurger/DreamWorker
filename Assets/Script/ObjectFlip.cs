@@ -5,9 +5,9 @@ using UnityEngine;
 public class ObjectFlip : MonoBehaviour
 {
     [SerializeField]
-    float x, y, z;
+    private float x, y, z;
     [SerializeField]
-    int magnification;
+    private int magnification;
 
     public bool flipX, flipY;
 

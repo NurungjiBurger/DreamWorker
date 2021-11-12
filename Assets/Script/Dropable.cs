@@ -8,24 +8,21 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 {
     [SerializeField]
     private RectTransform lever;
-    private RectTransform rectTransform;
-
     [SerializeField, Range(10f, 250f)]
     private float leverRange;
 
-    ////////////////////////////////////////////
+    private int index;
 
     private Vector3 startPosition;
     private Vector3 diff;
-
     private GameObject tmp;
-    private int index;
+    private RectTransform rectTransform;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (name.Equals("JoyStick"))
         {
-            if (Input.mousePosition.magnitude <= (transform.position + new Vector3(140,140,0)).magnitude)
+            if (Input.mousePosition.magnitude <= (transform.position + new Vector3(200,200,0)).magnitude)
             {
                 var inputDir = Input.mousePosition - transform.position;
                 var clampedDir = inputDir.magnitude < leverRange ? inputDir : (inputDir.normalized * leverRange);

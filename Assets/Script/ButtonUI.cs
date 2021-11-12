@@ -34,6 +34,7 @@ public class ButtonUI : MonoBehaviour
         {
             GameObject.Find("Canvas").transform.Find("Inventory&InspectorButton").GetComponent<ButtonUI>().UIActive();
         }
+        else if (transform.parent.name.Equals("Background")) GameObject.Find("Canvas").transform.Find(transform.parent.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
     }
 
@@ -75,6 +76,9 @@ public class ButtonUI : MonoBehaviour
                     break;
                 case "SaveButton":
                     ui[0] = GameObject.Find("Canvas").transform.Find("Save").gameObject;
+                    break;
+                case "DescriptionButton":
+                    ui[0] = GameObject.Find("Canvas").transform.Find("Description").gameObject;
                     break;
                 default:
                     break;

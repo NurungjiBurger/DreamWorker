@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    private GameObject player;
-    private Portal connectPortal;
-
     [SerializeField]
     private GameObject portalIcon;
 
     private GameObject miniMapPortalIcon;
+    private GameObject player;
 
-    public Vector3 ConnectPosition { get { return connectPortal.transform.position; } }
+    private Portal connectPortal;
+
+
     public GameObject MiniMapPortalIcon { get { return miniMapPortalIcon; } }
+    public Vector3 ConnectPosition { get { return connectPortal.transform.position; } }
 
     public void PositionSave(Portal portal)
     {

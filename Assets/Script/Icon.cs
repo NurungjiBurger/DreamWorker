@@ -6,10 +6,10 @@ using TMPro;
 
 public class Icon : MonoBehaviour
 {
-    private GameController gameController;
     private GameObject room;
-
     public GameObject obj;
+
+    private GameController gameController;
 
     private void RoomFinder()
     {

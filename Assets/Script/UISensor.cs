@@ -9,18 +9,16 @@ public class UISensor : MonoBehaviour
 
     private Direction dir = Direction.Stop;
     */
-    private int direction = 0;
-
     private bool mountAble = false;
     private bool toInventory = false;
+
+    private int direction = 0;
 
     private GameObject inspector;
     private GameObject inventory;
 
     public bool MountAble { get { return mountAble ; } }
     public bool ToInventory { get { return toInventory; } }
-
-    //public Direction direction { get { return dir; } }
     public int Direction { get { return direction; } }
 
     private void OnTriggerStay2D(Collider2D collision)

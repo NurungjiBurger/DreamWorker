@@ -4,32 +4,35 @@ using UnityEngine;
 
 public class MonsterMovement : MonoBehaviour
 {
-    enum Direction { Left, Right, Up, Stop };
-
-    private Direction dir = Direction.Stop;
-
-    private bool jumping = false;
-
-    private bool isGround = true;
-    private bool trigger = false;
-    private bool isMove = false;
-    private int moveRandom;
-
-    private GameObject player;
-    private Animator animator;
-
     [SerializeField]
     private float recognitionRange;
-    [SerializeField]
-    private GameObject prefabTimer;
     [SerializeField]
     private float[] offsetX;
     [SerializeField]
     private float[] offsetY;
+    [SerializeField]
+    private GameObject prefabTimer;
 
+    private bool jumping = false;
+    private bool isGround = true;
+    private bool trigger = false;
+    private bool isMove = false;
+
+    private int moveRandom;
     private float lastYVelocity = 0;
 
+    private GameObject player;
+
+    private Animator animator;
     private Timer moveTimer;
+    private GameController gameController;
+    enum Direction { Left, Right, Up, Stop };
+    private Direction dir = Direction.Stop;
+
+    private void OnEnable()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
 
     public bool Trigger { get { return trigger; } set { trigger = value; } }
     public bool IsGround { get { return isGround; } set { isGround = value; } }
@@ -170,7 +173,7 @@ public class MonsterMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)
+        if (!gameController.IsPause)
         {
             GetComponent<Rigidbody2D>().isKinematic = false;
             Moving();
@@ -185,6 +188,6 @@ public class MonsterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!GameObject.Find("GameController").GetComponent<GameController>().IsPause)  DecideMove();
+        if (!gameController.IsPause)  DecideMove();
     }
 }

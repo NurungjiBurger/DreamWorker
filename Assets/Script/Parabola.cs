@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Parabola : MonoBehaviour
 {
-    private Vector3 targetPoint;
-    public float m_Speed = 10;
-    public float m_HeightArc = 1;
-    private Vector3 m_StartPosition;
     private bool isArrived = true;
     private bool isGround = false;
 
+    public float m_Speed = 10;
+    public float m_HeightArc = 1;
+
     private GameObject room;
+
+    private Vector3 targetPoint;
+    private Vector3 m_StartPosition;
 
     public bool Arrived { get { return isArrived; } }
 
