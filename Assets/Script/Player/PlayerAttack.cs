@@ -47,19 +47,22 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    // 무기에 따른 공격 애니메이션 재생
     private void AttackAnimatestart()
     {
         GameObject tmp;
 
+        // 무기를 착용하고
         if (weapon)
         {
-
+            // 이펙트가 있는 무기의 경우? 몰?루
             if (weapon.GetComponent<ItemStatus>().EffectBone != null)
             {
                 tmp = Instantiate(weapon.GetComponent<ItemStatus>().AttackEffect, weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
             }
             else tmp = Instantiate(weapon.GetComponent<ItemStatus>().AttackEffect, weapon.GetComponent<ItemStatus>().EffectBone.transform.position, Quaternion.identity);
 
+            // 해당 무기의 이펙트에 무기와 플레이어 등록
             if (tmp.GetComponent<Projectile>())
             {
                 tmp.GetComponent<Projectile>().EntitySetting(gameObject);
@@ -96,6 +99,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attacking()
     {
+        // 공격이 가능한 상태라면
         if (!isAttack)
         {
             isAttack = true;

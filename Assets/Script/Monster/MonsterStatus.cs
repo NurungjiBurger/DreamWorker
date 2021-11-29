@@ -56,10 +56,13 @@ public class MonsterStatus : Status
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
+    // 몬스터 삭제
     public void DestroyObject()
     {
+        // 미니맵 아이콘 삭제
         Destroy(miniMapMonsterIcon);
 
+        // 아이템 드랍
         if (Random.Range(0, 101) <= dropRate)
         {
             int cnt = 0;
@@ -69,6 +72,7 @@ public class MonsterStatus : Status
                 cnt = (dropRate - 100) / 20;
             }
 
+            // 설정된 갯수 만큼 아이템 드랍
             for (int index = 0; index <= cnt; index++)
             {
                 GameObject tmp;
@@ -78,14 +82,17 @@ public class MonsterStatus : Status
             }
         }
 
+        // 코인 드랍
         for(int i=0;i<coinindexber;i++)
         {
             Instantiate(dropCoin[0], transform.position, Quaternion.identity);
         }
         if (isBoss) Instantiate(dropCoin[1], transform.position, Quaternion.identity);
 
+        // 플레이어 경험치 획득
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().CalCulateExperience(experience);
 
+        // 데이터 삭제
         data.datas.Remove(dataM);
         for (int idx = index; idx < data.datas.Count; idx++)
         {
@@ -98,6 +105,7 @@ public class MonsterStatus : Status
         Destroy(hpBar.gameObject);
     }
 
+    // 몬스터 보스화
     public void BeTheBossMonster(bool isevent)
     {
         int magnification = 1;
@@ -117,6 +125,7 @@ public class MonsterStatus : Status
 
     }
 
+    // 플레이어 위치 방 찾기
     private void RoomFind()
     {
         for (int idx = 0; idx < GameObject.Find("GameController").GetComponent<GameController>().Room.Count; idx++)
@@ -136,6 +145,7 @@ public class MonsterStatus : Status
 
     private void Start()
     {
+        // 데이터 생성 및 할당
         if (index == -1)
         {
             int[] arr = new int[2];
@@ -154,6 +164,7 @@ public class MonsterStatus : Status
             dataM = data.datas[index];
         }
 
+        // 체력바 생성
         canvas = GameObject.Find("Canvas");
 
         hpBar = Instantiate(prefabHpBar, canvas.transform).GetComponent<RectTransform>();
@@ -163,6 +174,7 @@ public class MonsterStatus : Status
         if (!isBoss) coinindexber = Random.Range(1, 5);
         else coinindexber = 15;
 
+        // 보스몬스터 생성 위치 고정
         if (GetComponent<MonsterStatus>().Boss)
         {
             GetComponent<ObjectFlip>().ChangeSize(1.5f);
@@ -171,6 +183,7 @@ public class MonsterStatus : Status
             hpBar.transform.localScale = new Vector3(2.0f, 1.25f, 1.25f);
         }
 
+        // 미니맵 아이콘 생성
         miniMapMonsterIcon = Instantiate(monsterIcon, transform.position, Quaternion.identity);
         miniMapMonsterIcon.transform.SetParent(GameObject.Find("Canvas").transform.Find("MiniMap").transform.Find("Background"));
         miniMapMonsterIcon.GetComponent<Icon>().obj = gameObject;
@@ -189,6 +202,7 @@ public class MonsterStatus : Status
 
         if (!gameController.IsPause)
         {
+            // 체력바는 몬스터 머리 위에 따라다녀야 함
             Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + hpBarYAxis, 0));
             hpBar.transform.position = _hpBarPos;
 
@@ -205,8 +219,8 @@ public class MonsterStatus : Status
             // 해당 방을 벗어난다면
             if (transform.position.x > room.transform.position.x + 12.0f || transform.position.x < room.transform.position.x - 12.0f || transform.position.y > room.transform.position.y + 7.5f || transform.position.y < room.transform.position.y - 7.5f)
             {
+                // 몬스터 위치 복구
                 transform.position = room.transform.position;
-                Debug.Log("몬스터 구출!");
             }
         }
     }

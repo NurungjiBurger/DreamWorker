@@ -53,6 +53,7 @@ public class PlayerSensor : MonoBehaviour
 
             if (collision.CompareTag("Item"))
             {
+                // 플레이어가 습득 가능한 상황이고 아이템이 습득된 아이템이 아닐경우
                 if (GetComponent<PlayerStatus>().Acquirable && !collision.GetComponent<ItemStatus>().Data.isAcquired)
                 {
                     collision.GetComponent<ItemStatus>().Data.isAcquired = true;
@@ -144,7 +145,6 @@ public class PlayerSensor : MonoBehaviour
         
     }
 
-    // 콜리젼 충돌
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!gameController.IsPause)

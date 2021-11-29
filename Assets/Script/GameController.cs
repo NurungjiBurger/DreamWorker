@@ -11,12 +11,6 @@ public class GameController : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject newButton;
-    [SerializeField]
-    private GameObject loadButton;
-    [SerializeField]
-    private GameObject exitButton;
-    [SerializeField]
     private GameObject prefabRoom;
     [SerializeField]
     private GameObject prefabSlot;
@@ -44,6 +38,7 @@ public class GameController : MonoBehaviour
     private int selectedPlayerIndex;
     private int pastSelectDirection;
 
+    private GameObject activeRoom;
     private GameObject player;
     private GameObject inventory;
     private GameObject inspector;
@@ -69,6 +64,7 @@ public class GameController : MonoBehaviour
         for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName + "  " + idx);
     }
 
+    // 캐릭터 선택후 게임 시작
     public void PlayerSelect(int value)
     {
         selectedPlayerIndex = value;
@@ -79,7 +75,7 @@ public class GameController : MonoBehaviour
         Debug.Log("게임을시작하지");
     }
 
-
+    // 아이템 획득후 해당 아이템 슬롯화
     public Slot CreateItemSlot(GameObject item)
     {
         GameObject tmp;
@@ -106,6 +102,7 @@ public class GameController : MonoBehaviour
         return tmp;
     }
 
+    // 다음 스테이지로 넘어가기 위해 현재 스테이지 삭제
     public void DestroyNowStage()
     {
         GameObject tmp;
@@ -122,17 +119,8 @@ public class GameController : MonoBehaviour
             Destroy(tmp);
         }
 
-        /*
-        for (int idx = 0; idx < 1; idx++)
-        {
-            eventRoom[idx].transform.Find("GreenMap_Wall").GetComponent<Room>().DestoryAll();
-            tmp = eventRoom[idx];
-            eventRoom.Remove(eventRoom[idx]);
-            Destroy(tmp);
-        }
-        */
-        // 0 천국 1 지옥 ( 2 ~ (2+data.substagenumber)) 던전
         data.stageEntrance = false;
+        activeRoom = null;
     }
 
     public void PortalCreate(GameObject selectRoom, GameObject nowRoom, int direction)
@@ -150,27 +138,27 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            // 천국 과 지옥포탈
             if (selectRoom.transform.position == room[0].transform.position) value = 2;
             else value = 3;
         }
 
+        // 기준방 먼저 포탈 생성
         first = selectRoom.GetComponent<Room>().CreatePortal(direction, value);
         if (direction % 2 == 0) direction += 1;
         else direction -= 1;
 
+        // 기준방을 기준으로 방향 설정후 기준방 포탈과 연동되는 두번째 포탈 생성
         if (value == 2) direction = -1;
         else if (value == 3) direction = -2;
         second = nowRoom.GetComponent<Room>().CreatePortal(direction, value);
 
+        // 두개 포탈의 위치를 저장하여 연결
         first.GetComponent<Portal>().PositionSave(second.GetComponent<Portal>());
         second.GetComponent<Portal>().PositionSave(first.GetComponent<Portal>());
     }
 
-    private void CreateEventRoom()
-    {
-
-    }
-
+    // 스태이지내 부스테이지 개념의 방 생성
     private void CreateRoom(int cnt)
     {
         int mapPrfNumber;
@@ -182,7 +170,7 @@ public class GameController : MonoBehaviour
         else
         {
             // eventroom 생성
-            // heaven
+            // 천국
             map.Add(Instantiate(prefabMapDesigns[prefabMapDesigns.Length-2], new Vector3(300, 300, 0), Quaternion.identity));
             map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
             room.Add(Instantiate(prefabRoom, new Vector3(300, 300, 0), Quaternion.identity));
@@ -197,7 +185,8 @@ public class GameController : MonoBehaviour
             room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(0);
 
             npc[0].transform.position = room[room.Count-1].transform.position;
-            // hell
+
+            // 지옥
             map.Add(Instantiate(prefabMapDesigns[prefabMapDesigns.Length - 1], new Vector3(-300, -300, 0), Quaternion.identity));
             map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
             room.Add(Instantiate(prefabRoom, new Vector3(-300, -300, 0), Quaternion.identity));
@@ -210,7 +199,8 @@ public class GameController : MonoBehaviour
             room[room.Count - 1].GetComponent<Room>().sel = -1;
 
             room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(1);
-            // dungeon
+
+            // 던전 첫번째 방
             pastSelectDirection = 0;
 
             mapPrfNumber = Random.Range((6 * (data.stageNumber - 1)), (6 * data.stageNumber) - 1);
@@ -236,6 +226,7 @@ public class GameController : MonoBehaviour
 
         while (!complete)
         {
+            // 현재 방을 기준으로 동, 서, 남, 북에 방을 생성 가능
             create = true;
             int number = Random.Range(2, Room.Count);
             selectRoom = Room[number];
@@ -259,11 +250,13 @@ public class GameController : MonoBehaviour
                     break;
             }
 
+            // 생성되어있는 방 중에 현재 생성하려는 위치에 이미 존재하면 그곳에는 방을 생성할 수 없음
             for (int i=2;i<room.Count;i++)
             {
                 if (room[i].transform.position == position) create = false;
             }
 
+            // 해당 위치에 겹치는 방이 없다면 새로운 방을 생성
             if (create)
             {
                 if (cnt == data.subStageNumber) mapPrfNumber = (6 * data.stageNumber) - 1;
@@ -279,13 +272,33 @@ public class GameController : MonoBehaviour
                 room[room.Count - 1].GetComponent<Room>().sel = number;
 
                 room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(room.Count - 1);
-                //PortalCreate(selectRoom, Room[Room.Count - 1], direction);
 
                 complete = true;
             }
         }
     }
 
+    // 플레이어 위치 변경
+    public void RefreshPlayerPosition()
+    {
+        if (activeRoom != null)
+        {
+            player.transform.position = activeRoom.transform.position;
+            Debug.Log("실행했어!");
+        }
+    }
+
+    // 게임 종료
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+    }
+
+    // 메인메뉴로 돌아가기
     public void ReturntoMain()
     {
         Destroy(GameObject.Find("GameController"));
@@ -293,11 +306,27 @@ public class GameController : MonoBehaviour
         GameObject.Find("GameController").GetComponent<GameController>().RevertScene("MainMenu");
     }
 
+    // 플레이어가 속한 방 체크
+    private bool PlayerCheck()
+    {
+        for (int idx = 0; idx < room.Count; idx++)
+        {
+            if (room[idx].GetComponent<Room>().isPlayer)
+            {
+                activeRoom = room[idx];
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private bool CheckRoom(string str)
     {
         return true;
     }
 
+    // 던전씬으로 전환
     public void RevertScene(string scenename)
     {
         revert = false;
@@ -306,6 +335,7 @@ public class GameController : MonoBehaviour
         {
             npc.Add(GameObject.Find("BlackSmith").gameObject);
 
+            // 저장된 데이터가 아예 없는 경우 새로 시작한 것이므로 오브젝트 및 데이터 초기화
             if (data.datas.Count == 0)
             {
                 player = Instantiate(prefabCharacters[selectedPlayerIndex], new Vector3(0, 0, 0), Quaternion.identity);
@@ -316,12 +346,13 @@ public class GameController : MonoBehaviour
                 data.stageNumber = 1;
                 data.subStageNumber = 0;
 
-                data.stageEntrance = false;  // 스테이지에 처음 들어왔는가?
+                data.stageEntrance = false;
                 data.stageClear = false;
                 data.eventRoomVisit = false;
             }
             else
             {
+                // 저장된 데이터가 있으면 해당 데이터를 기반으로 이전 게임 환경으로 복구
                 Restore();
             }
         }
@@ -333,9 +364,9 @@ public class GameController : MonoBehaviour
             GameStart = false;
         }
 
-        //revert = true;
     }
 
+    // 해상도 설정
     private void SetResolution()
     {
         int setWidth = 1920; // 사용자 설정 너비
@@ -379,16 +410,10 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log(Input.mousePosition);
-        //if (Input.GetKey(KeyCode.A)) printalldata();
 
         if (Input.GetKey("escape"))
         {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            ExitGame();
         }
 
         if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
@@ -425,9 +450,8 @@ public class GameController : MonoBehaviour
 
                     if (true) // 무한 스테이지
                     {
-                        //Debug.Log(data.stageNumber);
                         data.stageClear = false;
-                        if (!data.stageEntrance) // 처음 스테이지에 입장
+                        if (!data.stageEntrance) 
                         {
                             data.round++;
 
@@ -441,14 +465,11 @@ public class GameController : MonoBehaviour
 
                             CreateRoom(data.subStageNumber);
 
-
                         }
                         else
                         {
-                            for (int idx = 0; idx < data.subStageNumber; idx++)
-                            {
-                                //Debug.Log(room[idx].transform.position + " 좌표에 있는 " + idx + " 번 방에 " + room[idx].GetComponent<Room>().isPlayer);
-                            }
+                            // 플레이어가 속한 방이 존재하지 않을때 버그로 방을 벗어난 것이므로 복구시켜줌
+                            if (!PlayerCheck()) RefreshPlayerPosition();
                         }
                     }
                 }
@@ -459,19 +480,19 @@ public class GameController : MonoBehaviour
 
     /// ////////////////////////////////////////////////////////////////////////////////
 
-
+    // 저장된 데이터를 기반으로 복구
     public void Restore()
     {
         GameObject obj;
 
         for(int idx =0; idx < data.datas.Count; idx++)
         {
-            //printalldata();
-
+            // 맵 복구
             if (data.datas[idx].structName == "Map")
             {
                 map.Add(Instantiate(prefabMapDesigns[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity));
                 map[map.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
+                // 방 연결
                 room.Add(obj = Instantiate(prefabRoom, data.datas[idx].Position(), Quaternion.identity));
                 room[room.Count - 1].transform.SetParent(GameObject.Find("Grid").transform);
 
@@ -481,12 +502,14 @@ public class GameController : MonoBehaviour
                 obj.GetComponent<Room>().AllocateSubStageNumber(room.Count-1);
                 obj.GetComponent<Room>().ConnectData();
             }
+            // 플레이어 복구
             else if (data.datas[idx].structName == "Player")
             {
                 player = Instantiate(prefabCharacters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
 
                 player.GetComponent<PlayerStatus>().index = idx;
             }
+            // 아이템 복구
             else if (data.datas[idx].structName == "Item")
             {
                 obj = Instantiate(prefabItems[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
@@ -494,6 +517,7 @@ public class GameController : MonoBehaviour
                 obj.GetComponent<ItemStatus>().itemPrfNumber = data.datas[idx].prfNumber;
                 obj.GetComponent<ItemStatus>().index = idx;
             }
+            // 몬스터 복구
             else if (data.datas[idx].structName == "Monster")
             {
                 if (data.datas[idx].isBoss) obj = Instantiate(prefabMonsters[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
@@ -505,7 +529,5 @@ public class GameController : MonoBehaviour
 
         npc.Add(GameObject.Find("BlackSmith").gameObject);
         npc[0].transform.position = room[0].transform.position;
-
-        // if (Room[Room.Count - 1].GetComponent<Room>().Data.isClear) Room[Room.Count - 1].GetComponent<Room>().BossClearAfter();
     }
 }

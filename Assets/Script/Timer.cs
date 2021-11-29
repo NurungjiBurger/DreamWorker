@@ -10,48 +10,39 @@ public class Timer : MonoBehaviour
     private float time;
     private float cooldown;
 
+    // 타이머 파괴
     public void DestroyAll()
     {
         Destroy(gameObject);
     }
 
+    // 쿨다운 시간 설정
     public void SetCooldown(float cool)
     {
         cooldown = cool;
     }
 
+    // 쿨다운 시간 체크
     public bool CooldownCheck()
     {
         if (time >= cooldown) return true;
         else return false;
     }
 
+    // 타이머 초기화
     public void TimerSetZero()
     {
         time = 0;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         time = 0;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         time += Time.deltaTime;
 
-        /*
-            if (duration != 0)
-            {
-                Debug.Log(time + " " + duration);
-                if (time >= duration)
-                {
-                    Debug.Log("왜 실행?");
-                    DestroyAll();
-                }
-            }
-            */
     }
 }

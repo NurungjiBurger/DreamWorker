@@ -11,6 +11,7 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
     private GameObject inspector;
     private Slot slot;
 
+    // 아이템 정보창 위치변경
     public void ModifyPosition(int direction, Vector3 position)
     {
         // 36 슬롯은 마우스의 오른쪽 가운데에 정보창
@@ -20,6 +21,7 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         // 3, 4, 8, 9 슬롯은 마우스의 왼쪽 아래에 정보창
         // 10, 11, 12, 15, 16, 17 슬롯은 마우스의 오른쪽 위에 정보창
         // 13, 14, 18, 19 슬롯은 마우스의 왼쪽 위에 정보창
+
         switch (direction)
         {
             case 0:
@@ -62,8 +64,13 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
 
     }
 
+    // 장착된 아이템과 비교표시
     private void CompareToInspector(string str, GameObject delta)
     {
+        // 더 낮은 스탯 - 파랑
+        // 더 높은 스탯 - 빨강
+        // 같은 스탯 - 초록
+
         Color blue = new Color(0 / 255f, 150 / 255f, 255 / 255f);
         Color red = new Color(255 / 255f, 0 / 255f, 0 / 255f);
         Color green = new Color(0 / 255f, 255 / 255f, 0 / 255f);
@@ -452,6 +459,7 @@ public class ItemInformation : MonoBehaviour, IPointerClickHandler
         slot.GetComponent<Slot>().ActiveItemInform();
     }
 
+    // 아이템 정보창에 보고자하는 아이템의 정보로 업데이트
     private void UpdateItemInformation()
     {
         // 이름 , 이미지

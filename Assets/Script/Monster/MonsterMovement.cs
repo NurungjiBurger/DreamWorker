@@ -44,9 +44,12 @@ public class MonsterMovement : MonoBehaviour
 
     private void Moving()
     {
+        // 가속력이 0에 가까워지면서 공중에 체공하는 시간이 길어질수록 해당 오브젝트가 중력을 안받는것처럼 보임.
+        // 강제로 -가속력을 주어 해당 체공시간을 없앰.
         if (GetComponent<Rigidbody2D>().velocity.y > 0 && lastYVelocity > 0) lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;
 
-        if (!GetComponent<MonsterAttack>().Attack) // 몬스터가 공격중이 아니라면 무빙 가능
+        // 공격중이 아닌 경우 움직일 수 있음
+        if (!GetComponent<MonsterAttack>().Attack)
         {
             switch (dir)
             {
@@ -78,13 +81,14 @@ public class MonsterMovement : MonoBehaviour
             }
         }
 
+
+        // 속도 제한 Y, X
         if (lastYVelocity < 2f && lastYVelocity > 0) //GetComponent<Rigidbody2D>().velocity.y < 0 && lastYVelocity > 1.5f)
         {
             lastYVelocity = -1;
             GetComponent<Rigidbody2D>().AddForce(Vector2.down * (GetComponent<MonsterStatus>().Data.jumpPower / 1.1f), ForceMode2D.Impulse);
         }
 
-        // 속도 제한
         if (GetComponent<Rigidbody2D>().velocity.x >= 1.5f)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(1.5f, GetComponent<Rigidbody2D>().velocity.y);
@@ -95,11 +99,12 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
+    // 움직임 결정 함수
     private void DecideMove()
     {
         if (moveTimer.CooldownCheck()) isMove = false;
 
-        // 인식 범위 안
+        // 인식 범위 안일때
         if (Vector3.Distance(player.transform.position, transform.position) <= recognitionRange)
         {
             if (GetComponent<MonsterSensor>().LastColliderGround != player.GetComponent<PlayerSensor>().LastColliderGround && transform.position.y < player.transform.position.y)
@@ -140,7 +145,7 @@ public class MonsterMovement : MonoBehaviour
         }
 
 
-        // 다 정했으니 움직이자!
+        // 다 정했졌으므로 움직임
         switch (moveRandom)
         {
             case 0:
@@ -162,7 +167,6 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -185,7 +189,6 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (!gameController.IsPause)  DecideMove();

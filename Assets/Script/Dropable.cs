@@ -18,11 +18,13 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private GameObject tmp;
     private RectTransform rectTransform;
 
+    // 드래그 시작
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (name.Equals("JoyStick"))
         {
-            if (Input.mousePosition.magnitude <= (transform.position + new Vector3(200,200,0)).magnitude)
+            // 모든 화면에서 인식되지 않기 위해 거리 제한
+            if (Input.mousePosition.magnitude <= (transform.position + new Vector3(140,140,0)).magnitude)
             {
                 var inputDir = Input.mousePosition - transform.position;
                 var clampedDir = inputDir.magnitude < leverRange ? inputDir : (inputDir.normalized * leverRange);
@@ -49,10 +51,12 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
+    // 드래그 중
     public void OnDrag(PointerEventData eventData)
     {
         if (name.Equals("JoyStick"))
         {
+            // 모든 화면에서 인식되지 않기 위해 거리 제한
             if (Input.mousePosition.magnitude <= (transform.position + new Vector3(140, 140, 0)).magnitude)
             {
                 var inputDir = Input.mousePosition - transform.position;
@@ -67,10 +71,12 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
+    // 드래그 끝
     public void OnEndDrag(PointerEventData eventData)
     {
         if (name.Equals("JoyStick"))
         {
+            // 조이스틱에서 손이 떼지면 레버는 원위치로 돌아감
             lever.anchoredPosition = Vector2.zero;
         }
 
@@ -79,6 +85,7 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             transform.SetParent(tmp.transform);
             transform.SetSiblingIndex(index);
 
+            // 드랍되었을때 충돌했던 콜라이더를 바탕으로 인스펙터, 인벤토리 등 위치 결정
             if (GetComponent<UISensor>().MountAble) GetComponent<Slot>().Mounting();
             else if (GetComponent<UISensor>().ToInventory) GetComponent<Slot>().DisMounting();
             else transform.position = startPosition;                        

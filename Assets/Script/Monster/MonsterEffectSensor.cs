@@ -15,7 +15,7 @@ public class MonsterEffectSensor : EffectSensor
     private Timer durationTimer;
 
     public int Dmg { get { return dmg; } }
-    //
+    
     private void OnEnable()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
@@ -37,9 +37,9 @@ public class MonsterEffectSensor : EffectSensor
 
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
+        // 이펙트가 일정시간동안 존재해야 하는 경우 ( ex. 가스구름 )
         if (durationTime != 0)
         {
             durationTimer = Instantiate(prefabTimer).GetComponent<Timer>();
@@ -61,6 +61,7 @@ public class MonsterEffectSensor : EffectSensor
         {
             if (type == 1) // 가스구름
             {
+                // 할당된 시간이 다 되면 삭제
                 if (durationTimer.CooldownCheck())
                 {
                     disappear = true;

@@ -8,7 +8,7 @@ using System;
 [Serializable]
 public class GameData
 {
-    // gamedata
+    // 기본 게임데이터
     public int round;
     public int stageNumber;
     public int subStageNumber;
@@ -23,13 +23,13 @@ public class GameData
 [Serializable]
 public class Data
 {
-    // common
+    // 공통
     public string structName;
     public float[] pos = new float[3];
     public int prfNumber;
     public int index;
 
-    //////////////////////////////////////////////// // player
+    //////////////////////////////////////////////// // 플레이어
 
     public int handMoney;
     public int level;
@@ -41,14 +41,14 @@ public class Data
     public bool thirdEvolution;
     public bool forthEvolution;
 
-    //////////////////////////////////////////////// // item
+    //////////////////////////////////////////////// // 아이템
 
     public int cursedRate;
     public bool isMount;
     public bool isAcquired;
     public int enhancingLevel;
 
-    //////////////////////////////////////////////// // stat
+    //////////////////////////////////////////////// // 스탯
 
     public int maxHP;
     public int nowHP;
@@ -60,11 +60,11 @@ public class Data
     public float bloodAbsorptionRate;
     public float evasionRate;
 
-    //////////////////////////////////////////////// // monster data
+    //////////////////////////////////////////////// // 몬스터
 
     public bool isBoss;
 
-    //////////////////////////////////////////////// // map data
+    //////////////////////////////////////////////// // 맵
 
     public int selectRoomIndex;
     public int portalDirection;
@@ -101,7 +101,7 @@ public class Data
         else
         {
             StatData(arr, arr2);
-            isAcquired = false; // item
+            isAcquired = false;
             isMount = false;
 
             if (name == "Player")

@@ -16,6 +16,7 @@ public class Portal : MonoBehaviour
     public GameObject MiniMapPortalIcon { get { return miniMapPortalIcon; } }
     public Vector3 ConnectPosition { get { return connectPortal.transform.position; } }
 
+    // 연결된 포탈의 위치 저장
     public void PositionSave(Portal portal)
     {
         connectPortal = portal;
@@ -23,6 +24,7 @@ public class Portal : MonoBehaviour
 
     private void Start()
     {
+        // 미니맵에 포탈 아이콘 생성
         if (portalIcon)
         {
             miniMapPortalIcon = Instantiate(portalIcon, transform.position, Quaternion.identity);

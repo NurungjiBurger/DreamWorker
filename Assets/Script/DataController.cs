@@ -13,12 +13,14 @@ public class DataController : MonoBehaviour
 
     public GameData GameData { get { return gameData;} }
 
+    // 게임데이터 삭제
     public void DeleteGameData()
     {
         Debug.Log("저장 파일을 삭제합니다.");
         File.Delete(filePath);
     }
 
+    // 게임데이터 저장
     public void SaveGameData()
     {
         GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatRerange(-1);
@@ -31,6 +33,7 @@ public class DataController : MonoBehaviour
 
     }
 
+    // 새로운 게임데이터 생성
     public void NewGameData()
     {
         if (File.Exists(filePath))
@@ -43,6 +46,7 @@ public class DataController : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(true);
     }
 
+    // 저장된 게임데이터 로드
     public void LoadGameData()
     {
         if (File.Exists(filePath))
@@ -60,6 +64,7 @@ public class DataController : MonoBehaviour
 
     }
 
+    // 진행중인 게임 종료
     public void ExitGame()
     {
         Debug.Log("게임종료");

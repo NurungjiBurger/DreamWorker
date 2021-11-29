@@ -11,6 +11,7 @@ public class ObjectFlip : MonoBehaviour
 
     public bool flipX, flipY;
 
+    // 오브젝트 사이즈 변경
     public void ChangeSize(float size)
     {
         x = x * size;
@@ -18,6 +19,7 @@ public class ObjectFlip : MonoBehaviour
         z = z * size;
     }
 
+    // 오브젝트 좌우 / 상하 반전
     public void flip(char axis, bool value)
     {
         int dir;
@@ -39,14 +41,12 @@ public class ObjectFlip : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         flipX = false;
         flipY = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         flip('x', flipX);

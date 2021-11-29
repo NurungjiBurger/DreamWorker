@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
+    // 다음 스테이지 진행 결정
     public bool GetGoNext()
     {
         return isGoNext;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void KeyInput()
     {
+        // 조이스틱 입력으로 행동 결정
         action = joyStick.Direction;
 
         jumpPower = GetComponent<PlayerStatus>().Data.jumpPower;
@@ -107,6 +109,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Moving()
     {
+        // 가속력이 0에 가까워지면서 공중에 체공하는 시간이 길어질수록 해당 오브젝트가 중력을 안받는것처럼 보임.
+        // 강제로 -가속력을 주어 해당 체공시간을 없앰.
         if (GetComponent<Rigidbody2D>().velocity.y > 0 && lastYVelocity > 0) lastYVelocity = GetComponent<Rigidbody2D>().velocity.y;
 
         switch (dir)
@@ -149,10 +153,9 @@ public class PlayerMovement : MonoBehaviour
             else transform.position -= new Vector3(1.5f, 0f, 0f);
         }
 
-        // 속도 제한
+        // 속도 제한 Y , X
         if (lastYVelocity < 2f && lastYVelocity > 0) //GetComponent<Rigidbody2D>().velocity.y < 0 && lastYVelocity > 1.5f)
         {
-            //
             lastYVelocity = -1;
             GetComponent<Rigidbody2D>().AddForce(Vector2.down * (jumpPower / 1.1f), ForceMode2D.Impulse);
         }

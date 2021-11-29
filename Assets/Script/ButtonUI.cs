@@ -12,16 +12,30 @@ public class ButtonUI : MonoBehaviour
 
     public bool OnOff { get { return onOff; } }
 
+    // 저장
     public void SaveButton()
     {
         GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
     }
 
+    // 메인메뉴로
     public void MainButton()
     {
         GameObject.Find("GameController").GetComponent<GameController>().ReturntoMain();
     }
 
+    // 게임종료
+    public void ExitGame()
+    {
+        GameObject.Find("GameController").GetComponent<GameController>().ExitGame();
+    }
+
+    public void RefreshPosition()
+    {
+        GameObject.Find("GameController").GetComponent<GameController>().RefreshPlayerPosition();
+    }
+
+    // UI 닫기
     public void CloseButton()
     {
         if (transform.parent.name.Equals("Enhancer"))
@@ -34,6 +48,10 @@ public class ButtonUI : MonoBehaviour
         {
             GameObject.Find("Canvas").transform.Find("Inventory&InspectorButton").GetComponent<ButtonUI>().UIActive();
         }
+        else if (transform.parent.name.Equals("Pause"))
+        {
+            GameObject.Find("Canvas").transform.Find("MenuButton").GetComponent<ButtonUI>().UIActive();
+        }
         else if (transform.parent.name.Equals("Background")) GameObject.Find("Canvas").transform.Find(transform.parent.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
     }
@@ -43,6 +61,7 @@ public class ButtonUI : MonoBehaviour
         GameObject.Find("BlackSmith").transform.position = new Vector3(300, 310);
     }
 
+    // UI on / off
     public void UIActive()
     {
         onOff = !onOff;
@@ -56,6 +75,7 @@ public class ButtonUI : MonoBehaviour
 
     void Update()
     {
+        // UI 할당
         if (!ui[0])
         {
             switch (transform.name)
@@ -79,6 +99,9 @@ public class ButtonUI : MonoBehaviour
                     break;
                 case "DescriptionButton":
                     ui[0] = GameObject.Find("Canvas").transform.Find("Description").gameObject;
+                    break;
+                case "MenuButton":
+                    ui[0] = GameObject.Find("Canvas").transform.Find("Pause").gameObject;
                     break;
                 default:
                     break;

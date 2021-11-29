@@ -14,6 +14,7 @@ public class Description : MonoBehaviour
 
     private int page;
 
+    // 좌, 우 로 가기위한 버튼 조정
     private void ButtonOnoff()
     {
         if (page == 0) button[0].SetActive(false);
@@ -27,12 +28,12 @@ public class Description : MonoBehaviour
 
     private void PrintPage()
     {
-        // page = 0  메인메뉴설명
-        // page = 1  캐릭터 선택창 설명? 필요한가
-        // page = 2  기본화면설명
-        // page = 3  인벤토리화면설명
-        // page = 4  강화창화면설명
-        // page = 5  강화선택창화면설명
+        // page = 0  메인메뉴
+        // page = 1  캐릭터 선택창
+        // page = 2  기본화면
+        // page = 3  인벤토리화면
+        // page = 4  강화창화면
+        // page = 5  강화선택창화면
 
         GetComponent<Image>().sprite = backGroundImage[page];
 

@@ -13,6 +13,7 @@ public class Smithy : MonoBehaviour
     private Slot[] slots;
     private List<GameObject> items = new List<GameObject>();
 
+    // 아이템 구매
     public void ItemPayment(GameObject obj)
     {
         bool clear = false;
@@ -55,10 +56,12 @@ public class Smithy : MonoBehaviour
         }
     }
 
+    // 아이템 표시
     private void ProductDisplay()
     {
         int itemidx;
 
+        // 아이템 4개 생성
         for (int idx = 0; idx < 4; idx++)
         {
             itemidx = Random.Range(0, controller.Items.Length);
@@ -71,15 +74,13 @@ public class Smithy : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
-    {//
+    {
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
         if (!controller) controller = GameObject.Find("GameController").GetComponent<GameController>();
         if (!blackSmith) blackSmith = GameObject.Find("BlackSmith").transform.Find("BlackSmithButton").GetComponent<ButtonUI>();

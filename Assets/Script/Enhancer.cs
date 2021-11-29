@@ -21,11 +21,12 @@ public class Enhancer : MonoBehaviour
     public List<Slot> DevoteItemList { get { return devoteItemList; } }
     public Slot EnhanceItem { get { return enhanceItem; } }
 
+    // 강화 성공 확률 계산
     private void CalculateSuccess()
     {
         success = 0;
 
-        // 강화레벨이 높을수록 성공확률은 감소해야한다.
+        // 강화레벨이 높을수록 성공확률은 감소해야함
         if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 10)
         {
             success = 100;
@@ -69,6 +70,7 @@ public class Enhancer : MonoBehaviour
         }
     }
 
+    // 강화 성공확률 표시
     private void EnhancerSuccessRatePrint()
     {
         CalculateSuccess();
@@ -76,18 +78,21 @@ public class Enhancer : MonoBehaviour
         transform.Find("SuccessRate").GetComponent<TextMeshProUGUI>().text = "강화 성공 확률은 " + success.ToString() + "% 입니다.";
     }
 
+    // 강화 성공
     private void Success()
     {
         timer.TimerSetZero();
         transform.Find("Success").gameObject.SetActive(true);
     }
 
+    // 강화 실패
     private void Fail()
     {
         timer.TimerSetZero();
         transform.Find("Fail").gameObject.SetActive(true);
     }
 
+    // 강화할 아이템 등록
     public void Enroll()
     {
         enhanceItem = devoteItemList[0];
@@ -97,12 +102,13 @@ public class Enhancer : MonoBehaviour
 
     public void Enhance()
     {
-
+        
         CalculateSuccess();
 
         Slot tmp;
         int size = devoteItemList.Count;
 
+        // 제물로 사용된 아이템들은 강화 성공 여부에 관계없이 삭제
         for (int i = 0; i < size; i++)
         {
             tmp = devoteItemList[0];
@@ -111,6 +117,7 @@ public class Enhancer : MonoBehaviour
             Destroy(tmp.gameObject);
         }
 
+        // 강화 성공시 아이템의 스탯 증가
         if (Random.Range(0,101) <= success)
         {
             Success();
@@ -122,6 +129,7 @@ public class Enhancer : MonoBehaviour
         }
     }
     
+    // 강화창에 올려진 아이템들 제거 ( 인스펙터, 인벤토리로 되돌아감 )
     public void DiscardToEnhancer(bool value)
     {
 
@@ -140,6 +148,7 @@ public class Enhancer : MonoBehaviour
         if (value) enhanceItem = null;
     }
 
+    // 강화창에 아이템을 올림
     public void AddToEnhancer(Slot slot)
     {
         devoteItemList.Add(slot);
@@ -163,6 +172,7 @@ public class Enhancer : MonoBehaviour
             for (int i = 0; i < devoteItemList.Count; i++) devoteItemList.Remove(devoteItemList[0]);
         }
 
+        // 아무런 아이템이 선택되지 않은 경우
         if (devoteItemList.Count == 0)
         {
             transform.Find("ButtonBackground").transform.Find("EnrollButton").gameObject.SetActive(false);
@@ -170,19 +180,23 @@ public class Enhancer : MonoBehaviour
         }
         else
         {
+            // 강화 아이템이 등록되지 않고 선택된 아이템이 한개인 경우
             if (!enhanceItem && devoteItemList.Count == 1) transform.Find("ButtonBackground").transform.Find("EnrollButton").gameObject.SetActive(true);
             else transform.Find("ButtonBackground").transform.Find("EnrollButton").gameObject.SetActive(false);
 
+            // 강화아이템이 등록된 경우
             if (enhanceItem) transform.Find("ButtonBackground").transform.Find("DevoteButton").gameObject.SetActive(true);
         }
 
         if (enhanceItem != null && devoteItemList.Count != 0)
         {
+            // 강화 아이템이 등록되어있고 제물로 바칠 아이템도 선택된 경우 성공 확률 표시
             transform.Find("SuccessRate").gameObject.SetActive(true);
             EnhancerSuccessRatePrint();
         }
         else transform.Find("SuccessRate").gameObject.SetActive(false);
 
+        // 성공 실패 글씨가 시간이 지나면 자동으로 꺼짐
         if (timer.CooldownCheck())
         {
             transform.Find("Success").gameObject.SetActive(false);

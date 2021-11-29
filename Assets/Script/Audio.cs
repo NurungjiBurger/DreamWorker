@@ -29,19 +29,18 @@ public class Audio : MonoBehaviour
 
     private AudioSource audioSource;
 
+    // 번호에 따른 저장된 오디오 재생 
     public void AudioPlay(int idx)
     {
         audioSource.clip = audioClips[idx];
         audioSource.Play();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         

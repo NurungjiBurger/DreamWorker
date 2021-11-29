@@ -15,6 +15,7 @@ public class Inspector : MonoBehaviour
     public int ItemCount { get { return equipItemList.Count; } }
     public List<Slot> EquipItemList { get { return equipItemList; } }
 
+    // 아이템의 스탯에 변화가 생기면 재장착을 통해 이를 적용시켜줌
     public void InspectorStatRerange(int oper)
     {
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
@@ -25,6 +26,7 @@ public class Inspector : MonoBehaviour
         }
     }
 
+    // 장착한 아이템 찾기
     public Slot FindInInspector(Slot slot)
     {
         int size = equipItemList.Count;
@@ -38,6 +40,7 @@ public class Inspector : MonoBehaviour
         return slot;
     }
 
+    // 장착해제
     public void DiscardToInspector(Slot slot)
     {
         int size = equipItemList.Count;
@@ -55,6 +58,7 @@ public class Inspector : MonoBehaviour
         }
     }
 
+    // 같은 부위의 아이템이 존재하면 장착된 아이템은 빼고 새로 장착
     private void ChangeItemPart(Slot slot)
     {
         int size = equipItemList.Count;
@@ -69,6 +73,7 @@ public class Inspector : MonoBehaviour
 
     }
 
+    // 장착
     public void AddToInspector(Slot slot)
     {
         ChangeItemPart(slot);
@@ -84,6 +89,7 @@ public class Inspector : MonoBehaviour
         player.GetComponent<PlayerStatus>().CalCulateStat(slot.SlotItem, 1);
     }
 
+    // 인스펙터에 캐릭터 스탯표시
     public void StatusText()
     {
         transform.Find("Background").transform.Find("Infomation").transform.Find("Level").GetComponent<TextMeshProUGUI>().text = "Level  " + player.GetComponent<PlayerStatus>().Level.ToString();

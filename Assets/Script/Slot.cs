@@ -36,6 +36,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public GameObject SlotItem { get { return slotItem; } }
 
+    // 아이템 선택
     public void ItemSelect()
     {
         smithy.GetComponent<Smithy>().ItemPayment(slotItem);
@@ -52,12 +53,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         
     }
 
+    // 아이템 정보 패널 활성화
     public void ActiveItemInform()
     {
         itemInform.GetComponent<ItemInformation>().InputInformation(gameObject);
         hovering = !hovering;
         itemInform.SetActive(hovering);
 
+        // 달려있는 UI 에 따라 패널의 위치 변화
         if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
         else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
         else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
@@ -66,11 +69,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        // 더블클릭의 경우 아이템 정보를 표시해줘야 함
+        // 더블클릭 구분
         if (isOneClick && ((Time.time - timer) > doubleClickSecond))
         {
             isOneClick = false;
         }
 
+        // 원클릭
         if (!isOneClick)
         {
             timer = Time.time;
@@ -86,10 +92,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             }
 
         }
+        // 더블클릭
         else if (isOneClick && (Time.time - timer) < doubleClickSecond)
         {
             isOneClick = false;
-            // 처리
             ActiveItemInform();
             if (transform.parent == enhancerSelecter.transform.GetChild(0))
             {
@@ -103,11 +109,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         Destroy(gameObject);
     }
 
+    // 선택되었음을 알리는 체크표시 활성화
     public void ShowSelect(bool value)
     {
         transform.GetChild(0).Find("Select").gameObject.SetActive(value);
     }
     
+    // 선택되어 투명해진 슬롯 원래 색깔로 복구
     private void SetOriginColor()
     {
         GetComponent<Image>().color = originColor[0];
@@ -115,6 +123,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = originColor[2];
     }
 
+    // 선택된 슬롯 투명화
     private void SetTransParentColor()
     {
         GetComponent<Image>().color = new Color(originColor[0].r, originColor[0].g, originColor[0].b, 75f / 255f);
@@ -122,7 +131,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor[2].r, originColor[2].g, originColor[2].b, 75f / 255f);
     }
     
-
+    // 장착한 아이템과 비교
     private void CompareMountItem()
     {
         if (transform.parent.transform.parent == inventory.transform)
@@ -145,6 +154,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         }
     }
     
+    // 강화기에 올리기
     public void PutInEnhancer()
     {
         if (!originParent && originIndex == -1)
@@ -159,6 +169,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         }
     }
 
+    // 강화기에서 빼오기
     public void PullOutEnhancer()
     {
         if (originParent && originIndex != -1)
@@ -173,18 +184,21 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         }
     }
 
+    // 장착
     public void Mounting()
     {
         inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
         inspector.GetComponent<Inspector>().AddToInspector(this);
     }
 
+    // 해제
     public void DisMounting()
     {
         inspector.GetComponent<Inspector>().DiscardToInspector(this);
         inventory.GetComponent<Inventory>().AddToInventory(this);
     }
 
+    // 슬롯에 이미지 및 색깔 채우기
     public void InsertImage(GameObject item)
     {
         slotItem = item;
@@ -219,6 +233,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 break;
         }
 
+        // 슬롯 크기에 맞추어 아이템 이미지를 확대 축소
         float ratio = 0;
 
         Sprite img = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;

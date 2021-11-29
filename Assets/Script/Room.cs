@@ -234,20 +234,24 @@ public class Room : MonoBehaviour
                         {
                             if (!dataM.subStageEntrance)
                             {
-                                dataM.visible = true;
-                                dataM.subStageEntrance = true;
-
-                                if (subStageNumber != 2 && subStageNumber == data.subStageNumber + 2)
+                                if (GameObject.FindGameObjectWithTag("Monster")) player.transform.position = new Vector3(-1000, -1000, -1000);
+                                else
                                 {
-                                    if (Vector3.Distance(player.transform.position, transform.position) <= 6) CreateStage(true, false);
-                                    else dataM.subStageEntrance = false;
+                                    dataM.visible = true;
+                                    dataM.subStageEntrance = true;
 
+                                    if (subStageNumber != 2 && subStageNumber == data.subStageNumber + 2)
+                                    {
+                                        if (Vector3.Distance(player.transform.position, transform.position) <= 6) CreateStage(true, false);
+                                        else dataM.subStageEntrance = false;
+
+                                    }
+                                    else if (subStageNumber == 2)
+                                    {
+                                        dataM.isClear = true;
+                                    }
+                                    else CreateStage(false, false);
                                 }
-                                else if (subStageNumber == 2)
-                                {
-                                    dataM.isClear = true;
-                                }
-                                else CreateStage(false, false);
                             }
                             else    // 게임 진행중 
                             {

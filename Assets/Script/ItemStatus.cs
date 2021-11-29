@@ -46,6 +46,7 @@ public class ItemStatus : Status
     public GameObject EffectBone { get { return effectBone; } }
     public Data Data { get { return dataI; } }
 
+    // 아이템 삭제
     public void DestoryAll()
     {
         data.datas.Remove(dataI);
@@ -56,8 +57,10 @@ public class ItemStatus : Status
         Destroy(gameObject);
     }
 
+    // 저주 적용
     private void CurseApply()
     {
+        // 장착할 부위에 따라 저주로 감소되는 스탯이 다름
         switch(MountingPart)
         {
             case "Head":
@@ -85,12 +88,14 @@ public class ItemStatus : Status
         }
     }
 
+    // 아이템의 스탯 증가
     public void StatUP(bool enhance)
     {
         if (dataI.isMount) player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, -1);
 
         if (!enhance)
         {
+            // 전용 직업에 의한 상승
             dataI.maxHP = (int)(dataI.maxHP * 1.5f);
             dataI.power *= dataI.power * 1.3f;
             dataI.jumpPower *= 1.2f;
@@ -102,6 +107,7 @@ public class ItemStatus : Status
         }
         else
         {
+            // 강화에 의한 상승
             int delta;
 
             if (Data.enhancingLevel <= 10)
@@ -157,6 +163,7 @@ public class ItemStatus : Status
 
     }
 
+    // 전용직업인지 체크
     private int OccupationCheck()
     {
         if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) return 1;
@@ -191,6 +198,7 @@ public class ItemStatus : Status
         inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
 
         player = GameObject.FindGameObjectWithTag("Player");
+        // 데이터 생성 및 할당
         if (index == -1)
         {
             int[] arr = new int[2];
@@ -253,24 +261,5 @@ public class ItemStatus : Status
         if (dataI == null) dataI = data.datas[index];
         else dataI.SetPosition(transform.position);
 
-        /*
-        Debug.Log(dataI.isAcquired + " " + dataI.isMount + " ");
-        if (dataI.isAcquired)
-        {
-            if (dataI.isMount)
-            {
-                Debug.Log("보여야하는데?");
-                gameObject.SetActive(true);
-            }
-            else gameObject.SetActive(false);
-        }
-        */
-        //if (!room) FindRoom();
-        //else
-        {
-           // Debug.Log(room);
-            //Debug.Log(dataI);
-            //if (!room.GetComponent<Room>().isPlayer && !dataI.isAcquired) DestoryAll();
-        }
     }
 }

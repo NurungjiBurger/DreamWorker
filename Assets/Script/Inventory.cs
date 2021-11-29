@@ -22,11 +22,13 @@ public class Inventory : MonoBehaviour
     public int ItemCount { get { return possessItemList.Count; } }
     public List<Slot> PossessItemList { get { return possessItemList; } }
 
+    // º“¡ˆ±› «•Ω√
     public void GoldText()
     {
           transform.Find("HandMoneyBackground").transform.Find("HandMoney").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
     }
 
+    // ¿Œ∫•≈‰∏Æø°º≠ ª©≥ø
     public Slot DiscardToInventory(int index)
     {
         if (possessItemList.Count != 0)
@@ -39,6 +41,7 @@ public class Inventory : MonoBehaviour
         else return null;
     }
 
+    // æ∆¿Ã≈€ »πµÊ
     public void AddToInventory(Slot slot)
     {
 

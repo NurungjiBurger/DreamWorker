@@ -20,6 +20,7 @@ public class EnhancerSelecter : MonoBehaviour
 
     public List<bool> SelectedList { get { return selectedList; } }
 
+
     public void EnrollItem()
     {
         for (int i = 0; i < selectedList.Count; i++)
@@ -88,6 +89,7 @@ public class EnhancerSelecter : MonoBehaviour
         }
     }
 
+    // 모든 아이템 표기
     public void LoadAllItem()
     {
         Update();
@@ -118,7 +120,7 @@ public class EnhancerSelecter : MonoBehaviour
             SelectItem(tmp, i);
         }
 
-        // inspector
+        // inspector 아이템 
         size = inspector.GetComponent<Inspector>().ItemCount;
         for (int i = size-1; i >= 0; i--)
         {
@@ -130,7 +132,7 @@ public class EnhancerSelecter : MonoBehaviour
             selectedList.Add(false);
         }
 
-        // inventory
+        // inventory 아이템
         size = inventory.GetComponent<Inventory>().ItemCount;
         for (int i = 0;i < size;i++)
         {

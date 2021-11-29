@@ -50,8 +50,9 @@ public class MonsterSensor : MonoBehaviour
                     // 플레이어 피흡
                     player.GetComponent<PlayerStatus>().CalCulateHealth((int)(Dmg * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100)), '+');
                 }
-            }
-            else if (collision.CompareTag("Item") && player.GetComponent<PlayerAttack>().IsAttack)
+            } 
+            // 휘두르는 칼 따위의 오브젝트에도 데미지를 받기 위함
+            else if (collision.CompareTag("Item") && player.GetComponent<PlayerAttack>().IsAttack) 
             {
                 // 회피 실패
                 if (Random.Range(0, 101) > GetComponent<MonsterStatus>().Data.evasionRate)

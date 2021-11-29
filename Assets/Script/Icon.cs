@@ -11,6 +11,7 @@ public class Icon : MonoBehaviour
 
     private GameController gameController;
 
+    // 활성화된 방 찾기
     private void RoomFinder()
     {
         int idx;
@@ -25,13 +26,11 @@ public class Icon : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!gameController) gameController = GameObject.Find("GameController").GetComponent<GameController>();
@@ -42,8 +41,10 @@ public class Icon : MonoBehaviour
 
         Vector3 position;
 
+        // 활성화된 방과 오브젝트를 찾아내었다면
         if (obj && room)
         {
+            // 오브젝트 위치 - 활성화된 방의 좌표를 미니맵에서의 좌표로 치환
             position = obj.transform.position - room.transform.position;
 
             position.x *= 20.8f;

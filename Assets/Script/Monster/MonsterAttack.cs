@@ -57,8 +57,10 @@ public class MonsterAttack : MonoBehaviour
     }
     //public void AnimaotrSetFalse() { animator.SetBool("move", false); }
 
+    // 공격 이펙트 생성 함수
     public void AttackEffectCreate()
     {
+        // 할당된 뼈의 위치에서 공격 이펙트 생성
         if (effect == null && GetComponent<MonsterStatus>().Bone)
         {
             effect = Instantiate(prefabAttackEffect, GetComponent<MonsterStatus>().Bone.transform.position, Quaternion.identity);
@@ -69,20 +71,24 @@ public class MonsterAttack : MonoBehaviour
         }
     }
 
+    // 공격
     private void Attacking()
     {
         if (isAttack )
         {
             animator.SetTrigger("attack");
+            // 공격 타이머 초기화
             attackTimer.TimerSetZero();
         }
     }
 
+    // 공격 결정 함수
     private void DecideAttack()
     {
         // 공격범위내에 있다면
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
         {
+            // 공격이 가능한 상태라면
             if (!isAttack)
             {
                 isAttack = true;

@@ -63,6 +63,7 @@ public class PlayerStatus : Status
         }
     }
 
+    // 경험치 계산
     public void CalCulateExperience(int exp)
     {
         dataP.experience += exp;
@@ -98,6 +99,7 @@ public class PlayerStatus : Status
 
     }
 
+    // 체력 계산
     public void CalCulateHealth(int Dmg, char oper)
     {
         if (oper == '+')
@@ -129,6 +131,7 @@ public class PlayerStatus : Status
         }
     }
 
+    // 소지금 계산
     public bool CalCulateHandMoney(int money, char oper)
     {
         if (oper == '+') { dataP.handMoney += money; return true; }
@@ -144,17 +147,21 @@ public class PlayerStatus : Status
         else return false;
     }
 
+    // 기본 데미지 계산
     private void CalDamage()
     {
         damage = (int)(dataP.power * 1.5);
     }
 
+    // 스탯 계산
     public void CalCulateStat(GameObject item, int how)
     {
+        // 제대로 생성된 아이템이라면
         if (item.GetComponent<ItemStatus>().itemPrfNumber != -1)
         {
             int coefficient;
 
+            // 전용 아이템의 경우 능력치가 배로 증가함
             if (item.GetComponent<ItemStatus>().Occupation == occupation) coefficient = 2;
             else coefficient = 1;
 
@@ -193,6 +200,7 @@ public class PlayerStatus : Status
     {
         GameObject tmp;
 
+        // 데이터 생성
         if (index == -1)
         {
             int[] arr = new int[2];
@@ -214,10 +222,12 @@ public class PlayerStatus : Status
 
         }
 
+        // 플레이어 미니맵 아이콘 생성
         tmp = Instantiate(playerIcon, transform.position, Quaternion.identity);
         tmp.transform.SetParent(GameObject.Find("Canvas").transform.Find("MiniMap").transform.Find("Background"));
         tmp.GetComponent<Icon>().obj = gameObject;
 
+        // 체력바 할당
         hpBar = GameObject.Find("Canvas").transform.Find("PlayerHPBar").GetComponent<RectTransform>();
         nowHPBar = hpBar.Find("php_bar").GetComponent<Image>();
         textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -235,7 +245,5 @@ public class PlayerStatus : Status
 
         if (dataP.jumpPower > 10) dataP.jumpPower = 10;
         if (dataP.moveSpeed > 3) dataP.moveSpeed = 3;
-        // 체력
-        //Debug.Log(dataP.attackSpeed);
     }
 }
