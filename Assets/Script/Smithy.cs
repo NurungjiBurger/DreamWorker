@@ -13,6 +13,20 @@ public class Smithy : MonoBehaviour
     private Slot[] slots;
     private List<GameObject> items = new List<GameObject>();
 
+    public void Clear()
+    {
+        int length = items.Count;
+        for (int idx = 0; idx < length; idx++)
+        {
+            GameObject tmp;
+            tmp = items[0];
+            items.Remove(items[0]);
+            tmp.GetComponent<ItemStatus>().DestoryAll();
+        }
+
+        blackSmith.BlackSmith();
+    }
+
     // 아이템 구매
     public void ItemPayment(GameObject obj)
     {
@@ -32,6 +46,7 @@ public class Smithy : MonoBehaviour
                     obj.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
                     clear = true;
+                    blackSmith.UIActive();
                 }
                 else
                 {
@@ -43,16 +58,7 @@ public class Smithy : MonoBehaviour
 
         if (clear)
         {
-            for (int idx = 0; idx < 3; idx++)
-            {
-                GameObject tmp;
-                tmp = items[0];
-                items.Remove(items[0]);
-                tmp.GetComponent<ItemStatus>().DestoryAll();
-            }
-
-            blackSmith.UIActive();
-            blackSmith.BlackSmith();
+            Clear();
         }
     }
 
@@ -70,7 +76,11 @@ public class Smithy : MonoBehaviour
             items[idx].GetComponent<ItemStatus>().itemPrfNumber = itemidx;
             items[idx].GetComponent<ItemStatus>().Start();
 
-            slots[idx].GetComponent<Slot>().InsertImage(items[idx]);
+            //GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(items[idx], false);
+            //slots[idx].GetComponent<Slot>().InsertImage(items[idx]);
+            if (slots[idx] == null) slots[idx] = transform.GetChild(0).GetChild(idx).gameObject.GetComponent<Slot>();
+
+            slots[idx].InsertImage(items[idx]);
         }
     }
 
@@ -87,6 +97,7 @@ public class Smithy : MonoBehaviour
 
         if (items.Count == 0)
         {
+            
             if (slots == null)
             {
                 slots = new Slot[4];
@@ -94,6 +105,8 @@ public class Smithy : MonoBehaviour
                 for (int idx = 0; idx < 4; idx++) slots[idx] = transform.GetChild(0).GetChild(idx).gameObject.GetComponent<Slot>();
             }
             else ProductDisplay();
+            
+           // ProductDisplay();
         }
 
     }

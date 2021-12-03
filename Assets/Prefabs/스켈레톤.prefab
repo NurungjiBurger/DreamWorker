@@ -116,9 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c028441d3d4217b439fec512ba1c7276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
-  attackRange: 2
   attackQuantity: 1
+  attackRange: 2
   attackSpeed: 2
   prefabAttackEffect: {fileID: 3371286919379478663, guid: ea1dbcd0b5831c343ab965bd56bc7a0d, type: 3}
   attackEffectOffset:
@@ -126,6 +125,7 @@ MonoBehaviour:
   - 0.8
   sizeX: 0
   sizeY: 0
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
 --- !u!114 &5110901806239470643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,13 +139,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recognitionRange: 4
-  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
   offsetX:
   - -0.3
   - 0.5
   offsetY:
   - 7.2
   - 6.2
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
 --- !u!114 &3395771081149220459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,25 +175,25 @@ MonoBehaviour:
   jumpPower: 4
   moveSpeed: 1.5
   attackSpeed: 2
-  name: "\uC2A4\uCF08\uB808\uD1A4"
   defenseRate: 5
   bloodAbsorptionRate: 0
   evasionRate: 10
-  prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
-  miniIcon: {fileID: 0}
+  name: "\uC2A4\uCF08\uB808\uD1A4"
   isBoss: 0
   bodyDmg: 7
   dropRate: 60
   dropItemStartindexber: 0
-  dropItemFinishindexber: 14
-  dropCoin:
-  - {fileID: 8452382426054345512, guid: c5437a6929825d140a4065aac8cfabe8, type: 3}
-  - {fileID: 7103391790794157746, guid: 038db4b916c01e6498ab67b068ce16ca, type: 3}
+  dropItemFinishindexber: 41
+  hpBarYAxis: 1.2
   experience: 50
   effectBone: {fileID: 2732555752003705625}
   dropBone: {fileID: 3702865307386415279}
   monsterIcon: {fileID: 1821452458296802910, guid: b9a3059e3fd8e134f8251f7c5010e922, type: 3}
-  hpBarYAxis: 1.2
+  prefabHpBar: {fileID: 1041531287276773535, guid: c18e00528bf4a344a836f9b15a2c560c, type: 3}
+  dropCoin:
+  - {fileID: 8452382426054345512, guid: c5437a6929825d140a4065aac8cfabe8, type: 3}
+  - {fileID: 7103391790794157746, guid: 038db4b916c01e6498ab67b068ce16ca, type: 3}
+  miniIcon: {fileID: 0}
   monsterPrfNumber: 0
   index: -1
 --- !u!61 &4763057662337307459

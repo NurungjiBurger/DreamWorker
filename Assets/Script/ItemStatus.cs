@@ -97,7 +97,7 @@ public class ItemStatus : Status
         {
             // 전용 직업에 의한 상승
             dataI.maxHP = (int)(dataI.maxHP * 1.5f);
-            dataI.power *= dataI.power * 1.3f;
+            dataI.power *= 1.3f;
             dataI.jumpPower *= 1.2f;
             dataI.moveSpeed *= 1.2f;
             dataI.attackSpeed *= 1.1f;
@@ -177,10 +177,14 @@ public class ItemStatus : Status
         {
             room = GameObject.Find("GameController").GetComponent<GameController>().Room[idx];
 
+            //Debug.Log(idx + " / " + room.GetComponent<Room>().isPlayer);
+
             if (transform.position.x <= room.transform.position.x + 11.0f && transform.position.x >= room.transform.position.x - 11.0f)
             {
                 if (transform.position.y <= room.transform.position.y + 7.5f && transform.position.y >= room.transform.position.y - 7.5f)
                 {
+                    Debug.Log(idx + " / " + room.GetComponent<Room>().isPlayer);
+                    //if (room.GetComponent<Room>().isPlayer != null && !room.GetComponent<Room>().isPlayer) DestoryAll();
                     break;
                 }
             }
@@ -244,14 +248,11 @@ public class ItemStatus : Status
 
             if (dataI.isAcquired)
             {
-                if (dataI.isMount) inspector.GetComponent<Inspector>().AddToInspector(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject));
-                else inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject));
+                if (dataI.isMount) inspector.GetComponent<Inspector>().AddToInspector(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject, true));
+                else inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject, true));
             }
         }
 
-        // 방 찾기
-        FindRoom();
-        if (transform.position.x >= 300 && transform.position.y >= 300) Debug.Log("아이템생성완료");
     }
 
     private void Update()
@@ -259,7 +260,11 @@ public class ItemStatus : Status
         //if (GameObject.Find("GameController").GetComponent<GameController>().GoNext) Destroy(gameObject);
 
         if (dataI == null) dataI = data.datas[index];
-        else dataI.SetPosition(transform.position);
+        else
+        {
+            dataI.SetPosition(transform.position);
+            //if (!dataI.isAcquired && GameObject.Find("GameController").GetComponent<GameController>().Room.Count == data.subStageNumber+3) FindRoom();
+        }
 
     }
 }

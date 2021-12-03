@@ -60,23 +60,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8930f6a86c226743bc4a89b38f7bc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
-  power: 10
+  maxHP: 40
+  power: 15
   jumpPower: 1.2
   moveSpeed: 1.2
   attackSpeed: 1
-  name: "\uC6B4\uB3D9\uD654"
   defenseRate: 1.3
   bloodAbsorptionRate: 1
   evasionRate: 1.5
-  prefabAttack: []
+  name: "\uC6B4\uB3D9\uD654"
+  price: 100
   dedicatedOccupation: 
   mountingPart: Foot
-  grade: 0
   effectBone: {fileID: 0}
   attackType: 
-  price: 100
   description: "\uD65C\uB3D9\uC744 \uD3B8\uD558\uAC8C \uD574\uC8FC\uB294 \uC6B4\uB3D9\uD654"
+  prefabAttack: []
+  grade: 2
   itemPrfNumber: -1
   index: -1
 --- !u!114 &790806709830757516

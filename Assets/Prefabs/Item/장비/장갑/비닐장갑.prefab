@@ -61,23 +61,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10
-  power: 20
+  power: 5
   jumpPower: 1
   moveSpeed: 1
   attackSpeed: 1
-  name: "\uBE44\uB2D0\uC7A5\uAC11"
   defenseRate: 1
   bloodAbsorptionRate: 1
   evasionRate: 1
-  prefabAttack: []
-  dedicatedOccupation: 
+  name: "\uBE44\uB2D0\uC7A5\uAC11"
+  price: 50
+  dedicatedOccupation: "\uC804\uC9C1\uC5C5"
   mountingPart: Hand
-  grade: 0
   effectBone: {fileID: 0}
   attackType: 
-  price: 100
   description: "\uC870\uAE08\uB9CC \uC4F0\uBA74 \uAD6C\uBA4D\uC774 \uB0A0\uAC83\uB9CC
     \uAC19\uC740\uAC78?"
+  prefabAttack: []
+  grade: 0
   itemPrfNumber: -1
   index: -1
 --- !u!114 &3016665813289788130

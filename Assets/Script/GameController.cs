@@ -76,16 +76,26 @@ public class GameController : MonoBehaviour
     }
 
     // 아이템 획득후 해당 아이템 슬롯화
-    public Slot CreateItemSlot(GameObject item)
+    public Slot CreateItemSlot(GameObject item, bool isacquired)
     {
         GameObject tmp;
         tmp = Instantiate(prefabSlot);
 
         tmp.GetComponent<Slot>().InsertImage(item);
 
-        item.gameObject.SetActive(false);
+        // 인벤토리 행
+        if (isacquired)
+        {
 
-        item.GetComponent<ItemStatus>().Data.isAcquired = true;
+            item.gameObject.SetActive(false);
+
+            item.GetComponent<ItemStatus>().Data.isAcquired = true;
+        }
+        // 상점 행
+        else
+        {
+            tmp.transform.SetParent(GameObject.Find("Canvas").transform.Find("Smithy").transform.Find("Background"));
+        }
 
         return tmp.GetComponent<Slot>();
     }
@@ -121,6 +131,8 @@ public class GameController : MonoBehaviour
 
         data.stageEntrance = false;
         activeRoom = null;
+
+        GameObject.Find("Canvas").transform.Find("Smithy").GetComponent<Smithy>().Clear();
     }
 
     public void PortalCreate(GameObject selectRoom, GameObject nowRoom, int direction)

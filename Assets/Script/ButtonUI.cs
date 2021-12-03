@@ -52,6 +52,10 @@ public class ButtonUI : MonoBehaviour
         {
             GameObject.Find("Canvas").transform.Find("MenuButton").GetComponent<ButtonUI>().UIActive();
         }
+        else if (transform.parent.name.Equals("Smithy"))
+        {
+            GameObject.Find("BlackSmith").transform.Find("BlackSmithButton").GetComponent<ButtonUI>().UIActive();
+        }
         else if (transform.parent.name.Equals("Background")) GameObject.Find("Canvas").transform.Find(transform.parent.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
     }

@@ -57,7 +57,7 @@ public class PlayerSensor : MonoBehaviour
                 if (GetComponent<PlayerStatus>().Acquirable && !collision.GetComponent<ItemStatus>().Data.isAcquired)
                 {
                     collision.GetComponent<ItemStatus>().Data.isAcquired = true;
-                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject));
+                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject, true));
                 }
             }
         }
@@ -154,7 +154,7 @@ public class PlayerSensor : MonoBehaviour
                 if (GetComponent<PlayerStatus>().Acquirable && !collision.collider.gameObject.GetComponent<ItemStatus>().Data.isAcquired)
                 {
                     collision.collider.gameObject.GetComponent<ItemStatus>().Data.isAcquired = true;
-                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject));
+                    GetComponent<PlayerStatus>().Inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(collision.gameObject, true));
                 }
             }
 

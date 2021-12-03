@@ -10,7 +10,7 @@ public class Room : MonoBehaviour
     private bool isGoNext;
     private bool monsterPresence;
     public bool isEvent = false;
-    public bool isPlayer = false;
+    public bool isPlayer;
 
     private int subStageNumber;
     private int population;
