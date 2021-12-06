@@ -1,24 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Enhancer : MonoBehaviour
 {
     [SerializeField]
     private GameObject prefabTimer;
+    [SerializeField]
+    private GameObject itemPanel;
+    [SerializeField]
+    private GameObject inspector;
+    [SerializeField]
+    private GameObject inventory;
 
+    private int possessItemPiece;
     private int success;
 
     private GameObject prefabItem;
     private GameObject player;
     private Timer timer;
 
-    private List<Slot> devoteItemList = new List<Slot>();
+    private GameObject itemPiece;
+
+    private Slot devoteItem;
     private Slot enhanceItem;
 
-    public int ItemCount { get { return devoteItemList.Count; } }
-    public List<Slot> DevoteItemList { get { return devoteItemList; } }
+    private int devoteItemPiece;
+
     public Slot EnhanceItem { get { return enhanceItem; } }
 
     // 강화 성공 확률 계산
@@ -27,47 +37,22 @@ public class Enhancer : MonoBehaviour
         success = 0;
 
         // 강화레벨이 높을수록 성공확률은 감소해야함
-        if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 10)
-        {
-            success = 100;
-
-        }
-        else if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel > 10 && enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 30)
+        if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel < 2)
         {
             success = 75;
+
         }
-        else if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel > 30 && enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 60)
+        else if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel >= 2 && enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel < 4)
         {
             success = 50;
         }
-        else if (enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel > 60 && enhanceItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel <= 100)
+        else
         {
             success = 25;
         }
-        else
-        {
-            success = 15;
-        }
 
-        // 아이템의 enhancinglevel * 투자한 아이템 수 ( 1 , 1.125 , 1.25 , 1.375 , 1.5 )
-        switch (devoteItemList.Count)
-        {
-            case 1:
-                success *= 1;
-                break;
-            case 2:
-                success = (int)(success * 1.25f);
-                break;
-            case 3:
-                success = (int)(success * 1.5f);
-                break;
-            case 4:
-                success = (int)(success * 1.75f);
-                break;
-            default:
-                success *= 1;
-                break;
-        }
+        // 성공확률 =  기본확률 + ( 투자한 조각수 * 0.5 )
+        success = (int)((float)success + (devoteItemPiece * 0.5f));
     }
 
     // 강화 성공확률 표시
@@ -75,7 +60,7 @@ public class Enhancer : MonoBehaviour
     {
         CalculateSuccess();
 
-        transform.Find("SuccessRate").GetComponent<TextMeshProUGUI>().text = "강화 성공 확률은 " + success.ToString() + "% 입니다.";
+        transform.Find("SuccessRate").GetComponent<TextMeshProUGUI>().text = "강화 성공 확률은 " + success.ToString() + "% 입니다.\n 제물로 바칠 아이템 조각의 수를 결정해주세요.";
     }
 
     // 강화 성공
@@ -93,29 +78,18 @@ public class Enhancer : MonoBehaviour
     }
 
     // 강화할 아이템 등록
-    public void Enroll()
+    public void Enroll(Slot item, bool enhance)
     {
-        enhanceItem = devoteItemList[0];
-
-        DiscardToEnhancer(false);
+        if (enhance) enhanceItem = item;
+        else devoteItem = item;
     }
 
     public void Enhance()
     {
-        
         CalculateSuccess();
 
-        Slot tmp;
-        int size = devoteItemList.Count;
-
-        // 제물로 사용된 아이템들은 강화 성공 여부에 관계없이 삭제
-        for (int i = 0; i < size; i++)
-        {
-            tmp = devoteItemList[0];
-            devoteItemList.Remove(devoteItemList[0]);
-            tmp.SlotItem.GetComponent<ItemStatus>().DestoryAll();
-            Destroy(tmp.gameObject);
-        }
+        devoteItem.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().DestoryAll();
+        devoteItem.GetComponent<Slot>().DestroyObject();
 
         // 강화 성공시 아이템의 스탯 증가
         if (Random.Range(0,101) <= success)
@@ -127,33 +101,17 @@ public class Enhancer : MonoBehaviour
         {
             Fail();
         }
-    }
-    
-    // 강화창에 올려진 아이템들 제거 ( 인스펙터, 인벤토리로 되돌아감 )
-    public void DiscardToEnhancer(bool value)
-    {
 
-        if (devoteItemList.Count != 0)
-        {
-            Slot tmp;
-            int size = devoteItemList.Count;
-            for (int i = size - 1; i >= 0; i--)
-            {
-                tmp = devoteItemList[i];
-                devoteItemList.Remove(devoteItemList[i]);
-                tmp.GetComponent<Slot>().PullOutEnhancer();
-            }
-        }
-
-        if (value) enhanceItem = null;
+        GameObject.Find("Canvas").transform.Find("ItemPanel").transform.Find("EnhanceButton").GetComponent<ButtonUI>().UIActive();
+        player.GetComponent<PlayerStatus>().Data.itemPiece -= devoteItemPiece;
+        enhanceItem = null;
+        devoteItem = null;
     }
 
-    // 강화창에 아이템을 올림
-    public void AddToEnhancer(Slot slot)
+    private void OnDisable()
     {
-        devoteItemList.Add(slot);
-
-        slot.transform.SetParent(transform.Find("Background").transform);
+        enhanceItem = null;
+        devoteItem = null;
     }
 
     void Start()
@@ -165,34 +123,30 @@ public class Enhancer : MonoBehaviour
 
     void Update()
     {
+        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+        if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
-        if (gameObject.activeInHierarchy == false)
-        {
-            for (int i = 0; i < devoteItemList.Count; i++) devoteItemList.Remove(devoteItemList[0]);
-        }
 
-        // 아무런 아이템이 선택되지 않은 경우
-        if (devoteItemList.Count == 0)
+        if (enhanceItem != null && devoteItem != null && player)
         {
-            transform.Find("ButtonBackground").transform.Find("EnrollButton").gameObject.SetActive(false);
-            transform.Find("ButtonBackground").transform.Find("DevoteButton").gameObject.SetActive(false);
-        }
-        else
-        {
-            // 강화 아이템이 등록되지 않고 선택된 아이템이 한개인 경우
-            if (!enhanceItem && devoteItemList.Count == 1) transform.Find("ButtonBackground").transform.Find("EnrollButton").gameObject.SetActive(true);
-            else transform.Find("ButtonBackground").transform.Find("EnrollButton").gameObject.SetActive(false);
+            itemPanel.SetActive(false);
 
-            // 강화아이템이 등록된 경우
-            if (enhanceItem) transform.Find("ButtonBackground").transform.Find("DevoteButton").gameObject.SetActive(true);
-        }
+            // 플레이어가 소지한 아이템조각이 최대가능 갯수
+            // 0 / 50 ~ 50 / 50
 
-        if (enhanceItem != null && devoteItemList.Count != 0)
-        {
-            // 강화 아이템이 등록되어있고 제물로 바칠 아이템도 선택된 경우 성공 확률 표시
-            transform.Find("SuccessRate").gameObject.SetActive(true);
+            possessItemPiece = player.GetComponent<PlayerStatus>().Data.itemPiece;
+
+            if (possessItemPiece > 50) possessItemPiece = 50;
+
+            transform.Find("SelectNumberBackground").GetChild(0).GetComponent<TextMeshProUGUI>().text = ((int)(transform.Find("Background").GetChild(0).GetComponent<Slider>().value * possessItemPiece)).ToString() + " / " + possessItemPiece.ToString();
+            devoteItemPiece = (int)(transform.Find("Background").GetChild(0).GetComponent<Slider>().value * possessItemPiece);
             EnhancerSuccessRatePrint();
+
+            // 강화 아이템이 등록되어있고 제물로 바칠 아이템도 있는 경우 성공 확률 표시
+            CalculateSuccess();
+
+            transform.Find("SuccessRate").gameObject.SetActive(true);
         }
         else transform.Find("SuccessRate").gameObject.SetActive(false);
 
@@ -201,6 +155,7 @@ public class Enhancer : MonoBehaviour
         {
             transform.Find("Success").gameObject.SetActive(false);
             transform.Find("Fail").gameObject.SetActive(false);
+            if (enhanceItem == null) gameObject.SetActive(false);
         }
     }
 }

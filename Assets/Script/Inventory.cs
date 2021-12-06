@@ -22,10 +22,11 @@ public class Inventory : MonoBehaviour
     public int ItemCount { get { return possessItemList.Count; } }
     public List<Slot> PossessItemList { get { return possessItemList; } }
 
-    // 소지금 표시
-    public void GoldText()
+    // 소지금 및 아이템조각 표시
+    public void StatusText()
     {
-          transform.Find("HandMoneyBackground").transform.Find("HandMoney").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
+        transform.Find("HandMoneyBackground").transform.Find("HandMoney").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().HandMoney.ToString();
+        transform.Find("ItemPiece").transform.Find("Number").transform.Find("Text").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().Data.itemPiece.ToString();
     }
 
     // 인벤토리에서 빼냄
@@ -73,6 +74,6 @@ public class Inventory : MonoBehaviour
         else acquirable = false;
 
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
-        else GoldText();
+        else StatusText();
     }
 }

@@ -95,68 +95,67 @@ public class ItemStatus : Status
 
         if (!enhance)
         {
-            // 전용 직업에 의한 상승
-            dataI.maxHP = (int)(dataI.maxHP * 1.5f);
-            dataI.power *= 1.3f;
-            dataI.jumpPower *= 1.2f;
-            dataI.moveSpeed *= 1.2f;
-            dataI.attackSpeed *= 1.1f;
-            dataI.defenseRate *= 1.1f;
-            dataI.bloodAbsorptionRate *= 1.1f;
-            dataI.evasionRate *= 1.1f;
+            // 전용 직업에 의한 기본 스탯 상승
+            maxHP = (int)(dataI.maxHP * 1.5f);
+            power *= 1.3f;
+            jumpPower *= 1.2f;
+            moveSpeed *= 1.2f;
+            attackSpeed *= 1.1f;
+            defenseRate *= 1.1f;
+            bloodAbsorptionRate *= 1.1f;
+            evasionRate *= 1.1f;
+
+            if (enhancingLevel == 0)
+            {
+                dataI.maxHP = maxHP;
+                dataI.power = power;
+                dataI.jumpPower = jumpPower;
+                dataI.moveSpeed = moveSpeed;
+                dataI.attackSpeed = attackSpeed;
+                dataI.defenseRate = defenseRate;
+                dataI.bloodAbsorptionRate = bloodAbsorptionRate;
+                dataI.evasionRate = evasionRate;
+            }
         }
         else
         {
-            // 강화에 의한 상승
-            int delta;
+            if (dataI.enhancingLevel < 6)
+            {
+                // 강화에 의한 상승
+                switch (MountingPart)
+                {
+                    case "Head":
+                        dataI.maxHP += (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)maxHP);
+                        dataI.defenseRate += (1.0f - ((float)dataI.cursedRate / 100)) * defenseRate;
+                        break;
+                    case "Hand":
+                        dataI.maxHP += (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)maxHP);
+                        dataI.power += (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)power);
+                        dataI.attackSpeed += (1.0f - ((float)dataI.cursedRate / 100)) * attackSpeed;
+                        dataI.defenseRate += (1.0f - ((float)dataI.cursedRate / 100)) * defenseRate;
+                        break;
+                    case "Foot":
+                        dataI.defenseRate += (1.0f - ((float)dataI.cursedRate / 100)) * defenseRate;
+                        dataI.moveSpeed += (1.0f - ((float)dataI.cursedRate / 100)) * moveSpeed;
+                        break;
+                    case "Body":
+                        dataI.maxHP += (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)maxHP);
+                        dataI.defenseRate += (1.0f - ((float)dataI.cursedRate / 100)) * defenseRate;
+                        break;
+                    case "Weapon":
+                        dataI.power += (int)((1.0f - ((float)dataI.cursedRate / 100)) * (float)power);
+                        dataI.attackSpeed += (1.0f - ((float)dataI.cursedRate / 100)) * attackSpeed;
+                        break;
+                    default:
+                        break;
+                }
 
-            if (Data.enhancingLevel <= 10)
-            {
-                delta = 70;
-            }
-            else if (Data.enhancingLevel > 10 && Data.enhancingLevel <= 30)
-            {
-                delta = 50;
-            }
-            else if (Data.enhancingLevel > 30 && Data.enhancingLevel <= 60)
-            {
-                delta = 30;
+                dataI.enhancingLevel++;
             }
             else
             {
-                delta = 10;
+                Debug.Log("강화수치가 최대입니다.");
             }
-
-            switch (MountingPart)
-            {
-                case "Head":
-                    dataI.maxHP += (maxHP / delta);
-                    dataI.defenseRate += (defenseRate / delta);
-                    break;
-                case "Hand":
-                    dataI.maxHP += (maxHP / delta);
-                    dataI.power += (power / delta);
-                    dataI.attackSpeed += (attackSpeed / 50);
-                    dataI.defenseRate += (defenseRate / delta);
-                    break;
-                case "Foot":
-                    dataI.defenseRate += (defenseRate / delta);
-                    dataI.moveSpeed += (moveSpeed / delta);
-                    break;
-                case "Body":
-                    dataI.maxHP += (maxHP / delta);
-                    dataI.defenseRate += (defenseRate / delta);
-                    break;
-                case "Weapon":
-                    dataI.power += (power / delta);
-                    dataI.attackSpeed += (attackSpeed / 50);
-                    break;
-                default:
-                    break;
-            }
-
-            if ((dataI.cursedRate -= 1) < 0) dataI.cursedRate = 0;
-            dataI.enhancingLevel++;
         }
 
         player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, 1);
@@ -237,8 +236,6 @@ public class ItemStatus : Status
                 default:
                     break;
             }
-
-            if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) StatUP(false);
         }
         else
         {
@@ -252,6 +249,8 @@ public class ItemStatus : Status
                 else inventory.GetComponent<Inventory>().AddToInventory(GameObject.Find("GameController").GetComponent<GameController>().CreateItemSlot(gameObject, true));
             }
         }
+
+        if (player.GetComponent<PlayerStatus>().Occupation == dedicatedOccupation) StatUP(false);
 
     }
 

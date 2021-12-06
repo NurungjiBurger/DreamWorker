@@ -29,10 +29,7 @@ public class UISensor : MonoBehaviour
             else if (collision.gameObject.name == "LeftBox" || Input.GetKey(KeyCode.LeftArrow)) direction = 2;
             else if (collision.gameObject.name == "UpBox") direction = 3;
             else if (collision.gameObject.name == "DownBox" || Input.GetKey(KeyCode.DownArrow)) direction = 4;
-            else //if (collision.gameObject.name == "StopBox") direction = 0;
-            {
-                direction = 0;
-            }
+            else if (collision.gameObject.name == "StopBox") direction = 0;
         }
     }
 

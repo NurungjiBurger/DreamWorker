@@ -71,7 +71,7 @@ public class PlayerStatus : Status
 
         if (dataP.experience >= dataP.needExperience)
         {
-            dataP.power += 5;
+            dataP.power += 1;
             dataP.level++;
 
             switch(dataP.level)
@@ -215,6 +215,20 @@ public class PlayerStatus : Status
 
             tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
             tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
+            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
+            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
         }
         else
         {
@@ -245,5 +259,6 @@ public class PlayerStatus : Status
 
         if (dataP.jumpPower > 10) dataP.jumpPower = 10;
         if (dataP.moveSpeed > 3) dataP.moveSpeed = 3;
+
     }
 }

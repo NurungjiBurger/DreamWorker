@@ -40,8 +40,11 @@ public class ButtonUI : MonoBehaviour
     {
         if (transform.parent.name.Equals("Enhancer"))
         {
-            GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
-            GameObject.Find("Canvas").transform.Find("Enhancer").GetComponent<Enhancer>().DiscardToEnhancer(true);
+            Debug.Log("잘되는데?");
+            //GameObject.Find("Canvas").transform.Find("Inventory").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
+            //GameObject.Find("Canvas").transform.Find("Enhancer").GetComponent<Enhancer>().DiscardToEnhancer(true);
+            GameObject.Find("Canvas").transform.Find("ItemPanel").transform.Find("EnhanceButton").GetComponent<ButtonUI>().UIActive();
+            GameObject.Find("Canvas").transform.Find("Enhancer").gameObject.SetActive(false);
 
         }
         else if (transform.parent.name.Equals("Inventory") || transform.parent.name.Equals("Inspector"))
@@ -69,7 +72,6 @@ public class ButtonUI : MonoBehaviour
     public void UIActive()
     {
         onOff = !onOff;
-        if (transform.name == "LoadButton" && onOff) GameObject.Find("Canvas").transform.Find("EnhancerSelecter").GetComponent<EnhancerSelecter>().LoadAllItem();
     }
 
     void Start()
@@ -88,9 +90,6 @@ public class ButtonUI : MonoBehaviour
                     ui[0] = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
                     ui[1] = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
                     break;
-                case "EnhancerButton":
-                    ui[0] = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
-                    break;
                 case "LoadButton":
                     ui[0] = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
                     ui[0].SetActive(onOff);
@@ -107,12 +106,15 @@ public class ButtonUI : MonoBehaviour
                 case "MenuButton":
                     ui[0] = GameObject.Find("Canvas").transform.Find("Pause").gameObject;
                     break;
+                case "EnhanceButton":
+                    ui[0] = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
+                    break;
                 default:
                     break;
             }
         }
         else
-        {
+        { 
             ui[0].SetActive(onOff);
             if (ui[1]) ui[1].SetActive(onOff);
         }

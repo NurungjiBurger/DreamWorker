@@ -92,6 +92,8 @@ public class Inspector : MonoBehaviour
     // 인스펙터에 캐릭터 스탯표시
     public void StatusText()
     {
+        transform.Find("Background").transform.Find("Character").transform.GetComponent<Image>().sprite = player.GetComponent<PlayerStatus>().PlayerImage;
+
         transform.Find("Background").transform.Find("Infomation").transform.Find("Level").GetComponent<TextMeshProUGUI>().text = "Level  " + player.GetComponent<PlayerStatus>().Level.ToString();
         transform.Find("Background").transform.Find("Infomation").transform.Find("Occupation").GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerStatus>().Occupation;
 
@@ -115,7 +117,6 @@ public class Inspector : MonoBehaviour
         if (!player)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            transform.Find("Background").transform.Find("Character").transform.GetComponent<Image>().sprite = player.GetComponent<PlayerStatus>().PlayerImage;
         }
         else StatusText();
 

@@ -19,14 +19,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private float doubleClickSecond = 0.25f;
     private double timer = 0;
 
+    private GameObject itemPanel;
     private GameObject ui;
     private GameObject slotItem;
     private GameObject player;
     private GameObject inventory;
     private GameObject inspector;
     private GameObject itemInform;
-    private GameObject enhancer;
-    private GameObject enhancerSelecter;
+//    private GameObject enhancer;
+//    private GameObject enhancerSelecter;
     private GameObject selecter;
     private GameObject smithy;   
     private GameObject originParent = null;
@@ -61,15 +62,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         itemInform.SetActive(hovering);
 
         // 달려있는 UI 에 따라 패널의 위치 변화
+        /*
         if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
         else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
         else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
-        else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
+        */
+        //else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // 더블클릭의 경우 아이템 정보를 표시해줘야 함
         // 더블클릭 구분
         if (isOneClick && ((Time.time - timer) > doubleClickSecond))
         {
@@ -81,31 +83,20 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             timer = Time.time;
             isOneClick = true;
-
-            if (transform.parent == enhancerSelecter.transform.GetChild(0))
-            {
-                enhancerSelecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
-            }
-            else
-            {
-
-            }
-
         }
         // 더블클릭
         else if (isOneClick && (Time.time - timer) < doubleClickSecond)
         {
             isOneClick = false;
-            ActiveItemInform();
-            if (transform.parent == enhancerSelecter.transform.GetChild(0))
-            {
-                enhancerSelecter.GetComponent<EnhancerSelecter>().SelectItem(this, transform.GetSiblingIndex());
-            }
+            // 패널 온
+            itemPanel.SetActive(!itemPanel.activeSelf);
+            itemPanel.GetComponent<ItemPanel>().AllocateSlot(this);
         }
     }
 
     public void DestroyObject()
     {
+        if (transform.parent.parent == inventory.transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
         Destroy(gameObject);
     }
 
@@ -165,7 +156,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             if (transform.parent == inventory.transform.Find("Background").transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
             else inspector.GetComponent<Inspector>().DiscardToInspector(this);
 
-            enhancer.GetComponent<Enhancer>().AddToEnhancer(this);
+            //enhancer.GetComponent<Enhancer>().AddToEnhancer(this);
         }
     }
 
@@ -264,18 +255,20 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     void Update()
     {
+        if (!itemPanel) itemPanel = GameObject.Find("Canvas").transform.Find("ItemPanel").gameObject;
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
         if (!itemInform) itemInform = GameObject.Find("Canvas").transform.Find("ItemInform").gameObject;
-        if (!enhancer) enhancer = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
-        if (!enhancerSelecter) enhancerSelecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
+       // if (!enhancer) enhancer = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
+       // if (!enhancerSelecter) enhancerSelecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
         if (!smithy) smithy = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
 
         if (slotItem != null)
         {
             if (transform.parent.parent == smithy.transform) transform.GetChild(0).Find("PriceBackground").Find("Price").GetComponent<TextMeshProUGUI>().text = slotItem.GetComponent<ItemStatus>().Price.ToString();
 
+            /*
             if (transform.parent.parent != enhancerSelecter.transform)
             {
                 if (slotItem.GetComponent<ItemStatus>().IsMount) SetTransParentColor();
@@ -283,6 +276,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
                 ShowSelect(false);
             }
+            */
         }
     }
 }

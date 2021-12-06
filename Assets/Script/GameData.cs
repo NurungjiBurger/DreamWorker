@@ -31,6 +31,8 @@ public class Data
 
     //////////////////////////////////////////////// // 플레이어
 
+    public int itemPiece;
+
     public int handMoney;
     public int level;
     public int experience;
@@ -106,6 +108,7 @@ public class Data
 
             if (name == "Player")
             {
+                itemPiece = 5000;
                 handMoney = 0;
                 level = 1;
                 experience = 0;
