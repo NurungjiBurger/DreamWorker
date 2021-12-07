@@ -23,8 +23,6 @@ public class Smithy : MonoBehaviour
             items.Remove(items[0]);
             tmp.GetComponent<ItemStatus>().DestoryAll();
         }
-
-        blackSmith.BlackSmith();
     }
 
     // 아이템 구매
@@ -59,6 +57,7 @@ public class Smithy : MonoBehaviour
         if (clear)
         {
             Clear();
+            blackSmith.BlackSmith();
         }
     }
 

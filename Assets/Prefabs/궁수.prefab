@@ -1710,6 +1710,8 @@ MonoBehaviour:
   occupation: archer
   handBone: {fileID: 1567140013943674303}
   playerIcon: {fileID: 7876186749358279507, guid: 3e8490a723c7f204f9acd2eb49f031cb, type: 3}
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  levelUP: {fileID: 0}
   playerImage:
   - {fileID: -2487460197355101067, guid: 6581560465c771743b0f3ad1144b4f7e, type: 3}
   - {fileID: 1506378578506205021, guid: 1084ff68752c6484bb2aba4ea97311c6, type: 3}

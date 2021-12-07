@@ -91,8 +91,6 @@ public class ItemStatus : Status
     // 아이템의 스탯 증가
     public void StatUP(bool enhance)
     {
-        if (dataI.isMount) player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, -1);
-
         if (!enhance)
         {
             // 전용 직업에 의한 기본 스탯 상승
@@ -121,6 +119,8 @@ public class ItemStatus : Status
         {
             if (dataI.enhancingLevel < 6)
             {
+                if (dataI.isMount) player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, -1);
+
                 // 강화에 의한 상승
                 switch (MountingPart)
                 {
@@ -151,15 +151,14 @@ public class ItemStatus : Status
                 }
 
                 dataI.enhancingLevel++;
+
+                player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, 1);
             }
             else
             {
                 Debug.Log("강화수치가 최대입니다.");
             }
         }
-
-        player.GetComponent<PlayerStatus>().CalCulateStat(gameObject, 1);
-
     }
 
     // 전용직업인지 체크

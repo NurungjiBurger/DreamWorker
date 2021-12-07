@@ -145,15 +145,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 40
   power: 20
-  jumpPower: 0.9
-  moveSpeed: 0.9
-  attackSpeed: 1
-  defenseRate: 0.9
+  jumpPower: 0.2
+  moveSpeed: 0.1
+  attackSpeed: 0
+  defenseRate: 0.7
   bloodAbsorptionRate: 1
-  evasionRate: 0.9
+  evasionRate: 0
   name: "\uD558\uC774\uD790"
   price: 600
-  dedicatedOccupation: "\uC804\uC9C1"
+  dedicatedOccupation: "\uC804\uC9C1\uC5C5"
   mountingPart: Foot
   effectBone: {fileID: 0}
   attackType: 

@@ -9,16 +9,19 @@ public class UISensor : MonoBehaviour
 
     private Direction dir = Direction.Stop;
     */
+    /*
     private bool mountAble = false;
     private bool toInventory = false;
-
+    */
     private int direction = 0;
 
+    /*
     private GameObject inspector;
     private GameObject inventory;
 
     public bool MountAble { get { return mountAble ; } }
     public bool ToInventory { get { return toInventory; } }
+    */
     public int Direction { get { return direction; } }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -35,6 +38,7 @@ public class UISensor : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
         if (name.Equals("Slot(Clone)"))
         {
             if (collision.collider.name.Equals("Inventory"))
@@ -48,6 +52,7 @@ public class UISensor : MonoBehaviour
                 toInventory = false;
             }
         }
+        */
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -73,7 +78,7 @@ public class UISensor : MonoBehaviour
 
     void Update()
     {
-        if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
-        if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+       // if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+      //  if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
     }
 }

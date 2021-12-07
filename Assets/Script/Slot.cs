@@ -15,7 +15,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private bool hovering = false;
     private bool isOneClick = false;
 
-    private int originIndex = -1;
     private float doubleClickSecond = 0.25f;
     private double timer = 0;
 
@@ -26,13 +25,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private GameObject inventory;
     private GameObject inspector;
     private GameObject itemInform;
-//    private GameObject enhancer;
-//    private GameObject enhancerSelecter;
     private GameObject selecter;
     private GameObject smithy;   
-    private GameObject originParent = null;
 
-    private Color[] originColor = new Color[3];
     private Sprite itemImage;
 
     public GameObject SlotItem { get { return slotItem; } }
@@ -60,14 +55,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         itemInform.GetComponent<ItemInformation>().InputInformation(gameObject);
         hovering = !hovering;
         itemInform.SetActive(hovering);
-
-        // 달려있는 UI 에 따라 패널의 위치 변화
-        /*
-        if (transform.parent.parent == inventory.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(transform.GetSiblingIndex(), Input.mousePosition);
-        else if (transform.parent.parent == inspector.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
-        else if (transform.parent.parent == smithy.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
-        */
-        //else if (transform.parent.parent == enhancerSelecter.transform) itemInform.GetComponent<ItemInformation>().ModifyPosition(36, Input.mousePosition);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -96,31 +83,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void DestroyObject()
     {
-        if (transform.parent.parent == inventory.transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
+        if (transform.parent.parent == inventory.transform)
+        {
+            // 인벤에서 제거
+            inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
+            // 아이템 데이터 삭제
+            slotItem.GetComponent<ItemStatus>().DestoryAll();
+        }
         Destroy(gameObject);
     }
 
-    // 선택되었음을 알리는 체크표시 활성화
-    public void ShowSelect(bool value)
-    {
-        transform.GetChild(0).Find("Select").gameObject.SetActive(value);
-    }
-    
-    // 선택되어 투명해진 슬롯 원래 색깔로 복구
-    private void SetOriginColor()
-    {
-        GetComponent<Image>().color = originColor[0];
-        transform.Find("Background").GetComponent<Image>().color = originColor[1];
-        transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = originColor[2];
-    }
-
-    // 선택된 슬롯 투명화
-    private void SetTransParentColor()
-    {
-        GetComponent<Image>().color = new Color(originColor[0].r, originColor[0].g, originColor[0].b, 75f / 255f);
-        transform.Find("Background").GetComponent<Image>().color = new Color(originColor[1].r, originColor[1].g, originColor[1].b, 75f / 255f);
-        transform.Find("Background").transform.Find("Item").GetComponent<Image>().color = new Color(originColor[2].r, originColor[2].g, originColor[2].b, 75f / 255f);
-    }
     
     // 장착한 아이템과 비교
     private void CompareMountItem()
@@ -143,50 +115,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             if (ui) Destroy(ui.gameObject);
         }
-    }
-    
-    // 강화기에 올리기
-    public void PutInEnhancer()
-    {
-        if (!originParent && originIndex == -1)
-        {
-            originParent = transform.parent.gameObject;
-            originIndex = transform.GetSiblingIndex();
-
-            if (transform.parent == inventory.transform.Find("Background").transform) inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
-            else inspector.GetComponent<Inspector>().DiscardToInspector(this);
-
-            //enhancer.GetComponent<Enhancer>().AddToEnhancer(this);
-        }
-    }
-
-    // 강화기에서 빼오기
-    public void PullOutEnhancer()
-    {
-        if (originParent && originIndex != -1)
-        {
-            if (originParent.transform.parent == inspector.transform) inspector.GetComponent<Inspector>().AddToInspector(this);
-            else if (originParent.transform.parent == inventory.transform) inventory.GetComponent<Inventory>().AddToInventory(this);
-
-            transform.SetSiblingIndex(originIndex);
-
-            originParent = null;
-            originIndex = -1;
-        }
-    }
-
-    // 장착
-    public void Mounting()
-    {
-        inventory.GetComponent<Inventory>().DiscardToInventory(transform.GetSiblingIndex());
-        inspector.GetComponent<Inspector>().AddToInspector(this);
-    }
-
-    // 해제
-    public void DisMounting()
-    {
-        inspector.GetComponent<Inspector>().DiscardToInspector(this);
-        inventory.GetComponent<Inventory>().AddToInventory(this);
     }
 
     // 슬롯에 이미지 및 색깔 채우기
@@ -242,10 +170,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         transform.Find("Background").transform.Find("Item").GetComponent<RectTransform>().sizeDelta = new Vector2(img.bounds.size.x * ratio, img.bounds.size.y * ratio);
 
         transform.Find("Background").transform.Find("Item").GetComponent<Image>().sprite = img;
-
-        originColor[0] = GetComponent<Image>().color;
-        originColor[1] = transform.Find("Background").GetComponent<Image>().color;
-        originColor[2] = transform.Find("Background").transform.Find("Item").GetComponent<Image>().color;
     }
 
     void Start()
@@ -260,23 +184,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
         if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
         if (!itemInform) itemInform = GameObject.Find("Canvas").transform.Find("ItemInform").gameObject;
-       // if (!enhancer) enhancer = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
-       // if (!enhancerSelecter) enhancerSelecter = GameObject.Find("Canvas").transform.Find("EnhancerSelecter").gameObject;
         if (!smithy) smithy = GameObject.Find("Canvas").transform.Find("Smithy").gameObject;
 
         if (slotItem != null)
         {
-            if (transform.parent.parent == smithy.transform) transform.GetChild(0).Find("PriceBackground").Find("Price").GetComponent<TextMeshProUGUI>().text = slotItem.GetComponent<ItemStatus>().Price.ToString();
-
-            /*
-            if (transform.parent.parent != enhancerSelecter.transform)
+            if (transform.parent == smithy.transform.GetChild(0).transform)
             {
-                if (slotItem.GetComponent<ItemStatus>().IsMount) SetTransParentColor();
-                else SetOriginColor();
-
-                ShowSelect(false);
+                Debug.Log("왜 들어오는거야?");
+                transform.GetChild(0).Find("PriceBackground").Find("Price").GetComponent<TextMeshProUGUI>().text = slotItem.GetComponent<ItemStatus>().Price.ToString();
             }
-            */
         }
     }
 }

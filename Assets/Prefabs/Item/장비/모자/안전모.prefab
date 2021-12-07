@@ -145,12 +145,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 40
   power: 15
-  jumpPower: 1
-  moveSpeed: 1
-  attackSpeed: 1
-  defenseRate: 1.5
+  jumpPower: 0.3
+  moveSpeed: 0.15
+  attackSpeed: 0
+  defenseRate: 3
   bloodAbsorptionRate: 1
-  evasionRate: 1
+  evasionRate: 4
   name: "\uC548\uC804\uBAA8"
   price: 600
   dedicatedOccupation: "\uC804\uC9C1\uC5C5"

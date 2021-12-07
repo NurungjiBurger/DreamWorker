@@ -145,11 +145,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 60
   power: 20
-  jumpPower: 1.1
-  moveSpeed: 1.1
-  attackSpeed: 1.1
-  defenseRate: 1.1
-  bloodAbsorptionRate: 1
+  jumpPower: 0.2
+  moveSpeed: 0.15
+  attackSpeed: 0
+  defenseRate: 3
+  bloodAbsorptionRate: 4
   evasionRate: 1
   name: "\uD5EC\uBA67"
   price: 1000

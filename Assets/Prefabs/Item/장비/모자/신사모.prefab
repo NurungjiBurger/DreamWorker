@@ -62,19 +62,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 20
   power: 10
-  jumpPower: 1
-  moveSpeed: 1
-  attackSpeed: 1
-  defenseRate: 1.2
-  bloodAbsorptionRate: 1
-  evasionRate: 1
+  jumpPower: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  defenseRate: 1
+  bloodAbsorptionRate: 5
+  evasionRate: 5
   name: "\uC2E0\uC0AC\uBAA8"
   price: 300
   dedicatedOccupation: "\uC804\uC9C1\uC5C5"
   mountingPart: Head
   effectBone: {fileID: 0}
   attackType: 
-  description: "\uC2E0\uC0AC\uBAA8."
+  description: "\uC138\uC0C1\uC5D0\uC11C \uAC00\uC7A5 \uC810\uC796\uC740 \uC2E0\uC0AC\uAC00
+    \uC4F0\uB358 \uBAA8\uC790. \uC660\uC9C0 \uBC1C\uAC78\uC74C\uC774 \uC870\uAE08
+    \uBB34\uAC70\uC6CC\uC9C4 \uAC83 \uAC19\uC740\uB370... \uAE30\uBD84\uD0D3\uC778\uAC00?"
   prefabAttack: []
   grade: 1
   itemPrfNumber: -1

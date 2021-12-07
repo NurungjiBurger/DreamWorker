@@ -197,6 +197,7 @@ public class GameController : MonoBehaviour
             room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(0);
 
             npc[0].transform.position = room[room.Count-1].transform.position;
+            npc[0].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
             // 지옥
             map.Add(Instantiate(prefabMapDesigns[prefabMapDesigns.Length - 1], new Vector3(-300, -300, 0), Quaternion.identity));
@@ -524,6 +525,7 @@ public class GameController : MonoBehaviour
             // 아이템 복구
             else if (data.datas[idx].structName == "Item")
             {
+                Debug.Log("아이템 복구");
                 obj = Instantiate(prefabItems[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
 
                 obj.GetComponent<ItemStatus>().itemPrfNumber = data.datas[idx].prfNumber;

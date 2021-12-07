@@ -137,23 +137,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 0
-  power: 40
-  jumpPower: 1
-  moveSpeed: 1
-  attackSpeed: 1.3
+  power: 30
+  jumpPower: 0.1
+  moveSpeed: 0.1
+  attackSpeed: 0.05
+  defenseRate: 0
+  bloodAbsorptionRate: 1
+  evasionRate: 3
   name: "\uBD80\uCC44"
-  defenseRate: 1
-  bloodAbsorptionRate: 1.2
-  evasionRate: 1
-  prefabAttack:
-  - {fileID: 6330355989328511912, guid: 3af4f50ea4b913245a28598be7ca9be7, type: 3}
+  price: 100
   dedicatedOccupation: "\uB9C8\uBC95\uC0AC"
   mountingPart: Weapon
-  grade: 0
   effectBone: {fileID: 5276904517093856343}
   attackType: oneHandWield
-  price: 100
-  description: "\uBD80\uCC44"
+  description: "\uC0B0\uB118\uACE0 \uBB3C\uAC74\uB108 \uCC3E\uC544\uC628 \uB9C8\uB825\uBD80\uCC44.
+    \uD718\uB450\uB974\uAE30\uB9CC\uD574\uB3C4 \uAC70\uC13C \uBC14\uB78C\uC774 \uBD84\uB2E4."
+  prefabAttack:
+  - {fileID: 6330355989328511912, guid: 3af4f50ea4b913245a28598be7ca9be7, type: 3}
+  grade: 2
   itemPrfNumber: -1
   index: -1
 --- !u!114 &-6090757465333679244

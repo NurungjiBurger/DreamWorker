@@ -18,6 +18,10 @@ public class PlayerStatus : Status
     [SerializeField]
     private GameObject playerIcon;
     [SerializeField]
+    private GameObject prefabTimer;
+    [SerializeField]
+    private GameObject levelUP;
+    [SerializeField]
     private Sprite[] playerImage;
 
     public int characterPrfNumber;
@@ -25,6 +29,7 @@ public class PlayerStatus : Status
     private int inventoryItemNumber;
 
     private GameObject inventory;
+    private Timer levelTimer;
 
     RectTransform hpBar;
     private Image nowHPBar;
@@ -47,19 +52,30 @@ public class PlayerStatus : Status
     {
         if (dataP.forthEvolution)
         {
-            // 공격력, 이동속도, 방어력 소폭 증가
+            // 공격력, 회피 대폭 증가
+            dataP.power += 20;
+            dataP.evasionRate += 20;
         }
         else if (dataP.thirdEvolution)
         {
-            // 공격력, 점프력, 체력 소폭 증가
+            // 공격력, 흡혈 증가
+            dataP.power += 10;
+            dataP.bloodAbsorptionRate += 10;
         }
         else if (dataP.secondEvolution)
         {
-            // 공격력, 흡혈 증가
+            // 공격력, 점프력, 체력 소폭 증가
+            dataP.power += 5;
+            dataP.jumpPower += 0.05f;
+            dataP.maxHP += 10;
+            dataP.nowHP += 10;
         }
         else if (dataP.firstEvolution)
         {
-            // 공격력, 회피 대폭 증가
+            // 공격력, 이동속도, 방어력 소폭 증가
+            dataP.power += 5;
+            dataP.moveSpeed += 0.05f;
+            dataP.defenseRate += 5;
         }
     }
 
@@ -67,33 +83,33 @@ public class PlayerStatus : Status
     public void CalCulateExperience(int exp)
     {
         dataP.experience += exp;
-        dataP.needExperience = dataP.level * 100;
+        dataP.needExperience = dataP.level * 10;
+       // dataP.needExperience = dataP.level * 100;
 
         if (dataP.experience >= dataP.needExperience)
         {
             dataP.power += 1;
             dataP.level++;
+            //dataP.experience = 0;
 
-            switch(dataP.level)
+            levelUP.SetActive(true);
+            levelTimer.TimerSetZero();
+
+            if (dataP.level >= 10 && !dataP.firstEvolution)
             {
-                case 10:
-                    dataP.firstEvolution = true;
-                    Evolution();
-                    break;
-                case 30:
-                    dataP.secondEvolution = true;
-                    Evolution();
-                    break;
-                case 60:
-                    dataP.thirdEvolution = true;
-                    Evolution();
-                    break;
-                case 100:
-                    dataP.forthEvolution = true;
-                    Evolution();
-                    break;
-                default:
-                    break;
+                dataP.firstEvolution = true; Evolution();
+            }
+            else if (dataP.level >= 30 && !dataP.secondEvolution)
+            {
+                dataP.secondEvolution = true; Evolution();
+            }
+            else if (dataP.level >= 60 && !dataP.thirdEvolution)
+            {
+                dataP.thirdEvolution = true; Evolution();
+            }
+            else if (dataP.level >= 100 && !dataP.forthEvolution)
+            {
+                dataP.forthEvolution = true; Evolution();
             }
         }
 
@@ -156,37 +172,20 @@ public class PlayerStatus : Status
     // 스탯 계산
     public void CalCulateStat(GameObject item, int how)
     {
-        // 제대로 생성된 아이템이라면
+        // 제대로 생성된 아이템이라면 프리팹넘버를 지니고 있을것
         if (item.GetComponent<ItemStatus>().itemPrfNumber != -1)
         {
-            int coefficient;
-
-            // 전용 아이템의 경우 능력치가 배로 증가함
-            if (item.GetComponent<ItemStatus>().Occupation == occupation) coefficient = 2;
-            else coefficient = 1;
 
             dataP.defenseRate += item.GetComponent<ItemStatus>().Data.defenseRate * how;
             dataP.maxHP += item.GetComponent<ItemStatus>().Data.maxHP * how;
             dataP.nowHP += item.GetComponent<ItemStatus>().Data.nowHP * how;
-            dataP.power += item.GetComponent<ItemStatus>().Data.power * how * coefficient;
-            if (how == 1)
-            {
-                if (item.GetComponent<ItemStatus>().Data.attackSpeed != 0) dataP.attackSpeed /= item.GetComponent<ItemStatus>().Data.attackSpeed;
-                if (item.GetComponent<ItemStatus>().Data.jumpPower != 0) dataP.jumpPower *= item.GetComponent<ItemStatus>().Data.jumpPower;
-                if (item.GetComponent<ItemStatus>().Data.moveSpeed != 0) dataP.moveSpeed *= item.GetComponent<ItemStatus>().Data.moveSpeed;
-                if (item.GetComponent<ItemStatus>().Data.defenseRate != 0) dataP.defenseRate *= item.GetComponent<ItemStatus>().Data.defenseRate;
-                if (item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate != 0) dataP.bloodAbsorptionRate *= item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate;
-                if (item.GetComponent<ItemStatus>().Data.evasionRate != 0) dataP.evasionRate *= item.GetComponent<ItemStatus>().Data.evasionRate;
-            }
-            else
-            {
-                if (item.GetComponent<ItemStatus>().Data.attackSpeed != 0) dataP.attackSpeed *= item.GetComponent<ItemStatus>().Data.attackSpeed;
-                if (item.GetComponent<ItemStatus>().Data.jumpPower != 0) dataP.jumpPower /= item.GetComponent<ItemStatus>().Data.jumpPower;
-                if (item.GetComponent<ItemStatus>().Data.moveSpeed != 0) dataP.moveSpeed /= item.GetComponent<ItemStatus>().Data.moveSpeed;
-                if (item.GetComponent<ItemStatus>().Data.defenseRate != 0) dataP.defenseRate /= item.GetComponent<ItemStatus>().Data.defenseRate;
-                if (item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate != 0) dataP.bloodAbsorptionRate /= item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate;
-                if (item.GetComponent<ItemStatus>().Data.evasionRate != 0) dataP.evasionRate /= item.GetComponent<ItemStatus>().Data.evasionRate;
-            }
+            dataP.power += item.GetComponent<ItemStatus>().Data.power * how;
+            dataP.evasionRate += item.GetComponent<ItemStatus>().Data.evasionRate * how;
+            dataP.bloodAbsorptionRate += item.GetComponent<ItemStatus>().Data.bloodAbsorptionRate * how;
+            dataP.attackSpeed -= item.GetComponent<ItemStatus>().Data.attackSpeed * how;
+            dataP.jumpPower += item.GetComponent<ItemStatus>().Data.jumpPower * how;
+            dataP.moveSpeed += item.GetComponent<ItemStatus>().Data.moveSpeed * how;
+
         }
         CalDamage();
     }
@@ -215,26 +214,16 @@ public class PlayerStatus : Status
 
             tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
             tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
-            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
-            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
-            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
-            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
-            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
-            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
-            tmp = Instantiate(GameObject.Find("GameController").GetComponent<GameController>().PrefabReturn("Item", basicItemNum), new Vector3(-1, -1, 0), Quaternion.identity);
-            tmp.GetComponent<ItemStatus>().itemPrfNumber = basicItemNum;
         }
         else
         {
             dataP = data.datas[index];
 
         }
+
+        // 타이머 생성
+        levelTimer = Instantiate(prefabTimer).GetComponent<Timer>();
+        levelTimer.SetCooldown(1.0f);
 
         // 플레이어 미니맵 아이콘 생성
         tmp = Instantiate(playerIcon, transform.position, Quaternion.identity);
@@ -257,8 +246,30 @@ public class PlayerStatus : Status
         textHp.text = dataP.nowHP.ToString() + "    /    " + dataP.maxHP.ToString();
         nowHPBar.fillAmount = (float)dataP.nowHP / (float)dataP.maxHP;
 
+        // 스탯 제한
         if (dataP.jumpPower > 10) dataP.jumpPower = 10;
-        if (dataP.moveSpeed > 3) dataP.moveSpeed = 3;
+        if (dataP.moveSpeed > 4.5) dataP.moveSpeed = 4.5f;
+        if (dataP.defenseRate > 90) dataP.defenseRate = 90;
+        if (dataP.evasionRate > 100) dataP.evasionRate = 100;
+        if (dataP.bloodAbsorptionRate > 100) dataP.bloodAbsorptionRate = 100;
 
+        // 레벨업 효과 출력
+        if (!levelUP) levelUP = GameObject.Find("Canvas").transform.Find("LevelUP").gameObject;
+        else
+        {
+            if (levelUP.activeSelf) if (levelTimer.CooldownCheck()) levelUP.SetActive(false);
+        }
+
+        CalCulateExperience(0);
+        /*
+        Debug.Log(dataP.defenseRate + " / " +
+        dataP.maxHP + " / " +
+        dataP.power + " / " +
+        dataP.evasionRate + " / " +
+        dataP.bloodAbsorptionRate + " / " +
+        dataP.attackSpeed + " / " +
+        dataP.jumpPower + " / " +
+        dataP.moveSpeed);
+        */
     }
 }

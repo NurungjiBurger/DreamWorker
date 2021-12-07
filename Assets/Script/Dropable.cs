@@ -35,19 +35,7 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         else
         {
-            if (name.Equals("Slot(Clone)"))
-            {
-                tmp = transform.parent.gameObject;
-                index = transform.GetSiblingIndex();
-                transform.SetParent(GameObject.Find("Canvas").transform);
-            }
-            else
-            {
-                index = transform.GetSiblingIndex();
-                transform.SetSiblingIndex(transform.parent.childCount);
-            }
-            startPosition = transform.position;
-            diff = new Vector3(Input.mousePosition.x - transform.position.x, Input.mousePosition.y - transform.position.y, Input.mousePosition.z - transform.position.z);
+
         }
     }
 
@@ -78,21 +66,6 @@ public class Dropable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             // 조이스틱에서 손이 떼지면 레버는 원위치로 돌아감
             lever.anchoredPosition = Vector2.zero;
-        }
-
-        if (name.Equals("Slot(Clone)"))
-        {
-            transform.SetParent(tmp.transform);
-            transform.SetSiblingIndex(index);
-
-            // 드랍되었을때 충돌했던 콜라이더를 바탕으로 인스펙터, 인벤토리 등 위치 결정
-            if (GetComponent<UISensor>().MountAble) GetComponent<Slot>().Mounting();
-            else if (GetComponent<UISensor>().ToInventory) GetComponent<Slot>().DisMounting();
-            else transform.position = startPosition;                        
-        }        
-        else
-        {
-            transform.SetSiblingIndex(index);
         }
     }
 

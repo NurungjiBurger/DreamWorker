@@ -58,26 +58,9 @@ public class Inspector : MonoBehaviour
         }
     }
 
-    // 같은 부위의 아이템이 존재하면 장착된 아이템은 빼고 새로 장착
-    private void ChangeItemPart(Slot slot)
-    {
-        int size = equipItemList.Count;
-        for (int i = 0; i < size; i++)
-        {
-            if (equipItemList[i].SlotItem.GetComponent<ItemStatus>().MountingPart == slot.SlotItem.GetComponent<ItemStatus>().MountingPart)
-            {
-                equipItemList[i].GetComponent<Slot>().DisMounting();
-                break;
-            }
-        }
-
-    }
-
     // 장착
     public void AddToInspector(Slot slot)
     {
-        ChangeItemPart(slot);
-
         equipItemList.Add(slot);
 
         slot.transform.SetParent(transform.Find("Background").transform);

@@ -1529,6 +1529,8 @@ MonoBehaviour:
   occupation: warrior
   handBone: {fileID: 257292859706910284}
   playerIcon: {fileID: 7876186749358279507, guid: 3e8490a723c7f204f9acd2eb49f031cb, type: 3}
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  levelUP: {fileID: 0}
   playerImage:
   - {fileID: -4958174520814758285, guid: 021f55bd2fce8ab4793b486038790a54, type: 3}
   - {fileID: 5266660786677024269, guid: 51aed734742153344b8e7f895e308641, type: 3}

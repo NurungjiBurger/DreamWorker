@@ -66,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftArrow)) action = 2;
         else if (Input.GetKey(KeyCode.UpArrow)) action = 3;
         else if (Input.GetKey(KeyCode.DownArrow)) action = 4;
-        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow)) action = 0;
+
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow)) action = 0;
 
         animator.SetBool("move", true);
 

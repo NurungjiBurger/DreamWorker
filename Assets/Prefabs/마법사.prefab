@@ -914,6 +914,8 @@ MonoBehaviour:
   occupation: Wizard
   handBone: {fileID: 3840391632728447356}
   playerIcon: {fileID: 7876186749358279507, guid: 3e8490a723c7f204f9acd2eb49f031cb, type: 3}
+  prefabTimer: {fileID: 8029014231287241412, guid: 11bd5bfdc7ce0a442b1c60201849c17d, type: 3}
+  levelUP: {fileID: 0}
   playerImage:
   - {fileID: 8028680832453401255, guid: c8aaa48d8644c8445aba1797110622b3, type: 3}
   - {fileID: -3022620115696231728, guid: 2329680b1d838aa4493022ee361cba7d, type: 3}

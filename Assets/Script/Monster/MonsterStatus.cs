@@ -206,6 +206,8 @@ public class MonsterStatus : Status
             Vector3 _hpBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + hpBarYAxis, 0));
             hpBar.transform.position = _hpBarPos;
 
+            hpBar.transform.SetParent(GameObject.Find("Canvas").transform);
+
             nowHpBar.fillAmount = (float)dataM.nowHP / (float)dataM.maxHP;
 
             if (dataM.nowHP <= 0)
