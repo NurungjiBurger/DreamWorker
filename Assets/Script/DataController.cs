@@ -16,7 +16,7 @@ public class DataController : MonoBehaviour
     // 게임데이터 삭제
     public void DeleteGameData()
     {
-        Debug.Log("저장 파일을 삭제합니다.");
+        //Debug.Log("저장 파일을 삭제합니다.");
         File.Delete(filePath);
     }
 
@@ -27,7 +27,7 @@ public class DataController : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(gameData);
         File.WriteAllText(filePath, jsonData);
-        Debug.Log("저장");
+        //Debug.Log("저장");
 
         GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatRerange(+1);
 
@@ -41,7 +41,7 @@ public class DataController : MonoBehaviour
             DeleteGameData();
         }
         gameData = new GameData();
-        Debug.Log("새로운파일생성 완료.");
+        //Debug.Log("새로운파일생성 완료.");
 
         GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(true);
     }
@@ -51,7 +51,7 @@ public class DataController : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
-            Debug.Log("불러옴");
+           // Debug.Log("불러옴");
             string jsonData = File.ReadAllText(filePath);
             gameData = JsonUtility.FromJson<GameData>(jsonData);
 
@@ -59,7 +59,7 @@ public class DataController : MonoBehaviour
         }
         else
         {
-            Debug.Log("불러올 데이터가 없습니다.");
+           // Debug.Log("불러올 데이터가 없습니다.");
         }
 
     }
@@ -67,7 +67,7 @@ public class DataController : MonoBehaviour
     // 진행중인 게임 종료
     public void ExitGame()
     {
-        Debug.Log("게임종료");
+       // Debug.Log("게임종료");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

@@ -105,44 +105,47 @@ public class ItemPanel : MonoBehaviour
         if (!enhancer) enhancer = GameObject.Find("Canvas").transform.Find("Enhancer").gameObject;
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
-        // 선택 슬롯이 장비창에 있는 슬롯인 경우
-        if (selectSlot.transform.parent == inspector.transform.Find("Background").transform && selectSlot.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel < 6)
+        if (!inventory.activeSelf || !inspector.activeSelf) gameObject.SetActive(false);
+        else
         {
-            int size = 0;
-            size = inventory.GetComponent<Inventory>().ItemCount;
-
-            // 장비창에 있는 아이템을 선택하는 경우에는 장착할수없고 해제만 가능
-            transform.Find("EquipButton").Find("Background").Find("Equip").GetComponent<TextMeshProUGUI>().text = "해제";
-            // 하지만 인벤에 공간이 없으면 해제할수 없음.
-            if (size == 20) transform.Find("EquipButton").gameObject.SetActive(false);
-            // 실수로 장착한 아이템 분해 방지
-            transform.Find("DisAssemblyButton").gameObject.SetActive(false);
-
-            Debug.Log("size 는 " + size);
-
-            if (selectSlot && devoteSlot == null)
+            // 선택 슬롯이 장비창에 있는 슬롯인 경우
+            if (selectSlot.transform.parent == inspector.transform.Find("Background").transform && selectSlot.GetComponent<Slot>().SlotItem.GetComponent<ItemStatus>().Data.enhancingLevel < 6)
             {
+                int size = 0;
+                size = inventory.GetComponent<Inventory>().ItemCount;
 
-                for (int i = 0; i < size; i++)
+                // 장비창에 있는 아이템을 선택하는 경우에는 장착할수없고 해제만 가능
+                transform.Find("EquipButton").Find("Background").Find("Equip").GetComponent<TextMeshProUGUI>().text = "해제";
+                // 하지만 인벤에 공간이 없으면 해제할수 없음.
+                if (size == 20) transform.Find("EquipButton").gameObject.SetActive(false);
+                // 장착한 아이템 분해 방지
+                transform.Find("DisAssemblyButton").gameObject.SetActive(false);
+
+                Debug.Log("size 는 " + size);
+
+                if (selectSlot && devoteSlot == null)
                 {
-                    if (inventory.transform.GetChild(0).GetChild(i).GetComponent<Slot>().SlotItem.name == selectSlot.GetComponent<Slot>().SlotItem.name)
+
+                    for (int i = 0; i < size; i++)
                     {
-                        devoteSlot = inventory.transform.GetChild(0).GetChild(i).gameObject.GetComponent<Slot>();
-                        transform.Find("EnhanceButton").gameObject.SetActive(true);
-                        break;
+                        if (inventory.transform.GetChild(0).GetChild(i).GetComponent<Slot>().SlotItem.name == selectSlot.GetComponent<Slot>().SlotItem.name)
+                        {
+                            devoteSlot = inventory.transform.GetChild(0).GetChild(i).gameObject.GetComponent<Slot>();
+                            transform.Find("EnhanceButton").gameObject.SetActive(true);
+                            break;
+                        }
                     }
                 }
             }
+            // 선택 슬롯이 인벤토리인 경우
+            else
+            {
+                // 인벤토리에서는 해제는 불가능하고 장착만 가능함.
+                transform.Find("EquipButton").gameObject.SetActive(true);
+                transform.Find("EquipButton").Find("Background").Find("Equip").GetComponent<TextMeshProUGUI>().text = "장착";
+                transform.Find("EnhanceButton").gameObject.SetActive(false);
+                transform.Find("DisAssemblyButton").gameObject.SetActive(true);
+            }
         }
-        // 선택 슬롯이 인벤토리인 경우
-        else
-        {
-            // 인벤토리에서는 해제는 불가능하고 장착만 가능함.
-            transform.Find("EquipButton").gameObject.SetActive(true);
-            transform.Find("EquipButton").Find("Background").Find("Equip").GetComponent<TextMeshProUGUI>().text = "장착";
-            transform.Find("EnhanceButton").gameObject.SetActive(false);
-            transform.Find("DisAssemblyButton").gameObject.SetActive(true);
-        }
-
     }
 }

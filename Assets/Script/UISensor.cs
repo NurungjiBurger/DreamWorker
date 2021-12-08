@@ -9,19 +9,18 @@ public class UISensor : MonoBehaviour
 
     private Direction dir = Direction.Stop;
     */
-    /*
-    private bool mountAble = false;
+    private bool toInspector = false;
     private bool toInventory = false;
-    */
+
     private int direction = 0;
 
-    /*
+    
     private GameObject inspector;
     private GameObject inventory;
 
-    public bool MountAble { get { return mountAble ; } }
+    public bool ToInspector { get { return toInspector; } }
     public bool ToInventory { get { return toInventory; } }
-    */
+    
     public int Direction { get { return direction; } }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -38,36 +37,27 @@ public class UISensor : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*
         if (name.Equals("Slot(Clone)"))
         {
             if (collision.collider.name.Equals("Inventory"))
             {
-                mountAble = false;
+                toInspector = false;
                 toInventory = true;
+                GetComponent<Dropable>().SwapInspecInven("Inventory");
             }
             else if (collision.collider.name.Equals("Inspector"))
             {
-                mountAble = true;
+                toInspector = true;
                 toInventory = false;
+                GetComponent<Dropable>().SwapInspecInven("Inspector");
             }
         }
-        */
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        /*
-        if (name.Equals("Slot(Clone)"))
-        {
-            if (collision.collider.name.Equals("Inventory") || collision.collider.name.Equals("Inspector"))
-            {
-                Debug.Log("빠져나감");
-                mountAble = false;
-                toInventory = false;
-            }
-        }
-        */
+
     }
 
     void Start()
@@ -78,7 +68,8 @@ public class UISensor : MonoBehaviour
 
     void Update()
     {
-       // if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
-      //  if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+        // if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
+        //  if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+
     }
 }

@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(false);
         gameStart = true;
 
-        Debug.Log("게임을시작하지");
+       // Debug.Log("게임을시작하지");
     }
 
     // 아이템 획득후 해당 아이템 슬롯화
@@ -297,7 +297,7 @@ public class GameController : MonoBehaviour
         if (activeRoom != null)
         {
             player.transform.position = activeRoom.transform.position;
-            Debug.Log("실행했어!");
+            //Debug.Log("실행했어!");
         }
     }
 
