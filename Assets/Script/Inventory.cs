@@ -16,11 +16,13 @@ public class Inventory : MonoBehaviour
     private GameObject player;
 
     private GameData data;
+    private Data dataM = null;
     private List<Slot> possessItemList = new List<Slot>();
 
     public bool Acquirable { get { return acquirable; } }
     public int ItemCount { get { return possessItemList.Count; } }
     public List<Slot> PossessItemList { get { return possessItemList; } }
+    public Data getData { get { return dataM; } }
 
     // 소지금 및 아이템조각 표시
     public void StatusText()
@@ -53,6 +55,11 @@ public class Inventory : MonoBehaviour
             slot.transform.SetParent(transform.Find("Background").transform);
             slot.SlotItem.GetComponent<ItemStatus>().IsMount = false;
             slot.SlotItem.SetActive(false);
+
+            // 아이템의 등급이 유니크 이상이면
+            if (data == null) Awake();
+            if (slot.SlotItem.GetComponent<ItemStatus>().ItemGrade >= 4) data.numberOfObtainedItems++;
+            
         }
     }
 

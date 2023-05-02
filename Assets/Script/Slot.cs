@@ -190,7 +190,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             if (transform.parent == smithy.transform.GetChild(0).transform)
             {
-                Debug.Log("왜 들어오는거야?");
+                //Debug.Log("왜 들어오는거야?");
                 transform.GetChild(0).Find("PriceBackground").Find("Price").GetComponent<TextMeshProUGUI>().text = slotItem.GetComponent<ItemStatus>().Price.ToString();
             }
         }

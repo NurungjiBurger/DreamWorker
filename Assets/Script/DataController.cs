@@ -43,7 +43,9 @@ public class DataController : MonoBehaviour
         gameData = new GameData();
         //Debug.Log("새로운파일생성 완료.");
 
-        GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("Tutorial&Story").gameObject.SetActive(true);
+
+        //GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(true);
     }
 
     // 저장된 게임데이터 로드
@@ -73,6 +75,13 @@ public class DataController : MonoBehaviour
 #else
             Application.Quit();
 #endif
+    }
+
+    // 튜토리얼 스킵
+    public void SkipTutorialAndStory()
+    {
+        GameObject.Find("Canvas").transform.Find("Tutorial&Story").gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.Find("CharacterSelecter").gameObject.SetActive(true);
     }
 
     private void OnApplicationQuit()

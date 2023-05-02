@@ -387,7 +387,7 @@ TextureImporter:
       213: 6240146042683552915
     second: nature_environment_01_sand_127
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -408,6 +408,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -416,9 +417,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -446,6 +447,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -473,6 +475,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -3646,6 +3672,135 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      nature_environment_01_sand_0: 8808102691504935270
+      nature_environment_01_sand_1: 7882621592190185485
+      nature_environment_01_sand_10: 399891709648866091
+      nature_environment_01_sand_100: -2103726553634656063
+      nature_environment_01_sand_101: 6479313521329811109
+      nature_environment_01_sand_102: -4317673664622472120
+      nature_environment_01_sand_103: 3675447691346357520
+      nature_environment_01_sand_104: 3954765787207493650
+      nature_environment_01_sand_105: -4344734381605395176
+      nature_environment_01_sand_106: -3722327257892031070
+      nature_environment_01_sand_107: -3784766955572732181
+      nature_environment_01_sand_108: 7215031047906135279
+      nature_environment_01_sand_109: 1994373691247691788
+      nature_environment_01_sand_11: 1841371025968058644
+      nature_environment_01_sand_110: 9157662721332229428
+      nature_environment_01_sand_111: -6465741692810040098
+      nature_environment_01_sand_112: 8234717405120851691
+      nature_environment_01_sand_113: 6097520175483264901
+      nature_environment_01_sand_114: 4402918354199296074
+      nature_environment_01_sand_115: 7930353822724781353
+      nature_environment_01_sand_116: 1053841469043670173
+      nature_environment_01_sand_117: 716259209784750765
+      nature_environment_01_sand_118: -3032739028899544857
+      nature_environment_01_sand_119: -2480222208203687556
+      nature_environment_01_sand_12: 6493485611352779131
+      nature_environment_01_sand_120: -1853004024819281429
+      nature_environment_01_sand_121: 4835392108347177774
+      nature_environment_01_sand_122: 5309909344685612263
+      nature_environment_01_sand_123: -183517662588582503
+      nature_environment_01_sand_124: -3462573035922826545
+      nature_environment_01_sand_125: 479668130759015209
+      nature_environment_01_sand_126: -1281071051803089548
+      nature_environment_01_sand_127: 6240146042683552915
+      nature_environment_01_sand_13: 7455849950955752448
+      nature_environment_01_sand_14: -5221412149601351433
+      nature_environment_01_sand_15: 8189014868367958023
+      nature_environment_01_sand_16: -1584240024068764017
+      nature_environment_01_sand_17: 8167810072538070237
+      nature_environment_01_sand_18: 9175515245342080424
+      nature_environment_01_sand_19: -2134380864439925447
+      nature_environment_01_sand_2: -5755713625804541481
+      nature_environment_01_sand_20: 2115159784759960062
+      nature_environment_01_sand_21: -4457010184962215101
+      nature_environment_01_sand_22: 740132742648646712
+      nature_environment_01_sand_23: -4341596011686399679
+      nature_environment_01_sand_24: -1162449600889483677
+      nature_environment_01_sand_25: 7524547657523647576
+      nature_environment_01_sand_26: -2969684008368694550
+      nature_environment_01_sand_27: -2249473367822698397
+      nature_environment_01_sand_28: 1910815277116586864
+      nature_environment_01_sand_29: 2593922855877169242
+      nature_environment_01_sand_3: 3581736025750202003
+      nature_environment_01_sand_30: 7402017213773169266
+      nature_environment_01_sand_31: 9086085914585244911
+      nature_environment_01_sand_32: 3763333810924067365
+      nature_environment_01_sand_33: -3317963671228893093
+      nature_environment_01_sand_34: -5178109917399278613
+      nature_environment_01_sand_35: -8718434488783754064
+      nature_environment_01_sand_36: -627936379398794670
+      nature_environment_01_sand_37: -1163170295559471186
+      nature_environment_01_sand_38: 3921194965991987445
+      nature_environment_01_sand_39: -7524236748912509216
+      nature_environment_01_sand_4: 46243361512705656
+      nature_environment_01_sand_40: 1351600601367564652
+      nature_environment_01_sand_41: -3952840025947786766
+      nature_environment_01_sand_42: -109400492444955511
+      nature_environment_01_sand_43: 6235841193639651022
+      nature_environment_01_sand_44: 4884107711663354757
+      nature_environment_01_sand_45: 1358895296629624262
+      nature_environment_01_sand_46: -1450236919521594179
+      nature_environment_01_sand_47: 6989373447103929180
+      nature_environment_01_sand_48: -9136512685508852496
+      nature_environment_01_sand_49: 593585165326629162
+      nature_environment_01_sand_5: -8652913626806298042
+      nature_environment_01_sand_50: 3831052340518418155
+      nature_environment_01_sand_51: -5523522452233459610
+      nature_environment_01_sand_52: 8921780871093539854
+      nature_environment_01_sand_53: 8531786176854397843
+      nature_environment_01_sand_54: 1887380578112691567
+      nature_environment_01_sand_55: -7712472179016003527
+      nature_environment_01_sand_56: -5112296333904456872
+      nature_environment_01_sand_57: -1115101929223791512
+      nature_environment_01_sand_58: -7974609748684772809
+      nature_environment_01_sand_59: -5772217788365367230
+      nature_environment_01_sand_6: 9126107683026578768
+      nature_environment_01_sand_60: 8559494825488828839
+      nature_environment_01_sand_61: 1707884010382752031
+      nature_environment_01_sand_62: -858085081480321987
+      nature_environment_01_sand_63: 681035866106133337
+      nature_environment_01_sand_64: -6030914653962999394
+      nature_environment_01_sand_65: -4243943274016439707
+      nature_environment_01_sand_66: 4037333619837231949
+      nature_environment_01_sand_67: 8531229408447568247
+      nature_environment_01_sand_68: -6700110900977369689
+      nature_environment_01_sand_69: -2609369391377815871
+      nature_environment_01_sand_7: 2648979425241048611
+      nature_environment_01_sand_70: -8248304770895455515
+      nature_environment_01_sand_71: 2409533963133796314
+      nature_environment_01_sand_72: 102256495930108511
+      nature_environment_01_sand_73: 4054549379542027189
+      nature_environment_01_sand_74: 6924573132757958568
+      nature_environment_01_sand_75: 4525212125129865701
+      nature_environment_01_sand_76: -4939338351801156680
+      nature_environment_01_sand_77: 9117822863580196175
+      nature_environment_01_sand_78: 8519490187565840240
+      nature_environment_01_sand_79: 1320766096063421262
+      nature_environment_01_sand_8: 6823924803398085823
+      nature_environment_01_sand_80: -2568999768385795210
+      nature_environment_01_sand_81: -292624442530317168
+      nature_environment_01_sand_82: 9145877646031190934
+      nature_environment_01_sand_83: 3821683645686928706
+      nature_environment_01_sand_84: 6793969022634421448
+      nature_environment_01_sand_85: 1146336556559011260
+      nature_environment_01_sand_86: 3870060324399209895
+      nature_environment_01_sand_87: 399256251506065
+      nature_environment_01_sand_88: 4018552938893481867
+      nature_environment_01_sand_89: -584761871681417873
+      nature_environment_01_sand_9: 1679352800214064233
+      nature_environment_01_sand_90: 4408178193998190128
+      nature_environment_01_sand_91: -4693174129603549455
+      nature_environment_01_sand_92: 7188356980235170383
+      nature_environment_01_sand_93: 2114520673768560411
+      nature_environment_01_sand_94: 2940480707920230308
+      nature_environment_01_sand_95: -2672943930333438595
+      nature_environment_01_sand_96: 6370871012863763636
+      nature_environment_01_sand_97: 4056589539329316137
+      nature_environment_01_sand_98: -6588951538668014395
+      nature_environment_01_sand_99: 5979706086792536458
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

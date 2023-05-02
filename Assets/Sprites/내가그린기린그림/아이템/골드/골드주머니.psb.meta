@@ -25,6 +25,7 @@ ScriptedImporter:
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
+    ignoreMasterTextureLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -46,6 +47,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
+    cookieMode: 0
     filterMode: 0
     aniso: 1
     mipBias: 0
@@ -79,7 +81,6 @@ ScriptedImporter:
       width: 0
       height: 0
     spriteID: 
-    internalID: 0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -89,6 +90,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: "\uB808\uC774\uC5B4 0"
@@ -103,7 +105,6 @@ ScriptedImporter:
       width: 330
       height: 413
     spriteID: fe4a25ad4b1086146abf0a798030bb93
-    internalID: 0
     spriteBone:
     - name: bone_1
       guid: 553a4874a6ccbac499ae4ec491f0cbf0
@@ -665,7 +666,8 @@ ScriptedImporter:
     - {x: 0, y: 45}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 2, y: 1}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 2, y: 3}
   characterData:
     bones:
     - name: bone_1
@@ -754,16 +756,13 @@ ScriptedImporter:
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 512
-  importedTextureHeight: 512
-  documentSize: {x: 336, y: 419}
+  layerMappingOption: 2
+  generatePhysicsShape: 0
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
   spriteCategoryList:
     categories: []
-  textureActualWidth: 512
-  textureActualHeight: 512
   spritePackingTag: 
   resliceFromLayer: 0
   mosaicPSDLayers: []
@@ -775,7 +774,11 @@ ScriptedImporter:
     spriteID: fe4a25ad4b1086146abf0a798030bb93
     layerID: 2
     mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
   generateGOHierarchy: 0
   textureAssetName: "\uACE8\uB4DC\uC8FC\uBA38\uB2C8 Texture"
   prefabAssetName: "\uACE8\uB4DC\uC8FC\uBA38\uB2C8 Prefab"

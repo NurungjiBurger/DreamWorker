@@ -9,6 +9,12 @@ using System;
 public class GameData
 {
     // 기본 게임데이터
+    public int numberOfClearRoom = 0;
+    public int numberOfKilledMonster = 0;
+    public int numberOfObtainedItems = 0;
+    public int obtainedGold = 0;
+    public float playTime = 0.0f;
+
     public int round;
     public int stageNumber;
     public int subStageNumber;
@@ -108,6 +114,7 @@ public class Data
 
             if (name == "Player")
             {
+
                 itemPiece = 5000;
                 handMoney = 0;
                 level = 1;

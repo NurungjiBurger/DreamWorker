@@ -266,7 +266,13 @@ public class Room : MonoBehaviour
                                         }
                                     }
 
-                                    if (!dataM.isClear) dataM.isClear = true;
+                                    if (!dataM.isClear)
+                                    {
+                                        // 방을 하나 클리어 할때마다 데이터 저장.
+                                        dataM.isClear = true;
+                                        data.numberOfClearRoom++;
+                                        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+                                    }
                                 }
                             }
                         }
@@ -278,7 +284,7 @@ public class Room : MonoBehaviour
 
                                 if (data.eventRoomVisit)
                                 {
-                                    gameController.DestroyNowStage();
+                                    gameController.DestroyNowStage(true);
                                     data.eventRoomVisit = false;
                                     player.transform.position = new Vector3(0, 0, 0);
                                 }

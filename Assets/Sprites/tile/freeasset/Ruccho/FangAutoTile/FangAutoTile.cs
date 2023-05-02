@@ -530,7 +530,7 @@ namespace Ruccho.Utilities
                 if (!texSizeUnchanged)
                 {
                     //Resize texture
-                    mainTex.Resize(texSize, texSize, TextureFormat.RGBA32, false);
+                    mainTex.Reinitialize(texSize, texSize, TextureFormat.RGBA32, false);
                 }
             }
             else
@@ -548,7 +548,7 @@ namespace Ruccho.Utilities
                     if (!texSizeUnchanged)
                     {
                         //Resize texture
-                        customTexs[i].Resize(texSize, texSize, TextureFormat.RGBA32, false);
+                        customTexs[i].Reinitialize(texSize, texSize, TextureFormat.RGBA32, false);
                     }
                 }
                 else

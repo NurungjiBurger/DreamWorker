@@ -25,6 +25,7 @@ ScriptedImporter:
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
+    ignoreMasterTextureLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -46,6 +47,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
+    cookieMode: 0
     filterMode: 0
     aniso: 1
     mipBias: 0
@@ -79,7 +81,6 @@ ScriptedImporter:
       width: 0
       height: 0
     spriteID: 
-    internalID: 0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -89,6 +90,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: "\uB3CC"
@@ -103,7 +105,6 @@ ScriptedImporter:
       width: 784
       height: 461
     spriteID: f678950a33ba1ae4a8b462e84943c160
-    internalID: 0
     spriteBone:
     - name: bone_1
       guid: 995f2485496b40f4d8b694b46630189d
@@ -578,7 +579,8 @@ ScriptedImporter:
     - {x: 0, y: 36}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -47, y: -56}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 51, y: 60}
   characterData:
     bones:
     - name: bone_1
@@ -667,16 +669,13 @@ ScriptedImporter:
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 1024
-  importedTextureHeight: 512
-  documentSize: {x: 888, y: 567}
+  layerMappingOption: 2
+  generatePhysicsShape: 0
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
   spriteCategoryList:
     categories: []
-  textureActualWidth: 1024
-  textureActualHeight: 512
   spritePackingTag: 
   resliceFromLayer: 0
   mosaicPSDLayers: []
@@ -688,7 +687,11 @@ ScriptedImporter:
     spriteID: f678950a33ba1ae4a8b462e84943c160
     layerID: 2
     mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
   generateGOHierarchy: 0
   textureAssetName: "\uB3CC Texture"
   prefabAssetName: "\uB3CC Prefab"

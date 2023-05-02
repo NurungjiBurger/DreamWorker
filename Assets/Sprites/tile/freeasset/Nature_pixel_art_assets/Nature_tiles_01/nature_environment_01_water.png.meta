@@ -387,7 +387,7 @@ TextureImporter:
       213: -6566800479309143005
     second: nature_environment_01_water_127
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -408,6 +408,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -416,9 +417,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -446,6 +447,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -473,6 +475,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -3646,6 +3672,135 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      nature_environment_01_water_0: 5202108461696010168
+      nature_environment_01_water_1: -1437455428374428855
+      nature_environment_01_water_10: -4417107373550274297
+      nature_environment_01_water_100: -4218450733834816373
+      nature_environment_01_water_101: -3536392144412357021
+      nature_environment_01_water_102: 3214128352642193137
+      nature_environment_01_water_103: 6921119470664370135
+      nature_environment_01_water_104: 7179143181658248023
+      nature_environment_01_water_105: -7686475929129256987
+      nature_environment_01_water_106: -3212864620985645068
+      nature_environment_01_water_107: -5958783969596455224
+      nature_environment_01_water_108: 9101401424543346881
+      nature_environment_01_water_109: 4446100623373250056
+      nature_environment_01_water_11: -4926593433555014882
+      nature_environment_01_water_110: -6048408070220399447
+      nature_environment_01_water_111: -3339292117034348839
+      nature_environment_01_water_112: -6554142629515436658
+      nature_environment_01_water_113: -5905328159400561104
+      nature_environment_01_water_114: -2632201639787764340
+      nature_environment_01_water_115: 1115651467794427781
+      nature_environment_01_water_116: -3023220173402582576
+      nature_environment_01_water_117: 3118638982384584592
+      nature_environment_01_water_118: -4154480353118594569
+      nature_environment_01_water_119: -4569572509841697899
+      nature_environment_01_water_12: -8801507508308620983
+      nature_environment_01_water_120: 4109335197189370089
+      nature_environment_01_water_121: 7563247571551604474
+      nature_environment_01_water_122: -8745517315158814634
+      nature_environment_01_water_123: 2083767803619463011
+      nature_environment_01_water_124: 5488173765035857264
+      nature_environment_01_water_125: 4808353904744543157
+      nature_environment_01_water_126: -9097474404220289310
+      nature_environment_01_water_127: -6566800479309143005
+      nature_environment_01_water_13: -4564262744984416815
+      nature_environment_01_water_14: 3058992363468929214
+      nature_environment_01_water_15: -6222290824119681361
+      nature_environment_01_water_16: 842473092040921016
+      nature_environment_01_water_17: 3581888991826778336
+      nature_environment_01_water_18: 7372820712366870594
+      nature_environment_01_water_19: -9206674941886093819
+      nature_environment_01_water_2: -7399080882317836781
+      nature_environment_01_water_20: 1435037923104389469
+      nature_environment_01_water_21: 3137263580572073542
+      nature_environment_01_water_22: 6379296040762144261
+      nature_environment_01_water_23: 3533450627439214224
+      nature_environment_01_water_24: 8013459445850853885
+      nature_environment_01_water_25: -8231280287138593639
+      nature_environment_01_water_26: -8089236489064627752
+      nature_environment_01_water_27: 8455172192499060998
+      nature_environment_01_water_28: 602189345097999650
+      nature_environment_01_water_29: -6483191401500365742
+      nature_environment_01_water_3: -4123801697853592811
+      nature_environment_01_water_30: 1398330431458794491
+      nature_environment_01_water_31: 7487536275555429695
+      nature_environment_01_water_32: 2916235502879610679
+      nature_environment_01_water_33: -6676709160255847789
+      nature_environment_01_water_34: -3648452592618676946
+      nature_environment_01_water_35: -2584067044755695776
+      nature_environment_01_water_36: 590729775607588367
+      nature_environment_01_water_37: -8109483233405469598
+      nature_environment_01_water_38: 1433090115773487710
+      nature_environment_01_water_39: 2732901609648931825
+      nature_environment_01_water_4: 4489539816067276556
+      nature_environment_01_water_40: 4588034902970053826
+      nature_environment_01_water_41: -4983751934265376173
+      nature_environment_01_water_42: -5088118052095578294
+      nature_environment_01_water_43: 4600532150951552166
+      nature_environment_01_water_44: -7306582149025386980
+      nature_environment_01_water_45: 8878231392662843238
+      nature_environment_01_water_46: -1715543897144505899
+      nature_environment_01_water_47: 9211382547221867842
+      nature_environment_01_water_48: -3316421395707658281
+      nature_environment_01_water_49: -6265854673605816884
+      nature_environment_01_water_5: 6106736488704606860
+      nature_environment_01_water_50: 7309221372427510930
+      nature_environment_01_water_51: -1929259723590932549
+      nature_environment_01_water_52: 5283478089619777422
+      nature_environment_01_water_53: -8256460405666895430
+      nature_environment_01_water_54: 4468982793881121624
+      nature_environment_01_water_55: -5847591249841627146
+      nature_environment_01_water_56: -3718116767594534035
+      nature_environment_01_water_57: -1670862187312115286
+      nature_environment_01_water_58: 7943525714382474940
+      nature_environment_01_water_59: 4321830930431668799
+      nature_environment_01_water_6: -1486528122893310823
+      nature_environment_01_water_60: -347960113734578782
+      nature_environment_01_water_61: -6347324493431087566
+      nature_environment_01_water_62: -2888241929506638201
+      nature_environment_01_water_63: 5582876895340199636
+      nature_environment_01_water_64: -2826757978267234667
+      nature_environment_01_water_65: -558513209916264346
+      nature_environment_01_water_66: -8064963361783362463
+      nature_environment_01_water_67: 788834506333521944
+      nature_environment_01_water_68: 5779641792164475126
+      nature_environment_01_water_69: 1051789517742061596
+      nature_environment_01_water_7: 6063078553696629522
+      nature_environment_01_water_70: -1801572475728062031
+      nature_environment_01_water_71: 2007723592389444066
+      nature_environment_01_water_72: -4397196423374311758
+      nature_environment_01_water_73: -3459746872661571564
+      nature_environment_01_water_74: 2464518896157200006
+      nature_environment_01_water_75: -7902839027318686897
+      nature_environment_01_water_76: -677514943170141737
+      nature_environment_01_water_77: 7034305220086311590
+      nature_environment_01_water_78: -4401309018969818717
+      nature_environment_01_water_79: -8063775709003012672
+      nature_environment_01_water_8: 8749998846634356015
+      nature_environment_01_water_80: -5765552233702138611
+      nature_environment_01_water_81: -255518912023423888
+      nature_environment_01_water_82: -3547727737153163651
+      nature_environment_01_water_83: -4789427455383772297
+      nature_environment_01_water_84: -5141270339541724377
+      nature_environment_01_water_85: -4405483973883014199
+      nature_environment_01_water_86: -4205438881016233311
+      nature_environment_01_water_87: 838810340359338162
+      nature_environment_01_water_88: 5943815589778346865
+      nature_environment_01_water_89: 5795857733429965251
+      nature_environment_01_water_9: -5071760217314163780
+      nature_environment_01_water_90: 9123086317327220943
+      nature_environment_01_water_91: 8460666511106363804
+      nature_environment_01_water_92: -3139801276011396206
+      nature_environment_01_water_93: -2885984072100191326
+      nature_environment_01_water_94: 8406275837173668147
+      nature_environment_01_water_95: 8270082846780604164
+      nature_environment_01_water_96: 5627911796750370144
+      nature_environment_01_water_97: -7578320366869247576
+      nature_environment_01_water_98: 6442387082726397222
+      nature_environment_01_water_99: -9016440037843319107
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

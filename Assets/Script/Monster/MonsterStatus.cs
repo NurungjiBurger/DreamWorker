@@ -59,6 +59,9 @@ public class MonsterStatus : Status
     // 몬스터 삭제
     public void DestroyObject()
     {
+        // 처치한 몬스터 수 증가
+        data.numberOfKilledMonster++;
+
         // 미니맵 아이콘 삭제
         Destroy(miniMapMonsterIcon);
 

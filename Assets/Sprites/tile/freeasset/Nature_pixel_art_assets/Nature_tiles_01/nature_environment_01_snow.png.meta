@@ -396,7 +396,7 @@ TextureImporter:
       213: -5516759290589898783
     second: nature_environment_01_snow_130
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -417,6 +417,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -425,9 +426,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -455,6 +456,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -482,6 +484,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -3655,6 +3681,135 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      nature_environment_01_snow_0: 4405874736853249501
+      nature_environment_01_snow_1: -3106263277321420738
+      nature_environment_01_snow_10: -4606208837429854239
+      nature_environment_01_snow_100: 389863559350628876
+      nature_environment_01_snow_101: 3765998919617689523
+      nature_environment_01_snow_102: -9018894871965515665
+      nature_environment_01_snow_103: 8469570051947422240
+      nature_environment_01_snow_104: 4518029020116763811
+      nature_environment_01_snow_105: -1525872917729213846
+      nature_environment_01_snow_106: -1200556059532412046
+      nature_environment_01_snow_107: 2350894741571739347
+      nature_environment_01_snow_108: 6679968097383894227
+      nature_environment_01_snow_109: 5930117430420927395
+      nature_environment_01_snow_11: -8696230303226762047
+      nature_environment_01_snow_110: -4366886990591307176
+      nature_environment_01_snow_111: 229569304488728612
+      nature_environment_01_snow_112: 9014762428781767002
+      nature_environment_01_snow_113: 349494510648277917
+      nature_environment_01_snow_114: 3529947369876572198
+      nature_environment_01_snow_115: 345985400038215672
+      nature_environment_01_snow_116: -6534113442943561566
+      nature_environment_01_snow_117: 2982046889909275414
+      nature_environment_01_snow_118: -1538960641084137325
+      nature_environment_01_snow_119: 3168777089197692993
+      nature_environment_01_snow_12: 7067467387539346976
+      nature_environment_01_snow_120: 1576792339901649075
+      nature_environment_01_snow_121: -7727803794677455978
+      nature_environment_01_snow_122: -782108551627500131
+      nature_environment_01_snow_123: 3987494389558243978
+      nature_environment_01_snow_124: 242555690344175778
+      nature_environment_01_snow_125: 7083366217184751829
+      nature_environment_01_snow_126: 7520279487181497888
+      nature_environment_01_snow_127: -2177090035447094095
+      nature_environment_01_snow_13: -4567989325639785759
+      nature_environment_01_snow_14: 1840717119610361129
+      nature_environment_01_snow_15: 1113986240605805756
+      nature_environment_01_snow_16: 4105888817641666591
+      nature_environment_01_snow_17: -6438079246828976890
+      nature_environment_01_snow_18: 5922984031308484243
+      nature_environment_01_snow_19: 5801487549149244329
+      nature_environment_01_snow_2: -7929811673366863289
+      nature_environment_01_snow_20: 4274955092103364955
+      nature_environment_01_snow_21: -1581716275226300804
+      nature_environment_01_snow_22: 5351960891970500540
+      nature_environment_01_snow_23: -2800783191030658541
+      nature_environment_01_snow_24: 6136677103822430801
+      nature_environment_01_snow_25: 1555836611462130612
+      nature_environment_01_snow_26: -219444617729625969
+      nature_environment_01_snow_27: -8007537175876715488
+      nature_environment_01_snow_28: -4281945842260875292
+      nature_environment_01_snow_29: 6766117471859875000
+      nature_environment_01_snow_3: 7420037233510365927
+      nature_environment_01_snow_30: 6872078175000568901
+      nature_environment_01_snow_31: 2594926153721307629
+      nature_environment_01_snow_32: 5712294789737064592
+      nature_environment_01_snow_33: 7177798865386386639
+      nature_environment_01_snow_34: 1743027329808328489
+      nature_environment_01_snow_35: -6888612359589260773
+      nature_environment_01_snow_36: -6913640248624690169
+      nature_environment_01_snow_37: -7146226089900721784
+      nature_environment_01_snow_38: 3665528890157813524
+      nature_environment_01_snow_39: -4793162087942976033
+      nature_environment_01_snow_4: 6195884865024858025
+      nature_environment_01_snow_40: 319584063571965543
+      nature_environment_01_snow_41: 9126472056736998064
+      nature_environment_01_snow_42: -2789078921716822085
+      nature_environment_01_snow_43: 6021780127716358937
+      nature_environment_01_snow_44: 4231193776761075856
+      nature_environment_01_snow_45: -1577280377421089379
+      nature_environment_01_snow_46: 8724283602961741566
+      nature_environment_01_snow_47: -3377611381801862014
+      nature_environment_01_snow_48: -4272641512956376352
+      nature_environment_01_snow_49: -2891492792884054387
+      nature_environment_01_snow_5: 2647309693646868135
+      nature_environment_01_snow_50: 116532083780572765
+      nature_environment_01_snow_51: 2610415721221957866
+      nature_environment_01_snow_52: -8939601280909141817
+      nature_environment_01_snow_53: -724935810008737746
+      nature_environment_01_snow_54: 6002251429122398305
+      nature_environment_01_snow_55: 5738685657989272795
+      nature_environment_01_snow_56: -4672169967852092136
+      nature_environment_01_snow_57: 3101598678521253007
+      nature_environment_01_snow_58: -3290433212408804752
+      nature_environment_01_snow_59: 8925585558928680254
+      nature_environment_01_snow_6: -9013527422355216522
+      nature_environment_01_snow_60: 8544557591800018964
+      nature_environment_01_snow_61: 5044464844637487833
+      nature_environment_01_snow_62: 6569342239578433106
+      nature_environment_01_snow_63: 639148517581200446
+      nature_environment_01_snow_64: 6031157176638905888
+      nature_environment_01_snow_65: 4657766822282146128
+      nature_environment_01_snow_66: 2955219024881376416
+      nature_environment_01_snow_67: -2058466741363003337
+      nature_environment_01_snow_68: 679768394836057695
+      nature_environment_01_snow_69: 6148444183813859087
+      nature_environment_01_snow_7: -8781822622076142783
+      nature_environment_01_snow_70: -5515537162870468138
+      nature_environment_01_snow_71: -1057014238926839911
+      nature_environment_01_snow_72: -4599026659969994203
+      nature_environment_01_snow_73: 4301923195229404936
+      nature_environment_01_snow_74: -2537684096157891840
+      nature_environment_01_snow_75: -3739394023844107922
+      nature_environment_01_snow_76: 6293721178111647133
+      nature_environment_01_snow_77: -7368970046896594680
+      nature_environment_01_snow_78: 5087911287886053455
+      nature_environment_01_snow_79: -1695790653252078187
+      nature_environment_01_snow_8: -4560010330392696977
+      nature_environment_01_snow_80: 3251590808198066845
+      nature_environment_01_snow_81: -1650199566632555859
+      nature_environment_01_snow_82: 6744172932150718380
+      nature_environment_01_snow_83: 7817753581366162284
+      nature_environment_01_snow_84: 525971990473980249
+      nature_environment_01_snow_85: -4672957114320140836
+      nature_environment_01_snow_86: 3692379093454209282
+      nature_environment_01_snow_87: 8186537009940451471
+      nature_environment_01_snow_88: 1038659373252495113
+      nature_environment_01_snow_89: -2024913454140062253
+      nature_environment_01_snow_9: -7707953721683117377
+      nature_environment_01_snow_90: 5056312602004025148
+      nature_environment_01_snow_91: 1792956234080085800
+      nature_environment_01_snow_92: -8491830258130497788
+      nature_environment_01_snow_93: 558344897347178189
+      nature_environment_01_snow_94: -9150031202566767271
+      nature_environment_01_snow_95: 4722383780705886900
+      nature_environment_01_snow_96: 919650051313063072
+      nature_environment_01_snow_97: 3146054099580539279
+      nature_environment_01_snow_98: 4437244390386537210
+      nature_environment_01_snow_99: 5163610661287625675
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

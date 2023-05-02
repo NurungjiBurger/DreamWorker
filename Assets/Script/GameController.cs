@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
     private GameObject[] prefabPortals;
     [SerializeField]
     private GameObject[] prefabNpcs;
+    [SerializeField]
+    private GameObject stageNumber;
 
     private bool gameStart = false;
     private bool revert = false;
@@ -47,9 +49,11 @@ public class GameController : MonoBehaviour
     private List<GameObject> room = new List<GameObject>();
     private List<GameObject> npc = new List<GameObject>();
     private GameData data;
+    private Data dataM = null;
 
     public bool GameStart { set { gameStart = value; } }
     public bool IsPause { get { return isPause; } }
+    public Data Data { get { return dataM; } }
 
     public List<GameObject> Room { get { return room; } }
     public List<GameObject> Map { get { return map; } }
@@ -113,26 +117,37 @@ public class GameController : MonoBehaviour
     }
 
     // 다음 스테이지로 넘어가기 위해 현재 스테이지 삭제
-    public void DestroyNowStage()
+    public void DestroyNowStage(bool type)
     {
-        GameObject tmp;
-        int cnt = room.Count;
-        for(int i=0;i<cnt;i++)
+        /*
+        Debug.Log(data.stageNumber);
+        stageNumber.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "Stage start !";
+        stageNumber.SetActive(true);
+        for (int i = 0; i < 100000; i++) { }
+        stageNumber.SetActive(false);
+        */
+
+        if (type)
         {
-            tmp = room[0];
-            room.Remove(Room[0]);
-            tmp.GetComponent<Room>().DestoryAll();
-            Destroy(tmp);
+            GameObject tmp;
+            int cnt = room.Count;
+            for (int i = 0; i < cnt; i++)
+            {
+                tmp = room[0];
+                room.Remove(Room[0]);
+                tmp.GetComponent<Room>().DestoryAll();
+                Destroy(tmp);
 
-            tmp = map[0];
-            map.Remove(map[0]);
-            Destroy(tmp);
+                tmp = map[0];
+                map.Remove(map[0]);
+                Destroy(tmp);
+            }
+
+            data.stageEntrance = false;
+            activeRoom = null;
+
+            GameObject.Find("Canvas").transform.Find("Smithy").GetComponent<Smithy>().Clear();
         }
-
-        data.stageEntrance = false;
-        activeRoom = null;
-
-        GameObject.Find("Canvas").transform.Find("Smithy").GetComponent<Smithy>().Clear();
     }
 
     public void PortalCreate(GameObject selectRoom, GameObject nowRoom, int direction)
@@ -173,6 +188,7 @@ public class GameController : MonoBehaviour
     // 스태이지내 부스테이지 개념의 방 생성
     private void CreateRoom(int cnt)
     {
+
         int mapPrfNumber;
 
         if (cnt > 0)
@@ -410,7 +426,6 @@ public class GameController : MonoBehaviour
 
 
     }
-
     void Start()
     {
 
@@ -445,13 +460,38 @@ public class GameController : MonoBehaviour
             {
                 if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
                 if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
+                if (!stageNumber) stageNumber = GameObject.Find("Canvas").transform.Find("StageNumber").gameObject;
 
                 if (revert) RevertScene("Dungeon");
                 else
                 {
 
-                    if (GameObject.FindGameObjectWithTag("Pause") == null) isPause = false;
-                    else isPause = true;
+                    if (GameObject.FindGameObjectWithTag("Pause") == null)
+                    {
+                        isPause = false;
+                        if (data == null) Awake();
+
+                        data.playTime += Time.deltaTime;
+                       // Debug.Log(data.playTime + " " + Time.deltaTime);
+
+                    }
+                    else
+                    {
+                        isPause = true;
+                        
+                        /*
+                        Debug.Log("플레이타임");
+                        Debug.Log(data.playTime);
+                        Debug.Log("획득아이템");
+                        Debug.Log(data.numberOfObtainedItems);
+                        Debug.Log("획득골드");
+                        Debug.Log(data.obtainedGold);
+                        Debug.Log("처치한 몬스터수");
+                        Debug.Log(data.numberOfKilledMonster);
+                        Debug.Log("클리어한방");
+                        Debug.Log(data.numberOfClearRoom);
+                        */
+                    }
 
                     GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 1.55f, -10), Quaternion.identity);
 
@@ -461,7 +501,7 @@ public class GameController : MonoBehaviour
                         for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName);
                     }
 
-                    if (true) // 무한 스테이지
+                    if (data.stageNumber <= 6) // 5 스테이지
                     {
                         data.stageClear = false;
                         if (!data.stageEntrance) 
@@ -474,7 +514,9 @@ public class GameController : MonoBehaviour
 
                             data.subStageNumber = 3;
 
-                            data.stageNumber = Random.Range(1, (prefabMapDesigns.Length - 2) / 6);
+                            //data.stageNumber = Random.Range(1, (prefabMapDesigns.Length - 2) / 6);
+
+                            DestroyNowStage(false);
 
                             CreateRoom(data.subStageNumber);
 

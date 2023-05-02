@@ -25,6 +25,7 @@ ScriptedImporter:
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
+    ignoreMasterTextureLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -46,6 +47,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
+    cookieMode: 0
     filterMode: 0
     aniso: 1
     mipBias: 0
@@ -79,7 +81,6 @@ ScriptedImporter:
       width: 948
       height: 1832
     spriteID: 63b33ce218f8bbd4baa1bac804549cbf
-    internalID: 0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -89,6 +90,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: "\uAE30\uD0C0"
@@ -103,7 +105,6 @@ ScriptedImporter:
       width: 649
       height: 1613
     spriteID: f1a80aade92c87e479bbddeda77fd056
-    internalID: 0
     spriteBone:
     - name: bone_1
       guid: 1ea520d62b18f664d8d9b9cdb72c18f6
@@ -734,7 +735,8 @@ ScriptedImporter:
     - {x: 0, y: 52}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -129, y: -105}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 133, y: 109}
   characterData:
     bones:
     - name: bone_1
@@ -823,16 +825,13 @@ ScriptedImporter:
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 1024
-  importedTextureHeight: 2048
-  documentSize: {x: 948, y: 1832}
+  layerMappingOption: 2
+  generatePhysicsShape: 0
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
   spriteCategoryList:
     categories: []
-  textureActualWidth: 1024
-  textureActualHeight: 2048
   spritePackingTag: 
   resliceFromLayer: 0
   mosaicPSDLayers: []
@@ -844,7 +843,11 @@ ScriptedImporter:
     spriteID: f1a80aade92c87e479bbddeda77fd056
     layerID: 4
     mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
   generateGOHierarchy: 0
   textureAssetName: "\uAE30\uD0C0 Texture"
   prefabAssetName: "\uAE30\uD0C0 Prefab"

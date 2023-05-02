@@ -25,6 +25,7 @@ ScriptedImporter:
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
+    ignoreMasterTextureLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -46,6 +47,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
+    cookieMode: 0
     filterMode: 0
     aniso: 1
     mipBias: 0
@@ -79,7 +81,6 @@ ScriptedImporter:
       width: 0
       height: 0
     spriteID: 
-    internalID: 0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -89,6 +90,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: "\uBE44\uBE44\uD0C4\uAD8C\uCD1D"
@@ -103,7 +105,6 @@ ScriptedImporter:
       width: 1210
       height: 782
     spriteID: cdb1c3135d99bd74a8af088822cab22f
-    internalID: 0
     spriteBone:
     - name: bone_1
       guid: 718e7271943886d498481a5148f46993
@@ -762,7 +763,8 @@ ScriptedImporter:
     - {x: 17, y: 57}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -39, y: -59}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 43, y: 63}
   characterData:
     bones:
     - name: bone_1
@@ -842,16 +844,13 @@ ScriptedImporter:
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 2048
-  importedTextureHeight: 1024
-  documentSize: {x: 1293, y: 892}
+  layerMappingOption: 2
+  generatePhysicsShape: 0
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
   spriteCategoryList:
     categories: []
-  textureActualWidth: 2048
-  textureActualHeight: 1024
   spritePackingTag: 
   resliceFromLayer: 0
   mosaicPSDLayers: []
@@ -863,7 +862,11 @@ ScriptedImporter:
     spriteID: cdb1c3135d99bd74a8af088822cab22f
     layerID: 2
     mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
   generateGOHierarchy: 0
   textureAssetName: "\uBE44\uBE44\uD0C4\uAD8C\uCD1D Texture"
   prefabAssetName: "\uBE44\uBE44\uD0C4\uAD8C\uCD1D Prefab"

@@ -3153,7 +3153,7 @@ TextureImporter:
       213: -5197256101461285670
     second: nature_environment_01_grass_1049
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -3174,6 +3174,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -3183,8 +3184,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 1
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -3212,6 +3213,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -3239,6 +3241,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6418,6 +6444,135 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      nature_environment_01_grass_0: -6247229378997111868
+      nature_environment_01_grass_1: -8778415895262919807
+      nature_environment_01_grass_10: -2197503536657267945
+      nature_environment_01_grass_100: 3169106331601114250
+      nature_environment_01_grass_101: 6180724512995375579
+      nature_environment_01_grass_102: 4163732815946409055
+      nature_environment_01_grass_103: 5612989545723144726
+      nature_environment_01_grass_104: 7441755814735387003
+      nature_environment_01_grass_105: 6814445755193423503
+      nature_environment_01_grass_106: 2917865588204311205
+      nature_environment_01_grass_107: 459076197068344435
+      nature_environment_01_grass_108: 8791262765841079967
+      nature_environment_01_grass_109: 5958790619168480694
+      nature_environment_01_grass_11: 29454286179041808
+      nature_environment_01_grass_110: -4874034387853513421
+      nature_environment_01_grass_111: 5197032757753245702
+      nature_environment_01_grass_112: -7690285585869432492
+      nature_environment_01_grass_113: -3948246566413276103
+      nature_environment_01_grass_114: -5699408121042473639
+      nature_environment_01_grass_115: 2600142905159655298
+      nature_environment_01_grass_116: 8310330968827215633
+      nature_environment_01_grass_117: -5025628045832439908
+      nature_environment_01_grass_118: 4163171409277070153
+      nature_environment_01_grass_119: 7354418179872933809
+      nature_environment_01_grass_12: 2800854301333722923
+      nature_environment_01_grass_120: -6295852151199350512
+      nature_environment_01_grass_121: 460247445977392191
+      nature_environment_01_grass_122: 673960166007825118
+      nature_environment_01_grass_123: 6842915427508187076
+      nature_environment_01_grass_124: -6429074814429485019
+      nature_environment_01_grass_125: -7560404434410304367
+      nature_environment_01_grass_126: 2928265653790954038
+      nature_environment_01_grass_127: 8151716974949255010
+      nature_environment_01_grass_13: -7840561547546496602
+      nature_environment_01_grass_14: 6183776496257198704
+      nature_environment_01_grass_15: 7842104533827654313
+      nature_environment_01_grass_16: -6851886340257115348
+      nature_environment_01_grass_17: 3954894136293950155
+      nature_environment_01_grass_18: 2943205618476388644
+      nature_environment_01_grass_19: -7450142466583821642
+      nature_environment_01_grass_2: -2846664913327516531
+      nature_environment_01_grass_20: -2306106305360774057
+      nature_environment_01_grass_21: 7536143319514265655
+      nature_environment_01_grass_22: -8225812280658890550
+      nature_environment_01_grass_23: 4824895246762804249
+      nature_environment_01_grass_24: 3130307879592394584
+      nature_environment_01_grass_25: 8876551633273603279
+      nature_environment_01_grass_26: -9142414124268343296
+      nature_environment_01_grass_27: 5457815371514842598
+      nature_environment_01_grass_28: -5254833400793295339
+      nature_environment_01_grass_29: -6706908709212968896
+      nature_environment_01_grass_3: 208562477382515317
+      nature_environment_01_grass_30: -471431376291594810
+      nature_environment_01_grass_31: -5837002019128858866
+      nature_environment_01_grass_32: -7888389762722114148
+      nature_environment_01_grass_33: 4677474931166476651
+      nature_environment_01_grass_34: -3029827631900130557
+      nature_environment_01_grass_35: -1910815000438785832
+      nature_environment_01_grass_36: -8577321034337988562
+      nature_environment_01_grass_37: -6561188296400713334
+      nature_environment_01_grass_38: 750178013247345039
+      nature_environment_01_grass_39: 4110879390693913054
+      nature_environment_01_grass_4: 4295496068614669325
+      nature_environment_01_grass_40: 3441899410349923018
+      nature_environment_01_grass_41: 5051350631696881933
+      nature_environment_01_grass_42: 2370687876168044151
+      nature_environment_01_grass_43: 3524261084672789144
+      nature_environment_01_grass_44: -174382567263983937
+      nature_environment_01_grass_45: -4216951367728729409
+      nature_environment_01_grass_46: 4378388736481584143
+      nature_environment_01_grass_47: 3688710018317002071
+      nature_environment_01_grass_48: 2172358450294634178
+      nature_environment_01_grass_49: 5551242504758398362
+      nature_environment_01_grass_5: 1753809548531578707
+      nature_environment_01_grass_50: -1611274853210586804
+      nature_environment_01_grass_51: -867517784885605028
+      nature_environment_01_grass_52: -4482744593651216404
+      nature_environment_01_grass_53: -901584130990200463
+      nature_environment_01_grass_54: -1570965944555873118
+      nature_environment_01_grass_55: 4583443303653405827
+      nature_environment_01_grass_56: -3402333177662855552
+      nature_environment_01_grass_57: -5802172658793849578
+      nature_environment_01_grass_58: -310895128956671091
+      nature_environment_01_grass_59: 7137120437904092376
+      nature_environment_01_grass_6: 7779655033496248745
+      nature_environment_01_grass_60: -3098718114383885786
+      nature_environment_01_grass_61: -5297820759323629686
+      nature_environment_01_grass_62: -2482808405983427588
+      nature_environment_01_grass_63: 7833125358191366158
+      nature_environment_01_grass_64: 3316237315445844512
+      nature_environment_01_grass_65: -8484865221636827547
+      nature_environment_01_grass_66: 309942352833350379
+      nature_environment_01_grass_67: -231167993050649535
+      nature_environment_01_grass_68: -8399754603136151095
+      nature_environment_01_grass_69: 1477995116307595856
+      nature_environment_01_grass_7: 2418788655115874129
+      nature_environment_01_grass_70: -8047834754494507042
+      nature_environment_01_grass_71: 8660326959768780541
+      nature_environment_01_grass_72: -7889275872577091868
+      nature_environment_01_grass_73: 995677393991358669
+      nature_environment_01_grass_74: -2913838727409932286
+      nature_environment_01_grass_75: 8263850181304789238
+      nature_environment_01_grass_76: -379180260400050593
+      nature_environment_01_grass_77: -7159614868812839658
+      nature_environment_01_grass_78: 114253449453821843
+      nature_environment_01_grass_79: -7173872525051711119
+      nature_environment_01_grass_8: 4474939871253176598
+      nature_environment_01_grass_80: 8058226597720190390
+      nature_environment_01_grass_81: -3500647150791290469
+      nature_environment_01_grass_82: -5584471230973614865
+      nature_environment_01_grass_83: 3692426726281211754
+      nature_environment_01_grass_84: 7618292159890104400
+      nature_environment_01_grass_85: -7682961443834647466
+      nature_environment_01_grass_86: 9186777279141064900
+      nature_environment_01_grass_87: 4186967586795691990
+      nature_environment_01_grass_88: 3362498729610659423
+      nature_environment_01_grass_89: -7659836941748386461
+      nature_environment_01_grass_9: 3951293398129504089
+      nature_environment_01_grass_90: 1550311083695878142
+      nature_environment_01_grass_91: 8146434885164863714
+      nature_environment_01_grass_92: -4862132424034387593
+      nature_environment_01_grass_93: -6259778781769961170
+      nature_environment_01_grass_94: -2598985373242525418
+      nature_environment_01_grass_95: 2891469079953757445
+      nature_environment_01_grass_96: -1219497809064731186
+      nature_environment_01_grass_97: 530382690770968677
+      nature_environment_01_grass_98: -735749833819840734
+      nature_environment_01_grass_99: -8269708892040950339
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

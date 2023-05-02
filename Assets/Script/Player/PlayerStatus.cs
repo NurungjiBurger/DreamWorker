@@ -132,17 +132,16 @@ public class PlayerStatus : Status
             dataP.nowHP -= Dmg;
             if (dataP.nowHP < 0)
             {
-                Debug.Log("사망했습니다");
-                // 저장된 파일 삭제후 메인메뉴로 돌아가기 or 게임 종료
-                /*
+                //Debug.Log("사망했습니다");
+                
                 Destroy(GameObject.Find("GameController"));
                 Destroy(GameObject.Find("Data"));
                 GameObject.Find("Data").GetComponent<DataController>().DeleteGameData();
-                GameObject.Find("GameController").GetComponent<GameController>().RevertScene("MainMenu");
-                /*
+                GameObject.Find("GameController").GetComponent<GameController>().RevertScene("Result");
+                
                 GameObject.Find("Data").GetComponent<DataController>().DeleteGameData();
-                GameObject.Find("Data").GetComponent<DataController>().ExitGame();
-                */
+                //GameObject.Find("Data").GetComponent<DataController>().ExitGame();
+                
             }
         }
     }
@@ -150,7 +149,13 @@ public class PlayerStatus : Status
     // 소지금 계산
     public bool CalCulateHandMoney(int money, char oper)
     {
-        if (oper == '+') { dataP.handMoney += money; return true; }
+        if (oper == '+') 
+        { 
+            dataP.handMoney += money;
+            data.obtainedGold += money;
+
+            return true; 
+        }
         else if (oper == '-')
         {
             if (dataP.handMoney >= money)
