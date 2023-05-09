@@ -15,7 +15,7 @@ public class ButtonUI : MonoBehaviour
     // 저장
     public void SaveButton()
     {
-        //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
     }
 
     // 메인메뉴로

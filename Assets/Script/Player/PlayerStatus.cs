@@ -83,14 +83,14 @@ public class PlayerStatus : Status
     public void CalCulateExperience(int exp)
     {
         dataP.experience += exp;
-        dataP.needExperience = dataP.level * 10;
-       // dataP.needExperience = dataP.level * 100;
+        //dataP.needExperience = dataP.level * 10;
+       dataP.needExperience = dataP.level * 100;
 
         if (dataP.experience >= dataP.needExperience)
         {
             dataP.power += 1;
             dataP.level++;
-            //dataP.experience = 0;
+            dataP.experience = 0;
 
             levelUP.SetActive(true);
             levelTimer.TimerSetZero();
@@ -133,13 +133,15 @@ public class PlayerStatus : Status
             if (dataP.nowHP < 0)
             {
                 //Debug.Log("사망했습니다");
-                
-                Destroy(GameObject.Find("GameController"));
-                Destroy(GameObject.Find("Data"));
+
+                // Destroy(GameObject.Find("GameController"));
+                // Destroy(GameObject.Find("Data"));
+                data.winOrLose = "Defeat ...";
+
                 GameObject.Find("Data").GetComponent<DataController>().DeleteGameData();
                 GameObject.Find("GameController").GetComponent<GameController>().RevertScene("Result");
                 
-                GameObject.Find("Data").GetComponent<DataController>().DeleteGameData();
+                //GameObject.Find("Data").GetComponent<DataController>().DeleteGameData();
                 //GameObject.Find("Data").GetComponent<DataController>().ExitGame();
                 
             }

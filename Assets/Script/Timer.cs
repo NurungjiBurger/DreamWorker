@@ -9,7 +9,13 @@ public class Timer : MonoBehaviour
 
     private float time;
     private float cooldown;
+    private bool active = false;
 
+    private void ActiveFalse()
+    {
+        active = false;
+        GameObject.Find("Canvas").transform.Find("StageNumber").gameObject.SetActive(false);
+    }
     // Å¸ÀÌ¸Ó ÆÄ±«
     public void DestroyAll()
     {
@@ -35,6 +41,11 @@ public class Timer : MonoBehaviour
         time = 0;
     }
 
+    public void ActiveTrue()
+    {
+        active = true;
+    }
+
     private void Start()
     {
         time = 0;
@@ -43,6 +54,7 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime;
+        if (active && CooldownCheck()) ActiveFalse();
 
     }
 }

@@ -271,6 +271,7 @@ public class Room : MonoBehaviour
                                         // 방을 하나 클리어 할때마다 데이터 저장.
                                         dataM.isClear = true;
                                         data.numberOfClearRoom++;
+                                        Debug.Log("데이터 저장");
                                         GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
                                     }
                                 }
@@ -284,6 +285,8 @@ public class Room : MonoBehaviour
 
                                 if (data.eventRoomVisit)
                                 {
+                                    GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+                                    data.stageNumber++;
                                     gameController.DestroyNowStage(true);
                                     data.eventRoomVisit = false;
                                     player.transform.position = new Vector3(0, 0, 0);

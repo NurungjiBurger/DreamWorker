@@ -15,6 +15,8 @@ public class GameData
     public int obtainedGold = 0;
     public float playTime = 0.0f;
 
+    public string winOrLose = "";
+
     public int round;
     public int stageNumber;
     public int subStageNumber;

@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     private bool gameStart = false;
     private bool revert = false;
     private bool isPause = false;
+    private bool isReuslt = false;
 
     private int selectedPlayerIndex;
     private int pastSelectDirection;
@@ -119,13 +120,11 @@ public class GameController : MonoBehaviour
     // 다음 스테이지로 넘어가기 위해 현재 스테이지 삭제
     public void DestroyNowStage(bool type)
     {
-        /*
-        Debug.Log(data.stageNumber);
-        stageNumber.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "Stage start !";
+        stageNumber.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "Stage " + data.stageNumber;
         stageNumber.SetActive(true);
-        for (int i = 0; i < 100000; i++) { }
-        stageNumber.SetActive(false);
-        */
+        stageNumber.GetComponent<Timer>().TimerSetZero();
+        stageNumber.GetComponent<Timer>().ActiveTrue();
+        
 
         if (type)
         {
@@ -330,8 +329,6 @@ public class GameController : MonoBehaviour
     // 메인메뉴로 돌아가기
     public void ReturntoMain()
     {
-        Destroy(GameObject.Find("GameController"));
-        Destroy(GameObject.Find("Data"));
         GameObject.Find("GameController").GetComponent<GameController>().RevertScene("MainMenu");
     }
 
@@ -353,6 +350,29 @@ public class GameController : MonoBehaviour
     private bool CheckRoom(string str)
     {
         return true;
+    }
+
+    // 결과화면 출력
+    public void AllocateResultScene()
+    {
+        //Debug.Log("게임종료");
+
+        // 게임 플레이 정보
+        GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("ScoreBoard").transform.Find("PlayTime").transform.Find("PlayTimeData").GetComponent<TextMeshProUGUI>().text = (int)data.playTime/3600 + " : " + (int)data.playTime/60%60 + " : " + (int)data.playTime%60;
+        GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("ScoreBoard").transform.Find("KilledMonster").transform.Find("KilledMonsterData").GetComponent<TextMeshProUGUI>().text = " " + data.numberOfKilledMonster;
+        GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("ScoreBoard").transform.Find("ObtainedItems").transform.Find("ObtainedItemsData").GetComponent<TextMeshProUGUI>().text = " " + data.numberOfObtainedItems;
+        GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("ScoreBoard").transform.Find("ObtainedGold").transform.Find("ObtainedGoldData").GetComponent<TextMeshProUGUI>().text = " " + data.obtainedGold;
+        GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("ScoreBoard").transform.Find("ClearRoom").transform.Find("ClearRoomData").GetComponent<TextMeshProUGUI>().text = " " + data.numberOfClearRoom;
+
+        GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("GameBoard").transform.Find("DeadRoomNumber").transform.Find("RoomNumber").GetComponent<TextMeshProUGUI>().text = " " + data.stageNumber + " - " + data.subStageNumber;
+
+        if (!isReuslt)
+        {
+            GameObject.Find("Canvas").transform.Find("Background").transform.Find("GameResult").GetComponent<TextMeshProUGUI>().text = data.winOrLose;
+            GameObject.Find("Canvas").transform.Find("Background").transform.Find("MainButton").GetComponent<Button>().onClick.AddListener(ReturntoMain);
+            GameObject.Find("Canvas").transform.Find("Background").transform.Find("ExitButton").GetComponent<Button>().onClick.AddListener(ExitGame);
+            isReuslt = true;
+        }
     }
 
     // 던전씬으로 전환
@@ -387,8 +407,19 @@ public class GameController : MonoBehaviour
         }
         else if (scenename == "MainMenu")
         {
-            SceneManager.UnloadSceneAsync("Dungeon");
+            if (SceneManager.GetActiveScene().name == "Dungeon") SceneManager.UnloadSceneAsync("Dungeon");
+            else if (SceneManager.GetActiveScene().name == "Result") SceneManager.UnloadSceneAsync("Result");
+            Destroy(GameObject.Find("Data"));
+            Destroy(GameObject.Find("GameController"));
             SceneManager.LoadScene("MainMenu");
+
+            GameStart = false;
+            isReuslt = false;
+        }
+        else if (scenename == "Result")
+        {
+            if (SceneManager.GetActiveScene().name == "Dungeon")  SceneManager.UnloadSceneAsync("Dungeon");
+            SceneManager.LoadScene("Result");
 
             GameStart = false;
         }
@@ -444,9 +475,12 @@ public class GameController : MonoBehaviour
             ExitGame();
         }
 
-        if (data == null) data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+        if (data == null)
+        {
+            data = GameObject.Find("Data").GetComponent<DataController>().GameData; 
+        }
         else
-        {            
+        {
             if (SceneManager.GetActiveScene().name == "MainMenu")
             {
                 if (gameStart)
@@ -460,7 +494,11 @@ public class GameController : MonoBehaviour
             {
                 if (!inventory) inventory = GameObject.Find("Canvas").transform.Find("Inventory").gameObject;
                 if (!inspector) inspector = GameObject.Find("Canvas").transform.Find("Inspector").gameObject;
-                if (!stageNumber) stageNumber = GameObject.Find("Canvas").transform.Find("StageNumber").gameObject;
+                if (!stageNumber)
+                {
+                    stageNumber = GameObject.Find("Canvas").transform.Find("StageNumber").gameObject;
+                    stageNumber.GetComponent<Timer>().SetCooldown(1);
+                }
 
                 if (revert) RevertScene("Dungeon");
                 else
@@ -472,25 +510,13 @@ public class GameController : MonoBehaviour
                         if (data == null) Awake();
 
                         data.playTime += Time.deltaTime;
-                       // Debug.Log(data.playTime + " " + Time.deltaTime);
+                        // Debug.Log(data.playTime + " " + Time.deltaTime);
 
                     }
                     else
                     {
                         isPause = true;
-                        
-                        /*
-                        Debug.Log("플레이타임");
-                        Debug.Log(data.playTime);
-                        Debug.Log("획득아이템");
-                        Debug.Log(data.numberOfObtainedItems);
-                        Debug.Log("획득골드");
-                        Debug.Log(data.obtainedGold);
-                        Debug.Log("처치한 몬스터수");
-                        Debug.Log(data.numberOfKilledMonster);
-                        Debug.Log("클리어한방");
-                        Debug.Log(data.numberOfClearRoom);
-                        */
+
                     }
 
                     GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 1.55f, -10), Quaternion.identity);
@@ -504,7 +530,7 @@ public class GameController : MonoBehaviour
                     if (data.stageNumber <= 6) // 5 스테이지
                     {
                         data.stageClear = false;
-                        if (!data.stageEntrance) 
+                        if (!data.stageEntrance)
                         {
                             data.round++;
 
@@ -527,8 +553,13 @@ public class GameController : MonoBehaviour
                             if (!PlayerCheck()) RefreshPlayerPosition();
                         }
                     }
+                    else
+                    {
+                        data.winOrLose = "Victory !";
+                    }
                 }
             }
+            else if (SceneManager.GetActiveScene().name == "Result") AllocateResultScene();
         }
     }
 
@@ -567,7 +598,6 @@ public class GameController : MonoBehaviour
             // 아이템 복구
             else if (data.datas[idx].structName == "Item")
             {
-                Debug.Log("아이템 복구");
                 obj = Instantiate(prefabItems[data.datas[idx].prfNumber], data.datas[idx].Position(), Quaternion.identity);
 
                 obj.GetComponent<ItemStatus>().itemPrfNumber = data.datas[idx].prfNumber;
