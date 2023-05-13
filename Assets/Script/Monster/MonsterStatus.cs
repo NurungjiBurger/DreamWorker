@@ -183,7 +183,7 @@ public class MonsterStatus : Status
             GetComponent<ObjectFlip>().ChangeSize(1.5f);
             hpBarYAxis *= 2.5f;
             hpBar.transform.position = new Vector3(canvas.transform.position.x + 85, canvas.transform.position.y + 100, transform.position.z);
-            hpBar.transform.localScale = new Vector3(2.0f, 1.25f, 1.25f);
+            hpBar.transform.localScale = new Vector3(1.15f, 1.15f, 1.15f);
         }
 
         // 미니맵 아이콘 생성

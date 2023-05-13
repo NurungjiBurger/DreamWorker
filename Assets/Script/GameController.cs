@@ -64,6 +64,13 @@ public class GameController : MonoBehaviour
     public GameObject[] Monsters { get { return prefabMonsters; } }
     public GameObject[] Portals { get { return prefabPortals; } }
 
+
+    public void BGMPlay(int id)
+    {
+        if (GetComponent<Audio>().IsNowPlaying()) GetComponent<Audio>().NowPlayingStop();
+        GetComponent<Audio>().AudioPlay(id);
+        GetComponent<Audio>().IsLoop(true);
+    }
     private void printalldata()
     {
         for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName + "  " + idx);
@@ -120,6 +127,8 @@ public class GameController : MonoBehaviour
     // 다음 스테이지로 넘어가기 위해 현재 스테이지 삭제
     public void DestroyNowStage(bool type)
     {
+        BGMPlay(Random.Range(0, 1));
+
         stageNumber.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "Stage " + data.stageNumber;
         stageNumber.SetActive(true);
         stageNumber.GetComponent<Timer>().TimerSetZero();
@@ -404,6 +413,8 @@ public class GameController : MonoBehaviour
                 // 저장된 데이터가 있으면 해당 데이터를 기반으로 이전 게임 환경으로 복구
                 Restore();
             }
+
+            BGMPlay(Random.Range(0, 1));
         }
         else if (scenename == "MainMenu")
         {
@@ -415,6 +426,8 @@ public class GameController : MonoBehaviour
 
             GameStart = false;
             isReuslt = false;
+
+            BGMPlay(2);
         }
         else if (scenename == "Result")
         {
@@ -422,6 +435,8 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene("Result");
 
             GameStart = false;
+
+            BGMPlay(2);
         }
 
     }
@@ -477,12 +492,20 @@ public class GameController : MonoBehaviour
 
         if (data == null)
         {
-            data = GameObject.Find("Data").GetComponent<DataController>().GameData; 
+            data = GameObject.Find("Data").GetComponent<DataController>().GameData;
+
+            if (GetComponent<Audio>().IsNowPlaying())
+            {
+                //Debug.Log("실행중");
+                BGMPlay(2);
+            }
         }
         else
         {
+
             if (SceneManager.GetActiveScene().name == "MainMenu")
             {
+
                 if (gameStart)
                 {
                     SceneManager.LoadScene("Dungeon");

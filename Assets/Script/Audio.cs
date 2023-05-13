@@ -27,7 +27,21 @@ public class Audio : MonoBehaviour
     [SerializeField]
     private AudioClip[] audioClips;
 
-    private AudioSource audioSource;
+    private AudioSource audioSource = null;
+
+    public bool IsNowPlaying()
+    {
+        if (audioSource != null) return true;
+        else return false;
+    }
+    public void NowPlayingStop()
+    {
+        audioSource.Stop();
+    }
+    public void IsLoop(bool value)
+    {
+        audioSource.loop = value;
+    }
 
     // 번호에 따른 저장된 오디오 재생 
     public void AudioPlay(int idx)

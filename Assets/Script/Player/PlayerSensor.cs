@@ -100,6 +100,8 @@ public class PlayerSensor : MonoBehaviour
                     // 회피 실패
                     if (Random.Range(0, 101) > GetComponent<PlayerStatus>().Data.evasionRate)
                     {
+                        GetComponent<Audio>().AudioPlay(0);
+
                         isHit = true;
                         hitTimer.TimerSetZero();
                         onOff = true;
@@ -115,6 +117,8 @@ public class PlayerSensor : MonoBehaviour
                     // 회피 실패
                     if (Random.Range(0, 101) > GetComponent<PlayerStatus>().Data.evasionRate)
                     {
+                        GetComponent<Audio>().AudioPlay(0);
+
                         isHit = true;
                         hitTimer.TimerSetZero();
                         onOff = true;
@@ -184,6 +188,8 @@ public class PlayerSensor : MonoBehaviour
                 if (Random.Range(0, 101) > GetComponent<PlayerStatus>().Data.evasionRate) {
                     if (!isHit)
                     {
+                        GetComponent<Audio>().AudioPlay(0);
+
                         isHit = true;
                         hitTimer.TimerSetZero();
                         onOff = true;

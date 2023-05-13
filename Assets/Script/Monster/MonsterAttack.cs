@@ -95,6 +95,7 @@ public class MonsterAttack : MonoBehaviour
                 if (GetComponent<ObjectFlip>().flipX) dir = -1;
                 else dir = 1;
 
+                GetComponent<Audio>().AudioPlay(1);
                 attackRandom = Random.Range(0, attackQuantity);
 
                 Attacking();
