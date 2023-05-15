@@ -210,7 +210,7 @@ public class PlayerSensor : MonoBehaviour
     {
         hitTimer = Instantiate(prefabTimer).GetComponent<Timer>();
 
-        hitTimer.SetCooldown(2.0f);
+        hitTimer.SetCooldown(1.0f);
     }
 
     private void Update()

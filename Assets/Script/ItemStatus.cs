@@ -46,6 +46,12 @@ public class ItemStatus : Status
     public GameObject EffectBone { get { return effectBone; } }
     public Data Data { get { return dataI; } }
 
+    // 무기의 경우 적절한 오디오 재생
+    public void WeaponSoundPlay()
+    {
+        GetComponent<Audio>().AudioPlay(0);
+    }
+
     // 아이템 삭제
     public void DestoryAll()
     {

@@ -550,7 +550,8 @@ public class GameController : MonoBehaviour
                         for (int idx = 0; idx < data.datas.Count; idx++) Debug.Log(data.datas[idx].structName);
                     }
 
-                    if (data.stageNumber <= 6) // 5 스테이지
+                    //if (data.stageNumber <= 6) // 5 스테이지
+                    if (data.stageNumber <= 3) // 3 스테이지
                     {
                         data.stageClear = false;
                         if (!data.stageEntrance)
@@ -561,7 +562,7 @@ public class GameController : MonoBehaviour
 
                             data.subStageNumber = Random.Range(10, 16);
 
-                            data.subStageNumber = 3;
+                            //data.subStageNumber = 3;
 
                             //data.stageNumber = Random.Range(1, (prefabMapDesigns.Length - 2) / 6);
 
@@ -579,6 +580,7 @@ public class GameController : MonoBehaviour
                     else
                     {
                         data.winOrLose = "Victory !";
+                        RevertScene("Result");
                     }
                 }
             }

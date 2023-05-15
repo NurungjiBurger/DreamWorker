@@ -108,6 +108,13 @@ public class MonsterStatus : Status
         Destroy(hpBar.gameObject);
     }
 
+    private void BalanceStat(int value)
+    {
+        maxHP *= value;
+        power *= value;
+        defenseRate *= value;
+    }
+
     // 몬스터 보스화
     public void BeTheBossMonster(bool isevent)
     {
@@ -159,6 +166,8 @@ public class MonsterStatus : Status
 
             data.datas.Add(new Data("Monster", monsterPrfNumber, index, arr, arr2, -1, -1, false));
             dataM = data.datas[index];
+
+            BalanceStat(data.stageNumber*5);
 
             dataM.isBoss = isBoss;
         }

@@ -84,11 +84,13 @@ public class PlayerStatus : Status
     {
         dataP.experience += exp;
         //dataP.needExperience = dataP.level * 10;
-       dataP.needExperience = dataP.level * 100;
+       dataP.needExperience = dataP.level * 25;
 
         if (dataP.experience >= dataP.needExperience)
         {
             dataP.power += 1;
+            dataP.maxHP += 1;
+            dataP.nowHP += 1;
             dataP.level++;
             dataP.experience = 0;
 
@@ -120,6 +122,8 @@ public class PlayerStatus : Status
     {
         if (oper == '+')
         {
+            Debug.Log(Dmg);
+
             dataP.nowHP += Dmg;
 
             if (dataP.nowHP > dataP.maxHP) dataP.nowHP = dataP.maxHP;

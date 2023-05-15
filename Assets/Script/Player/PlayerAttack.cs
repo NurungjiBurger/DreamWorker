@@ -108,11 +108,15 @@ public class PlayerAttack : MonoBehaviour
 
             if (weapon)
             {
-                GetComponent<Audio>().AudioPlay(1);
+                //GetComponent<Audio>().AudioPlay(1);
+                weapon.GetComponent<ItemStatus>().WeaponSoundPlay();
 
                 animator.SetTrigger(weapon.GetComponent<ItemStatus>().AttackType);
 
                 attackTimer.TimerSetZero();
+
+                // ««»Ì
+                GetComponent<PlayerStatus>().CalCulateHealth((int)(GetComponent<PlayerStatus>().Damage * (GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100)), '+');
             }
             else
             {
