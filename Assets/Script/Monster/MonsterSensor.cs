@@ -48,7 +48,8 @@ public class MonsterSensor : MonoBehaviour
                     GetComponent<MonsterStatus>().Data.nowHP -= Dmg;
 
                     // 플레이어 피흡
-                    //player.GetComponent<PlayerStatus>().CalCulateHealth((int)(Dmg * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100)), '+');
+                    //Debug.Log(player.GetComponent<PlayerStatus>().Damage + " " + Dmg + " " + ((int)(player.GetComponent<PlayerStatus>().Damage * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100))));
+                    player.GetComponent<PlayerStatus>().CalCulateHealth((int)((Dmg * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 1000))), '+');
                 }
             } 
             // 휘두르는 칼 따위의 오브젝트에도 데미지를 받기 위함
@@ -84,7 +85,7 @@ public class MonsterSensor : MonoBehaviour
                         GetComponent<MonsterStatus>().Data.nowHP -= Dmg;
 
                         // 플레이어 피흡
-                        //player.GetComponent<PlayerStatus>().CalCulateHealth((int)(Dmg * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100)), '+');
+                        player.GetComponent<PlayerStatus>().CalCulateHealth((int)(player.GetComponent<PlayerStatus>().Damage * (player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 100)), '+');
                     }
                 }
             }

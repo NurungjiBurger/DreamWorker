@@ -923,7 +923,7 @@ MonoBehaviour:
   moveSpeed: 1
   attackSpeed: 1
   defenseRate: 5
-  bloodAbsorptionRate: 5
+  bloodAbsorptionRate: 1
   evasionRate: 5
   name: "\uB9C8\uBC95\uC0AC"
   damage: 0

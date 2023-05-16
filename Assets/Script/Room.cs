@@ -271,7 +271,7 @@ public class Room : MonoBehaviour
                                         // 방을 하나 클리어 할때마다 데이터 저장.
                                         dataM.isClear = true;
                                         data.numberOfClearRoom++;
-                                        Debug.Log("데이터 저장");
+                                        //Debug.Log("데이터 저장");
                                         GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
                                     }
                                 }

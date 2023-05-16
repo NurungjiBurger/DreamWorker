@@ -72,10 +72,11 @@ public class PlayerStatus : Status
         }
         else if (dataP.firstEvolution)
         {
-            // 공격력, 이동속도, 방어력 소폭 증가
+            // 공격력, 이동속도, 방어력, 피흡 소폭 증가
             dataP.power += 5;
             dataP.moveSpeed += 0.05f;
             dataP.defenseRate += 5;
+            dataP.bloodAbsorptionRate += 2;
         }
     }
 
@@ -91,6 +92,7 @@ public class PlayerStatus : Status
             dataP.power += 1;
             dataP.maxHP += 1;
             dataP.nowHP += 1;
+            dataP.bloodAbsorptionRate += 0.02f;
             dataP.level++;
             dataP.experience = 0;
 
@@ -122,7 +124,7 @@ public class PlayerStatus : Status
     {
         if (oper == '+')
         {
-            Debug.Log(Dmg);
+            //Debug.Log(Dmg);
 
             dataP.nowHP += Dmg;
 

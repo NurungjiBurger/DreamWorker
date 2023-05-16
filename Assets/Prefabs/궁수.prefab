@@ -1728,7 +1728,7 @@ MonoBehaviour:
   moveSpeed: 1.2
   attackSpeed: 1.8
   defenseRate: 5
-  bloodAbsorptionRate: 5
+  bloodAbsorptionRate: 1
   evasionRate: 5
   name: "\uAD81\uC218"
   damage: 0

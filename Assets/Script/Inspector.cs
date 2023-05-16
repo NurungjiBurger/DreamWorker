@@ -86,7 +86,7 @@ public class Inspector : MonoBehaviour
         transform.Find("Background").transform.Find("Status").transform.Find("MoveSpeed").GetComponent<TextMeshProUGUI>().text = "이동속도  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.moveSpeed);
         transform.Find("Background").transform.Find("Status").transform.Find("DefenseCapability").GetComponent<TextMeshProUGUI>().text = "방어력  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.defenseRate);
         transform.Find("Background").transform.Find("Status").transform.Find("AttackSpeed").GetComponent<TextMeshProUGUI>().text = "공격속도  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.attackSpeed);
-        transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "피흡  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate);
+        transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "피흡  " + string.Format("{0:N3}", player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 10);
         transform.Find("Background").transform.Find("Status").transform.Find("EvasionRate").GetComponent<TextMeshProUGUI>().text = "회피  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.evasionRate);
     }
 
