@@ -72,6 +72,11 @@ public class ButtonUI : MonoBehaviour
     public void UIActive()
     {
         onOff = !onOff;
+        if (transform.name == "EntranceButton")
+        {
+            //Debug.Log("데이터 저장");
+            //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+        }
     }
 
     void Start()

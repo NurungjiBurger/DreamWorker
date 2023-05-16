@@ -47240,46 +47240,50 @@ struct Result_tCF0219C304F36402253F98E97102805A5D2462CF  : public MonoBehaviour_
 // Room
 struct Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
+	// UnityEngine.GameObject Room::prefabTimer
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___prefabTimer_4;
+	// Timer Room::saveTimer
+	Timer_t2FE811324BD2C741B8D6EBC18E20230874E35A20* ___saveTimer_5;
 	// System.Boolean Room::isGoNext
-	bool ___isGoNext_4;
+	bool ___isGoNext_6;
 	// System.Boolean Room::monsterPresence
-	bool ___monsterPresence_5;
+	bool ___monsterPresence_7;
 	// System.Boolean Room::isEvent
-	bool ___isEvent_6;
+	bool ___isEvent_8;
 	// System.Boolean Room::isPlayer
-	bool ___isPlayer_7;
+	bool ___isPlayer_9;
 	// System.Int32 Room::subStageNumber
-	int32_t ___subStageNumber_8;
+	int32_t ___subStageNumber_10;
 	// System.Int32 Room::population
-	int32_t ___population_9;
+	int32_t ___population_11;
 	// System.Single Room::mx
-	float ___mx_10;
+	float ___mx_12;
 	// System.Single Room::my
-	float ___my_11;
+	float ___my_13;
 	// System.Int32 Room::mapPrfNumber
-	int32_t ___mapPrfNumber_12;
+	int32_t ___mapPrfNumber_14;
 	// System.Int32 Room::index
-	int32_t ___index_13;
+	int32_t ___index_15;
 	// System.Int32 Room::dir
-	int32_t ___dir_14;
+	int32_t ___dir_16;
 	// System.Int32 Room::sel
-	int32_t ___sel_15;
+	int32_t ___sel_17;
 	// UnityEngine.GameObject Room::player
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_16;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_18;
 	// UnityEngine.GameObject[] Room::monsters
-	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_17;
+	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_19;
 	// UnityEngine.GameObject Room::map
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_18;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_20;
 	// GameController Room::gameController
-	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_19;
+	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_21;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::portals
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_20;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_22;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::objects
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_21;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_23;
 	// GameData Room::data
-	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_22;
+	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_24;
 	// Data Room::dataM
-	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_23;
+	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_25;
 };
 
 // UnityEngine.UIElements.RuntimePanel

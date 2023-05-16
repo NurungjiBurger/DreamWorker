@@ -98,8 +98,6 @@ public class PlayerMovement : MonoBehaviour
             if (GetComponent<PlayerSensor>().Portal)
             {
                 transform.position = GetComponent<PlayerSensor>().TeleportPosition;
-                Debug.Log("데이터 저장");
-                GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
             }
             GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().UIActive();
         }

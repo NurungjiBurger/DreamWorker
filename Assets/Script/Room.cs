@@ -7,6 +7,11 @@ using TMPro;
 public class Room : MonoBehaviour
 {
 
+    [SerializeField]
+    private GameObject prefabTimer;
+
+    private Timer saveTimer;
+
     private bool isGoNext;
     private bool monsterPresence;
     public bool isEvent = false;
@@ -183,6 +188,8 @@ public class Room : MonoBehaviour
                 }
             }
         }
+
+        //Debug.Log("스테이지 생성 완료");
     }
 
     public void ConnectData()
@@ -217,6 +224,8 @@ public class Room : MonoBehaviour
         {
             gameController.PortalCreate(gameController.Room[dataM.selectRoomIndex], gameController.Room[subStageNumber], dataM.portalDirection);
         }
+
+
     }
 
     private void FixedUpdate()
@@ -272,7 +281,7 @@ public class Room : MonoBehaviour
                                         dataM.isClear = true;
                                         data.numberOfClearRoom++;
                                         //Debug.Log("데이터 저장");
-                                        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+                                        //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
                                     }
                                 }
                             }
@@ -285,7 +294,6 @@ public class Room : MonoBehaviour
 
                                 if (data.eventRoomVisit)
                                 {
-                                    GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
                                     data.stageNumber++;
                                     gameController.DestroyNowStage(true);
                                     data.eventRoomVisit = false;
@@ -333,6 +341,10 @@ public class Room : MonoBehaviour
 
         ManageMap();
 
-        //if (isPlayer)  Debug.Log("나의 방 번호는 " + subStageNumber + "인덱스는 " + (index-2) + "방의 속성은 " + isEvent + "방의 위치는 " + transform.position  );
+        if (isPlayer)
+        {
+            //Debug.Log("데이터 저장");
+            //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+        }//Debug.Log("나의 방 번호는 " + subStageNumber + "인덱스는 " + (index-2) + "방의 속성은 " + isEvent + "방의 위치는 " + transform.position  );
     }
 }

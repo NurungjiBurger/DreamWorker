@@ -106,6 +106,9 @@ public class MonsterStatus : Status
         GetComponent<MonsterMovement>().DestroyAll();
         Destroy(gameObject);
         Destroy(hpBar.gameObject);
+
+        Debug.Log("데이터저장");
+        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
     }
 
     private void BalanceStat(int value)

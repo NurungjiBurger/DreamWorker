@@ -8746,46 +8746,50 @@ struct Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6  : public MonoBehavi
 // Room
 struct Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
+	// UnityEngine.GameObject Room::prefabTimer
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___prefabTimer_4;
+	// Timer Room::saveTimer
+	Timer_t2FE811324BD2C741B8D6EBC18E20230874E35A20* ___saveTimer_5;
 	// System.Boolean Room::isGoNext
-	bool ___isGoNext_4;
+	bool ___isGoNext_6;
 	// System.Boolean Room::monsterPresence
-	bool ___monsterPresence_5;
+	bool ___monsterPresence_7;
 	// System.Boolean Room::isEvent
-	bool ___isEvent_6;
+	bool ___isEvent_8;
 	// System.Boolean Room::isPlayer
-	bool ___isPlayer_7;
+	bool ___isPlayer_9;
 	// System.Int32 Room::subStageNumber
-	int32_t ___subStageNumber_8;
+	int32_t ___subStageNumber_10;
 	// System.Int32 Room::population
-	int32_t ___population_9;
+	int32_t ___population_11;
 	// System.Single Room::mx
-	float ___mx_10;
+	float ___mx_12;
 	// System.Single Room::my
-	float ___my_11;
+	float ___my_13;
 	// System.Int32 Room::mapPrfNumber
-	int32_t ___mapPrfNumber_12;
+	int32_t ___mapPrfNumber_14;
 	// System.Int32 Room::index
-	int32_t ___index_13;
+	int32_t ___index_15;
 	// System.Int32 Room::dir
-	int32_t ___dir_14;
+	int32_t ___dir_16;
 	// System.Int32 Room::sel
-	int32_t ___sel_15;
+	int32_t ___sel_17;
 	// UnityEngine.GameObject Room::player
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_16;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_18;
 	// UnityEngine.GameObject[] Room::monsters
-	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_17;
+	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_19;
 	// UnityEngine.GameObject Room::map
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_18;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_20;
 	// GameController Room::gameController
-	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_19;
+	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_21;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::portals
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_20;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_22;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::objects
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_21;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_23;
 	// GameData Room::data
-	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_22;
+	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_24;
 	// Data Room::dataM
-	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_23;
+	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_25;
 };
 
 // TMPro.Examples.ShaderPropAnimator
@@ -14182,9 +14186,9 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable3442[4] =
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable3443[18] = 
 {
 	static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___isComBack_4)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___isMove_5)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___isFall_6)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___attackRange_7)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___speed_8)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___prefabEffect_9)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___flip_10)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___cnt_11)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___flag_12)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___dir_13)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___x_14)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___y_15)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___sizex_16)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___sizey_17)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___entity_18)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___weapon_19)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___startPosition_20)),static_cast<int32_t>(offsetof(Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6, ___animator_21)),};
-IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable3445[20] = 
+IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable3445[22] = 
 {
-	static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___isGoNext_4)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___monsterPresence_5)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___isEvent_6)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___isPlayer_7)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___subStageNumber_8)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___population_9)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___mx_10)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___my_11)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___mapPrfNumber_12)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___index_13)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___dir_14)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___sel_15)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___player_16)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___monsters_17)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___map_18)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___gameController_19)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___portals_20)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___objects_21)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___data_22)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___dataM_23)),};
+	static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___prefabTimer_4)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___saveTimer_5)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___isGoNext_6)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___monsterPresence_7)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___isEvent_8)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___isPlayer_9)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___subStageNumber_10)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___population_11)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___mx_12)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___my_13)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___mapPrfNumber_14)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___index_15)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___dir_16)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___sel_17)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___player_18)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___monsters_19)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___map_20)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___gameController_21)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___portals_22)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___objects_23)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___data_24)),static_cast<int32_t>(offsetof(Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07, ___dataM_25)),};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable3446[16] = 
 {
 	static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___prefabUI_4)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___gradeImage_5)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___hovering_6)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___isOneClick_7)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___doubleClickSecond_8)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___timer_9)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___itemPanel_10)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___ui_11)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___slotItem_12)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___player_13)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___inventory_14)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___inspector_15)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___itemInform_16)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___selecter_17)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___smithy_18)),static_cast<int32_t>(offsetof(Slot_tC1CF93C4345A89624C638031DE98B5A9AD59E0E2, ___itemImage_19)),};

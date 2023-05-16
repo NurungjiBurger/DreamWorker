@@ -360,6 +360,7 @@ IL2CPP_EXTERN_C String_t* _stringLiteral2386E77CF610F786B06A91AF2C1B3FD2282D2745
 IL2CPP_EXTERN_C String_t* _stringLiteral238B4DA6FB0AFA19F6FE9DB897725DE4A4A6BFD5;
 IL2CPP_EXTERN_C String_t* _stringLiteral2BFEFE714213ED769AC808B09378480733D606EE;
 IL2CPP_EXTERN_C String_t* _stringLiteral2C174C49951ED40CEB221EC4F687E0B9B79C300D;
+IL2CPP_EXTERN_C String_t* _stringLiteral2C509DA50CABE391075A07188DA180CC2E4C53F7;
 IL2CPP_EXTERN_C String_t* _stringLiteral30D2AB9136CB0937750E2322D92F7FBA2A45A89A;
 IL2CPP_EXTERN_C String_t* _stringLiteral31E55FC06F9220D4B44D60641E9A8E99622B0C51;
 IL2CPP_EXTERN_C String_t* _stringLiteral31EC3FAD23E28416DB6C78F432D83FBF9772C72D;
@@ -415,6 +416,7 @@ IL2CPP_EXTERN_C String_t* _stringLiteral8F8BFCFC439A636B20C06C334A493AB7004843ED
 IL2CPP_EXTERN_C String_t* _stringLiteral92750ECE83DFBD7D2B0CCE5EF2BE9CE597546DA4;
 IL2CPP_EXTERN_C String_t* _stringLiteral960E5E7F211EFF3243DF14EDD1901DC9EF314D62;
 IL2CPP_EXTERN_C String_t* _stringLiteral9788506C7B6CACC404916E5EE56A086959758088;
+IL2CPP_EXTERN_C String_t* _stringLiteral9A1C2B6C68C4947A2C9B09B17990077FC3658723;
 IL2CPP_EXTERN_C String_t* _stringLiteral9C5521C3D6E99A0FA3A8A60136CF4760AB524020;
 IL2CPP_EXTERN_C String_t* _stringLiteralA879A0DC3089196DADE4A6A3AADD009F1D0230AE;
 IL2CPP_EXTERN_C String_t* _stringLiteralAAAA401E86E41E6120BB9E96B9892141CF5A81F8;
@@ -2568,46 +2570,50 @@ struct Projectile_tA72765CF412643B7253F62ADB6EDDCC9C3803BA6  : public MonoBehavi
 // Room
 struct Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
+	// UnityEngine.GameObject Room::prefabTimer
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___prefabTimer_4;
+	// Timer Room::saveTimer
+	Timer_t2FE811324BD2C741B8D6EBC18E20230874E35A20* ___saveTimer_5;
 	// System.Boolean Room::isGoNext
-	bool ___isGoNext_4;
+	bool ___isGoNext_6;
 	// System.Boolean Room::monsterPresence
-	bool ___monsterPresence_5;
+	bool ___monsterPresence_7;
 	// System.Boolean Room::isEvent
-	bool ___isEvent_6;
+	bool ___isEvent_8;
 	// System.Boolean Room::isPlayer
-	bool ___isPlayer_7;
+	bool ___isPlayer_9;
 	// System.Int32 Room::subStageNumber
-	int32_t ___subStageNumber_8;
+	int32_t ___subStageNumber_10;
 	// System.Int32 Room::population
-	int32_t ___population_9;
+	int32_t ___population_11;
 	// System.Single Room::mx
-	float ___mx_10;
+	float ___mx_12;
 	// System.Single Room::my
-	float ___my_11;
+	float ___my_13;
 	// System.Int32 Room::mapPrfNumber
-	int32_t ___mapPrfNumber_12;
+	int32_t ___mapPrfNumber_14;
 	// System.Int32 Room::index
-	int32_t ___index_13;
+	int32_t ___index_15;
 	// System.Int32 Room::dir
-	int32_t ___dir_14;
+	int32_t ___dir_16;
 	// System.Int32 Room::sel
-	int32_t ___sel_15;
+	int32_t ___sel_17;
 	// UnityEngine.GameObject Room::player
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_16;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_18;
 	// UnityEngine.GameObject[] Room::monsters
-	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_17;
+	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_19;
 	// UnityEngine.GameObject Room::map
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_18;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_20;
 	// GameController Room::gameController
-	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_19;
+	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_21;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::portals
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_20;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_22;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::objects
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_21;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_23;
 	// GameData Room::data
-	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_22;
+	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_24;
 	// Data Room::dataM
-	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_23;
+	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_25;
 };
 
 // Slot
@@ -4405,12 +4411,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* String_Concat_m9E3155FB84015C823606
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m5F87930F9B0828E5652E2D9D01ED907C01122C86_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) ;
 // System.Void UnityEngine.Transform::set_position(UnityEngine.Vector3)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Transform_set_position_mA1A817124BB41B685043DED2A9BA48CDF37C4156 (Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_value, const RuntimeMethod* method) ;
+// System.Boolean System.String::op_Equality(System.String,System.String)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1 (String_t* ___0_a, String_t* ___1_b, const RuntimeMethod* method) ;
 // System.Boolean UnityEngine.Object::op_Implicit(UnityEngine.Object)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Object_op_Implicit_m93896EF7D68FA113C42D3FE2BC6F661FC7EF514A (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C* ___0_exists, const RuntimeMethod* method) ;
 // System.UInt32 <PrivateImplementationDetails>::ComputeStringHash(System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876 (String_t* ___0_s, const RuntimeMethod* method) ;
-// System.Boolean System.String::op_Equality(System.String,System.String)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1 (String_t* ___0_a, String_t* ___1_b, const RuntimeMethod* method) ;
 // System.Void System.IO.File::Delete(System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void File_Delete_mE29829DA504F3E1B8BCB78F21E2862C9ED7EC386 (String_t* ___0_path, const RuntimeMethod* method) ;
 // T UnityEngine.Component::GetComponent<Inspector>()
@@ -5569,10 +5575,24 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ButtonUI_BlackSmith_m21982197F50D1F4A0C5
 // System.Void ButtonUI::UIActive()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ButtonUI_UIActive_m192F80352B506BCE4CAB5DF5749D43FBFE45F066 (ButtonUI_t5256A8C05315E0757F96C06015768AC38E80C269* __this, const RuntimeMethod* method) 
 {
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral2C509DA50CABE391075A07188DA180CC2E4C53F7);
+		s_Il2CppMethodInitialized = true;
+	}
 	{
 		// onOff = !onOff;
 		bool L_0 = __this->___onOff_5;
 		__this->___onOff_5 = (bool)((((int32_t)L_0) == ((int32_t)0))? 1 : 0);
+		// if (transform.name == "EntranceButton")
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1;
+		L_1 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(__this, NULL);
+		NullCheck(L_1);
+		String_t* L_2;
+		L_2 = Object_get_name_mAC2F6B897CF1303BA4249B4CB55271AFACBB6392(L_1, NULL);
+		bool L_3;
+		L_3 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_2, _stringLiteral2C509DA50CABE391075A07188DA180CC2E4C53F7, NULL);
 		// }
 		return;
 	}
@@ -9355,7 +9375,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_33;
 		L_33 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_32, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_33);
-		L_33->___isEvent_6 = (bool)1;
+		L_33->___isEvent_8 = (bool)1;
 		// room[room.Count - 1].GetComponent<Room>().map = map[map.Count - 1];
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_34 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_35 = __this->___room_26;
@@ -9377,8 +9397,8 @@ IL_0012:
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_42;
 		L_42 = List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979(L_39, ((int32_t)il2cpp_codegen_subtract(L_41, 1)), List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979_RuntimeMethod_var);
 		NullCheck(L_38);
-		L_38->___map_18 = L_42;
-		Il2CppCodeGenWriteBarrier((void**)(&L_38->___map_18), (void*)L_42);
+		L_38->___map_20 = L_42;
+		Il2CppCodeGenWriteBarrier((void**)(&L_38->___map_20), (void*)L_42);
 		// room[room.Count - 1].GetComponent<Room>().mapPrfNumber = prefabMapDesigns.Length-2;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_43 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_44 = __this->___room_26;
@@ -9394,7 +9414,7 @@ IL_0012:
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_48 = __this->___prefabMapDesigns_7;
 		NullCheck(L_48);
 		NullCheck(L_47);
-		L_47->___mapPrfNumber_12 = ((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_48)->max_length)), 2));
+		L_47->___mapPrfNumber_14 = ((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_48)->max_length)), 2));
 		// room[room.Count - 1].GetComponent<Room>().dir = -1;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_49 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_50 = __this->___room_26;
@@ -9408,7 +9428,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_53;
 		L_53 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_52, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_53);
-		L_53->___dir_14 = (-1);
+		L_53->___dir_16 = (-1);
 		// room[room.Count - 1].GetComponent<Room>().sel = -1;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_54 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_55 = __this->___room_26;
@@ -9422,7 +9442,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_58;
 		L_58 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_57, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_58);
-		L_58->___sel_15 = (-1);
+		L_58->___sel_17 = (-1);
 		// room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(0);
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_59 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_60 = __this->___room_26;
@@ -9551,7 +9571,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_107;
 		L_107 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_106, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_107);
-		L_107->___isEvent_6 = (bool)1;
+		L_107->___isEvent_8 = (bool)1;
 		// room[room.Count - 1].GetComponent<Room>().map = map[map.Count - 1];
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_108 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_109 = __this->___room_26;
@@ -9573,8 +9593,8 @@ IL_0012:
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_116;
 		L_116 = List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979(L_113, ((int32_t)il2cpp_codegen_subtract(L_115, 1)), List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979_RuntimeMethod_var);
 		NullCheck(L_112);
-		L_112->___map_18 = L_116;
-		Il2CppCodeGenWriteBarrier((void**)(&L_112->___map_18), (void*)L_116);
+		L_112->___map_20 = L_116;
+		Il2CppCodeGenWriteBarrier((void**)(&L_112->___map_20), (void*)L_116);
 		// room[room.Count - 1].GetComponent<Room>().mapPrfNumber = prefabMapDesigns.Length - 1;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_117 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_118 = __this->___room_26;
@@ -9590,7 +9610,7 @@ IL_0012:
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_122 = __this->___prefabMapDesigns_7;
 		NullCheck(L_122);
 		NullCheck(L_121);
-		L_121->___mapPrfNumber_12 = ((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_122)->max_length)), 1));
+		L_121->___mapPrfNumber_14 = ((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_122)->max_length)), 1));
 		// room[room.Count - 1].GetComponent<Room>().dir = -1;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_123 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_124 = __this->___room_26;
@@ -9604,7 +9624,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_127;
 		L_127 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_126, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_127);
-		L_127->___dir_14 = (-1);
+		L_127->___dir_16 = (-1);
 		// room[room.Count - 1].GetComponent<Room>().sel = -1;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_128 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_129 = __this->___room_26;
@@ -9618,7 +9638,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_132;
 		L_132 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_131, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_132);
-		L_132->___sel_15 = (-1);
+		L_132->___sel_17 = (-1);
 		// room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(1);
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_133 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_134 = __this->___room_26;
@@ -9732,8 +9752,8 @@ IL_0012:
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_178;
 		L_178 = List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979(L_175, ((int32_t)il2cpp_codegen_subtract(L_177, 1)), List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979_RuntimeMethod_var);
 		NullCheck(L_174);
-		L_174->___map_18 = L_178;
-		Il2CppCodeGenWriteBarrier((void**)(&L_174->___map_18), (void*)L_178);
+		L_174->___map_20 = L_178;
+		Il2CppCodeGenWriteBarrier((void**)(&L_174->___map_20), (void*)L_178);
 		// room[room.Count-1].GetComponent<Room>().mapPrfNumber = mapPrfNumber;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_179 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_180 = __this->___room_26;
@@ -9748,7 +9768,7 @@ IL_0012:
 		L_183 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_182, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		int32_t L_184 = V_0;
 		NullCheck(L_183);
-		L_183->___mapPrfNumber_12 = L_184;
+		L_183->___mapPrfNumber_14 = L_184;
 		// room[room.Count-1].GetComponent<Room>().dir = 4;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_185 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_186 = __this->___room_26;
@@ -9762,7 +9782,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_189;
 		L_189 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_188, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_189);
-		L_189->___dir_14 = 4;
+		L_189->___dir_16 = 4;
 		// room[room.Count-1].GetComponent<Room>().sel = -1;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_190 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_191 = __this->___room_26;
@@ -9776,7 +9796,7 @@ IL_0012:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_194;
 		L_194 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_193, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_194);
-		L_194->___sel_15 = (-1);
+		L_194->___sel_17 = (-1);
 		// room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(2);
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_195 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_196 = __this->___room_26;
@@ -10097,8 +10117,8 @@ IL_06c5:
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_281;
 		L_281 = List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979(L_278, ((int32_t)il2cpp_codegen_subtract(L_280, 1)), List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979_RuntimeMethod_var);
 		NullCheck(L_277);
-		L_277->___map_18 = L_281;
-		Il2CppCodeGenWriteBarrier((void**)(&L_277->___map_18), (void*)L_281);
+		L_277->___map_20 = L_281;
+		Il2CppCodeGenWriteBarrier((void**)(&L_277->___map_20), (void*)L_281);
 		// room[room.Count - 1].GetComponent<Room>().mapPrfNumber = mapPrfNumber;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_282 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_283 = __this->___room_26;
@@ -10113,7 +10133,7 @@ IL_06c5:
 		L_286 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_285, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		int32_t L_287 = V_0;
 		NullCheck(L_286);
-		L_286->___mapPrfNumber_12 = L_287;
+		L_286->___mapPrfNumber_14 = L_287;
 		// room[room.Count - 1].GetComponent<Room>().dir = direction;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_288 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_289 = __this->___room_26;
@@ -10128,7 +10148,7 @@ IL_06c5:
 		L_292 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_291, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		int32_t L_293 = V_3;
 		NullCheck(L_292);
-		L_292->___dir_14 = L_293;
+		L_292->___dir_16 = L_293;
 		// room[room.Count - 1].GetComponent<Room>().sel = number;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_294 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_295 = __this->___room_26;
@@ -10143,7 +10163,7 @@ IL_06c5:
 		L_298 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_297, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		int32_t L_299 = V_4;
 		NullCheck(L_298);
-		L_298->___sel_15 = L_299;
+		L_298->___sel_17 = L_299;
 		// room[room.Count - 1].GetComponent<Room>().AllocateSubStageNumber(room.Count - 1);
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_300 = __this->___room_26;
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_301 = __this->___room_26;
@@ -10287,7 +10307,7 @@ IL_0004:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_3;
 		L_3 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_2, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_3);
-		bool L_4 = L_3->___isPlayer_7;
+		bool L_4 = L_3->___isPlayer_9;
 		if (!L_4)
 		{
 			goto IL_0030;
@@ -11807,8 +11827,8 @@ IL_0007:
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_54;
 		L_54 = List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979(L_51, ((int32_t)il2cpp_codegen_subtract(L_53, 1)), List_1_get_Item_mE8DBE527F24D9CFED839C34216C475B716169979_RuntimeMethod_var);
 		NullCheck(L_50);
-		L_50->___map_18 = L_54;
-		Il2CppCodeGenWriteBarrier((void**)(&L_50->___map_18), (void*)L_54);
+		L_50->___map_20 = L_54;
+		Il2CppCodeGenWriteBarrier((void**)(&L_50->___map_20), (void*)L_54);
 		// obj.GetComponent<Room>().index = idx;
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_55 = V_0;
 		NullCheck(L_55);
@@ -11816,7 +11836,7 @@ IL_0007:
 		L_56 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_55, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		int32_t L_57 = V_1;
 		NullCheck(L_56);
-		L_56->___index_13 = L_57;
+		L_56->___index_15 = L_57;
 		// obj.GetComponent<Room>().AllocateSubStageNumber(room.Count-1);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_58 = V_0;
 		NullCheck(L_58);
@@ -12497,7 +12517,7 @@ IL_0004:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_4;
 		L_4 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_3, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_4);
-		bool L_5 = L_4->___isPlayer_7;
+		bool L_5 = L_4->___isPlayer_9;
 		if (!L_5)
 		{
 			goto IL_0039;
@@ -13223,6 +13243,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Inspector_StatusText_m0B62B9BBB13BF158CD
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral8198530FD6C4A6183E5D1ABB1B3CB084D50773A8);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral8BC0E23150632EBB0031D50EAC5465B72E807DEC);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral8D638670490E07423F4354ED142DAD869D496072);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral9A1C2B6C68C4947A2C9B09B17990077FC3658723);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral9C5521C3D6E99A0FA3A8A60136CF4760AB524020);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralB01CAD1AD76930000FBA297700B9815DCE2D9F76);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralB224A2EFE789603DFDDB79BA6CD8E1B7A89B708B);
@@ -13557,7 +13578,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Inspector_StatusText_m0B62B9BBB13BF158CD
 		L_118 = String_Concat_m9E3155FB84015C823606188F53B47CB44C444991(_stringLiteralC4167779E8C417261C1B824F1F4AE4D8E98380B5, L_117, NULL);
 		NullCheck(L_110);
 		VirtualActionInvoker1< String_t* >::Invoke(66 /* System.Void TMPro.TMP_Text::set_text(System.String) */, L_110, L_118);
-		// transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "????  " + string.Format("{0:N2}", player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate);
+		// transform.Find("Background").transform.Find("Status").transform.Find("BloodAbsorptionRate").GetComponent<TextMeshProUGUI>().text = "????  " + string.Format("{0:N3}", player.GetComponent<PlayerStatus>().Data.bloodAbsorptionRate / 10);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_119;
 		L_119 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(__this, NULL);
 		NullCheck(L_119);
@@ -13587,10 +13608,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Inspector_StatusText_m0B62B9BBB13BF158CD
 		L_128 = PlayerStatus_get_Data_m22C07871EAE98422AA0BBE85720EE78FD95A8728_inline(L_127, NULL);
 		NullCheck(L_128);
 		float L_129 = L_128->___bloodAbsorptionRate_24;
-		float L_130 = L_129;
+		float L_130 = ((float)(L_129/(10.0f)));
 		RuntimeObject* L_131 = Box(Single_t4530F2FF86FCB0DC29F35385CA1BD21BE294761C_il2cpp_TypeInfo_var, &L_130);
 		String_t* L_132;
-		L_132 = String_Format_mA8DBB4C2516B9723C5A41E6CB1E2FAF4BBE96DD8(_stringLiteral70DFFBE03295DB2997E2C0E0DE090E43634E4A0B, L_131, NULL);
+		L_132 = String_Format_mA8DBB4C2516B9723C5A41E6CB1E2FAF4BBE96DD8(_stringLiteral9A1C2B6C68C4947A2C9B09B17990077FC3658723, L_131, NULL);
 		String_t* L_133;
 		L_133 = String_Concat_m9E3155FB84015C823606188F53B47CB44C444991(_stringLiteralE3CE0F327177E632DAAAABA6C2BB2D156CE3B3B6, L_132, NULL);
 		NullCheck(L_125);
@@ -20421,7 +20442,7 @@ IL_0007:
 		Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07* L_35;
 		L_35 = GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6(L_34, GameObject_GetComponent_TisRoom_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07_m124B2D91E105A4C6F9A428DBFCD9314C44D56BE6_RuntimeMethod_var);
 		NullCheck(L_35);
-		bool* L_36 = (&L_35->___isPlayer_7);
+		bool* L_36 = (&L_35->___isPlayer_9);
 		String_t* L_37;
 		L_37 = Boolean_ToString_m6646C8026B1DF381A1EE8CD13549175E9703CC63(L_36, NULL);
 		String_t* L_38;
@@ -21755,7 +21776,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Data_tD68044ADE8612868F3B424B0659
 {
 	{
 		// public Data Data { get { return dataM; } }
-		Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* L_0 = __this->___dataM_23;
+		Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* L_0 = __this->___dataM_25;
 		return L_0;
 	}
 }
@@ -21763,7 +21784,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Room_get_SubStageNumber_m
 {
 	{
 		// public int SubStageNumber { get { return subStageNumber; } }
-		int32_t L_0 = __this->___subStageNumber_8;
+		int32_t L_0 = __this->___subStageNumber_10;
 		return L_0;
 	}
 }
@@ -21846,7 +21867,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Room_AllocateSubStageNumber_
 	{
 		// subStageNumber = num;
 		int32_t L_0 = ___0_num;
-		__this->___subStageNumber_8 = L_0;
+		__this->___subStageNumber_10 = L_0;
 		// }
 		return;
 	}

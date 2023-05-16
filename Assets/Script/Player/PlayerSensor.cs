@@ -145,7 +145,10 @@ public class PlayerSensor : MonoBehaviour
             }
         }
 
-        if (collision.CompareTag("Portal")) isPortal = false;
+        if (collision.CompareTag("Portal"))
+        {
+            isPortal = false;
+        }
         
     }
 
@@ -169,6 +172,8 @@ public class PlayerSensor : MonoBehaviour
                 //if (collision.collider.name.Equals("½ºÄ³·´(Clone)")) GetComponent<PlayerStatus>().AddHandMoney(10);
                 Destroy(collision.collider.gameObject);
             }
+
+            
 
         }
     }
