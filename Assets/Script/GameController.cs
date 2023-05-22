@@ -54,11 +54,14 @@ public class GameController : MonoBehaviour
 
     public bool GameStart { set { gameStart = value; } }
     public bool IsPause { get { return isPause; } }
+
+    public void setPause(bool val) { isPause = val; }
     public Data Data { get { return dataM; } }
 
     public List<GameObject> Room { get { return room; } }
     public List<GameObject> Map { get { return map; } }
 
+    public GameObject ActvieRoom { get { return activeRoom; } }
     public GameObject[] prfMonsters { get { return prefabMonsters; } }
     public GameObject[] Items { get { return prefabItems; } }
     public GameObject[] Monsters { get { return prefabMonsters; } }
@@ -316,11 +319,11 @@ public class GameController : MonoBehaviour
     }
 
     // 플레이어 위치 변경
-    public void RefreshPlayerPosition()
+    public void RefreshObjectPosition(GameObject obj)
     {
         if (activeRoom != null)
         {
-            player.transform.position = activeRoom.transform.position;
+            obj.transform.position = activeRoom.transform.position;
             //Debug.Log("실행했어!");
         }
     }
@@ -410,6 +413,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
+                //Debug.Log(JsonUtility.ToJson(data));
                 // 저장된 데이터가 있으면 해당 데이터를 기반으로 이전 게임 환경으로 복구
                 Restore();
             }
@@ -574,7 +578,7 @@ public class GameController : MonoBehaviour
                         else
                         {
                             // 플레이어가 속한 방이 존재하지 않을때 버그로 방을 벗어난 것이므로 복구시켜줌
-                            if (!PlayerCheck()) RefreshPlayerPosition();
+                            if (!PlayerCheck()) RefreshObjectPosition(player);
                         }
                     }
                     else

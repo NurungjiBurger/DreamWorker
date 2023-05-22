@@ -32,7 +32,7 @@ public class ButtonUI : MonoBehaviour
 
     public void RefreshPosition()
     {
-        GameObject.Find("GameController").GetComponent<GameController>().RefreshPlayerPosition();
+        GameObject.Find("GameController").GetComponent<GameController>().RefreshObjectPosition(GameObject.FindGameObjectWithTag("Player"));
     }
 
     // UI ´Ý±â

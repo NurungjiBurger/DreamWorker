@@ -27,9 +27,11 @@ public class DataController : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(gameData);
         File.WriteAllText(filePath, jsonData);
-        //Debug.Log("¿˙¿Â");
+        //Debug.Log(jsonData);
 
         GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatRerange(+1);
+
+        GameObject.Find("GameController").GetComponent<GameController>().setPause(false);
 
     }
 

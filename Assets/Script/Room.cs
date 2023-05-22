@@ -43,7 +43,18 @@ public class Room : MonoBehaviour
     {
         subStageNumber = num;
     }
-
+    public bool IsInHere(GameObject obj)
+    {
+        if (obj.transform.position.x <= transform.position.x + 12.0f && obj.transform.position.x >= transform.position.x - 12.0f)
+        {
+            if (obj.transform.position.y <= transform.position.y + 7.5f && obj.transform.position.y >= transform.position.y - 7.5f)
+            {
+                return true;
+            }
+            else return false;
+        }
+        else return false;
+    }
     public void DestoryAll()
     {
         GameObject tmp;
@@ -280,8 +291,10 @@ public class Room : MonoBehaviour
                                         // 방을 하나 클리어 할때마다 데이터 저장.
                                         dataM.isClear = true;
                                         data.numberOfClearRoom++;
+
                                         //Debug.Log("데이터 저장");
-                                        //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+                                        gameController.GetComponent<GameController>().setPause(true);
+                                        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
                                     }
                                 }
                             }

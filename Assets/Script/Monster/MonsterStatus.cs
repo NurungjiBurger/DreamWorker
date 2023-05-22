@@ -107,8 +107,8 @@ public class MonsterStatus : Status
         Destroy(gameObject);
         Destroy(hpBar.gameObject);
 
-        Debug.Log("데이터저장");
-        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+        //Debug.Log("데이터저장");
+        //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
     }
 
     private void BalanceStat(int value)
@@ -240,5 +240,7 @@ public class MonsterStatus : Status
                 transform.position = room.transform.position;
             }
         }
+
+        if (!gameController.GetComponent<GameController>().ActvieRoom.GetComponent<Room>().IsInHere(this.gameObject)) gameController.GetComponent<GameController>().RefreshObjectPosition(this.gameObject);
     }
 }

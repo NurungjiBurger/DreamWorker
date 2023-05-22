@@ -191,6 +191,11 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             GetComponent<Rigidbody2D>().isKinematic = true;
         }
+        if (GetComponent<PlayerSensor>().Portal)
+        {
+            gameController.GetComponent<GameController>().setPause(true);
+            GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+        }
     }
 
     private void Update()
