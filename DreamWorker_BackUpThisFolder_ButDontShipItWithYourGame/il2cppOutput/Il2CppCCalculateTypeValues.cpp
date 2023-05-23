@@ -46645,28 +46645,30 @@ struct GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09  : public MonoBe
 	bool ___isPause_17;
 	// System.Boolean GameController::isReuslt
 	bool ___isReuslt_18;
+	// System.Boolean GameController::isSave
+	bool ___isSave_19;
 	// System.Int32 GameController::selectedPlayerIndex
-	int32_t ___selectedPlayerIndex_19;
+	int32_t ___selectedPlayerIndex_20;
 	// System.Int32 GameController::pastSelectDirection
-	int32_t ___pastSelectDirection_20;
+	int32_t ___pastSelectDirection_21;
 	// UnityEngine.GameObject GameController::activeRoom
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___activeRoom_21;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___activeRoom_22;
 	// UnityEngine.GameObject GameController::player
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_22;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_23;
 	// UnityEngine.GameObject GameController::inventory
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inventory_23;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inventory_24;
 	// UnityEngine.GameObject GameController::inspector
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inspector_24;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inspector_25;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> GameController::map
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___map_25;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___map_26;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> GameController::room
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___room_26;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___room_27;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> GameController::npc
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___npc_27;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___npc_28;
 	// GameData GameController::data
-	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_28;
+	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_29;
 	// Data GameController::dataM
-	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_29;
+	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_30;
 };
 
 // UnityEngine.Grid
@@ -47093,26 +47095,28 @@ struct PlayerMovement_t4A0A0A8C937BC1D4FC570D1B5B50847338423351  : public MonoBe
 	bool ___downjump_9;
 	// System.Boolean PlayerMovement::isGoNext
 	bool ___isGoNext_10;
+	// System.Boolean PlayerMovement::isPortal
+	bool ___isPortal_11;
 	// System.Int32 PlayerMovement::action
-	int32_t ___action_11;
+	int32_t ___action_12;
 	// System.Single PlayerMovement::time
-	float ___time_12;
+	float ___time_13;
 	// System.Single PlayerMovement::lastYVelocity
-	float ___lastYVelocity_13;
+	float ___lastYVelocity_14;
 	// System.Single PlayerMovement::moveSpeed
-	float ___moveSpeed_14;
+	float ___moveSpeed_15;
 	// System.Single PlayerMovement::jumpPower
-	float ___jumpPower_15;
+	float ___jumpPower_16;
 	// Timer PlayerMovement::dashTimer
-	Timer_t2FE811324BD2C741B8D6EBC18E20230874E35A20* ___dashTimer_16;
+	Timer_t2FE811324BD2C741B8D6EBC18E20230874E35A20* ___dashTimer_17;
 	// GameController PlayerMovement::gameController
-	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_17;
+	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_18;
 	// UISensor PlayerMovement::joyStick
-	UISensor_t06EE0FCFD76421FB3B97E261C21A01E6F933CB9A* ___joyStick_18;
+	UISensor_t06EE0FCFD76421FB3B97E261C21A01E6F933CB9A* ___joyStick_19;
 	// UnityEngine.Animator PlayerMovement::animator
-	Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* ___animator_19;
+	Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* ___animator_20;
 	// PlayerMovement/Direction PlayerMovement::dir
-	int32_t ___dir_20;
+	int32_t ___dir_21;
 };
 
 // PlayerSensor

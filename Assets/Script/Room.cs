@@ -293,8 +293,9 @@ public class Room : MonoBehaviour
                                         data.numberOfClearRoom++;
 
                                         //Debug.Log("데이터 저장");
-                                        gameController.GetComponent<GameController>().setPause(true);
-                                        GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+                                        GameObject.Find("Canvas").transform.Find("Save").gameObject.SetActive(true);
+                                        //gameController.GetComponent<GameController>().setPause(true);
+                                        //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
                                     }
                                 }
                             }

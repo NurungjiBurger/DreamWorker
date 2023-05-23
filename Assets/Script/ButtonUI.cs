@@ -32,7 +32,7 @@ public class ButtonUI : MonoBehaviour
 
     public void RefreshPosition()
     {
-        GameObject.Find("GameController").GetComponent<GameController>().RefreshObjectPosition(GameObject.FindGameObjectWithTag("Player"));
+        GameObject.Find("GameController").GetComponent<GameController>().RefreshObjectPosition();// GameObject.FindGameObjectWithTag("Player"));
     }
 
     // UI ´Ý±â
@@ -58,6 +58,11 @@ public class ButtonUI : MonoBehaviour
         else if (transform.parent.name.Equals("Smithy"))
         {
             GameObject.Find("BlackSmith").transform.Find("BlackSmithButton").GetComponent<ButtonUI>().UIActive();
+        }
+        else if (transform.parent.name.Equals("Save"))
+        {
+            GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+            GameObject.Find("Canvas").transform.Find("Save").gameObject.SetActive(false);
         }
         else if (transform.parent.name.Equals("Background")) GameObject.Find("Canvas").transform.Find(transform.parent.parent.name + "Button").GetComponent<ButtonUI>().UIActive();
         else GameObject.Find("Canvas").transform.Find(transform.parent.name + "Button").GetComponent<ButtonUI>().UIActive();

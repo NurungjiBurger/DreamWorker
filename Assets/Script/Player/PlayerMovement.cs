@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGround = true;
     private bool downjump = false;
     private bool isGoNext = false;
+    private bool isPortal = false;
 
     private int action;
     private float time;
@@ -98,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
             if (GetComponent<PlayerSensor>().Portal)
             {
                 transform.position = GetComponent<PlayerSensor>().TeleportPosition;
+                isPortal = true;
             }
             GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().UIActive();
         }
@@ -191,10 +193,13 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             GetComponent<Rigidbody2D>().isKinematic = true;
         }
-        if (GetComponent<PlayerSensor>().Portal)
+        
+        if (isPortal)
         {
-            gameController.GetComponent<GameController>().setPause(true);
-            GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+            GameObject.Find("Canvas").transform.Find("Save").gameObject.SetActive(true);
+            //gameController.GetComponent<GameController>().setPause(true);
+            //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
+            isPortal = false;
         }
     }
 

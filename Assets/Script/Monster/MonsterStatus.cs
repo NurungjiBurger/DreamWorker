@@ -241,6 +241,6 @@ public class MonsterStatus : Status
             }
         }
 
-        if (!gameController.GetComponent<GameController>().ActvieRoom.GetComponent<Room>().IsInHere(this.gameObject)) gameController.GetComponent<GameController>().RefreshObjectPosition(this.gameObject);
+        //if (!gameController.GetComponent<GameController>().ActvieRoom.GetComponent<Room>().IsInHere(this.gameObject)) gameController.GetComponent<GameController>().RefreshObjectPosition(this.gameObject);
     }
 }

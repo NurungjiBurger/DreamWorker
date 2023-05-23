@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
     private bool revert = false;
     private bool isPause = false;
     private bool isReuslt = false;
+    private bool isSave = false;
 
     private int selectedPlayerIndex;
     private int pastSelectDirection;
@@ -319,11 +320,11 @@ public class GameController : MonoBehaviour
     }
 
     // 플레이어 위치 변경
-    public void RefreshObjectPosition(GameObject obj)
+    public void RefreshObjectPosition()
     {
         if (activeRoom != null)
         {
-            obj.transform.position = activeRoom.transform.position;
+            player.transform.position = activeRoom.transform.position;
             //Debug.Log("실행했어!");
         }
     }
@@ -376,7 +377,8 @@ public class GameController : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("ScoreBoard").transform.Find("ObtainedGold").transform.Find("ObtainedGoldData").GetComponent<TextMeshProUGUI>().text = " " + data.obtainedGold;
         GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("ScoreBoard").transform.Find("ClearRoom").transform.Find("ClearRoomData").GetComponent<TextMeshProUGUI>().text = " " + data.numberOfClearRoom;
 
-        GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("GameBoard").transform.Find("DeadRoomNumber").transform.Find("RoomNumber").GetComponent<TextMeshProUGUI>().text = " " + data.stageNumber + " - " + data.subStageNumber;
+        if (data.winOrLose == "Victory!") GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("GameBoard").transform.Find("DeadRoomNumber").transform.Find("RoomNumber").GetComponent<TextMeshProUGUI>().text = "All Clear !";
+        else GameObject.Find("Canvas").transform.Find("Background").transform.Find("BoardBackground").transform.Find("GameBoard").transform.Find("DeadRoomNumber").transform.Find("RoomNumber").GetComponent<TextMeshProUGUI>().text = " " + data.stageNumber + " - " + data.subStageNumber;
 
         if (!isReuslt)
         {
@@ -543,7 +545,6 @@ public class GameController : MonoBehaviour
                     else
                     {
                         isPause = true;
-
                     }
 
                     GameObject.Find("Main Camera").transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 1.55f, -10), Quaternion.identity);
@@ -578,7 +579,7 @@ public class GameController : MonoBehaviour
                         else
                         {
                             // 플레이어가 속한 방이 존재하지 않을때 버그로 방을 벗어난 것이므로 복구시켜줌
-                            if (!PlayerCheck()) RefreshObjectPosition(player);
+                            if (!PlayerCheck()) RefreshObjectPosition();
                         }
                     }
                     else

@@ -31,7 +31,7 @@ public class DataController : MonoBehaviour
 
         GameObject.Find("Canvas").transform.Find("Inspector").GetComponent<Inspector>().InspectorStatRerange(+1);
 
-        GameObject.Find("GameController").GetComponent<GameController>().setPause(false);
+        //GameObject.Find("GameController").GetComponent<GameController>().setPause(false);
 
     }
 

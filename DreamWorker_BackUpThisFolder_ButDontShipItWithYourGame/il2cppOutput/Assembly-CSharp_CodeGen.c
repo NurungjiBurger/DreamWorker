@@ -182,8 +182,8 @@ extern void GameController_DestroyNowStage_mD4BFE9CA08837B818E3065F1EDC242E82F55
 extern void GameController_PortalCreate_m90FD9259E2AAEE5271830C1A97462C34AA0847F5 (void);
 // 0x00000055 System.Void GameController::CreateRoom(System.Int32)
 extern void GameController_CreateRoom_mEE8EAEDD6635FE4CC2626548F6EA73D420279750 (void);
-// 0x00000056 System.Void GameController::RefreshObjectPosition(UnityEngine.GameObject)
-extern void GameController_RefreshObjectPosition_mB10E3A148A24B3BB3EB607CF234ADAAC31928869 (void);
+// 0x00000056 System.Void GameController::RefreshObjectPosition()
+extern void GameController_RefreshObjectPosition_m6BDEB3310C6393A60FDB74B6B876666541B8631F (void);
 // 0x00000057 System.Void GameController::ExitGame()
 extern void GameController_ExitGame_m751A9262E57E9D3D6E07EC7927D3CF79BE56DFEE (void);
 // 0x00000058 System.Void GameController::ReturntoMain()
@@ -1471,7 +1471,7 @@ static Il2CppMethodPointer s_methodPointers[686] =
 	GameController_DestroyNowStage_mD4BFE9CA08837B818E3065F1EDC242E82F55F608,
 	GameController_PortalCreate_m90FD9259E2AAEE5271830C1A97462C34AA0847F5,
 	GameController_CreateRoom_mEE8EAEDD6635FE4CC2626548F6EA73D420279750,
-	GameController_RefreshObjectPosition_mB10E3A148A24B3BB3EB607CF234ADAAC31928869,
+	GameController_RefreshObjectPosition_m6BDEB3310C6393A60FDB74B6B876666541B8631F,
 	GameController_ExitGame_m751A9262E57E9D3D6E07EC7927D3CF79BE56DFEE,
 	GameController_ReturntoMain_mC3AD960FCF08557CA53B1F5870B107E35931D4CB,
 	GameController_PlayerCheck_m871FC339EAF5665C928F774FEDF59A0222B6D7EE,
@@ -2160,7 +2160,7 @@ static const int32_t s_InvokerIndices[686] =
 	3165,
 	956,
 	3212,
-	3231,
+	4000,
 	4000,
 	4000,
 	3840,
