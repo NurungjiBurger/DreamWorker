@@ -34,6 +34,9 @@ public class PlayerStatus : Status
     RectTransform hpBar;
     private Image nowHPBar;
     private TextMeshProUGUI textHp;
+    RectTransform expBar;
+    private Image nowEXPBar;
+    private TextMeshProUGUI textExp;
     private GameData data;
     private Data dataP = null;
 
@@ -85,7 +88,7 @@ public class PlayerStatus : Status
     {
         dataP.experience += exp;
         //dataP.needExperience = dataP.level * 10;
-       dataP.needExperience = dataP.level * 25;
+        dataP.needExperience = dataP.level * 25;
 
         if (dataP.experience >= dataP.needExperience)
         {
@@ -94,7 +97,7 @@ public class PlayerStatus : Status
             dataP.nowHP += 1;
             dataP.bloodAbsorptionRate += 0.02f;
             dataP.level++;
-            dataP.experience = 0;
+            dataP.experience = dataP.experience - dataP.needExperience;
 
             levelUP.SetActive(true);
             levelTimer.TimerSetZero();
@@ -248,6 +251,11 @@ public class PlayerStatus : Status
         nowHPBar = hpBar.Find("php_bar").GetComponent<Image>();
         textHp = nowHPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
+        // 경험치바 할당
+        expBar = GameObject.Find("Canvas").transform.Find("PlayerExperienceBar").GetComponent<RectTransform>();
+        nowEXPBar = expBar.Find("pexp_bar").GetComponent<Image>();
+        textExp = nowEXPBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+
     }
 
     private void Update()
@@ -258,6 +266,9 @@ public class PlayerStatus : Status
 
         textHp.text = dataP.nowHP.ToString() + "    /    " + dataP.maxHP.ToString();
         nowHPBar.fillAmount = (float)dataP.nowHP / (float)dataP.maxHP;
+
+        textExp.text = dataP.experience.ToString() + "  /  " + dataP.needExperience.ToString();
+        nowEXPBar.fillAmount = (float)dataP.experience / (float)dataP.needExperience;
 
         // 스탯 제한
         if (dataP.jumpPower > 10) dataP.jumpPower = 10;

@@ -110,8 +110,8 @@ public class ButtonUI : MonoBehaviour
                 case "SaveButton":
                     ui[0] = GameObject.Find("Canvas").transform.Find("Save").gameObject;
                     break;
-                case "DescriptionButton":
-                    ui[0] = GameObject.Find("Canvas").transform.Find("Description").gameObject;
+                case "MinimapButton":
+                    ui[0] = GameObject.Find("Canvas").transform.Find("MiniMap").gameObject;
                     break;
                 case "MenuButton":
                     ui[0] = GameObject.Find("Canvas").transform.Find("Pause").gameObject;

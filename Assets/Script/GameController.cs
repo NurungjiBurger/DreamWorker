@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
     private int selectedPlayerIndex;
     private int pastSelectDirection;
 
+    private GameObject saveUI;
     private GameObject activeRoom;
     private GameObject player;
     private GameObject inventory;
@@ -527,6 +528,11 @@ public class GameController : MonoBehaviour
                 {
                     stageNumber = GameObject.Find("Canvas").transform.Find("StageNumber").gameObject;
                     stageNumber.GetComponent<Timer>().SetCooldown(1);
+                }
+                if (!saveUI)
+                {
+                    saveUI = GameObject.Find("Canvas").transform.Find("Save").gameObject;
+                    saveUI.GetComponent<Timer>().SetCooldown(1);
                 }
 
                 if (revert) RevertScene("Dungeon");

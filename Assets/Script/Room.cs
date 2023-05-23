@@ -25,6 +25,7 @@ public class Room : MonoBehaviour
     public int dir = -1;
     public int sel = -1;
 
+    private GameObject saveUI;
     private GameObject player;
     private GameObject[] monsters;
     public GameObject map;
@@ -236,6 +237,10 @@ public class Room : MonoBehaviour
             gameController.PortalCreate(gameController.Room[dataM.selectRoomIndex], gameController.Room[subStageNumber], dataM.portalDirection);
         }
 
+        if (!saveUI)
+        {
+            saveUI = GameObject.Find("Canvas").transform.Find("Save").gameObject;
+        }
 
     }
 
@@ -293,6 +298,7 @@ public class Room : MonoBehaviour
                                         data.numberOfClearRoom++;
 
                                         //Debug.Log("데이터 저장");
+                                        saveUI.GetComponent<Timer>().TimerSetZero();
                                         GameObject.Find("Canvas").transform.Find("Save").gameObject.SetActive(true);
                                         //gameController.GetComponent<GameController>().setPause(true);
                                         //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
@@ -354,6 +360,11 @@ public class Room : MonoBehaviour
         else dataM.SetPosition(transform.position);
 
         ManageMap();
+
+        if (saveUI.GetComponent<Timer>().CooldownCheck())
+        {
+            if (GameObject.Find("Canvas").transform.Find("Save").gameObject.activeSelf) GameObject.Find("Canvas").transform.Find("Save").transform.Find("ConfirmButton").GetComponent<ButtonUI>().CloseButton();
+        }
 
         if (isPlayer)
         {

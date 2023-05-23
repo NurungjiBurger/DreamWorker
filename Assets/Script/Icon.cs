@@ -47,11 +47,11 @@ public class Icon : MonoBehaviour
             // 오브젝트 위치 - 활성화된 방의 좌표를 미니맵에서의 좌표로 치환
             position = obj.transform.position - room.transform.position;
 
-            position.x *= 20.8f;
-            position.y *= 16.25f;
+            position.x *= 83.2f; // 20.8f; // 83.2
+            position.y *= 48.75f; // 16.25f; // 48.75
 
-            position.x %= 250;
-            position.y %= 130;
+            position.x %= 1000; // 250; // 1000
+            position.y %= 400; // 130; // 400
 
             GetComponent<RectTransform>().localPosition = position;
         }

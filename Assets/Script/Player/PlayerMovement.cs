@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
             if (GetComponent<PlayerSensor>().Portal)
             {
                 transform.position = GetComponent<PlayerSensor>().TeleportPosition;
-                isPortal = true;
+                //isPortal = true;
             }
             GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().UIActive();
         }
@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (isPortal)
         {
-            GameObject.Find("Canvas").transform.Find("Save").gameObject.SetActive(true);
+            //GameObject.Find("Canvas").transform.Find("Save").gameObject.SetActive(true);
             //gameController.GetComponent<GameController>().setPause(true);
             //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
             isPortal = false;

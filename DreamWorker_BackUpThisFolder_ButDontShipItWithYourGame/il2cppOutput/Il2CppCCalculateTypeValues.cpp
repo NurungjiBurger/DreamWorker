@@ -46651,24 +46651,26 @@ struct GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09  : public MonoBe
 	int32_t ___selectedPlayerIndex_20;
 	// System.Int32 GameController::pastSelectDirection
 	int32_t ___pastSelectDirection_21;
+	// UnityEngine.GameObject GameController::saveUI
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___saveUI_22;
 	// UnityEngine.GameObject GameController::activeRoom
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___activeRoom_22;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___activeRoom_23;
 	// UnityEngine.GameObject GameController::player
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_23;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_24;
 	// UnityEngine.GameObject GameController::inventory
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inventory_24;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inventory_25;
 	// UnityEngine.GameObject GameController::inspector
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inspector_25;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___inspector_26;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> GameController::map
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___map_26;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___map_27;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> GameController::room
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___room_27;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___room_28;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> GameController::npc
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___npc_28;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___npc_29;
 	// GameData GameController::data
-	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_29;
+	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_30;
 	// Data GameController::dataM
-	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_30;
+	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_31;
 };
 
 // UnityEngine.Grid
@@ -47272,22 +47274,24 @@ struct Room_tD0CC32FBE9CDC835E022098A5DCC414C5D1EEA07  : public MonoBehaviour_t5
 	int32_t ___dir_16;
 	// System.Int32 Room::sel
 	int32_t ___sel_17;
+	// UnityEngine.GameObject Room::saveUI
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___saveUI_18;
 	// UnityEngine.GameObject Room::player
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_18;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___player_19;
 	// UnityEngine.GameObject[] Room::monsters
-	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_19;
+	GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* ___monsters_20;
 	// UnityEngine.GameObject Room::map
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_20;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___map_21;
 	// GameController Room::gameController
-	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_21;
+	GameController_tDA619EE453F7ED2C8297EF928518A0B447E44D09* ___gameController_22;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::portals
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_22;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___portals_23;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> Room::objects
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_23;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___objects_24;
 	// GameData Room::data
-	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_24;
+	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_25;
 	// Data Room::dataM
-	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_25;
+	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataM_26;
 };
 
 // UnityEngine.UIElements.RuntimePanel
@@ -48363,10 +48367,16 @@ struct PlayerStatus_t54F2A2308070DF6571631AF17684D5206AF66ACB  : public Status_t
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* ___nowHPBar_27;
 	// TMPro.TextMeshProUGUI PlayerStatus::textHp
 	TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* ___textHp_28;
+	// UnityEngine.RectTransform PlayerStatus::expBar
+	RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* ___expBar_29;
+	// UnityEngine.UI.Image PlayerStatus::nowEXPBar
+	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* ___nowEXPBar_30;
+	// TMPro.TextMeshProUGUI PlayerStatus::textExp
+	TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* ___textExp_31;
 	// GameData PlayerStatus::data
-	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_29;
+	GameData_t857DCFA51343FE2611A88BE4D943BDA16FBCE8B6* ___data_32;
 	// Data PlayerStatus::dataP
-	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataP_30;
+	Data_tD68044ADE8612868F3B424B065920F50C65B5CCE* ___dataP_33;
 };
 
 // UnityEngine.UIElements.RadioButton
