@@ -96,11 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().OnOff)
         {
-            if (GetComponent<PlayerSensor>().Portal)
-            {
-                transform.position = GetComponent<PlayerSensor>().TeleportPosition;
-                //isPortal = true;
-            }
+            if (GetComponent<PlayerSensor>().Portal) transform.position = GetComponent<PlayerSensor>().TeleportPosition;
             GameObject.Find("Canvas").transform.Find("EntranceButton").GetComponent<ButtonUI>().UIActive();
         }
 
@@ -192,14 +188,6 @@ public class PlayerMovement : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             GetComponent<Rigidbody2D>().isKinematic = true;
-        }
-        
-        if (isPortal)
-        {
-            //GameObject.Find("Canvas").transform.Find("Save").gameObject.SetActive(true);
-            //gameController.GetComponent<GameController>().setPause(true);
-            //GameObject.Find("Data").GetComponent<DataController>().SaveGameData();
-            isPortal = false;
         }
     }
 
