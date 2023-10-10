@@ -1,6 +1,5 @@
 # DreamWorker
 
-[PlayStore 다운로드]()
 
 <img src = "Assets/ImageSource/ICON_LOGO.png">
 
@@ -60,13 +59,18 @@
 
 <p align="center" width="100&">
 
-<img src = "Assets/ImageSource/Image0.png" width="50%" height="150">
-<img src = "Assets/ImageSource/Image1.png" width="50%" height="150">
-<img src = "Assets/ImageSource/Image3.png" width="50%" height="150">
+<img src = "Assets/ImageSource/Image0.png" width="49%" height="250">
+<img src = "Assets/ImageSource/image1.png" width="49%" height="250">
+
 <br>
-<img src = "Assets/ImageSource/Image4.png" width="50%" height="150">
-<img src = "Assets/ImageSource/Image5.png" width="50%" height="150">
-<img src = "Assets/ImageSource/Image6.png" width="50%" height="150">
+
+<img src = "Assets/ImageSource/Image3.png" width="49%" height="250">
+<img src = "Assets/ImageSource/Image4.png" width="49%" height="250">
+
+<br>
+
+<img src = "Assets/ImageSource/Image5.png" width="49%" height="250">
+<img src = "Assets/ImageSource/Image6.png" width="49%" height="250">
 
 </p>
 
